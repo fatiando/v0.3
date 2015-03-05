@@ -1,0 +1,12 @@
+.. _cookbook_gravmag_eqlayer_polereduc:
+
+GravMag: Use an equivalent layer to reduce a magnetic total field anomaly to the pole
+======================================================================================
+
+.. raw:: html
+
+    [<a href="../_static/cookbook/gravmag_eqlayer_polereduc.py">source code</a>]
+
+.. literalinclude:: ../../cookbook/gravmag_eqlayer_polereduc.py
+    :language: python
+    :linenos:

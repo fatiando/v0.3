@@ -1,0 +1,12 @@
+.. _cookbook_seismic_wavefd_scalar:
+
+Seismic: 2D finite difference simulation of scalar wave propagation.
+=====================================================================
+
+.. raw:: html
+
+    [<a href="../_static/cookbook/seismic_wavefd_scalar.py">source code</a>]
+
+.. literalinclude:: ../../cookbook/seismic_wavefd_scalar.py
+    :language: python
+    :linenos:

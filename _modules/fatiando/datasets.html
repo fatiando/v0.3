@@ -1,0 +1,443 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>fatiando.datasets &mdash; Fatiando a Terra v0.3</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../../_static/favicon.ico"/>
+  
+
+  
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="top" title="Fatiando a Terra v0.3" href="../../index.html"/>
+        <link rel="up" title="Module code" href="../index.html"/> 
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-nav-search">
+        <a href="../../index.html" class="fa fa-home"> Fatiando a Terra</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+        
+        
+            <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../contributors.html">Contributors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../license.html">License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../changelog.html">Changelog</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../changelog.html#version-0-3">Version 0.3</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../changelog.html#version-0-2">Version 0.2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../changelog.html#version-0-1">Version 0.1</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../install.html">Installing Fatiando</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../install.html#which-python">Which Python?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../install.html#installing-the-dependencies">Installing the dependencies</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../install.html#id1">Installing Fatiando</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../install.html#installing-the-latest-development-version">Installing the latest development version</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../install.html#testing-the-install">Testing the install</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../api/fatiando.html">API Reference: The <tt class="docutils literal"><span class="pre">fatiando</span></tt> package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../api/gravmag.html">Gravity and magnetics (<tt class="docutils literal"><span class="pre">fatiando.gravmag</span></tt>)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../api/seismic.html">Seismics and seismology (<tt class="docutils literal"><span class="pre">fatiando.seismic</span></tt>)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../api/geothermal.html">Geothermal heat (<tt class="docutils literal"><span class="pre">fatiando.geothermal</span></tt>)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../api/mesher.html">Meshing (<tt class="docutils literal"><span class="pre">fatiando.mesher</span></tt>)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../api/gridder.html">Gridding (<tt class="docutils literal"><span class="pre">fatiando.gridder</span></tt>)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../api/vis.html">Visualization (<tt class="docutils literal"><span class="pre">fatiando.vis</span></tt>)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../api/datasets.html">Fetch data from the internet (<tt class="docutils literal"><span class="pre">fatiando.datasets</span></tt>)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../api/gui.html">Graphical user interfaces (<tt class="docutils literal"><span class="pre">fatiando.gui</span></tt>)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../api/utils.html">Miscellaneous Utilities (<tt class="docutils literal"><span class="pre">fatiando.utils</span></tt>)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../api/constants.html">Physical constants and unit conversions (<tt class="docutils literal"><span class="pre">fatiando.constants</span></tt>)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../api/inversion.html">Inverse problems framework (<tt class="docutils literal"><span class="pre">fatiando.inversion</span></tt>)</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../cookbook.html">Cookbook</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../cookbook/datasets_crust2.0_tesseroid.html">Datasets: Fetch the CRUST2.0 model, convert it to tesseroids and calculate its gravity signal in parallel</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../cookbook/geothermal_climsig_abrupt.html">Geothermal: Forward and inverse modeling of an abrupt change in temperature measured in a well</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../cookbook/geothermal_climsig_linear.html">Geothermal: Forward and inverse modeling of a linear change in temperature measured in a well</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../cookbook/geothermal_climsig_wrong.html">Geothermal: Climate signal: What happens when assuming a climate change is linear, when in fact it was abrupt?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../cookbook/gravmag_2d_polygon_interactive.html">GravMag: Interactive 2D forward modeling with polygons</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../cookbook/gravmag_2d_polygon_picker.html">GravMag: 2D forward modeling with polygons</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../cookbook/gravmag_basin2d_trapezoidal.html">GravMag: Simple gravity inversion for the relief of a 2D trapezoidal basin</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../cookbook/gravmag_basin2d_trapezoidal_forward.html">GravMag: Interactive 2D forward gravity modeling of a trapezoidal basin</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../cookbook/gravmag_basin2d_triangular.html">GravMag: Simple gravity inversion for the relief of a 2D triangular basin</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../cookbook/gravmag_basin2d_triangular_forward.html">GravMag: Interactive 2D forward gravity modeling of a triangular basin</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../cookbook/gravmag_eqlayer_joint.html">GravMag: Fit an equivalent layer to gravity and gravity gradient data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../cookbook/gravmag_eqlayer_pel_polereduc.html">GravMag: Use the Polynomial Equivalent Layer to reduce a magnetic total field anomaly to the pole</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../cookbook/gravmag_eqlayer_pel_upcontinue.html">GravMag: Use the polynomial equivalent layer to upward continue gravity data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../cookbook/gravmag_eqlayer_polereduc.html">GravMag: Use an equivalent layer to reduce a magnetic total field anomaly to the pole</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../cookbook/gravmag_eqlayer_upcontinue.html">GravMag: Use an equivalent layer to upward continue gravity data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../cookbook/gravmag_euler_classic.html">GravMag: Classic 3D Euler deconvolution of magnetic data (single window)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../cookbook/gravmag_euler_classic_expanding_window.html">GravMag: Classic 3D Euler deconvolution of magnetic data using an expanding window</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../cookbook/gravmag_euler_classic_moving_window.html">GravMag: Classic 3D Euler deconvolution of magnetic data using a moving window</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../cookbook/gravmag_fourier_ansig.html">GravMag: Calculate the analytic signal of a total field anomaly using FFT</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../cookbook/gravmag_fourier_deriv.html">GravMag: Calculating the derivatives of the gravity anomaly using FFT</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../cookbook/gravmag_grav_polyprism.html">GravMag: Forward gravity modeling using a stack of 3D polygonal model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../cookbook/gravmag_grav_prism.html">GravMag: Forward modeling of the gravitational potential and its derivatives using 3D model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../cookbook/gravmag_grav_sphere.html">GravMag: Forward modeling of the gravity anomaly and gravity gradient tensor using model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../cookbook/gravmag_grav_tesseroid.html">GravMag: Forward modeling of the gravitational potential and its derivatives using tesseroids</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../cookbook/gravmag_harvester_grav.html">GravMag: 3D gravity inversion by planting anomalous densities using <tt class="docutils literal"><span class="pre">harvester</span></tt> (more complex interactive example)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../cookbook/gravmag_harvester_tensor.html">GravMag: 3D gravity gradient inversion by planting anomalous densities using <tt class="docutils literal"><span class="pre">harvester</span></tt> (with non-targeted sources)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../cookbook/gravmag_harvester_weights.html">GravMag: Using data weights in 3D inversion using <tt class="docutils literal"><span class="pre">harvester</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../cookbook/gravmag_imaging_geninv.html">GravMag: 3D imaging using the Generalized Inverse method on synthetic gravity data (more complex model + noisy data)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../cookbook/gravmag_imaging_migration.html">GravMag: 3D imaging using the migration method on synthetic gravity data (more complex model + noisy data)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../cookbook/gravmag_imaging_sandwich.html">GravMag: 3D imaging using the sandwich model method on synthetic gravity data (simple example)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../cookbook/gravmag_mag_polyprism.html">GravMag: 3D forward modeling of total-field magnetic anomaly using polygonal prisms</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../cookbook/gravmag_mag_prism.html">GravMag: 3D forward modeling of total-field magnetic anomaly using rectangular prisms (model with induced and remanent magnetization)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../cookbook/gravmag_mag_sphere.html">GravMag: 3D forward modeling of total-field magnetic anomaly using spheres</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../cookbook/gravmag_magdir_dipolemagdir.html">GravMag: Use the DipoleMagDir class to estimate the magnetization direction of dipoles with known centers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../cookbook/gravmag_normal_gravity.html">GravMag: Calculate the gravity disturbance and Bouguer anomaly for Hawaii</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../cookbook/gravmag_tensor_centerofmass.html">GravMag: Center of mass estimation using the first eigenvector of the gravity gradient tensor (simple model)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../cookbook/gravmag_tensor_centerofmass_expanding_window.html">GravMag: Center of mass estimation using the first eigenvector of the gravity gradient tensor (2 sources with expanding windows)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../cookbook/gravmag_tensor_invariants.html">GravMag: Calculate the gravity gradient tensor invariants</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../cookbook/gravmag_tensor_polyprism.html">GravMag: Generate synthetic gradient tensor data from polygonal prisms</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../cookbook/gravmag_tensor_prism_noisy.html">GravMag: Generate noise-corrupted gravity gradient tensor data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../cookbook/gravmag_upcontinue.html">GravMag: Upward continuation of noisy gz data using the analytical formula</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../cookbook/grid_cut.html">Gridding: Cut a section from a grid</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../cookbook/grid_interpolate.html">Gridding: Grid irregularly sampled data.</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../cookbook/grid_profile.html">Gridding: Extract a profile from map data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../cookbook/grid_scatter.html">Gridding: Generate and plot irregular grids (scatter)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../cookbook/grid_surfer.html">Gridding: Load a Surfer ASCII grid file</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../cookbook/mesher_pointgrid.html">Meshing: Making a grid of 3D point sources</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../cookbook/mesher_prismmesh.html">Meshing: Make and plot a 3D prism mesh</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../cookbook/mesher_prismmesh_filter.html">Meshing: Filter prisms from a 3D prism mesh based on their physical properties</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../cookbook/mesher_prismmesh_topo.html">Meshing: Make and plot a 3D prism mesh with topography</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../cookbook/mesher_prismmesh_vardens.html">Meshing: Make a 3D prism mesh with depth-varying density</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../cookbook/mesher_prismrelief_topo.html">Meshing: Generate a 3D prism model of the topography</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../cookbook/mesher_squaremesh_from_image.html">Meshing: Generate a SquareMesh and get the physical properties from an image</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../cookbook/mesher_tesseroid.html">Meshing: Make and plot a tesseroid with the Earth</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../cookbook/mesher_tesseroidmesh.html">Meshing: Make and plot a tesseroid mesh</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../cookbook/mesher_tesseroidmesh_topo.html">Meshing: Make and plot a tesseroid mesh with topography</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../cookbook/seismic_epic2d.html">Seismic: 2D epicenter estimation assuming a homogeneous and flat Earth</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../cookbook/seismic_epic2d_iterate.html">Seismic: Show steps taken by different algorithms for 2D epicenter estimation on a flat Earth</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../cookbook/seismic_profile_vertical.html">Seismic: Invert vertical seismic profile (VSP) traveltimes for the velocity of a layered model.</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../cookbook/seismic_profile_vertical_interactive.html">Seismic: Interactive forward modeling of 1D vertical seismic profile (VSP) data in layered media</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../cookbook/seismic_profile_vertical_smooth.html">Seismic: Invert vertical seismic profile (VSP) traveltimes using smoothness regularization and unknown layer thicknesses</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../cookbook/seismic_srtomo_damped.html">Seismic: 2D straight-ray tomography using damping regularization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../cookbook/seismic_srtomo_sharp.html">Seismic: 2D straight-ray tomography using sharpness (total variation) regularization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../cookbook/seismic_srtomo_smooth.html">Seismic: 2D straight-ray tomography using smoothness regularization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../cookbook/seismic_wavefd_elastic_psv.html">Seismic: 2D finite difference simulation of elastic P and SV wave propagation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../cookbook/seismic_wavefd_elastic_sh.html">Seismic: 2D finite difference simulation of elastic SH wave propagation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../cookbook/seismic_wavefd_love_wave.html">Seismic: 2D finite difference simulation of elastic SH wave propagation in a medium with a discontinuity (i.e., Moho), generating Love waves.</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../cookbook/seismic_wavefd_rayleigh_wave.html">Seismic: 2D finite difference simulation of elastic P and SV wave propagation in a medium with a discontinuity (i.e., Moho), generating Rayleigh waves</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../cookbook/seismic_wavefd_scalar.html">Seismic: 2D finite difference simulation of scalar wave propagation.</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../cookbook/vis_mpl_basemap.html">Vis: Plot a map using the Orthographic map projection and filled contours</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../cookbook/vis_mpl_basemap2.html">Vis: Plot a map using the Mercator map projection and pseudo-color</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../cookbook/vis_mpl_basemap3.html">Vis: Plot a map using the Robinson map projection and contours</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../cookbook/vis_mpl_contour.html">Vis: Plot contour lines and filled contours</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../cookbook/vis_mpl_irregular_data.html">Vis: Plotting irregularly sampled map data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../cookbook/vis_myv_color.html">Vis: Set the colors in figures, prisms, polygonal prisms and tesseroids.</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../cookbook/vis_myv_earth.html">Vis: Plot the Earth, continents, inner and outer core in 3D with Mayavi2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../cookbook/vis_myv_exaggerate.html">Vis: Exaggerate the vertical dimension of 3D plots</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../develop.html">Developer guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../develop.html#making-a-release">Making a release</a></li>
+</ul>
+</li>
+</ul>
+
+        
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../../index.html">Fatiando a Terra</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../../index.html">Docs</a> &raquo;</li>
+      
+          <li><a href="../index.html">Module code</a> &raquo;</li>
+      
+    <li>fatiando.datasets</li>
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            
+  <h1>Source code for fatiando.datasets</h1><div class="highlight"><pre>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Load datasets from the internet.</span>
+
+<span class="sd">**CRUST2.0**</span>
+
+<span class="sd">Load and convert the `CRUST2.0 global crustal model</span>
+<span class="sd">&lt;http://igppweb.ucsd.edu/~gabi/rem.html&gt;`_ (Bassin et al., 2000).</span>
+
+<span class="sd">* :func:`~fatiando.datasets.fetch_crust2`: Download the .tar.gz archive with</span>
+<span class="sd">  the model from the website</span>
+<span class="sd">* :func:`~fatiando.datasets.crust2_to_tesseroids`: Convert the CRUST2.0 model</span>
+<span class="sd">  to tesseroids</span>
+
+<span class="sd">**Sample data**</span>
+
+<span class="sd">Download a `Bouguer anomaly map of Alps (EGM 2008 model)</span>
+<span class="sd">&lt;https://gist.github.com/leouieda/6023922&gt;`_ in Surfer ASCII grid file format.</span>
+
+<span class="sd">* :func:`~fatiando.io.fetch_bouguer_alps_egm`: Download the .grd archive with</span>
+<span class="sd">  the Bouguer anomaly of Alps (EGM 2008 model) from the website</span>
+
+<span class="sd">**References**</span>
+
+<span class="sd">Bassin, C., Laske, G. and Masters, G., The Current Limits of Resolution for</span>
+<span class="sd">Surface Wave Tomography in North America, EOS Trans AGU, 81, F897, 2000.</span>
+
+<span class="sd">----</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="kn">import</span> <span class="nn">urllib</span>
+<span class="kn">import</span> <span class="nn">tarfile</span>
+
+<span class="kn">import</span> <span class="nn">numpy</span>
+
+<span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">gridder</span>
+<span class="kn">from</span> <span class="nn">.mesher</span> <span class="kn">import</span> <span class="n">Tesseroid</span>
+
+
+<div class="viewcode-block" id="fetch_crust2"><a class="viewcode-back" href="../../api/datasets.html#fatiando.datasets.fetch_crust2">[docs]</a><span class="k">def</span> <span class="nf">fetch_crust2</span><span class="p">(</span><span class="n">fname</span><span class="o">=</span><span class="s">&#39;crust2.tar.gz&#39;</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Download the CRUST2.0 model from http://igppweb.ucsd.edu/~gabi/crust2.html</span>
+
+<span class="sd">    Parameters:</span>
+
+<span class="sd">    * fname : str</span>
+<span class="sd">        The name that the archive file will be saved when downloaded</span>
+
+<span class="sd">    Returns:</span>
+
+<span class="sd">    * fname : str</span>
+<span class="sd">        The downloaded file name</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">urllib</span><span class="o">.</span><span class="n">urlretrieve</span><span class="p">(</span><span class="s">&#39;http://igpppublic.ucsd.edu/~gabi/ftp/crust2.tar.gz&#39;</span><span class="p">,</span>
+                       <span class="n">filename</span><span class="o">=</span><span class="n">fname</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">fname</span>
+
+</div>
+<div class="viewcode-block" id="crust2_to_tesseroids"><a class="viewcode-back" href="../../api/datasets.html#fatiando.datasets.crust2_to_tesseroids">[docs]</a><span class="k">def</span> <span class="nf">crust2_to_tesseroids</span><span class="p">(</span><span class="n">fname</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Convert the CRUST2.0 model to tesseroids.</span>
+
+<span class="sd">    Opens the .tar.gz archive and converts the model to</span>
+<span class="sd">    :class:`fatiando.mesher.Tesseroid`.</span>
+<span class="sd">    Each tesseroid will have its ``props`` set to the apropriate Vp, Vs and</span>
+<span class="sd">    density.</span>
+
+<span class="sd">    The CRUST2.0 model includes 7 layers: ice, water, soft sediments, hard</span>
+<span class="sd">    sediments, upper crust, middle curst and lower crust. It also includes the</span>
+<span class="sd">    mantle below the Moho. The mantle portion is not included in this</span>
+<span class="sd">    conversion because there is no way to place a bottom on it.</span>
+
+<span class="sd">    Parameters:</span>
+
+<span class="sd">    * fname : str</span>
+<span class="sd">        Name of the model .tar.gz archive (see</span>
+<span class="sd">        :func:`~fatiando.io.fetch_crust2`)</span>
+
+<span class="sd">    Returns:</span>
+
+<span class="sd">    * model : list of :class:`fatiando.mesher.Tesseroid`</span>
+<span class="sd">        The converted model</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">archive</span> <span class="o">=</span> <span class="n">tarfile</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">fname</span><span class="p">,</span> <span class="s">&#39;r:gz&#39;</span><span class="p">)</span>
+    <span class="c"># First get the topography and bathymetry information</span>
+    <span class="n">topogrd</span> <span class="o">=</span> <span class="n">_crust2_get_topo</span><span class="p">(</span><span class="n">archive</span><span class="p">)</span>
+    <span class="c"># Now make a dict with the codec for each type code</span>
+    <span class="n">codec</span> <span class="o">=</span> <span class="n">_crust2_get_codec</span><span class="p">(</span><span class="n">archive</span><span class="p">)</span>
+    <span class="c"># Get the type codes with the actual model</span>
+    <span class="n">types</span> <span class="o">=</span> <span class="n">_crust2_get_types</span><span class="p">(</span><span class="n">archive</span><span class="p">)</span>
+    <span class="c"># Convert to tesseroids</span>
+    <span class="n">size</span> <span class="o">=</span> <span class="mi">2</span>
+    <span class="n">lons</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="o">-</span><span class="mi">180</span><span class="p">,</span> <span class="mi">180</span><span class="p">,</span> <span class="n">size</span><span class="p">)</span>
+    <span class="n">lats</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">90</span><span class="p">,</span> <span class="o">-</span><span class="mi">90</span><span class="p">,</span> <span class="o">-</span><span class="n">size</span><span class="p">)</span>  <span class="c"># This is how lats are in the file</span>
+    <span class="n">model</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">xrange</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">lats</span><span class="p">)):</span>
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">xrange</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">lons</span><span class="p">)):</span>
+            <span class="n">t</span> <span class="o">=</span> <span class="n">types</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span>
+            <span class="n">top</span> <span class="o">=</span> <span class="n">topogrd</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span>
+            <span class="k">for</span> <span class="n">layer</span> <span class="ow">in</span> <span class="nb">xrange</span><span class="p">(</span><span class="mi">7</span><span class="p">):</span>
+                <span class="k">if</span> <span class="n">codec</span><span class="p">[</span><span class="n">t</span><span class="p">][</span><span class="s">&#39;thickness&#39;</span><span class="p">][</span><span class="n">layer</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                    <span class="k">continue</span>
+                <span class="n">w</span><span class="p">,</span> <span class="n">e</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span> <span class="n">n</span> <span class="o">=</span> <span class="n">lons</span><span class="p">[</span><span class="n">j</span><span class="p">],</span> <span class="n">lons</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">+</span> <span class="n">size</span><span class="p">,</span> <span class="n">lats</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="n">size</span><span class="p">,</span> <span class="n">lats</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+                <span class="n">bottom</span> <span class="o">=</span> <span class="n">top</span> <span class="o">-</span> <span class="n">codec</span><span class="p">[</span><span class="n">t</span><span class="p">][</span><span class="s">&#39;thickness&#39;</span><span class="p">][</span><span class="n">layer</span><span class="p">]</span>
+                <span class="n">props</span> <span class="o">=</span> <span class="p">{</span><span class="s">&#39;density&#39;</span><span class="p">:</span> <span class="n">codec</span><span class="p">[</span><span class="n">t</span><span class="p">][</span><span class="s">&#39;density&#39;</span><span class="p">][</span><span class="n">layer</span><span class="p">],</span>
+                         <span class="s">&#39;vp&#39;</span><span class="p">:</span> <span class="n">codec</span><span class="p">[</span><span class="n">t</span><span class="p">][</span><span class="s">&#39;vp&#39;</span><span class="p">][</span><span class="n">layer</span><span class="p">],</span>
+                         <span class="s">&#39;vs&#39;</span><span class="p">:</span> <span class="n">codec</span><span class="p">[</span><span class="n">t</span><span class="p">][</span><span class="s">&#39;vs&#39;</span><span class="p">][</span><span class="n">layer</span><span class="p">]}</span>
+                <span class="n">model</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">Tesseroid</span><span class="p">(</span><span class="n">w</span><span class="p">,</span> <span class="n">e</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">top</span><span class="p">,</span> <span class="n">bottom</span><span class="p">,</span> <span class="n">props</span><span class="p">))</span>
+                <span class="n">top</span> <span class="o">=</span> <span class="n">bottom</span>
+    <span class="k">return</span> <span class="n">model</span>
+
+</div>
+<span class="k">def</span> <span class="nf">_crust2_get_topo</span><span class="p">(</span><span class="n">archive</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Fetch the matrix of topography and bathymetry from the CRUST2.0 archive.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">f</span> <span class="o">=</span> <span class="n">archive</span><span class="o">.</span><span class="n">extractfile</span><span class="p">(</span><span class="s">&#39;./CNelevatio2.txt&#39;</span><span class="p">)</span>
+    <span class="n">topogrd</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">loadtxt</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">skiprows</span><span class="o">=</span><span class="mi">1</span><span class="p">)[:,</span> <span class="mi">1</span><span class="p">:]</span>
+    <span class="k">return</span> <span class="n">topogrd</span>
+
+
+<span class="k">def</span> <span class="nf">_crust2_get_types</span><span class="p">(</span><span class="n">archive</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Fetch a matrix with the type code for each 2x2 degree cell.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">f</span> <span class="o">=</span> <span class="n">archive</span><span class="o">.</span><span class="n">extractfile</span><span class="p">(</span><span class="s">&#39;./CNtype2.txt&#39;</span><span class="p">)</span>
+    <span class="n">typegrd</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">loadtxt</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">numpy</span><span class="o">.</span><span class="n">str</span><span class="p">,</span> <span class="n">skiprows</span><span class="o">=</span><span class="mi">1</span><span class="p">)[:,</span> <span class="mi">1</span><span class="p">:]</span>
+    <span class="k">return</span> <span class="n">typegrd</span>
+
+
+<span class="k">def</span> <span class="nf">_crust2_get_codec</span><span class="p">(</span><span class="n">archive</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Fetch the type code traslation codec from the archive and convert it to a</span>
+<span class="sd">    dict.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">f</span> <span class="o">=</span> <span class="n">archive</span><span class="o">.</span><span class="n">extractfile</span><span class="p">(</span><span class="s">&#39;./CNtype2_key.txt&#39;</span><span class="p">)</span>
+    <span class="c"># Skip the first 5 lines which are the header</span>
+    <span class="n">lines</span> <span class="o">=</span> <span class="p">[</span><span class="n">l</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span> <span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="n">f</span><span class="o">.</span><span class="n">readlines</span><span class="p">()[</span><span class="mi">5</span><span class="p">:]</span> <span class="k">if</span> <span class="n">l</span><span class="o">.</span><span class="n">strip</span><span class="p">()]</span>
+    <span class="c"># Each type code is 5 lines: code, vp, vs, density, thickness</span>
+    <span class="n">codec</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">xrange</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">lines</span><span class="p">)</span> <span class="o">/</span> <span class="mi">5</span><span class="p">):</span>
+        <span class="n">code</span> <span class="o">=</span> <span class="n">lines</span><span class="p">[</span><span class="n">i</span> <span class="o">*</span> <span class="mi">5</span><span class="p">][:</span><span class="mi">2</span><span class="p">]</span>
+        <span class="c"># Get the values and convert them to SI units</span>
+        <span class="n">vp</span> <span class="o">=</span> <span class="p">[</span><span class="nb">float</span><span class="p">(</span><span class="n">v</span><span class="p">)</span> <span class="o">*</span> <span class="mi">1000</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">lines</span><span class="p">[</span><span class="n">i</span> <span class="o">*</span> <span class="mi">5</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">()]</span>
+        <span class="n">vs</span> <span class="o">=</span> <span class="p">[</span><span class="nb">float</span><span class="p">(</span><span class="n">v</span><span class="p">)</span> <span class="o">*</span> <span class="mi">1000</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">lines</span><span class="p">[</span><span class="n">i</span> <span class="o">*</span> <span class="mi">5</span> <span class="o">+</span> <span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">()]</span>
+        <span class="n">density</span> <span class="o">=</span> <span class="p">[</span><span class="nb">float</span><span class="p">(</span><span class="n">v</span><span class="p">)</span> <span class="o">*</span> <span class="mi">1000</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">lines</span><span class="p">[</span><span class="n">i</span> <span class="o">*</span> <span class="mi">5</span> <span class="o">+</span> <span class="mi">3</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">()]</span>
+        <span class="c"># Skip the last thickness because it is an inf indicating the mantle</span>
+        <span class="n">thickness</span> <span class="o">=</span> <span class="p">[</span><span class="nb">float</span><span class="p">(</span><span class="n">v</span><span class="p">)</span> <span class="o">*</span> <span class="mi">1000</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">lines</span><span class="p">[</span><span class="n">i</span> <span class="o">*</span> <span class="mi">5</span> <span class="o">+</span> <span class="mi">4</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">()[:</span><span class="mi">7</span><span class="p">]]</span>
+        <span class="n">codec</span><span class="p">[</span><span class="n">code</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="s">&#39;vp&#39;</span><span class="p">:</span> <span class="n">vp</span><span class="p">,</span> <span class="s">&#39;vs&#39;</span><span class="p">:</span> <span class="n">vs</span><span class="p">,</span> <span class="s">&#39;density&#39;</span><span class="p">:</span> <span class="n">density</span><span class="p">,</span>
+                       <span class="s">&#39;thickness&#39;</span><span class="p">:</span> <span class="n">thickness</span><span class="p">}</span>
+    <span class="k">return</span> <span class="n">codec</span>
+
+
+<div class="viewcode-block" id="fetch_bouguer_alps_egm"><a class="viewcode-back" href="../../api/datasets.html#fatiando.datasets.fetch_bouguer_alps_egm">[docs]</a><span class="k">def</span> <span class="nf">fetch_bouguer_alps_egm</span><span class="p">(</span><span class="n">fname</span><span class="o">=</span><span class="s">&#39;bouguer_alps_egm08.grd&#39;</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Download the Bouguer anomaly of Alps (EGM 2008 model) in Surfer ASCII grid</span>
+<span class="sd">    file format from https://gist.github.com/leouieda/6023922</span>
+
+<span class="sd">    Parameters:</span>
+
+<span class="sd">    * fname : str</span>
+<span class="sd">        The name that the archive file will be saved when downloaded</span>
+
+<span class="sd">    Returns:</span>
+
+<span class="sd">    * fname : str</span>
+<span class="sd">        The downloaded file name</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">urllib</span><span class="o">.</span><span class="n">urlretrieve</span><span class="p">(</span><span class="s">&#39;https://gist.github.com/leouieda/6023922/raw/&#39;</span>
+                       <span class="s">&#39;948b0acbadb18e6ad49efe2092d9d9518b247780/&#39;</span>
+                       <span class="s">&#39;bouguer_alps_egm08.grd&#39;</span><span class="p">,</span> <span class="n">filename</span><span class="o">=</span><span class="n">fname</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">fname</span></div>
+</pre></div>
+
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2012-2014, Leonardo Uieda.
+      Last updated on Mar 05, 2015.
+    </p>
+  </div>
+
+  <a href="https://github.com/snide/sphinx_rtd_theme">Sphinx theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../',
+            VERSION:'0.3',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../_static/doctools.js"></script>
+      <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

@@ -1,0 +1,1288 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>fatiando.inversion.regularization &mdash; Fatiando a Terra v0.3</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../../../_static/favicon.ico"/>
+  
+
+  
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="top" title="Fatiando a Terra v0.3" href="../../../index.html"/>
+        <link rel="up" title="Module code" href="../../index.html"/> 
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-nav-search">
+        <a href="../../../index.html" class="fa fa-home"> Fatiando a Terra</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+        
+        
+            <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../contributors.html">Contributors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../license.html">License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../changelog.html">Changelog</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../changelog.html#version-0-3">Version 0.3</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../changelog.html#version-0-2">Version 0.2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../changelog.html#version-0-1">Version 0.1</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../install.html">Installing Fatiando</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../install.html#which-python">Which Python?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../install.html#installing-the-dependencies">Installing the dependencies</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../install.html#id1">Installing Fatiando</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../install.html#installing-the-latest-development-version">Installing the latest development version</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../install.html#testing-the-install">Testing the install</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../api/fatiando.html">API Reference: The <tt class="docutils literal"><span class="pre">fatiando</span></tt> package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../api/gravmag.html">Gravity and magnetics (<tt class="docutils literal"><span class="pre">fatiando.gravmag</span></tt>)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../api/seismic.html">Seismics and seismology (<tt class="docutils literal"><span class="pre">fatiando.seismic</span></tt>)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../api/geothermal.html">Geothermal heat (<tt class="docutils literal"><span class="pre">fatiando.geothermal</span></tt>)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../api/mesher.html">Meshing (<tt class="docutils literal"><span class="pre">fatiando.mesher</span></tt>)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../api/gridder.html">Gridding (<tt class="docutils literal"><span class="pre">fatiando.gridder</span></tt>)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../api/vis.html">Visualization (<tt class="docutils literal"><span class="pre">fatiando.vis</span></tt>)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../api/datasets.html">Fetch data from the internet (<tt class="docutils literal"><span class="pre">fatiando.datasets</span></tt>)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../api/gui.html">Graphical user interfaces (<tt class="docutils literal"><span class="pre">fatiando.gui</span></tt>)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../api/utils.html">Miscellaneous Utilities (<tt class="docutils literal"><span class="pre">fatiando.utils</span></tt>)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../api/constants.html">Physical constants and unit conversions (<tt class="docutils literal"><span class="pre">fatiando.constants</span></tt>)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../api/inversion.html">Inverse problems framework (<tt class="docutils literal"><span class="pre">fatiando.inversion</span></tt>)</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../cookbook.html">Cookbook</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../cookbook/datasets_crust2.0_tesseroid.html">Datasets: Fetch the CRUST2.0 model, convert it to tesseroids and calculate its gravity signal in parallel</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../cookbook/geothermal_climsig_abrupt.html">Geothermal: Forward and inverse modeling of an abrupt change in temperature measured in a well</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../cookbook/geothermal_climsig_linear.html">Geothermal: Forward and inverse modeling of a linear change in temperature measured in a well</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../cookbook/geothermal_climsig_wrong.html">Geothermal: Climate signal: What happens when assuming a climate change is linear, when in fact it was abrupt?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../cookbook/gravmag_2d_polygon_interactive.html">GravMag: Interactive 2D forward modeling with polygons</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../cookbook/gravmag_2d_polygon_picker.html">GravMag: 2D forward modeling with polygons</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../cookbook/gravmag_basin2d_trapezoidal.html">GravMag: Simple gravity inversion for the relief of a 2D trapezoidal basin</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../cookbook/gravmag_basin2d_trapezoidal_forward.html">GravMag: Interactive 2D forward gravity modeling of a trapezoidal basin</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../cookbook/gravmag_basin2d_triangular.html">GravMag: Simple gravity inversion for the relief of a 2D triangular basin</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../cookbook/gravmag_basin2d_triangular_forward.html">GravMag: Interactive 2D forward gravity modeling of a triangular basin</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../cookbook/gravmag_eqlayer_joint.html">GravMag: Fit an equivalent layer to gravity and gravity gradient data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../cookbook/gravmag_eqlayer_pel_polereduc.html">GravMag: Use the Polynomial Equivalent Layer to reduce a magnetic total field anomaly to the pole</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../cookbook/gravmag_eqlayer_pel_upcontinue.html">GravMag: Use the polynomial equivalent layer to upward continue gravity data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../cookbook/gravmag_eqlayer_polereduc.html">GravMag: Use an equivalent layer to reduce a magnetic total field anomaly to the pole</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../cookbook/gravmag_eqlayer_upcontinue.html">GravMag: Use an equivalent layer to upward continue gravity data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../cookbook/gravmag_euler_classic.html">GravMag: Classic 3D Euler deconvolution of magnetic data (single window)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../cookbook/gravmag_euler_classic_expanding_window.html">GravMag: Classic 3D Euler deconvolution of magnetic data using an expanding window</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../cookbook/gravmag_euler_classic_moving_window.html">GravMag: Classic 3D Euler deconvolution of magnetic data using a moving window</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../cookbook/gravmag_fourier_ansig.html">GravMag: Calculate the analytic signal of a total field anomaly using FFT</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../cookbook/gravmag_fourier_deriv.html">GravMag: Calculating the derivatives of the gravity anomaly using FFT</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../cookbook/gravmag_grav_polyprism.html">GravMag: Forward gravity modeling using a stack of 3D polygonal model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../cookbook/gravmag_grav_prism.html">GravMag: Forward modeling of the gravitational potential and its derivatives using 3D model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../cookbook/gravmag_grav_sphere.html">GravMag: Forward modeling of the gravity anomaly and gravity gradient tensor using model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../cookbook/gravmag_grav_tesseroid.html">GravMag: Forward modeling of the gravitational potential and its derivatives using tesseroids</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../cookbook/gravmag_harvester_grav.html">GravMag: 3D gravity inversion by planting anomalous densities using <tt class="docutils literal"><span class="pre">harvester</span></tt> (more complex interactive example)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../cookbook/gravmag_harvester_tensor.html">GravMag: 3D gravity gradient inversion by planting anomalous densities using <tt class="docutils literal"><span class="pre">harvester</span></tt> (with non-targeted sources)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../cookbook/gravmag_harvester_weights.html">GravMag: Using data weights in 3D inversion using <tt class="docutils literal"><span class="pre">harvester</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../cookbook/gravmag_imaging_geninv.html">GravMag: 3D imaging using the Generalized Inverse method on synthetic gravity data (more complex model + noisy data)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../cookbook/gravmag_imaging_migration.html">GravMag: 3D imaging using the migration method on synthetic gravity data (more complex model + noisy data)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../cookbook/gravmag_imaging_sandwich.html">GravMag: 3D imaging using the sandwich model method on synthetic gravity data (simple example)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../cookbook/gravmag_mag_polyprism.html">GravMag: 3D forward modeling of total-field magnetic anomaly using polygonal prisms</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../cookbook/gravmag_mag_prism.html">GravMag: 3D forward modeling of total-field magnetic anomaly using rectangular prisms (model with induced and remanent magnetization)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../cookbook/gravmag_mag_sphere.html">GravMag: 3D forward modeling of total-field magnetic anomaly using spheres</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../cookbook/gravmag_magdir_dipolemagdir.html">GravMag: Use the DipoleMagDir class to estimate the magnetization direction of dipoles with known centers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../cookbook/gravmag_normal_gravity.html">GravMag: Calculate the gravity disturbance and Bouguer anomaly for Hawaii</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../cookbook/gravmag_tensor_centerofmass.html">GravMag: Center of mass estimation using the first eigenvector of the gravity gradient tensor (simple model)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../cookbook/gravmag_tensor_centerofmass_expanding_window.html">GravMag: Center of mass estimation using the first eigenvector of the gravity gradient tensor (2 sources with expanding windows)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../cookbook/gravmag_tensor_invariants.html">GravMag: Calculate the gravity gradient tensor invariants</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../cookbook/gravmag_tensor_polyprism.html">GravMag: Generate synthetic gradient tensor data from polygonal prisms</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../cookbook/gravmag_tensor_prism_noisy.html">GravMag: Generate noise-corrupted gravity gradient tensor data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../cookbook/gravmag_upcontinue.html">GravMag: Upward continuation of noisy gz data using the analytical formula</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../cookbook/grid_cut.html">Gridding: Cut a section from a grid</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../cookbook/grid_interpolate.html">Gridding: Grid irregularly sampled data.</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../cookbook/grid_profile.html">Gridding: Extract a profile from map data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../cookbook/grid_scatter.html">Gridding: Generate and plot irregular grids (scatter)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../cookbook/grid_surfer.html">Gridding: Load a Surfer ASCII grid file</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../cookbook/mesher_pointgrid.html">Meshing: Making a grid of 3D point sources</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../cookbook/mesher_prismmesh.html">Meshing: Make and plot a 3D prism mesh</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../cookbook/mesher_prismmesh_filter.html">Meshing: Filter prisms from a 3D prism mesh based on their physical properties</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../cookbook/mesher_prismmesh_topo.html">Meshing: Make and plot a 3D prism mesh with topography</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../cookbook/mesher_prismmesh_vardens.html">Meshing: Make a 3D prism mesh with depth-varying density</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../cookbook/mesher_prismrelief_topo.html">Meshing: Generate a 3D prism model of the topography</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../cookbook/mesher_squaremesh_from_image.html">Meshing: Generate a SquareMesh and get the physical properties from an image</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../cookbook/mesher_tesseroid.html">Meshing: Make and plot a tesseroid with the Earth</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../cookbook/mesher_tesseroidmesh.html">Meshing: Make and plot a tesseroid mesh</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../cookbook/mesher_tesseroidmesh_topo.html">Meshing: Make and plot a tesseroid mesh with topography</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../cookbook/seismic_epic2d.html">Seismic: 2D epicenter estimation assuming a homogeneous and flat Earth</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../cookbook/seismic_epic2d_iterate.html">Seismic: Show steps taken by different algorithms for 2D epicenter estimation on a flat Earth</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../cookbook/seismic_profile_vertical.html">Seismic: Invert vertical seismic profile (VSP) traveltimes for the velocity of a layered model.</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../cookbook/seismic_profile_vertical_interactive.html">Seismic: Interactive forward modeling of 1D vertical seismic profile (VSP) data in layered media</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../cookbook/seismic_profile_vertical_smooth.html">Seismic: Invert vertical seismic profile (VSP) traveltimes using smoothness regularization and unknown layer thicknesses</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../cookbook/seismic_srtomo_damped.html">Seismic: 2D straight-ray tomography using damping regularization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../cookbook/seismic_srtomo_sharp.html">Seismic: 2D straight-ray tomography using sharpness (total variation) regularization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../cookbook/seismic_srtomo_smooth.html">Seismic: 2D straight-ray tomography using smoothness regularization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../cookbook/seismic_wavefd_elastic_psv.html">Seismic: 2D finite difference simulation of elastic P and SV wave propagation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../cookbook/seismic_wavefd_elastic_sh.html">Seismic: 2D finite difference simulation of elastic SH wave propagation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../cookbook/seismic_wavefd_love_wave.html">Seismic: 2D finite difference simulation of elastic SH wave propagation in a medium with a discontinuity (i.e., Moho), generating Love waves.</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../cookbook/seismic_wavefd_rayleigh_wave.html">Seismic: 2D finite difference simulation of elastic P and SV wave propagation in a medium with a discontinuity (i.e., Moho), generating Rayleigh waves</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../cookbook/seismic_wavefd_scalar.html">Seismic: 2D finite difference simulation of scalar wave propagation.</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../cookbook/vis_mpl_basemap.html">Vis: Plot a map using the Orthographic map projection and filled contours</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../cookbook/vis_mpl_basemap2.html">Vis: Plot a map using the Mercator map projection and pseudo-color</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../cookbook/vis_mpl_basemap3.html">Vis: Plot a map using the Robinson map projection and contours</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../cookbook/vis_mpl_contour.html">Vis: Plot contour lines and filled contours</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../cookbook/vis_mpl_irregular_data.html">Vis: Plotting irregularly sampled map data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../cookbook/vis_myv_color.html">Vis: Set the colors in figures, prisms, polygonal prisms and tesseroids.</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../cookbook/vis_myv_earth.html">Vis: Plot the Earth, continents, inner and outer core in 3D with Mayavi2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../cookbook/vis_myv_exaggerate.html">Vis: Exaggerate the vertical dimension of 3D plots</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../develop.html">Developer guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../develop.html#making-a-release">Making a release</a></li>
+</ul>
+</li>
+</ul>
+
+        
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../../../index.html">Fatiando a Terra</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../../../index.html">Docs</a> &raquo;</li>
+      
+          <li><a href="../../index.html">Module code</a> &raquo;</li>
+      
+    <li>fatiando.inversion.regularization</li>
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            
+  <h1>Source code for fatiando.inversion.regularization</h1><div class="highlight"><pre>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Ready made and base classes for regularization.</span>
+
+<span class="sd">All classes are derived from :class:`~fatiando.inversion.base.Objective` and</span>
+<span class="sd">should be used by summing them to a :class:`~fatiando.inversion.base.Misfit`</span>
+<span class="sd">derivative.</span>
+
+<span class="sd">The regularization parameter is set by multiplying the regularization instance</span>
+<span class="sd">by a scalar, e.g., ``solver = misfit + 0.1*regularization``.</span>
+
+<span class="sd">See :class:`fatiando.gravmag.eqlayer.EQLGravity` for an example.</span>
+
+<span class="sd">**List of classes**</span>
+
+<span class="sd">* :class:`~fatiando.inversion.regularization.Damping`: Damping regularization</span>
+<span class="sd">  (or 0th order Tikhonov regularization)</span>
+<span class="sd">* :class:`~fatiando.inversion.regularization.Smoothness`: Generic smoothness</span>
+<span class="sd">  regularization (or 1st order Tikhonov regularization). Requires a finite</span>
+<span class="sd">  difference matrix to specify the parameter derivatives to minimize.</span>
+<span class="sd">* :class:`~fatiando.inversion.regularization.Smoothness1D`: Smoothness for 1D</span>
+<span class="sd">  problems. Automatically builds a finite difference matrix based on the number</span>
+<span class="sd">  of parameters</span>
+<span class="sd">* :class:`~fatiando.inversion.regularization.Smoothness2D`: Smoothness for 2D</span>
+<span class="sd">  grid based problems. Automatically builds a finite difference matrix of</span>
+<span class="sd">  derivatives in the two spacial dimensions based on the shape of the parameter</span>
+<span class="sd">  grid</span>
+<span class="sd">* :class:`~fatiando.inversion.regularization.TotalVariation`: Generic total</span>
+<span class="sd">  variation regularization (enforces sharpness of the solution). Requires a</span>
+<span class="sd">  finite difference matrix to specify the parameter derivatives.</span>
+<span class="sd">* :class:`~fatiando.inversion.regularization.TotalVariation1D`: Total variation</span>
+<span class="sd">  for 1D problems. Similar to Smoothness1D</span>
+<span class="sd">* :class:`~fatiando.inversion.regularization.TotalVariation2D`: Total variation</span>
+<span class="sd">  for 2D grid based problems. Similar to Smoothness2D</span>
+
+<span class="sd">**Regularization parameter estimation**</span>
+
+<span class="sd">Bellow are classes that estimate an optimal value for the regularization</span>
+<span class="sd">parameter. They work exactly like an Objective function, i.e., run the</span>
+<span class="sd">inversion by calling their `fit()` method and accessing</span>
+<span class="sd">the estimates by `p_`, `estimate_`, `residuals()` and `predicted()`.</span>
+
+<span class="sd">* :class:`~fatiando.inversion.regularization.LCurve`: Use an L-curve criterion.</span>
+<span class="sd">  Runs the inversion using several regularization parameters. The best value</span>
+<span class="sd">  is the one that falls on the corner of the log-log plot of the data</span>
+<span class="sd">  misfit vs regularizing function. Only works for a single regularization.</span>
+
+
+<span class="sd">----</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">division</span>
+<span class="kn">import</span> <span class="nn">multiprocessing</span>
+
+<span class="kn">import</span> <span class="nn">numpy</span>
+<span class="kn">import</span> <span class="nn">scipy.sparse</span>
+
+<span class="kn">from</span> <span class="nn">.base</span> <span class="kn">import</span> <span class="n">Objective</span>
+<span class="kn">from</span> <span class="nn">..utils</span> <span class="kn">import</span> <span class="n">safe_dot</span>
+<span class="kn">from</span> <span class="nn">..vis</span> <span class="kn">import</span> <span class="n">mpl</span>
+
+
+<div class="viewcode-block" id="Damping"><a class="viewcode-back" href="../../../api/inversion.regularization.html#fatiando.inversion.regularization.Damping">[docs]</a><span class="k">class</span> <span class="nc">Damping</span><span class="p">(</span><span class="n">Objective</span><span class="p">):</span>
+
+    <span class="sd">r&quot;&quot;&quot;</span>
+<span class="sd">    Damping (0th order Tikhonov) regularization.</span>
+
+<span class="sd">    Imposes the minimum norm of the parameter vector.</span>
+
+<span class="sd">    The regularizing function if of the form</span>
+
+<span class="sd">    .. math::</span>
+
+<span class="sd">        \theta^{NM}(\bar{p}) = \bar{p}^T\bar{p}</span>
+
+<span class="sd">    Its gradient and Hessian matrices are, respectively,</span>
+
+<span class="sd">    .. math::</span>
+
+<span class="sd">        \bar{\nabla}\theta^{NM}(\bar{p}) = 2\bar{\bar{I}}\bar{p}</span>
+
+<span class="sd">    .. math::</span>
+
+<span class="sd">        \bar{\bar{\nabla}}\theta^{NM}(\bar{p}) = 2\bar{\bar{I}}</span>
+
+<span class="sd">    Parameters:</span>
+
+<span class="sd">    * nparams : int</span>
+<span class="sd">        The number of parameter</span>
+
+<span class="sd">    Examples:</span>
+
+<span class="sd">    &gt;&gt;&gt; import numpy</span>
+<span class="sd">    &gt;&gt;&gt; damp = Damping(3)</span>
+<span class="sd">    &gt;&gt;&gt; p = numpy.array([0, 0, 0])</span>
+<span class="sd">    &gt;&gt;&gt; damp.value(p)</span>
+<span class="sd">    0.0</span>
+<span class="sd">    &gt;&gt;&gt; damp.hessian(p).todense()</span>
+<span class="sd">    matrix([[ 2.,  0.,  0.],</span>
+<span class="sd">            [ 0.,  2.,  0.],</span>
+<span class="sd">            [ 0.,  0.,  2.]])</span>
+<span class="sd">    &gt;&gt;&gt; damp.gradient(p)</span>
+<span class="sd">    array([ 0.,  0.,  0.])</span>
+<span class="sd">    &gt;&gt;&gt; p = numpy.array([1, 0, 0])</span>
+<span class="sd">    &gt;&gt;&gt; damp.value(p)</span>
+<span class="sd">    1.0</span>
+<span class="sd">    &gt;&gt;&gt; damp.hessian(p).todense()</span>
+<span class="sd">    matrix([[ 2.,  0.,  0.],</span>
+<span class="sd">            [ 0.,  2.,  0.],</span>
+<span class="sd">            [ 0.,  0.,  2.]])</span>
+<span class="sd">    &gt;&gt;&gt; damp.gradient(p)</span>
+<span class="sd">    array([ 2.,  0.,  0.])</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nparams</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">Damping</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="n">nparams</span><span class="p">,</span> <span class="n">islinear</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_get_hessian</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">p</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Calculate the Hessian matrix.</span>
+
+<span class="sd">        Parameters:</span>
+
+<span class="sd">        * p : 1d-array</span>
+<span class="sd">            The parameter vector</span>
+
+<span class="sd">        Returns:</span>
+
+<span class="sd">        * hessian : 2d-array</span>
+<span class="sd">            The Hessian</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c"># This is cheap so there is no need to cache it</span>
+        <span class="k">return</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">scipy</span><span class="o">.</span><span class="n">sparse</span><span class="o">.</span><span class="n">identity</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">nparams</span><span class="p">)</span><span class="o">.</span><span class="n">tocsr</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">_get_gradient</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">p</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Calculate the gradient vector.</span>
+
+<span class="sd">        Parameters:</span>
+
+<span class="sd">        * p : 1d-array or ``&#39;null&#39;``</span>
+<span class="sd">            The parameter vector. If ``&#39;null&#39;``, will return 0.</span>
+
+<span class="sd">        Returns:</span>
+
+<span class="sd">        * gradient : 1d-array</span>
+<span class="sd">            The gradient</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">p</span> <span class="ow">is</span> <span class="s">&#39;null&#39;</span><span class="p">:</span>
+            <span class="n">grad</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">grad</span> <span class="o">=</span> <span class="mf">2.</span> <span class="o">*</span> <span class="n">p</span>
+        <span class="k">return</span> <span class="n">grad</span>
+
+    <span class="k">def</span> <span class="nf">_get_value</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">p</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Calculate the value of this function.</span>
+
+<span class="sd">        Parameters:</span>
+
+<span class="sd">        * p : 1d-array</span>
+<span class="sd">            The parameter vector</span>
+
+<span class="sd">        Returns:</span>
+
+<span class="sd">        * value : float</span>
+<span class="sd">            The value of this function evaluated at *p*</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">numpy</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">p</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span>
+
+</div>
+<div class="viewcode-block" id="Smoothness"><a class="viewcode-back" href="../../../api/inversion.regularization.html#fatiando.inversion.regularization.Smoothness">[docs]</a><span class="k">class</span> <span class="nc">Smoothness</span><span class="p">(</span><span class="n">Objective</span><span class="p">):</span>
+
+    <span class="sd">r&quot;&quot;&quot;</span>
+<span class="sd">    Smoothness (1st order Tikhonov) regularization.</span>
+
+<span class="sd">    Imposes that adjacent parameters have values close to each other.</span>
+
+<span class="sd">    The regularizing function if of the form</span>
+
+<span class="sd">    .. math::</span>
+
+<span class="sd">        \theta^{SV}(\bar{p}) =</span>
+<span class="sd">        \bar{p}^T \bar{\bar{R}}^T \bar{\bar{R}}\bar{p}</span>
+
+<span class="sd">    Its gradient and Hessian matrices are, respectively,</span>
+
+<span class="sd">    .. math::</span>
+
+<span class="sd">        \bar{\nabla}\theta^{SV}(\bar{p}) =</span>
+<span class="sd">        2\bar{\bar{R}}^T \bar{\bar{R}}\bar{p}</span>
+
+<span class="sd">    .. math::</span>
+
+<span class="sd">        \bar{\bar{\nabla}}\theta^{SV}(\bar{p}) =</span>
+<span class="sd">        2\bar{\bar{R}}^T \bar{\bar{R}}</span>
+
+<span class="sd">    in which matrix :math:`\bar{\bar{R}}` is a finite difference matrix. It</span>
+<span class="sd">    represents the differences between one parameter and another and is what</span>
+<span class="sd">    indicates what *adjacent* means.</span>
+
+<span class="sd">    Parameters:</span>
+
+<span class="sd">    * fdmat : 2d-array or sparse matrix</span>
+<span class="sd">        The finite difference matrix</span>
+
+<span class="sd">    Examples:</span>
+
+<span class="sd">    &gt;&gt;&gt; import numpy as np</span>
+<span class="sd">    &gt;&gt;&gt; fd = np.array([[1, -1, 0],</span>
+<span class="sd">    ...                [0, 1, -1]])</span>
+<span class="sd">    &gt;&gt;&gt; s = Smoothness(fd)</span>
+<span class="sd">    &gt;&gt;&gt; p = np.array([0, 0, 0])</span>
+<span class="sd">    &gt;&gt;&gt; s.value(p)</span>
+<span class="sd">    0.0</span>
+<span class="sd">    &gt;&gt;&gt; s.gradient(p)</span>
+<span class="sd">    array([0, 0, 0])</span>
+<span class="sd">    &gt;&gt;&gt; s.hessian(p)</span>
+<span class="sd">    array([[ 2, -2,  0],</span>
+<span class="sd">           [-2,  4, -2],</span>
+<span class="sd">           [ 0, -2,  2]])</span>
+<span class="sd">    &gt;&gt;&gt; p = np.array([1, 0, 1])</span>
+<span class="sd">    &gt;&gt;&gt; s.value(p)</span>
+<span class="sd">    2.0</span>
+<span class="sd">    &gt;&gt;&gt; s.gradient(p)</span>
+<span class="sd">    array([ 2, -4,  2])</span>
+<span class="sd">    &gt;&gt;&gt; s.hessian(p)</span>
+<span class="sd">    array([[ 2, -2,  0],</span>
+<span class="sd">           [-2,  4, -2],</span>
+<span class="sd">           [ 0, -2,  2]])</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fdmat</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">Smoothness</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="n">fdmat</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">islinear</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_cache</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_cache</span><span class="p">[</span><span class="s">&#39;hessian&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="s">&#39;hash&#39;</span><span class="p">:</span> <span class="s">&#39;&#39;</span><span class="p">,</span>
+                                  <span class="s">&#39;array&#39;</span><span class="p">:</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">safe_dot</span><span class="p">(</span><span class="n">fdmat</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="n">fdmat</span><span class="p">)}</span>
+
+    <span class="k">def</span> <span class="nf">_get_hessian</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">p</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Calculate the Hessian matrix.</span>
+
+<span class="sd">        Parameters:</span>
+
+<span class="sd">        * p : 1d-array</span>
+<span class="sd">            The parameter vector</span>
+
+<span class="sd">        Returns:</span>
+
+<span class="sd">        * hessian : 2d-array</span>
+<span class="sd">            The Hessian</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cache</span><span class="p">[</span><span class="s">&#39;hessian&#39;</span><span class="p">][</span><span class="s">&#39;array&#39;</span><span class="p">]</span>
+
+    <span class="k">def</span> <span class="nf">_get_gradient</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">p</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Calculate the gradient vector.</span>
+
+<span class="sd">        Parameters:</span>
+
+<span class="sd">        * p : 1d-array or ``&#39;null&#39;``</span>
+<span class="sd">            The parameter vector. If ``&#39;null&#39;``, will return 0.</span>
+
+<span class="sd">        Returns:</span>
+
+<span class="sd">        * gradient : 1d-array</span>
+<span class="sd">            The gradient</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">p</span> <span class="ow">is</span> <span class="s">&#39;null&#39;</span><span class="p">:</span>
+            <span class="n">grad</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">grad</span> <span class="o">=</span> <span class="n">safe_dot</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">hessian</span><span class="p">(</span><span class="n">p</span><span class="p">),</span> <span class="n">p</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">grad</span>
+
+    <span class="k">def</span> <span class="nf">_get_value</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">p</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Calculate the value of this function.</span>
+
+<span class="sd">        Parameters:</span>
+
+<span class="sd">        * p : 1d-array</span>
+<span class="sd">            The parameter vector</span>
+
+<span class="sd">        Returns:</span>
+
+<span class="sd">        * value : float</span>
+<span class="sd">            The value of this function evaluated at *p*</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c"># Need to divide by 2 because the hessian is 2*R.T*R</span>
+        <span class="k">return</span> <span class="n">numpy</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">p</span> <span class="o">*</span> <span class="n">safe_dot</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">hessian</span><span class="p">(</span><span class="n">p</span><span class="p">),</span> <span class="n">p</span><span class="p">))</span> <span class="o">/</span> <span class="mf">2.</span>
+
+</div>
+<div class="viewcode-block" id="Smoothness1D"><a class="viewcode-back" href="../../../api/inversion.regularization.html#fatiando.inversion.regularization.Smoothness1D">[docs]</a><span class="k">class</span> <span class="nc">Smoothness1D</span><span class="p">(</span><span class="n">Smoothness</span><span class="p">):</span>
+
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Smoothness regularization for 1D problems.</span>
+
+<span class="sd">    Extends the generic :class:`~fatiando.inversion.regularization.Smoothness`</span>
+<span class="sd">    class by automatically building the finite difference matrix.</span>
+
+<span class="sd">    Parameters:</span>
+
+<span class="sd">    * npoints : int</span>
+<span class="sd">        The number of parameters</span>
+
+<span class="sd">    Examples:</span>
+
+<span class="sd">    &gt;&gt;&gt; import numpy as np</span>
+<span class="sd">    &gt;&gt;&gt; s = Smoothness1D(3)</span>
+<span class="sd">    &gt;&gt;&gt; p = np.array([0, 0, 0])</span>
+<span class="sd">    &gt;&gt;&gt; s.value(p)</span>
+<span class="sd">    0.0</span>
+<span class="sd">    &gt;&gt;&gt; s.gradient(p)</span>
+<span class="sd">    array([0, 0, 0])</span>
+<span class="sd">    &gt;&gt;&gt; s.hessian(p).todense()</span>
+<span class="sd">    matrix([[ 2, -2,  0],</span>
+<span class="sd">            [-2,  4, -2],</span>
+<span class="sd">            [ 0, -2,  2]])</span>
+<span class="sd">    &gt;&gt;&gt; p = np.array([1, 0, 1])</span>
+<span class="sd">    &gt;&gt;&gt; s.value(p)</span>
+<span class="sd">    2.0</span>
+<span class="sd">    &gt;&gt;&gt; s.gradient(p)</span>
+<span class="sd">    array([ 2, -4,  2])</span>
+<span class="sd">    &gt;&gt;&gt; s.hessian(p).todense()</span>
+<span class="sd">    matrix([[ 2, -2,  0],</span>
+<span class="sd">            [-2,  4, -2],</span>
+<span class="sd">            [ 0, -2,  2]])</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">npoints</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">Smoothness1D</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="n">fd1d</span><span class="p">(</span><span class="n">npoints</span><span class="p">))</span>
+
+</div>
+<div class="viewcode-block" id="Smoothness2D"><a class="viewcode-back" href="../../../api/inversion.regularization.html#fatiando.inversion.regularization.Smoothness2D">[docs]</a><span class="k">class</span> <span class="nc">Smoothness2D</span><span class="p">(</span><span class="n">Smoothness</span><span class="p">):</span>
+
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Smoothness regularization for 2D problems.</span>
+
+<span class="sd">    Extends the generic :class:`~fatiando.inversion.regularization.Smoothness`</span>
+<span class="sd">    class by automatically building the finite difference matrix.</span>
+
+<span class="sd">    Parameters:</span>
+
+<span class="sd">    * shape : tuple = (ny, nx)</span>
+<span class="sd">        The shape of the parameter grid. Number of parameters in the y and x</span>
+<span class="sd">        (or z and x, time and offset, etc) dimensions.</span>
+
+<span class="sd">    Examples:</span>
+
+<span class="sd">    &gt;&gt;&gt; import numpy as np</span>
+<span class="sd">    &gt;&gt;&gt; s = Smoothness2D((2, 2))</span>
+<span class="sd">    &gt;&gt;&gt; p = np.array([[0, 0],</span>
+<span class="sd">    ...               [0, 0]]).ravel()</span>
+<span class="sd">    &gt;&gt;&gt; s.value(p)</span>
+<span class="sd">    0.0</span>
+<span class="sd">    &gt;&gt;&gt; s.gradient(p)</span>
+<span class="sd">    array([0, 0, 0, 0])</span>
+<span class="sd">    &gt;&gt;&gt; s.hessian(p).todense()</span>
+<span class="sd">    matrix([[ 4, -2, -2,  0],</span>
+<span class="sd">            [-2,  4,  0, -2],</span>
+<span class="sd">            [-2,  0,  4, -2],</span>
+<span class="sd">            [ 0, -2, -2,  4]])</span>
+<span class="sd">    &gt;&gt;&gt; p = np.array([[1, 0],</span>
+<span class="sd">    ...               [2, 3]]).ravel()</span>
+<span class="sd">    &gt;&gt;&gt; s.value(p)</span>
+<span class="sd">    12.0</span>
+<span class="sd">    &gt;&gt;&gt; s.gradient(p)</span>
+<span class="sd">    array([ 0, -8,  0,  8])</span>
+<span class="sd">    &gt;&gt;&gt; s.hessian(p).todense()</span>
+<span class="sd">    matrix([[ 4, -2, -2,  0],</span>
+<span class="sd">            [-2,  4,  0, -2],</span>
+<span class="sd">            [-2,  0,  4, -2],</span>
+<span class="sd">            [ 0, -2, -2,  4]])</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">shape</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">Smoothness2D</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="n">fd2d</span><span class="p">(</span><span class="n">shape</span><span class="p">))</span>
+
+</div>
+<div class="viewcode-block" id="TotalVariation"><a class="viewcode-back" href="../../../api/inversion.regularization.html#fatiando.inversion.regularization.TotalVariation">[docs]</a><span class="k">class</span> <span class="nc">TotalVariation</span><span class="p">(</span><span class="n">Objective</span><span class="p">):</span>
+
+    <span class="sd">r&quot;&quot;&quot;</span>
+<span class="sd">    Total variation regularization.</span>
+
+<span class="sd">    Imposes that adjacent parameters have a few sharp transitions.</span>
+
+<span class="sd">    The regularizing function if of the form</span>
+
+<span class="sd">    .. math::</span>
+
+<span class="sd">        \theta^{VT}(\bar{p}) = \sum\limits_{k=1}^L |v_k|</span>
+
+<span class="sd">    where vector :math:`\bar{v} = \bar{\bar{R}}\bar{p}`. See</span>
+<span class="sd">    :class:`~fatiando.inversion.regularization.Smoothness` for the definition</span>
+<span class="sd">    of the :math:`\bar{\bar{R}}` matrix.</span>
+
+<span class="sd">    This functions is not differentiable at the null vector, so the following</span>
+<span class="sd">    form is used to calculate the gradient and Hessian</span>
+
+<span class="sd">    .. math::</span>
+
+<span class="sd">        \theta^{VT}(\bar{p}) \approx \theta^{VT}_\beta(\bar{p}) =</span>
+<span class="sd">        \sum\limits_{k=1}^L \sqrt{v_k^2 + \beta}</span>
+
+<span class="sd">    Its gradient and Hessian matrices are, respectively,</span>
+
+<span class="sd">    .. math::</span>
+
+<span class="sd">        \bar{\nabla}\theta^{VT}_\beta(\bar{p}) =</span>
+<span class="sd">        \bar{\bar{R}}^T \bar{q}(\bar{p})</span>
+
+<span class="sd">    .. math::</span>
+
+<span class="sd">        \bar{\bar{\nabla}}\theta^{VT}_\beta(\bar{p}) =</span>
+<span class="sd">        \bar{\bar{R}}^T \bar{\bar{Q}}(\bar{p})\bar{\bar{R}}</span>
+
+<span class="sd">    and</span>
+
+<span class="sd">    .. math::</span>
+
+<span class="sd">        \bar{q}(\bar{p}) =</span>
+<span class="sd">        \begin{bmatrix}</span>
+<span class="sd">            \dfrac{v_1}{\sqrt{v_1^2 + \beta}} \\</span>
+<span class="sd">            \dfrac{v_2}{\sqrt{v_2^2 + \beta}} \\</span>
+<span class="sd">            \vdots \\ \dfrac{v_L}{\sqrt{v_L^2 + \beta}}</span>
+<span class="sd">        \end{bmatrix}</span>
+
+<span class="sd">    .. math::</span>
+
+<span class="sd">        \bar{\bar{Q}}(\bar{p}) =</span>
+<span class="sd">        \begin{bmatrix}</span>
+<span class="sd">            \dfrac{\beta}{(v_1^2 + \beta)^{\frac{3}{2}}} &amp; 0 &amp; \ldots &amp; 0 \\</span>
+<span class="sd">            0 &amp; \dfrac{\beta}{(v_2^2 + \beta)^{\frac{3}{2}}} &amp; \ldots &amp; 0 \\</span>
+<span class="sd">            \vdots &amp; \vdots &amp; \ddots &amp; \vdots \\</span>
+<span class="sd">            0 &amp; 0 &amp; \ldots &amp; \dfrac{\beta}{(v_L^2 + \beta)^{\frac{3}{2}}}</span>
+<span class="sd">        \end{bmatrix}</span>
+
+<span class="sd">    Parameters:</span>
+
+<span class="sd">    * beta : float</span>
+<span class="sd">        The beta parameter for the differentiable approximation. The larger it</span>
+<span class="sd">        is, the closer total variation is to</span>
+<span class="sd">        :class:`~fatiando.inversion.regularization.Smoothness`. Should be a</span>
+<span class="sd">        small, positive value.</span>
+<span class="sd">    * fdmat : 2d-array or sparse matrix</span>
+<span class="sd">        The finite difference matrix</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">beta</span><span class="p">,</span> <span class="n">fdmat</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">beta</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s">&quot;Invalid beta=</span><span class="si">%g</span><span class="s">. Must be &gt; 0&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">beta</span><span class="p">))</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">TotalVariation</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span>
+            <span class="n">nparams</span><span class="o">=</span><span class="n">fdmat</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">islinear</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">beta</span> <span class="o">=</span> <span class="n">beta</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_fdmat</span> <span class="o">=</span> <span class="n">fdmat</span>
+
+    <span class="k">def</span> <span class="nf">_get_value</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">p</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Calculate the value of this function.</span>
+
+<span class="sd">        Parameters:</span>
+
+<span class="sd">        * p : 1d-array</span>
+<span class="sd">            The parameter vector</span>
+
+<span class="sd">        Returns:</span>
+
+<span class="sd">        * value : float</span>
+<span class="sd">            The value of this function evaluated at *p*</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">numpy</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">safe_dot</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_fdmat</span><span class="p">,</span> <span class="n">p</span><span class="p">),</span> <span class="mi">1</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_get_hessian</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">p</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Calculate the Hessian matrix.</span>
+
+<span class="sd">        Parameters:</span>
+
+<span class="sd">        * p : 1d-array</span>
+<span class="sd">            The parameter vector</span>
+
+<span class="sd">        Returns:</span>
+
+<span class="sd">        * hessian : 2d-array</span>
+<span class="sd">            The Hessian</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">derivs</span> <span class="o">=</span> <span class="n">safe_dot</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_fdmat</span><span class="p">,</span> <span class="n">p</span><span class="p">)</span>
+        <span class="n">q</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">beta</span> <span class="o">/</span> <span class="p">((</span><span class="n">derivs</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">beta</span><span class="p">)</span> <span class="o">**</span> <span class="mf">1.5</span><span class="p">)</span>
+        <span class="n">q_matrix</span> <span class="o">=</span> <span class="n">scipy</span><span class="o">.</span><span class="n">sparse</span><span class="o">.</span><span class="n">diags</span><span class="p">(</span><span class="n">q</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">tocsr</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">safe_dot</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_fdmat</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="n">q_matrix</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">_fdmat</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_get_gradient</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">p</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Calculate the gradient vector.</span>
+
+<span class="sd">        Parameters:</span>
+
+<span class="sd">        * p : 1d-array</span>
+<span class="sd">            The parameter vector.</span>
+
+<span class="sd">        Returns:</span>
+
+<span class="sd">        * gradient : 1d-array</span>
+<span class="sd">            The gradient</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">derivs</span> <span class="o">=</span> <span class="n">safe_dot</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_fdmat</span><span class="p">,</span> <span class="n">p</span><span class="p">)</span>
+        <span class="n">q</span> <span class="o">=</span> <span class="n">derivs</span> <span class="o">/</span> <span class="n">numpy</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">derivs</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">beta</span><span class="p">)</span>
+        <span class="n">grad</span> <span class="o">=</span> <span class="n">safe_dot</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_fdmat</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="n">q</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">grad</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="n">grad</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">grad</span><span class="o">.</span><span class="n">T</span><span class="p">)</span><span class="o">.</span><span class="n">ravel</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">grad</span>
+
+</div>
+<div class="viewcode-block" id="TotalVariation1D"><a class="viewcode-back" href="../../../api/inversion.regularization.html#fatiando.inversion.regularization.TotalVariation1D">[docs]</a><span class="k">class</span> <span class="nc">TotalVariation1D</span><span class="p">(</span><span class="n">TotalVariation</span><span class="p">):</span>
+
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Total variation regularization for 1D problems.</span>
+
+<span class="sd">    Extends the generic</span>
+<span class="sd">    :class:`~fatiando.inversion.regularization.TotalVariation`</span>
+<span class="sd">    class by automatically building the finite difference matrix.</span>
+
+<span class="sd">    Parameters:</span>
+
+<span class="sd">    * beta : float</span>
+<span class="sd">        The beta parameter for the differentiable approximation. The larger it</span>
+<span class="sd">        is, the closer total variation is to</span>
+<span class="sd">        :class:`~fatiando.inversion.regularization.Smoothness`. Should be a</span>
+<span class="sd">        small, positive value.</span>
+<span class="sd">    * npoints : int</span>
+<span class="sd">        The number of parameters</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">beta</span><span class="p">,</span> <span class="n">npoints</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">TotalVariation1D</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="n">beta</span><span class="p">,</span> <span class="n">fd1d</span><span class="p">(</span><span class="n">npoints</span><span class="p">))</span>
+
+</div>
+<div class="viewcode-block" id="TotalVariation2D"><a class="viewcode-back" href="../../../api/inversion.regularization.html#fatiando.inversion.regularization.TotalVariation2D">[docs]</a><span class="k">class</span> <span class="nc">TotalVariation2D</span><span class="p">(</span><span class="n">TotalVariation</span><span class="p">):</span>
+
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Total variation regularization for 2D problems.</span>
+
+<span class="sd">    Extends the generic</span>
+<span class="sd">    :class:`~fatiando.inversion.regularization.TotalVariation`</span>
+<span class="sd">    class by automatically building the finite difference matrix.</span>
+
+<span class="sd">    Parameters:</span>
+
+<span class="sd">    * beta : float</span>
+<span class="sd">        The beta parameter for the differentiable approximation. The larger it</span>
+<span class="sd">        is, the closer total variation is to</span>
+<span class="sd">        :class:`~fatiando.inversion.regularization.Smoothness`. Should be a</span>
+<span class="sd">        small, positive value.</span>
+<span class="sd">    * shape : tuple = (ny, nx)</span>
+<span class="sd">        The shape of the parameter grid. Number of parameters in the y and x</span>
+<span class="sd">        (or z and x, time and offset, etc) dimensions.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">beta</span><span class="p">,</span> <span class="n">shape</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">TotalVariation2D</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="n">beta</span><span class="p">,</span> <span class="n">fd2d</span><span class="p">(</span><span class="n">shape</span><span class="p">))</span>
+
+</div>
+<div class="viewcode-block" id="fd1d"><a class="viewcode-back" href="../../../api/inversion.regularization.html#fatiando.inversion.regularization.fd1d">[docs]</a><span class="k">def</span> <span class="nf">fd1d</span><span class="p">(</span><span class="n">size</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Produce a 1D finite difference matrix.</span>
+
+<span class="sd">    Parameters:</span>
+
+<span class="sd">    * size : int</span>
+<span class="sd">        The number of points</span>
+
+<span class="sd">    Returns:</span>
+
+<span class="sd">    * fd : sparse CSR matrix</span>
+<span class="sd">        The finite difference matrix</span>
+
+<span class="sd">    Examples:</span>
+
+<span class="sd">    &gt;&gt;&gt; fd1d(2).todense()</span>
+<span class="sd">    matrix([[ 1, -1]])</span>
+<span class="sd">    &gt;&gt;&gt; fd1d(3).todense()</span>
+<span class="sd">    matrix([[ 1, -1,  0],</span>
+<span class="sd">            [ 0,  1, -1]])</span>
+<span class="sd">    &gt;&gt;&gt; fd1d(4).todense()</span>
+<span class="sd">    matrix([[ 1, -1,  0,  0],</span>
+<span class="sd">            [ 0,  1, -1,  0],</span>
+<span class="sd">            [ 0,  0,  1, -1]])</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">i</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="n">size</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="nb">range</span><span class="p">(</span><span class="n">size</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="n">j</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="n">size</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">size</span><span class="p">)</span>
+    <span class="n">v</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span><span class="n">size</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span><span class="n">size</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">scipy</span><span class="o">.</span><span class="n">sparse</span><span class="o">.</span><span class="n">coo_matrix</span><span class="p">((</span><span class="n">v</span><span class="p">,</span> <span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">)),</span> <span class="p">(</span><span class="n">size</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">size</span><span class="p">))</span><span class="o">.</span><span class="n">tocsr</span><span class="p">()</span>
+
+</div>
+<div class="viewcode-block" id="fd2d"><a class="viewcode-back" href="../../../api/inversion.regularization.html#fatiando.inversion.regularization.fd2d">[docs]</a><span class="k">def</span> <span class="nf">fd2d</span><span class="p">(</span><span class="n">shape</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Produce a 2D finite difference matrix.</span>
+
+<span class="sd">    Parameters:</span>
+
+<span class="sd">    * shape : tuple = (ny, nx)</span>
+<span class="sd">        The shape of the parameter grid. Number of parameters in the y and x</span>
+<span class="sd">        (or z and x, time and offset, etc) dimensions.</span>
+
+<span class="sd">    Returns:</span>
+
+<span class="sd">    * fd : sparse CSR matrix</span>
+<span class="sd">        The finite difference matrix</span>
+
+<span class="sd">    Examples:</span>
+
+<span class="sd">    &gt;&gt;&gt; fd2d((2, 2)).todense()</span>
+<span class="sd">    matrix([[ 1, -1,  0,  0],</span>
+<span class="sd">            [ 0,  0,  1, -1],</span>
+<span class="sd">            [ 1,  0, -1,  0],</span>
+<span class="sd">            [ 0,  1,  0, -1]])</span>
+<span class="sd">    &gt;&gt;&gt; fd2d((2, 3)).todense()</span>
+<span class="sd">    matrix([[ 1, -1,  0,  0,  0,  0],</span>
+<span class="sd">            [ 0,  1, -1,  0,  0,  0],</span>
+<span class="sd">            [ 0,  0,  0,  1, -1,  0],</span>
+<span class="sd">            [ 0,  0,  0,  0,  1, -1],</span>
+<span class="sd">            [ 1,  0,  0, -1,  0,  0],</span>
+<span class="sd">            [ 0,  1,  0,  0, -1,  0],</span>
+<span class="sd">            [ 0,  0,  1,  0,  0, -1]])</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">ny</span><span class="p">,</span> <span class="n">nx</span> <span class="o">=</span> <span class="n">shape</span>
+    <span class="n">nderivs</span> <span class="o">=</span> <span class="p">(</span><span class="n">nx</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="n">ny</span> <span class="o">+</span> <span class="p">(</span><span class="n">ny</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="n">nx</span>
+    <span class="n">I</span><span class="p">,</span> <span class="n">J</span><span class="p">,</span> <span class="n">V</span> <span class="o">=</span> <span class="p">[],</span> <span class="p">[],</span> <span class="p">[]</span>
+    <span class="n">deriv</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">param</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">xrange</span><span class="p">(</span><span class="n">ny</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">xrange</span><span class="p">(</span><span class="n">nx</span> <span class="o">-</span> <span class="mi">1</span><span class="p">):</span>
+            <span class="n">I</span><span class="o">.</span><span class="n">extend</span><span class="p">([</span><span class="n">deriv</span><span class="p">,</span> <span class="n">deriv</span><span class="p">])</span>
+            <span class="n">J</span><span class="o">.</span><span class="n">extend</span><span class="p">([</span><span class="n">param</span><span class="p">,</span> <span class="n">param</span> <span class="o">+</span> <span class="mi">1</span><span class="p">])</span>
+            <span class="n">V</span><span class="o">.</span><span class="n">extend</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+            <span class="n">deriv</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="n">param</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="n">param</span> <span class="o">+=</span> <span class="mi">1</span>
+    <span class="n">param</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">xrange</span><span class="p">(</span><span class="n">ny</span> <span class="o">-</span> <span class="mi">1</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">xrange</span><span class="p">(</span><span class="n">nx</span><span class="p">):</span>
+            <span class="n">I</span><span class="o">.</span><span class="n">extend</span><span class="p">([</span><span class="n">deriv</span><span class="p">,</span> <span class="n">deriv</span><span class="p">])</span>
+            <span class="n">J</span><span class="o">.</span><span class="n">extend</span><span class="p">([</span><span class="n">param</span><span class="p">,</span> <span class="n">param</span> <span class="o">+</span> <span class="n">nx</span><span class="p">])</span>
+            <span class="n">V</span><span class="o">.</span><span class="n">extend</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+            <span class="n">deriv</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="n">param</span> <span class="o">+=</span> <span class="mi">1</span>
+    <span class="k">return</span> <span class="n">scipy</span><span class="o">.</span><span class="n">sparse</span><span class="o">.</span><span class="n">coo_matrix</span><span class="p">((</span><span class="n">V</span><span class="p">,</span> <span class="p">(</span><span class="n">I</span><span class="p">,</span> <span class="n">J</span><span class="p">)),</span> <span class="p">(</span><span class="n">nderivs</span><span class="p">,</span> <span class="n">nx</span> <span class="o">*</span> <span class="n">ny</span><span class="p">))</span><span class="o">.</span><span class="n">tocsr</span><span class="p">()</span>
+
+</div>
+<div class="viewcode-block" id="LCurve"><a class="viewcode-back" href="../../../api/inversion.regularization.html#fatiando.inversion.regularization.LCurve">[docs]</a><span class="k">class</span> <span class="nc">LCurve</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Use the L-curve criterion to estimate the regularization parameter.</span>
+
+<span class="sd">    Runs the inversion using several specified regularization parameters.</span>
+<span class="sd">    The best value is the one that falls on the corner of the log-log plot of</span>
+<span class="sd">    the data misfit vs regularizing function.</span>
+<span class="sd">    This point is automatically found using the triangle method of</span>
+<span class="sd">    Castellanos et al. (2002).</span>
+
+<span class="sd">    This class behaves as :class:`~fatiando.inversion.base.Misfit`.</span>
+<span class="sd">    To use it, simply call ``fit`` and optionally ``config``.</span>
+<span class="sd">    The estimate will be stored in ``estimate_`` and ``p_``.</span>
+<span class="sd">    The estimated regularization parameter will be stored in ``regul_param_``.</span>
+
+<span class="sd">    Parameters:</span>
+
+<span class="sd">    * datamisfit : :class:`~fatiando.inversion.base.Misfit`</span>
+<span class="sd">        The data misfit instance for the inverse problem. Can be a sum of other</span>
+<span class="sd">        misfits.</span>
+<span class="sd">    * regul : A class from :mod:`fatiando.inversion.regularization`</span>
+<span class="sd">        The regularizing function.</span>
+<span class="sd">    * regul_params : list</span>
+<span class="sd">        The values of the regularization parameter that will be tested.</span>
+<span class="sd">    * loglog : True or False</span>
+<span class="sd">        If True, will use a log-log scale for the L-curve (recommended).</span>
+<span class="sd">    * jobs : None or int</span>
+<span class="sd">        If not None, will use *jobs* processes to calculate the L-curve.</span>
+
+<span class="sd">    References:</span>
+
+<span class="sd">    Castellanos, J. L., S. Gomez, and V. Guerra (2002), The triangle method for</span>
+<span class="sd">    finding the corner of the L-curve, Applied Numerical Mathematics, 43(4),</span>
+<span class="sd">    359-373, doi:10.1016/S0168-9274(01)00179-9.</span>
+
+<span class="sd">    Examples:</span>
+
+<span class="sd">    We&#39;ll use the L-curve to estimate the best regularization parameter for a</span>
+<span class="sd">    smooth inversion using :mod:`fatiando.seismic.srtomo`.</span>
+
+<span class="sd">    First, we&#39;ll setup some synthetic data:</span>
+
+<span class="sd">    &gt;&gt;&gt; import numpy</span>
+<span class="sd">    &gt;&gt;&gt; from fatiando.mesher import SquareMesh</span>
+<span class="sd">    &gt;&gt;&gt; from fatiando.seismic import ttime2d, srtomo</span>
+<span class="sd">    &gt;&gt;&gt; from fatiando.inversion.regularization import Smoothness2D, LCurve</span>
+<span class="sd">    &gt;&gt;&gt; from fatiando import utils</span>
+<span class="sd">    &gt;&gt;&gt; area = (0, 2, 0, 2)</span>
+<span class="sd">    &gt;&gt;&gt; shape = (10, 10)</span>
+<span class="sd">    &gt;&gt;&gt; model = SquareMesh(area, shape)</span>
+<span class="sd">    &gt;&gt;&gt; vp = 4*numpy.ones(shape)</span>
+<span class="sd">    &gt;&gt;&gt; vp[3:7,3:7] = 10</span>
+<span class="sd">    &gt;&gt;&gt; vp</span>
+<span class="sd">    array([[  4.,   4.,   4.,   4.,   4.,   4.,   4.,   4.,   4.,   4.],</span>
+<span class="sd">           [  4.,   4.,   4.,   4.,   4.,   4.,   4.,   4.,   4.,   4.],</span>
+<span class="sd">           [  4.,   4.,   4.,   4.,   4.,   4.,   4.,   4.,   4.,   4.],</span>
+<span class="sd">           [  4.,   4.,   4.,  10.,  10.,  10.,  10.,   4.,   4.,   4.],</span>
+<span class="sd">           [  4.,   4.,   4.,  10.,  10.,  10.,  10.,   4.,   4.,   4.],</span>
+<span class="sd">           [  4.,   4.,   4.,  10.,  10.,  10.,  10.,   4.,   4.,   4.],</span>
+<span class="sd">           [  4.,   4.,   4.,  10.,  10.,  10.,  10.,   4.,   4.,   4.],</span>
+<span class="sd">           [  4.,   4.,   4.,   4.,   4.,   4.,   4.,   4.,   4.,   4.],</span>
+<span class="sd">           [  4.,   4.,   4.,   4.,   4.,   4.,   4.,   4.,   4.,   4.],</span>
+<span class="sd">           [  4.,   4.,   4.,   4.,   4.,   4.,   4.,   4.,   4.,   4.]])</span>
+<span class="sd">    &gt;&gt;&gt; model.addprop(&#39;vp&#39;, vp.ravel())</span>
+<span class="sd">    &gt;&gt;&gt; src_loc = utils.random_points(area, 30, seed=0)</span>
+<span class="sd">    &gt;&gt;&gt; rec_loc = utils.circular_points(area, 20, random=True, seed=0)</span>
+<span class="sd">    &gt;&gt;&gt; srcs, recs = utils.connect_points(src_loc, rec_loc)</span>
+<span class="sd">    &gt;&gt;&gt; tts = ttime2d.straight(model, &#39;vp&#39;, srcs, recs)</span>
+<span class="sd">    &gt;&gt;&gt; tts = utils.contaminate(tts, 0.01, percent=True, seed=0)</span>
+
+<span class="sd">    Now we can setup a tomography by creating the necessary data misfit</span>
+<span class="sd">    (`SRTomo`) and regularization (`Smoothness2D`) objects:</span>
+
+<span class="sd">    &gt;&gt;&gt; mesh = SquareMesh(area, shape)</span>
+<span class="sd">    &gt;&gt;&gt; datamisfit = srtomo.SRTomo(tts, srcs, recs, mesh)</span>
+<span class="sd">    &gt;&gt;&gt; regul = Smoothness2D(mesh.shape)</span>
+
+<span class="sd">    The tomography solver will be the `LCurve` solver. It works by calling</span>
+<span class="sd">    `fit()` and accessing `estimate_`, exactly like any other solver:</span>
+
+<span class="sd">    &gt;&gt;&gt; tomo = LCurve(datamisfit, regul, [10**i for i in range(-10, -2, 1)])</span>
+<span class="sd">    &gt;&gt;&gt; e = tomo.fit().estimate_</span>
+<span class="sd">    &gt;&gt;&gt; print numpy.array_repr(e.reshape(shape), precision=0)</span>
+<span class="sd">    array([[  4.,   4.,   4.,   4.,   4.,   4.,   4.,   4.,   4.,   4.],</span>
+<span class="sd">           [  4.,   4.,   4.,   4.,   4.,   4.,   4.,   4.,   4.,   4.],</span>
+<span class="sd">           [  4.,   4.,   4.,   4.,   4.,   4.,   4.,   4.,   4.,   4.],</span>
+<span class="sd">           [  4.,   4.,   4.,  11.,   9.,  11.,  10.,   4.,   4.,   4.],</span>
+<span class="sd">           [  4.,   4.,   4.,  10.,  11.,  10.,  10.,   4.,   4.,   4.],</span>
+<span class="sd">           [  4.,   4.,   4.,  10.,  10.,  10.,  10.,   4.,   4.,   4.],</span>
+<span class="sd">           [  4.,   4.,   4.,  11.,  10.,  11.,   9.,   4.,   4.,   4.],</span>
+<span class="sd">           [  4.,   4.,   4.,   4.,   4.,   4.,   4.,   4.,   4.,   4.],</span>
+<span class="sd">           [  4.,   4.,   4.,   4.,   4.,   4.,   4.,   4.,   4.,   4.],</span>
+<span class="sd">           [  4.,   4.,   4.,   4.,   4.,   4.,   4.,   4.,   4.,   4.]])</span>
+
+<span class="sd">    The estimated regularization parameter is stored in `regul_param_`:</span>
+
+<span class="sd">    &gt;&gt;&gt; tomo.regul_param_</span>
+<span class="sd">    1e-05</span>
+
+<span class="sd">    The `LCurve` object also exposes the `residuals()` and `predicted()`</span>
+<span class="sd">    methods of the data misfit class:</span>
+
+<span class="sd">    &gt;&gt;&gt; residuals = tomo.residuals()</span>
+<span class="sd">    &gt;&gt;&gt; print &#39;%.4f %.4f&#39; % (residuals.mean(), residuals.std())</span>
+<span class="sd">    -0.0000 0.0047</span>
+
+<span class="sd">    `LCurve` also has a `config` method to configure the optimization process</span>
+<span class="sd">    for non-linear problems, for example:</span>
+
+<span class="sd">    &gt;&gt;&gt; initial = 1./4.*numpy.ones(mesh.size)</span>
+<span class="sd">    &gt;&gt;&gt; tomo = LCurve(datamisfit, regul, [10**i for i in range(-10, -2, 1)])</span>
+<span class="sd">    &gt;&gt;&gt; e = tomo.config(&#39;levmarq&#39;, initial=initial).fit().estimate_</span>
+<span class="sd">    &gt;&gt;&gt; tomo.regul_param_</span>
+<span class="sd">    1e-05</span>
+<span class="sd">    &gt;&gt;&gt; print numpy.array_repr(e.reshape(shape), precision=0)</span>
+<span class="sd">    array([[  4.,   4.,   4.,   4.,   4.,   4.,   4.,   4.,   4.,   4.],</span>
+<span class="sd">           [  4.,   4.,   4.,   4.,   4.,   4.,   4.,   4.,   4.,   4.],</span>
+<span class="sd">           [  4.,   4.,   4.,   4.,   4.,   4.,   4.,   4.,   4.,   4.],</span>
+<span class="sd">           [  4.,   4.,   4.,  11.,   9.,  11.,  10.,   4.,   4.,   4.],</span>
+<span class="sd">           [  4.,   4.,   4.,  10.,  11.,  10.,  10.,   4.,   4.,   4.],</span>
+<span class="sd">           [  4.,   4.,   4.,  10.,  10.,  10.,  10.,   4.,   4.,   4.],</span>
+<span class="sd">           [  4.,   4.,   4.,  11.,  10.,  11.,   9.,   4.,   4.,   4.],</span>
+<span class="sd">           [  4.,   4.,   4.,   4.,   4.,   4.,   4.,   4.,   4.,   4.],</span>
+<span class="sd">           [  4.,   4.,   4.,   4.,   4.,   4.,   4.,   4.,   4.,   4.],</span>
+<span class="sd">           [  4.,   4.,   4.,   4.,   4.,   4.,   4.,   4.,   4.,   4.]])</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">datamisfit</span><span class="p">,</span> <span class="n">regul</span><span class="p">,</span> <span class="n">regul_params</span><span class="p">,</span> <span class="n">loglog</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
+                 <span class="n">jobs</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">regul_params</span> <span class="o">=</span> <span class="n">regul_params</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">datamisfit</span> <span class="o">=</span> <span class="n">datamisfit</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">regul</span> <span class="o">=</span> <span class="n">regul</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">regul_param_</span> <span class="o">=</span> <span class="bp">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">objectives</span> <span class="o">=</span> <span class="bp">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">corner_</span> <span class="o">=</span> <span class="bp">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">estimate_</span> <span class="o">=</span> <span class="bp">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">p_</span> <span class="o">=</span> <span class="bp">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">dnorm</span> <span class="o">=</span> <span class="bp">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">mnorm</span> <span class="o">=</span> <span class="bp">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fit_method</span> <span class="o">=</span> <span class="bp">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fit_args</span> <span class="o">=</span> <span class="bp">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">jobs</span> <span class="o">=</span> <span class="n">jobs</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">loglog</span> <span class="o">=</span> <span class="n">loglog</span>
+
+<div class="viewcode-block" id="LCurve.fit"><a class="viewcode-back" href="../../../api/inversion.regularization.html#fatiando.inversion.regularization.LCurve.fit">[docs]</a>    <span class="k">def</span> <span class="nf">fit</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Solve for the parameter vector and optimum regularization parameter.</span>
+
+<span class="sd">        Combines the data-misfit and regularization solvers using the range of</span>
+<span class="sd">        regularization parameters provided and calls ``fit`` and ``config`` on</span>
+<span class="sd">        each.</span>
+
+<span class="sd">        The ``p_`` and ``estimate_`` attributes correspond to the combination</span>
+<span class="sd">        that falls in the corner of the L-curve.</span>
+
+<span class="sd">        The regularization parameter for this corner point if stored in the</span>
+<span class="sd">        ``regul_param_`` attribute.</span>
+
+<span class="sd">        Returns:</span>
+
+<span class="sd">        * self</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">datamisfit</span><span class="o">.</span><span class="n">islinear</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">datamisfit</span><span class="o">.</span><span class="n">jacobian</span><span class="p">(</span><span class="s">&#39;null&#39;</span><span class="p">)</span>
+        <span class="n">solvers</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">datamisfit</span> <span class="o">+</span> <span class="n">mu</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">regul</span> <span class="k">for</span> <span class="n">mu</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">regul_params</span><span class="p">]</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">fit_method</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">solver</span> <span class="ow">in</span> <span class="n">solvers</span><span class="p">:</span>
+                <span class="n">solver</span><span class="o">.</span><span class="n">config</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">fit_method</span><span class="p">,</span> <span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">fit_args</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">jobs</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="n">results</span> <span class="o">=</span> <span class="p">[</span><span class="n">_run_lcurve</span><span class="p">(</span><span class="n">s</span><span class="p">)</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">solvers</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">pool</span> <span class="o">=</span> <span class="n">multiprocessing</span><span class="o">.</span><span class="n">Pool</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">jobs</span><span class="p">)</span>
+            <span class="n">results</span> <span class="o">=</span> <span class="n">pool</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">_run_lcurve</span><span class="p">,</span> <span class="n">solvers</span><span class="p">)</span>
+            <span class="n">pool</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+            <span class="n">pool</span><span class="o">.</span><span class="n">join</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">objectives</span> <span class="o">=</span> <span class="n">results</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">dnorm</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">array</span><span class="p">(</span>
+            <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">datamisfit</span><span class="o">.</span><span class="n">value</span><span class="p">(</span><span class="n">s</span><span class="o">.</span><span class="n">p_</span><span class="p">)</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">results</span><span class="p">])</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">mnorm</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="bp">self</span><span class="o">.</span><span class="n">regul</span><span class="o">.</span><span class="n">value</span><span class="p">(</span><span class="n">s</span><span class="o">.</span><span class="n">p_</span><span class="p">)</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">results</span><span class="p">])</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">select_corner</span><span class="p">()</span>
+        <span class="k">return</span> <span class="bp">self</span>
+</div>
+    <span class="k">def</span> <span class="nf">_scale_curve</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Puts the data-misfit and regularizing function values in the range</span>
+<span class="sd">        [-10, 10].</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">loglog</span><span class="p">:</span>
+            <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dnorm</span><span class="p">),</span> <span class="n">numpy</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">mnorm</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">dnorm</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">mnorm</span>
+
+        <span class="k">def</span> <span class="nf">scale</span><span class="p">(</span><span class="n">a</span><span class="p">):</span>
+            <span class="n">vmin</span><span class="p">,</span> <span class="n">vmax</span> <span class="o">=</span> <span class="n">a</span><span class="o">.</span><span class="n">min</span><span class="p">(),</span> <span class="n">a</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>
+            <span class="n">l</span><span class="p">,</span> <span class="n">u</span> <span class="o">=</span> <span class="o">-</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span>
+            <span class="k">return</span> <span class="p">(((</span><span class="n">u</span> <span class="o">-</span> <span class="n">l</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">vmax</span> <span class="o">-</span> <span class="n">vmin</span><span class="p">))</span> <span class="o">*</span>
+                    <span class="p">(</span><span class="n">a</span> <span class="o">-</span> <span class="p">(</span><span class="n">u</span> <span class="o">*</span> <span class="n">vmin</span> <span class="o">-</span> <span class="n">l</span> <span class="o">*</span> <span class="n">vmax</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">u</span> <span class="o">-</span> <span class="n">l</span><span class="p">)))</span>
+        <span class="k">return</span> <span class="n">scale</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">scale</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+
+<div class="viewcode-block" id="LCurve.select_corner"><a class="viewcode-back" href="../../../api/inversion.regularization.html#fatiando.inversion.regularization.LCurve.select_corner">[docs]</a>    <span class="k">def</span> <span class="nf">select_corner</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Selects the corner value of the L-curve and sets the estimate to it.</span>
+
+<span class="sd">        Uses the Triangle method of Castellanos et al. (2002).</span>
+
+<span class="sd">        The index of the corner value is stored in the ``corner_`` attribute.</span>
+
+<span class="sd">        Returns:</span>
+
+<span class="sd">        * self</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_scale_curve</span><span class="p">()</span>
+        <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">regul_params</span><span class="p">)</span>
+        <span class="n">corner</span> <span class="o">=</span> <span class="n">n</span> <span class="o">-</span> <span class="mi">1</span>
+        <span class="n">dist</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">p1</span><span class="p">,</span> <span class="n">p2</span><span class="p">:</span> <span class="n">numpy</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span>
+            <span class="p">(</span><span class="n">p1</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="n">p2</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">+</span> <span class="p">(</span><span class="n">p1</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">p2</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span>
+        <span class="n">cte</span> <span class="o">=</span> <span class="mf">7.</span> <span class="o">*</span> <span class="n">numpy</span><span class="o">.</span><span class="n">pi</span> <span class="o">/</span> <span class="mf">8.</span>
+        <span class="n">angmin</span> <span class="o">=</span> <span class="bp">None</span>
+        <span class="n">c</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">y</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]]</span>
+        <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">xrange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">n</span> <span class="o">-</span> <span class="mi">2</span><span class="p">):</span>
+            <span class="n">b</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span><span class="p">[</span><span class="n">k</span><span class="p">],</span> <span class="n">y</span><span class="p">[</span><span class="n">k</span><span class="p">]]</span>
+            <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">xrange</span><span class="p">(</span><span class="n">k</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">):</span>
+                <span class="n">a</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span><span class="p">[</span><span class="n">j</span><span class="p">],</span> <span class="n">y</span><span class="p">[</span><span class="n">j</span><span class="p">]]</span>
+                <span class="n">ab</span> <span class="o">=</span> <span class="n">dist</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
+                <span class="n">ac</span> <span class="o">=</span> <span class="n">dist</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">c</span><span class="p">)</span>
+                <span class="n">bc</span> <span class="o">=</span> <span class="n">dist</span><span class="p">(</span><span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">)</span>
+                <span class="n">cosa</span> <span class="o">=</span> <span class="p">(</span><span class="n">ab</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">+</span> <span class="n">ac</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">-</span> <span class="n">bc</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="mf">2.</span> <span class="o">*</span> <span class="n">ab</span> <span class="o">*</span> <span class="n">ac</span><span class="p">)</span>
+                <span class="n">ang</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">arccos</span><span class="p">(</span><span class="n">cosa</span><span class="p">)</span>
+                <span class="n">area</span> <span class="o">=</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="p">((</span><span class="n">b</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="n">a</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">*</span> <span class="p">(</span><span class="n">a</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">c</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span> <span class="o">-</span>
+                              <span class="p">(</span><span class="n">a</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="n">c</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">*</span> <span class="p">(</span><span class="n">b</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">a</span><span class="p">[</span><span class="mi">1</span><span class="p">]))</span>
+                <span class="c"># area is &gt; 0 because in the paper C is index 0</span>
+                <span class="k">if</span> <span class="n">area</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="ow">and</span> <span class="p">(</span><span class="n">ang</span> <span class="o">&lt;</span> <span class="n">cte</span> <span class="ow">and</span>
+                                 <span class="p">(</span><span class="n">angmin</span> <span class="ow">is</span> <span class="bp">None</span> <span class="ow">or</span> <span class="n">ang</span> <span class="o">&lt;</span> <span class="n">angmin</span><span class="p">)):</span>
+                    <span class="n">corner</span> <span class="o">=</span> <span class="n">j</span>
+                    <span class="n">angmin</span> <span class="o">=</span> <span class="n">ang</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">corner_</span> <span class="o">=</span> <span class="n">corner</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">regul_param_</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">regul_params</span><span class="p">[</span><span class="n">corner</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">p_</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">objectives</span><span class="p">[</span><span class="n">corner</span><span class="p">]</span><span class="o">.</span><span class="n">p_</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">estimate_</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">objectives</span><span class="p">[</span><span class="n">corner</span><span class="p">]</span><span class="o">.</span><span class="n">estimate_</span>
+        <span class="k">return</span> <span class="bp">self</span>
+</div>
+<div class="viewcode-block" id="LCurve.config"><a class="viewcode-back" href="../../../api/inversion.regularization.html#fatiando.inversion.regularization.LCurve.config">[docs]</a>    <span class="k">def</span> <span class="nf">config</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">method</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Configure the optimization method and its parameters.</span>
+
+<span class="sd">        This sets the method used by</span>
+<span class="sd">        :meth:`~fatiando.inversion.regularization.LCurve.fit` and the keyword</span>
+<span class="sd">        arguments that are passed to it.</span>
+
+<span class="sd">        Parameters:</span>
+
+<span class="sd">        * method : string</span>
+<span class="sd">            The optimization method. One of: ``&#39;linear&#39;``, ``&#39;newton&#39;``,</span>
+<span class="sd">            ``&#39;levmarq&#39;``, ``&#39;steepest&#39;``, ``&#39;acor&#39;``</span>
+
+<span class="sd">        Other keyword arguments that can be passed are the ones allowed by each</span>
+<span class="sd">        method.</span>
+
+<span class="sd">        See :meth:`fatiando.inversion.base.Misfit.config`.</span>
+
+<span class="sd">        Returns:</span>
+
+<span class="sd">        * self</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fit_method</span> <span class="o">=</span> <span class="n">method</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fit_args</span> <span class="o">=</span> <span class="n">kwargs</span>
+        <span class="k">return</span> <span class="bp">self</span>
+</div>
+<div class="viewcode-block" id="LCurve.predicted"><a class="viewcode-back" href="../../../api/inversion.regularization.html#fatiando.inversion.regularization.LCurve.predicted">[docs]</a>    <span class="k">def</span> <span class="nf">predicted</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">p</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns the predicted data for a given parameter vector.</span>
+
+<span class="sd">        Uses the solver that falls on the corner of the L-curve.</span>
+
+<span class="sd">        Parameters:</span>
+
+<span class="sd">        * p : 1d-array or None</span>
+<span class="sd">            The parameter vector used to calculate the predicted data. If None,</span>
+<span class="sd">            will use the current estimate stored in ``estimate_``.</span>
+
+<span class="sd">        Returns:</span>
+
+<span class="sd">        * predicted : 1d-array or list of 1d-arrays</span>
+<span class="sd">            The predicted data. If this is the sum of 1 or more Misfit</span>
+<span class="sd">            instances, will return the predicted data from each of the summed</span>
+<span class="sd">            misfits in the order of the sum.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">objectives</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">corner_</span><span class="p">]</span><span class="o">.</span><span class="n">predicted</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
+</div>
+<div class="viewcode-block" id="LCurve.residuals"><a class="viewcode-back" href="../../../api/inversion.regularization.html#fatiando.inversion.regularization.LCurve.residuals">[docs]</a>    <span class="k">def</span> <span class="nf">residuals</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">p</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns the residuals vector (observed - predicted data).</span>
+
+<span class="sd">        Uses the solver that falls on the corner of the L-curve.</span>
+
+<span class="sd">        Parameters:</span>
+
+<span class="sd">        * p : 1d-array or None</span>
+<span class="sd">            The parameter vector used to calculate the residuals. If None, will</span>
+<span class="sd">            use the current estimate stored in ``estimate_``.</span>
+
+<span class="sd">        Returns:</span>
+
+<span class="sd">        * residuals : 1d-array or list of 1d-arrays</span>
+<span class="sd">            The residual vector. If this is the sum of 1 or more Misfit</span>
+<span class="sd">            instances, will return the residual vector from each of the summed</span>
+<span class="sd">            misfits in the order of the sum.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">objectives</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">corner_</span><span class="p">]</span><span class="o">.</span><span class="n">residuals</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
+</div>
+<div class="viewcode-block" id="LCurve.plot_lcurve"><a class="viewcode-back" href="../../../api/inversion.regularization.html#fatiando.inversion.regularization.LCurve.plot_lcurve">[docs]</a>    <span class="k">def</span> <span class="nf">plot_lcurve</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">guides</span><span class="o">=</span><span class="bp">True</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Make a plot of the data-misfit x regularization values.</span>
+
+<span class="sd">        The estimated corner value is shown as a blue triangle.</span>
+
+<span class="sd">        Parameters:</span>
+
+<span class="sd">        * guides : True or False</span>
+<span class="sd">            Plot vertical and horizontal lines across the corner value.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">dnorm</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">mnorm</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">loglog</span><span class="p">:</span>
+            <span class="n">mpl</span><span class="o">.</span><span class="n">loglog</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="s">&#39;.-k&#39;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">mpl</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="s">&#39;.-k&#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">guides</span><span class="p">:</span>
+            <span class="n">ax</span> <span class="o">=</span> <span class="n">mpl</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span>
+            <span class="n">vmin</span><span class="p">,</span> <span class="n">vmax</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">get_ybound</span><span class="p">()</span>
+            <span class="n">mpl</span><span class="o">.</span><span class="n">vlines</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">corner_</span><span class="p">],</span> <span class="n">vmin</span><span class="p">,</span> <span class="n">vmax</span><span class="p">)</span>
+            <span class="n">vmin</span><span class="p">,</span> <span class="n">vmax</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">get_xbound</span><span class="p">()</span>
+            <span class="n">mpl</span><span class="o">.</span><span class="n">hlines</span><span class="p">(</span><span class="n">y</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">corner_</span><span class="p">],</span> <span class="n">vmin</span><span class="p">,</span> <span class="n">vmax</span><span class="p">)</span>
+        <span class="n">mpl</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">corner_</span><span class="p">],</span> <span class="n">y</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">corner_</span><span class="p">],</span> <span class="s">&#39;^b&#39;</span><span class="p">,</span> <span class="n">markersize</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+        <span class="n">mpl</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s">&#39;Data misfit&#39;</span><span class="p">)</span>
+        <span class="n">mpl</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s">&#39;Regularization&#39;</span><span class="p">)</span>
+
+</div></div>
+<span class="k">def</span> <span class="nf">_run_lcurve</span><span class="p">(</span><span class="n">solver</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Call ``fit`` on the solver. Needed for multiprocessing.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">solver</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">result</span>
+</pre></div>
+
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2012-2014, Leonardo Uieda.
+      Last updated on Mar 05, 2015.
+    </p>
+  </div>
+
+  <a href="https://github.com/snide/sphinx_rtd_theme">Sphinx theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../../',
+            VERSION:'0.3',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="../../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../../_static/doctools.js"></script>
+      <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

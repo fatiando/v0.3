@@ -1,0 +1,12 @@
+.. _cookbook_gravmag_fourier_ansig:
+
+GravMag: Calculate the analytic signal of a total field anomaly using FFT
+==========================================================================
+
+.. raw:: html
+
+    [<a href="../_static/cookbook/gravmag_fourier_ansig.py">source code</a>]
+
+.. literalinclude:: ../../cookbook/gravmag_fourier_ansig.py
+    :language: python
+    :linenos:

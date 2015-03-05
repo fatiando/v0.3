@@ -1,0 +1,675 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>fatiando.gridder &mdash; Fatiando a Terra v0.3</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../../_static/favicon.ico"/>
+  
+
+  
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="top" title="Fatiando a Terra v0.3" href="../../index.html"/>
+        <link rel="up" title="Module code" href="../index.html"/> 
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-nav-search">
+        <a href="../../index.html" class="fa fa-home"> Fatiando a Terra</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+        
+        
+            <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../contributors.html">Contributors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../license.html">License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../changelog.html">Changelog</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../changelog.html#version-0-3">Version 0.3</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../changelog.html#version-0-2">Version 0.2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../changelog.html#version-0-1">Version 0.1</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../install.html">Installing Fatiando</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../install.html#which-python">Which Python?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../install.html#installing-the-dependencies">Installing the dependencies</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../install.html#id1">Installing Fatiando</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../install.html#installing-the-latest-development-version">Installing the latest development version</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../install.html#testing-the-install">Testing the install</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../api/fatiando.html">API Reference: The <tt class="docutils literal"><span class="pre">fatiando</span></tt> package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../api/gravmag.html">Gravity and magnetics (<tt class="docutils literal"><span class="pre">fatiando.gravmag</span></tt>)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../api/seismic.html">Seismics and seismology (<tt class="docutils literal"><span class="pre">fatiando.seismic</span></tt>)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../api/geothermal.html">Geothermal heat (<tt class="docutils literal"><span class="pre">fatiando.geothermal</span></tt>)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../api/mesher.html">Meshing (<tt class="docutils literal"><span class="pre">fatiando.mesher</span></tt>)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../api/gridder.html">Gridding (<tt class="docutils literal"><span class="pre">fatiando.gridder</span></tt>)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../api/vis.html">Visualization (<tt class="docutils literal"><span class="pre">fatiando.vis</span></tt>)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../api/datasets.html">Fetch data from the internet (<tt class="docutils literal"><span class="pre">fatiando.datasets</span></tt>)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../api/gui.html">Graphical user interfaces (<tt class="docutils literal"><span class="pre">fatiando.gui</span></tt>)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../api/utils.html">Miscellaneous Utilities (<tt class="docutils literal"><span class="pre">fatiando.utils</span></tt>)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../api/constants.html">Physical constants and unit conversions (<tt class="docutils literal"><span class="pre">fatiando.constants</span></tt>)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../api/inversion.html">Inverse problems framework (<tt class="docutils literal"><span class="pre">fatiando.inversion</span></tt>)</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../cookbook.html">Cookbook</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../cookbook/datasets_crust2.0_tesseroid.html">Datasets: Fetch the CRUST2.0 model, convert it to tesseroids and calculate its gravity signal in parallel</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../cookbook/geothermal_climsig_abrupt.html">Geothermal: Forward and inverse modeling of an abrupt change in temperature measured in a well</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../cookbook/geothermal_climsig_linear.html">Geothermal: Forward and inverse modeling of a linear change in temperature measured in a well</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../cookbook/geothermal_climsig_wrong.html">Geothermal: Climate signal: What happens when assuming a climate change is linear, when in fact it was abrupt?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../cookbook/gravmag_2d_polygon_interactive.html">GravMag: Interactive 2D forward modeling with polygons</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../cookbook/gravmag_2d_polygon_picker.html">GravMag: 2D forward modeling with polygons</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../cookbook/gravmag_basin2d_trapezoidal.html">GravMag: Simple gravity inversion for the relief of a 2D trapezoidal basin</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../cookbook/gravmag_basin2d_trapezoidal_forward.html">GravMag: Interactive 2D forward gravity modeling of a trapezoidal basin</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../cookbook/gravmag_basin2d_triangular.html">GravMag: Simple gravity inversion for the relief of a 2D triangular basin</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../cookbook/gravmag_basin2d_triangular_forward.html">GravMag: Interactive 2D forward gravity modeling of a triangular basin</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../cookbook/gravmag_eqlayer_joint.html">GravMag: Fit an equivalent layer to gravity and gravity gradient data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../cookbook/gravmag_eqlayer_pel_polereduc.html">GravMag: Use the Polynomial Equivalent Layer to reduce a magnetic total field anomaly to the pole</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../cookbook/gravmag_eqlayer_pel_upcontinue.html">GravMag: Use the polynomial equivalent layer to upward continue gravity data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../cookbook/gravmag_eqlayer_polereduc.html">GravMag: Use an equivalent layer to reduce a magnetic total field anomaly to the pole</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../cookbook/gravmag_eqlayer_upcontinue.html">GravMag: Use an equivalent layer to upward continue gravity data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../cookbook/gravmag_euler_classic.html">GravMag: Classic 3D Euler deconvolution of magnetic data (single window)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../cookbook/gravmag_euler_classic_expanding_window.html">GravMag: Classic 3D Euler deconvolution of magnetic data using an expanding window</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../cookbook/gravmag_euler_classic_moving_window.html">GravMag: Classic 3D Euler deconvolution of magnetic data using a moving window</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../cookbook/gravmag_fourier_ansig.html">GravMag: Calculate the analytic signal of a total field anomaly using FFT</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../cookbook/gravmag_fourier_deriv.html">GravMag: Calculating the derivatives of the gravity anomaly using FFT</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../cookbook/gravmag_grav_polyprism.html">GravMag: Forward gravity modeling using a stack of 3D polygonal model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../cookbook/gravmag_grav_prism.html">GravMag: Forward modeling of the gravitational potential and its derivatives using 3D model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../cookbook/gravmag_grav_sphere.html">GravMag: Forward modeling of the gravity anomaly and gravity gradient tensor using model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../cookbook/gravmag_grav_tesseroid.html">GravMag: Forward modeling of the gravitational potential and its derivatives using tesseroids</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../cookbook/gravmag_harvester_grav.html">GravMag: 3D gravity inversion by planting anomalous densities using <tt class="docutils literal"><span class="pre">harvester</span></tt> (more complex interactive example)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../cookbook/gravmag_harvester_tensor.html">GravMag: 3D gravity gradient inversion by planting anomalous densities using <tt class="docutils literal"><span class="pre">harvester</span></tt> (with non-targeted sources)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../cookbook/gravmag_harvester_weights.html">GravMag: Using data weights in 3D inversion using <tt class="docutils literal"><span class="pre">harvester</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../cookbook/gravmag_imaging_geninv.html">GravMag: 3D imaging using the Generalized Inverse method on synthetic gravity data (more complex model + noisy data)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../cookbook/gravmag_imaging_migration.html">GravMag: 3D imaging using the migration method on synthetic gravity data (more complex model + noisy data)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../cookbook/gravmag_imaging_sandwich.html">GravMag: 3D imaging using the sandwich model method on synthetic gravity data (simple example)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../cookbook/gravmag_mag_polyprism.html">GravMag: 3D forward modeling of total-field magnetic anomaly using polygonal prisms</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../cookbook/gravmag_mag_prism.html">GravMag: 3D forward modeling of total-field magnetic anomaly using rectangular prisms (model with induced and remanent magnetization)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../cookbook/gravmag_mag_sphere.html">GravMag: 3D forward modeling of total-field magnetic anomaly using spheres</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../cookbook/gravmag_magdir_dipolemagdir.html">GravMag: Use the DipoleMagDir class to estimate the magnetization direction of dipoles with known centers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../cookbook/gravmag_normal_gravity.html">GravMag: Calculate the gravity disturbance and Bouguer anomaly for Hawaii</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../cookbook/gravmag_tensor_centerofmass.html">GravMag: Center of mass estimation using the first eigenvector of the gravity gradient tensor (simple model)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../cookbook/gravmag_tensor_centerofmass_expanding_window.html">GravMag: Center of mass estimation using the first eigenvector of the gravity gradient tensor (2 sources with expanding windows)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../cookbook/gravmag_tensor_invariants.html">GravMag: Calculate the gravity gradient tensor invariants</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../cookbook/gravmag_tensor_polyprism.html">GravMag: Generate synthetic gradient tensor data from polygonal prisms</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../cookbook/gravmag_tensor_prism_noisy.html">GravMag: Generate noise-corrupted gravity gradient tensor data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../cookbook/gravmag_upcontinue.html">GravMag: Upward continuation of noisy gz data using the analytical formula</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../cookbook/grid_cut.html">Gridding: Cut a section from a grid</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../cookbook/grid_interpolate.html">Gridding: Grid irregularly sampled data.</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../cookbook/grid_profile.html">Gridding: Extract a profile from map data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../cookbook/grid_scatter.html">Gridding: Generate and plot irregular grids (scatter)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../cookbook/grid_surfer.html">Gridding: Load a Surfer ASCII grid file</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../cookbook/mesher_pointgrid.html">Meshing: Making a grid of 3D point sources</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../cookbook/mesher_prismmesh.html">Meshing: Make and plot a 3D prism mesh</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../cookbook/mesher_prismmesh_filter.html">Meshing: Filter prisms from a 3D prism mesh based on their physical properties</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../cookbook/mesher_prismmesh_topo.html">Meshing: Make and plot a 3D prism mesh with topography</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../cookbook/mesher_prismmesh_vardens.html">Meshing: Make a 3D prism mesh with depth-varying density</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../cookbook/mesher_prismrelief_topo.html">Meshing: Generate a 3D prism model of the topography</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../cookbook/mesher_squaremesh_from_image.html">Meshing: Generate a SquareMesh and get the physical properties from an image</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../cookbook/mesher_tesseroid.html">Meshing: Make and plot a tesseroid with the Earth</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../cookbook/mesher_tesseroidmesh.html">Meshing: Make and plot a tesseroid mesh</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../cookbook/mesher_tesseroidmesh_topo.html">Meshing: Make and plot a tesseroid mesh with topography</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../cookbook/seismic_epic2d.html">Seismic: 2D epicenter estimation assuming a homogeneous and flat Earth</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../cookbook/seismic_epic2d_iterate.html">Seismic: Show steps taken by different algorithms for 2D epicenter estimation on a flat Earth</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../cookbook/seismic_profile_vertical.html">Seismic: Invert vertical seismic profile (VSP) traveltimes for the velocity of a layered model.</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../cookbook/seismic_profile_vertical_interactive.html">Seismic: Interactive forward modeling of 1D vertical seismic profile (VSP) data in layered media</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../cookbook/seismic_profile_vertical_smooth.html">Seismic: Invert vertical seismic profile (VSP) traveltimes using smoothness regularization and unknown layer thicknesses</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../cookbook/seismic_srtomo_damped.html">Seismic: 2D straight-ray tomography using damping regularization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../cookbook/seismic_srtomo_sharp.html">Seismic: 2D straight-ray tomography using sharpness (total variation) regularization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../cookbook/seismic_srtomo_smooth.html">Seismic: 2D straight-ray tomography using smoothness regularization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../cookbook/seismic_wavefd_elastic_psv.html">Seismic: 2D finite difference simulation of elastic P and SV wave propagation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../cookbook/seismic_wavefd_elastic_sh.html">Seismic: 2D finite difference simulation of elastic SH wave propagation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../cookbook/seismic_wavefd_love_wave.html">Seismic: 2D finite difference simulation of elastic SH wave propagation in a medium with a discontinuity (i.e., Moho), generating Love waves.</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../cookbook/seismic_wavefd_rayleigh_wave.html">Seismic: 2D finite difference simulation of elastic P and SV wave propagation in a medium with a discontinuity (i.e., Moho), generating Rayleigh waves</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../cookbook/seismic_wavefd_scalar.html">Seismic: 2D finite difference simulation of scalar wave propagation.</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../cookbook/vis_mpl_basemap.html">Vis: Plot a map using the Orthographic map projection and filled contours</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../cookbook/vis_mpl_basemap2.html">Vis: Plot a map using the Mercator map projection and pseudo-color</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../cookbook/vis_mpl_basemap3.html">Vis: Plot a map using the Robinson map projection and contours</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../cookbook/vis_mpl_contour.html">Vis: Plot contour lines and filled contours</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../cookbook/vis_mpl_irregular_data.html">Vis: Plotting irregularly sampled map data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../cookbook/vis_myv_color.html">Vis: Set the colors in figures, prisms, polygonal prisms and tesseroids.</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../cookbook/vis_myv_earth.html">Vis: Plot the Earth, continents, inner and outer core in 3D with Mayavi2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../cookbook/vis_myv_exaggerate.html">Vis: Exaggerate the vertical dimension of 3D plots</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../develop.html">Developer guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../develop.html#making-a-release">Making a release</a></li>
+</ul>
+</li>
+</ul>
+
+        
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../../index.html">Fatiando a Terra</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../../index.html">Docs</a> &raquo;</li>
+      
+          <li><a href="../index.html">Module code</a> &raquo;</li>
+      
+    <li>fatiando.gridder</li>
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            
+  <h1>Source code for fatiando.gridder</h1><div class="highlight"><pre>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Create and operate on grids and profiles.</span>
+
+<span class="sd">**Grid generation**</span>
+
+<span class="sd">* :func:`~fatiando.gridder.regular`</span>
+<span class="sd">* :func:`~fatiando.gridder.scatter`</span>
+
+<span class="sd">**Grid operations**</span>
+
+<span class="sd">* :func:`~fatiando.gridder.cut`</span>
+<span class="sd">* :func:`~fatiando.gridder.profile`</span>
+
+<span class="sd">**Interpolation**</span>
+
+<span class="sd">* :func:`~fatiando.gridder.interp`</span>
+<span class="sd">* :func:`~fatiando.gridder.interp_at`</span>
+<span class="sd">* :func:`~fatiando.gridder.extrapolate_nans`</span>
+
+<span class="sd">**Input/Output**</span>
+
+<span class="sd">* :func:`~fatiando.gridder.load_surfer`: Read a Surfer grid file and return</span>
+<span class="sd">  three 1d numpy arrays and the grid shape</span>
+
+<span class="sd">**Misc**</span>
+
+<span class="sd">* :func:`~fatiando.gridder.spacing`</span>
+
+<span class="sd">----</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">import</span> <span class="nn">numpy</span>
+<span class="kn">import</span> <span class="nn">scipy.interpolate</span>
+<span class="kn">import</span> <span class="nn">matplotlib.mlab</span>
+
+
+<div class="viewcode-block" id="load_surfer"><a class="viewcode-back" href="../../api/gridder.html#fatiando.gridder.load_surfer">[docs]</a><span class="k">def</span> <span class="nf">load_surfer</span><span class="p">(</span><span class="n">fname</span><span class="p">,</span> <span class="n">fmt</span><span class="o">=</span><span class="s">&#39;ascii&#39;</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Read a Surfer grid file and return three 1d numpy arrays and the grid shape</span>
+
+<span class="sd">    Surfer is a contouring, gridding and surface mapping software</span>
+<span class="sd">    from GoldenSoftware. The names and logos for Surfer and Golden</span>
+<span class="sd">    Software are registered trademarks of Golden Software, Inc.</span>
+
+<span class="sd">    http://www.goldensoftware.com/products/surfer</span>
+
+<span class="sd">    According to Surfer structure, x and y are horizontal and vertical</span>
+<span class="sd">    screen-based coordinates respectively. If the grid is in geographic</span>
+<span class="sd">    coordinates, x will be longitude and y latitude. If the coordinates</span>
+<span class="sd">    are cartesian, x will be the easting and y the norting coordinates.</span>
+
+<span class="sd">    WARNING: This is opposite to the convention used for Fatiando.</span>
+<span class="sd">    See io_surfer.py in cookbook.</span>
+
+<span class="sd">    Parameters:</span>
+
+<span class="sd">    * fname : str</span>
+<span class="sd">        Name of the Surfer grid file</span>
+<span class="sd">    * fmt : str</span>
+<span class="sd">        File type, can be &#39;ascii&#39; or &#39;binary&#39;</span>
+
+<span class="sd">    Returns:</span>
+
+<span class="sd">    * x : 1d-array</span>
+<span class="sd">        Value of the horizontal coordinate of each grid point.</span>
+<span class="sd">    * y : 1d-array</span>
+<span class="sd">        Value of the vertical coordinate of each grid point.</span>
+<span class="sd">    * grd : 1d-array</span>
+<span class="sd">        Values of the field in each grid point. Field can be for example</span>
+<span class="sd">        topography, gravity anomaly etc</span>
+<span class="sd">    * shape : tuple = (ny, nx)</span>
+<span class="sd">        The number of points in the vertical and horizontal grid dimensions,</span>
+<span class="sd">        respectively</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">assert</span> <span class="n">fmt</span> <span class="ow">in</span> <span class="p">[</span><span class="s">&#39;ascii&#39;</span><span class="p">,</span> <span class="s">&#39;binary&#39;</span><span class="p">],</span> <span class="s">&quot;Invalid grid format &#39;</span><span class="si">%s</span><span class="s">&#39;. Should be </span><span class="se">\</span>
+<span class="s">        &#39;ascii&#39; or &#39;binary&#39;.&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">fmt</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">fmt</span> <span class="o">==</span> <span class="s">&#39;ascii&#39;</span><span class="p">:</span>
+        <span class="c"># Surfer ASCII grid structure</span>
+        <span class="c"># DSAA            Surfer ASCII GRD ID</span>
+        <span class="c"># nCols nRows     number of columns and rows</span>
+        <span class="c"># xMin xMax       X min max</span>
+        <span class="c"># yMin yMax       Y min max</span>
+        <span class="c"># zMin zMax       Z min max</span>
+        <span class="c"># z11 z21 z31 ... List of Z values</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">fname</span><span class="p">)</span> <span class="k">as</span> <span class="n">ftext</span><span class="p">:</span>
+            <span class="c"># DSAA is a Surfer ASCII GRD ID</span>
+            <span class="nb">id</span> <span class="o">=</span> <span class="n">ftext</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span>
+            <span class="c"># Read the number of columns (nx) and rows (ny)</span>
+            <span class="n">nx</span><span class="p">,</span> <span class="n">ny</span> <span class="o">=</span> <span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="n">s</span><span class="p">)</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">ftext</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">()]</span>
+            <span class="c"># Read the min/max value of x (columns/longitue)</span>
+            <span class="n">xmin</span><span class="p">,</span> <span class="n">xmax</span> <span class="o">=</span> <span class="p">[</span><span class="nb">float</span><span class="p">(</span><span class="n">s</span><span class="p">)</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">ftext</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">()]</span>
+            <span class="c"># Read the min/max value of  y(rows/latitude)</span>
+            <span class="n">ymin</span><span class="p">,</span> <span class="n">ymax</span> <span class="o">=</span> <span class="p">[</span><span class="nb">float</span><span class="p">(</span><span class="n">s</span><span class="p">)</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">ftext</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">()]</span>
+            <span class="c"># Read the min/max value of grd</span>
+            <span class="n">zmin</span><span class="p">,</span> <span class="n">zmax</span> <span class="o">=</span> <span class="p">[</span><span class="nb">float</span><span class="p">(</span><span class="n">s</span><span class="p">)</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">ftext</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">()]</span>
+            <span class="n">data</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">fromiter</span><span class="p">((</span><span class="nb">float</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">ftext</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span>
+                                   <span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="p">()),</span> <span class="n">dtype</span><span class="o">=</span><span class="s">&#39;f&#39;</span><span class="p">)</span>
+            <span class="n">grd</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">ma</span><span class="o">.</span><span class="n">masked_greater_equal</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="mf">1.70141e+38</span><span class="p">)</span>
+        <span class="c"># Create x and y numpy arrays</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">xmin</span><span class="p">,</span> <span class="n">xmax</span><span class="p">,</span> <span class="n">nx</span><span class="p">)</span>
+        <span class="n">y</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">ymin</span><span class="p">,</span> <span class="n">ymax</span><span class="p">,</span> <span class="n">ny</span><span class="p">)</span>
+        <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="p">[</span><span class="n">tmp</span><span class="o">.</span><span class="n">ravel</span><span class="p">()</span> <span class="k">for</span> <span class="n">tmp</span> <span class="ow">in</span> <span class="n">numpy</span><span class="o">.</span><span class="n">meshgrid</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)]</span>
+    <span class="k">if</span> <span class="n">fmt</span> <span class="o">==</span> <span class="s">&#39;binary&#39;</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span>
+            <span class="s">&quot;Binary file support is not implemented yet.&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">grd</span><span class="p">,</span> <span class="p">(</span><span class="n">ny</span><span class="p">,</span> <span class="n">nx</span><span class="p">)</span>
+
+</div>
+<div class="viewcode-block" id="regular"><a class="viewcode-back" href="../../api/gridder.html#fatiando.gridder.regular">[docs]</a><span class="k">def</span> <span class="nf">regular</span><span class="p">(</span><span class="n">area</span><span class="p">,</span> <span class="n">shape</span><span class="p">,</span> <span class="n">z</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Create a regular grid. Order of the output grid is x varies first, then y.</span>
+
+<span class="sd">    Parameters:</span>
+
+<span class="sd">    * area</span>
+<span class="sd">        ``(x1, x2, y1, y2)``: Borders of the grid</span>
+<span class="sd">    * shape</span>
+<span class="sd">        Shape of the regular grid, ie ``(ny, nx)``.</span>
+<span class="sd">    * z</span>
+<span class="sd">        Optional. z coordinate of the grid points. If given, will return an</span>
+<span class="sd">        array with the value *z*.</span>
+
+<span class="sd">    Returns:</span>
+
+<span class="sd">    * ``[xcoords, ycoords]``</span>
+<span class="sd">        Numpy arrays with the x and y coordinates of the grid points</span>
+<span class="sd">    * ``[xcoords, ycoords, zcoords]``</span>
+<span class="sd">        If *z* given. Numpy arrays with the x, y, and z coordinates of the grid</span>
+<span class="sd">        points</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">ny</span><span class="p">,</span> <span class="n">nx</span> <span class="o">=</span> <span class="n">shape</span>
+    <span class="n">x1</span><span class="p">,</span> <span class="n">x2</span><span class="p">,</span> <span class="n">y1</span><span class="p">,</span> <span class="n">y2</span> <span class="o">=</span> <span class="n">area</span>
+    <span class="n">dy</span><span class="p">,</span> <span class="n">dx</span> <span class="o">=</span> <span class="n">spacing</span><span class="p">(</span><span class="n">area</span><span class="p">,</span> <span class="n">shape</span><span class="p">)</span>
+    <span class="n">x_range</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">x1</span><span class="p">,</span> <span class="n">x2</span><span class="p">,</span> <span class="n">dx</span><span class="p">)</span>
+    <span class="n">y_range</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">y1</span><span class="p">,</span> <span class="n">y2</span><span class="p">,</span> <span class="n">dy</span><span class="p">)</span>
+    <span class="c"># Need to make sure that the number of points in the grid is correct</span>
+    <span class="c"># because of rounding errors in arange. Sometimes x2 and y2 are included,</span>
+    <span class="c"># sometimes not</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">x_range</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">nx</span><span class="p">:</span>
+        <span class="n">x_range</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">x_range</span><span class="p">,</span> <span class="n">x2</span><span class="p">)</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">y_range</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">ny</span><span class="p">:</span>
+        <span class="n">y_range</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">y_range</span><span class="p">,</span> <span class="n">y2</span><span class="p">)</span>
+    <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">x_range</span><span class="p">)</span> <span class="o">==</span> <span class="n">nx</span><span class="p">,</span> <span class="s">&quot;Failed! x_range doesn&#39;t have nx points&quot;</span>
+    <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">y_range</span><span class="p">)</span> <span class="o">==</span> <span class="n">ny</span><span class="p">,</span> <span class="s">&quot;Failed! y_range doesn&#39;t have ny points&quot;</span>
+    <span class="n">xcoords</span><span class="p">,</span> <span class="n">ycoords</span> <span class="o">=</span> <span class="p">[</span><span class="n">mat</span><span class="o">.</span><span class="n">ravel</span><span class="p">()</span>
+                        <span class="k">for</span> <span class="n">mat</span> <span class="ow">in</span> <span class="n">numpy</span><span class="o">.</span><span class="n">meshgrid</span><span class="p">(</span><span class="n">x_range</span><span class="p">,</span> <span class="n">y_range</span><span class="p">)]</span>
+    <span class="k">if</span> <span class="n">z</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="n">zcoords</span> <span class="o">=</span> <span class="n">z</span> <span class="o">*</span> <span class="n">numpy</span><span class="o">.</span><span class="n">ones_like</span><span class="p">(</span><span class="n">xcoords</span><span class="p">)</span>
+        <span class="k">return</span> <span class="p">[</span><span class="n">xcoords</span><span class="p">,</span> <span class="n">ycoords</span><span class="p">,</span> <span class="n">zcoords</span><span class="p">]</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="p">[</span><span class="n">xcoords</span><span class="p">,</span> <span class="n">ycoords</span><span class="p">]</span>
+
+</div>
+<div class="viewcode-block" id="scatter"><a class="viewcode-back" href="../../api/gridder.html#fatiando.gridder.scatter">[docs]</a><span class="k">def</span> <span class="nf">scatter</span><span class="p">(</span><span class="n">area</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">z</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Create an irregular grid with a random scattering of points.</span>
+
+<span class="sd">    Parameters:</span>
+
+<span class="sd">    * area</span>
+<span class="sd">        ``(x1, x2, y1, y2)``: Borders of the grid</span>
+<span class="sd">    * n</span>
+<span class="sd">        Number of points</span>
+<span class="sd">    * z</span>
+<span class="sd">        Optional. z coordinate of the points. If given, will return an</span>
+<span class="sd">        array with the value *z*.</span>
+<span class="sd">    * seed : None or int</span>
+<span class="sd">        Seed used to generate the pseudo-random numbers. If `None`, will use a</span>
+<span class="sd">        different seed every time. Use the same seed to generate the same</span>
+<span class="sd">        random points.</span>
+
+<span class="sd">    Returns:</span>
+
+<span class="sd">    * ``[xcoords, ycoords]``</span>
+<span class="sd">        Numpy arrays with the x and y coordinates of the points</span>
+<span class="sd">    * ``[xcoords, ycoords, zcoords]``</span>
+<span class="sd">        If *z* given. Arrays with the x, y, and z coordinates of the points</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">x1</span><span class="p">,</span> <span class="n">x2</span><span class="p">,</span> <span class="n">y1</span><span class="p">,</span> <span class="n">y2</span> <span class="o">=</span> <span class="n">area</span>
+    <span class="n">numpy</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="n">seed</span><span class="p">)</span>
+    <span class="n">xcoords</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="n">x1</span><span class="p">,</span> <span class="n">x2</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>
+    <span class="n">ycoords</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="n">y1</span><span class="p">,</span> <span class="n">y2</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>
+    <span class="n">numpy</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">()</span>
+    <span class="k">if</span> <span class="n">z</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="n">zcoords</span> <span class="o">=</span> <span class="n">z</span> <span class="o">*</span> <span class="n">numpy</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+        <span class="k">return</span> <span class="p">[</span><span class="n">xcoords</span><span class="p">,</span> <span class="n">ycoords</span><span class="p">,</span> <span class="n">zcoords</span><span class="p">]</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="p">[</span><span class="n">xcoords</span><span class="p">,</span> <span class="n">ycoords</span><span class="p">]</span>
+
+</div>
+<div class="viewcode-block" id="spacing"><a class="viewcode-back" href="../../api/gridder.html#fatiando.gridder.spacing">[docs]</a><span class="k">def</span> <span class="nf">spacing</span><span class="p">(</span><span class="n">area</span><span class="p">,</span> <span class="n">shape</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Returns the spacing between grid nodes</span>
+
+<span class="sd">    Parameters:</span>
+
+<span class="sd">    * area</span>
+<span class="sd">        ``(x1, x2, y1, y2)``: Borders of the grid</span>
+<span class="sd">    * shape</span>
+<span class="sd">        Shape of the regular grid, ie ``(ny, nx)``.</span>
+
+<span class="sd">    Returns:</span>
+
+<span class="sd">    * ``[dy, dx]``</span>
+<span class="sd">        Spacing the y and x directions</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">x1</span><span class="p">,</span> <span class="n">x2</span><span class="p">,</span> <span class="n">y1</span><span class="p">,</span> <span class="n">y2</span> <span class="o">=</span> <span class="n">area</span>
+    <span class="n">ny</span><span class="p">,</span> <span class="n">nx</span> <span class="o">=</span> <span class="n">shape</span>
+    <span class="n">dx</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">x2</span> <span class="o">-</span> <span class="n">x1</span><span class="p">)</span> <span class="o">/</span> <span class="nb">float</span><span class="p">(</span><span class="n">nx</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="n">dy</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">y2</span> <span class="o">-</span> <span class="n">y1</span><span class="p">)</span> <span class="o">/</span> <span class="nb">float</span><span class="p">(</span><span class="n">ny</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="k">return</span> <span class="p">[</span><span class="n">dy</span><span class="p">,</span> <span class="n">dx</span><span class="p">]</span>
+
+</div>
+<div class="viewcode-block" id="interp"><a class="viewcode-back" href="../../api/gridder.html#fatiando.gridder.interp">[docs]</a><span class="k">def</span> <span class="nf">interp</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">shape</span><span class="p">,</span> <span class="n">area</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">algorithm</span><span class="o">=</span><span class="s">&#39;cubic&#39;</span><span class="p">,</span> <span class="n">extrapolate</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Interpolate data onto a regular grid.</span>
+
+<span class="sd">    Parameters:</span>
+
+<span class="sd">    * x, y : 1D arrays</span>
+<span class="sd">        Arrays with the x and y coordinates of the data points.</span>
+<span class="sd">    * v : 1D array</span>
+<span class="sd">        Array with the scalar value assigned to the data points.</span>
+<span class="sd">    * shape : tuple = (ny, nx)</span>
+<span class="sd">        Shape of the interpolated regular grid, ie (ny, nx).</span>
+<span class="sd">    * area : tuple = (x1, x2, y1, y2)</span>
+<span class="sd">        The are where the data will be interpolated. If None, then will get the</span>
+<span class="sd">        area from *x* and *y*.</span>
+<span class="sd">    * algorithm : string</span>
+<span class="sd">        Interpolation algorithm. Either ``&#39;cubic&#39;``, ``&#39;nearest&#39;``,</span>
+<span class="sd">        ``&#39;linear&#39;`` (see scipy.interpolate.griddata), or ``&#39;nn&#39;`` for nearest</span>
+<span class="sd">        neighbors (using matplotlib.mlab.griddata)</span>
+<span class="sd">    * extrapolate : True or False</span>
+<span class="sd">        If True, will extrapolate values outside of the convex hull of the data</span>
+<span class="sd">        points.</span>
+
+<span class="sd">    Returns:</span>
+
+<span class="sd">    * ``[x, y, v]``</span>
+<span class="sd">        Three 1D arrays with the interpolated x, y, and v</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">algorithm</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="s">&#39;cubic&#39;</span><span class="p">,</span> <span class="s">&#39;linear&#39;</span><span class="p">,</span> <span class="s">&#39;nearest&#39;</span><span class="p">,</span> <span class="s">&#39;nn&#39;</span><span class="p">]:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s">&quot;Invalid interpolation algorithm: &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">algorithm</span><span class="p">))</span>
+    <span class="n">ny</span><span class="p">,</span> <span class="n">nx</span> <span class="o">=</span> <span class="n">shape</span>
+    <span class="k">if</span> <span class="n">area</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="n">area</span> <span class="o">=</span> <span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">min</span><span class="p">(),</span> <span class="n">x</span><span class="o">.</span><span class="n">max</span><span class="p">(),</span> <span class="n">y</span><span class="o">.</span><span class="n">min</span><span class="p">(),</span> <span class="n">y</span><span class="o">.</span><span class="n">max</span><span class="p">())</span>
+    <span class="n">x1</span><span class="p">,</span> <span class="n">x2</span><span class="p">,</span> <span class="n">y1</span><span class="p">,</span> <span class="n">y2</span> <span class="o">=</span> <span class="n">area</span>
+    <span class="n">xs</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">x1</span><span class="p">,</span> <span class="n">x2</span><span class="p">,</span> <span class="n">nx</span><span class="p">)</span>
+    <span class="n">ys</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">y1</span><span class="p">,</span> <span class="n">y2</span><span class="p">,</span> <span class="n">ny</span><span class="p">)</span>
+    <span class="n">xp</span><span class="p">,</span> <span class="n">yp</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span><span class="o">.</span><span class="n">ravel</span><span class="p">()</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">numpy</span><span class="o">.</span><span class="n">meshgrid</span><span class="p">(</span><span class="n">xs</span><span class="p">,</span> <span class="n">ys</span><span class="p">)]</span>
+    <span class="k">if</span> <span class="n">algorithm</span> <span class="o">==</span> <span class="s">&#39;nn&#39;</span><span class="p">:</span>
+        <span class="n">grid</span> <span class="o">=</span> <span class="n">matplotlib</span><span class="o">.</span><span class="n">mlab</span><span class="o">.</span><span class="n">griddata</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">numpy</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">xp</span><span class="p">,</span> <span class="n">shape</span><span class="p">),</span>
+                                        <span class="n">numpy</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">yp</span><span class="p">,</span> <span class="n">shape</span><span class="p">),</span>
+                                        <span class="n">interp</span><span class="o">=</span><span class="s">&#39;nn&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">ravel</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">extrapolate</span> <span class="ow">and</span> <span class="n">numpy</span><span class="o">.</span><span class="n">ma</span><span class="o">.</span><span class="n">is_masked</span><span class="p">(</span><span class="n">grid</span><span class="p">):</span>
+            <span class="n">grid</span> <span class="o">=</span> <span class="n">extrapolate_nans</span><span class="p">(</span><span class="n">xp</span><span class="p">,</span> <span class="n">yp</span><span class="p">,</span> <span class="n">grid</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">grid</span> <span class="o">=</span> <span class="n">interp_at</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">xp</span><span class="p">,</span> <span class="n">yp</span><span class="p">,</span> <span class="n">algorithm</span><span class="o">=</span><span class="n">algorithm</span><span class="p">,</span>
+                         <span class="n">extrapolate</span><span class="o">=</span><span class="n">extrapolate</span><span class="p">)</span>
+    <span class="k">return</span> <span class="p">[</span><span class="n">xp</span><span class="p">,</span> <span class="n">yp</span><span class="p">,</span> <span class="n">grid</span><span class="p">]</span>
+
+</div>
+<div class="viewcode-block" id="interp_at"><a class="viewcode-back" href="../../api/gridder.html#fatiando.gridder.interp_at">[docs]</a><span class="k">def</span> <span class="nf">interp_at</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">xp</span><span class="p">,</span> <span class="n">yp</span><span class="p">,</span> <span class="n">algorithm</span><span class="o">=</span><span class="s">&#39;cubic&#39;</span><span class="p">,</span> <span class="n">extrapolate</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Interpolate data onto the specified points.</span>
+
+<span class="sd">    Parameters:</span>
+
+<span class="sd">    * x, y : 1D arrays</span>
+<span class="sd">        Arrays with the x and y coordinates of the data points.</span>
+<span class="sd">    * v : 1D array</span>
+<span class="sd">        Array with the scalar value assigned to the data points.</span>
+<span class="sd">    * xp, yp : 1D arrays</span>
+<span class="sd">        Points where the data values will be interpolated</span>
+<span class="sd">    * algorithm : string</span>
+<span class="sd">        Interpolation algorithm. Either ``&#39;cubic&#39;``, ``&#39;nearest&#39;``,</span>
+<span class="sd">        ``&#39;linear&#39;`` (see scipy.interpolate.griddata)</span>
+<span class="sd">    * extrapolate : True or False</span>
+<span class="sd">        If True, will extrapolate values outside of the convex hull of the data</span>
+<span class="sd">        points.</span>
+
+<span class="sd">    Returns:</span>
+
+<span class="sd">    * v : 1D array</span>
+<span class="sd">        1D array with the interpolated v values.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">algorithm</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="s">&#39;cubic&#39;</span><span class="p">,</span> <span class="s">&#39;linear&#39;</span><span class="p">,</span> <span class="s">&#39;nearest&#39;</span><span class="p">]:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s">&quot;Invalid interpolation algorithm: &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">algorithm</span><span class="p">))</span>
+    <span class="n">grid</span> <span class="o">=</span> <span class="n">scipy</span><span class="o">.</span><span class="n">interpolate</span><span class="o">.</span><span class="n">griddata</span><span class="p">((</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">),</span> <span class="n">v</span><span class="p">,</span> <span class="p">(</span><span class="n">xp</span><span class="p">,</span> <span class="n">yp</span><span class="p">),</span>
+                                      <span class="n">method</span><span class="o">=</span><span class="n">algorithm</span><span class="p">)</span><span class="o">.</span><span class="n">ravel</span><span class="p">()</span>
+    <span class="k">if</span> <span class="n">extrapolate</span> <span class="ow">and</span> <span class="n">algorithm</span> <span class="o">!=</span> <span class="s">&#39;nearest&#39;</span> <span class="ow">and</span> <span class="n">numpy</span><span class="o">.</span><span class="n">any</span><span class="p">(</span><span class="n">numpy</span><span class="o">.</span><span class="n">isnan</span><span class="p">(</span><span class="n">grid</span><span class="p">)):</span>
+        <span class="n">grid</span> <span class="o">=</span> <span class="n">extrapolate_nans</span><span class="p">(</span><span class="n">xp</span><span class="p">,</span> <span class="n">yp</span><span class="p">,</span> <span class="n">grid</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">grid</span>
+
+</div>
+<div class="viewcode-block" id="profile"><a class="viewcode-back" href="../../api/gridder.html#fatiando.gridder.profile">[docs]</a><span class="k">def</span> <span class="nf">profile</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">point1</span><span class="p">,</span> <span class="n">point2</span><span class="p">,</span> <span class="n">size</span><span class="p">,</span> <span class="n">extrapolate</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Extract a data profile between 2 points.</span>
+
+<span class="sd">    Uses interpolation to calculate the data values at the profile points.</span>
+
+<span class="sd">    Parameters:</span>
+
+<span class="sd">    * x, y : 1D arrays</span>
+<span class="sd">        Arrays with the x and y coordinates of the data points.</span>
+<span class="sd">    * v : 1D array</span>
+<span class="sd">        Array with the scalar value assigned to the data points.</span>
+<span class="sd">    * point1, point2 : lists = [x, y]</span>
+<span class="sd">        Lists the x, y coordinates of the 2 points between which the profile</span>
+<span class="sd">        will be extracted.</span>
+<span class="sd">    * size : int</span>
+<span class="sd">        Number of points along the profile.</span>
+<span class="sd">    * extrapolate : True or False</span>
+<span class="sd">        If True, will extrapolate values outside of the convex hull of the data</span>
+<span class="sd">        points.</span>
+
+<span class="sd">    Returns:</span>
+
+<span class="sd">    * [xp, yp, distances, vp] : 1d arrays</span>
+<span class="sd">        ``xp`` and ``yp`` are the x, y coordinates of the points along the</span>
+<span class="sd">        profile.</span>
+<span class="sd">        ``distances`` are the distances of the profile points to ``point1``</span>
+<span class="sd">        ``vp`` are the data points along the profile.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">x1</span><span class="p">,</span> <span class="n">y1</span> <span class="o">=</span> <span class="n">point1</span>
+    <span class="n">x2</span><span class="p">,</span> <span class="n">y2</span> <span class="o">=</span> <span class="n">point2</span>
+    <span class="n">maxdist</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">sqrt</span><span class="p">((</span><span class="n">x1</span> <span class="o">-</span> <span class="n">x2</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">+</span> <span class="p">(</span><span class="n">y1</span> <span class="o">-</span> <span class="n">y2</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span>
+    <span class="n">distances</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">maxdist</span><span class="p">,</span> <span class="n">size</span><span class="p">)</span>
+    <span class="n">angle</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">arctan2</span><span class="p">(</span><span class="n">y2</span> <span class="o">-</span> <span class="n">y1</span><span class="p">,</span> <span class="n">x2</span> <span class="o">-</span> <span class="n">x1</span><span class="p">)</span>
+    <span class="n">xp</span> <span class="o">=</span> <span class="n">x1</span> <span class="o">+</span> <span class="n">distances</span> <span class="o">*</span> <span class="n">numpy</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">angle</span><span class="p">)</span>
+    <span class="n">yp</span> <span class="o">=</span> <span class="n">y1</span> <span class="o">+</span> <span class="n">distances</span> <span class="o">*</span> <span class="n">numpy</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">angle</span><span class="p">)</span>
+    <span class="n">vp</span> <span class="o">=</span> <span class="n">interp_at</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">xp</span><span class="p">,</span> <span class="n">yp</span><span class="p">,</span> <span class="n">algorithm</span><span class="o">=</span><span class="s">&#39;cubic&#39;</span><span class="p">,</span> <span class="n">extrapolate</span><span class="o">=</span><span class="n">extrapolate</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">xp</span><span class="p">,</span> <span class="n">yp</span><span class="p">,</span> <span class="n">distances</span><span class="p">,</span> <span class="n">vp</span>
+
+</div>
+<div class="viewcode-block" id="extrapolate_nans"><a class="viewcode-back" href="../../api/gridder.html#fatiando.gridder.extrapolate_nans">[docs]</a><span class="k">def</span> <span class="nf">extrapolate_nans</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">v</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;&quot;</span>
+<span class="sd">    Extrapolate the NaNs or masked values in a grid INPLACE using nearest</span>
+<span class="sd">    value.</span>
+
+<span class="sd">    .. warning:: Replaces the NaN or masked values of the original array!</span>
+
+<span class="sd">    Parameters:</span>
+
+<span class="sd">    * x, y : 1D arrays</span>
+<span class="sd">        Arrays with the x and y coordinates of the data points.</span>
+<span class="sd">    * v : 1D array</span>
+<span class="sd">        Array with the scalar value assigned to the data points.</span>
+
+<span class="sd">    Returns:</span>
+
+<span class="sd">    * v : 1D array</span>
+<span class="sd">        The array with NaNs or masked values extrapolated.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">numpy</span><span class="o">.</span><span class="n">ma</span><span class="o">.</span><span class="n">is_masked</span><span class="p">(</span><span class="n">v</span><span class="p">):</span>
+        <span class="n">nans</span> <span class="o">=</span> <span class="n">v</span><span class="o">.</span><span class="n">mask</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">nans</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">isnan</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
+    <span class="n">notnans</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">logical_not</span><span class="p">(</span><span class="n">nans</span><span class="p">)</span>
+    <span class="n">v</span><span class="p">[</span><span class="n">nans</span><span class="p">]</span> <span class="o">=</span> <span class="n">scipy</span><span class="o">.</span><span class="n">interpolate</span><span class="o">.</span><span class="n">griddata</span><span class="p">((</span><span class="n">x</span><span class="p">[</span><span class="n">notnans</span><span class="p">],</span> <span class="n">y</span><span class="p">[</span><span class="n">notnans</span><span class="p">]),</span> <span class="n">v</span><span class="p">[</span><span class="n">notnans</span><span class="p">],</span>
+                                         <span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="n">nans</span><span class="p">],</span> <span class="n">y</span><span class="p">[</span><span class="n">nans</span><span class="p">]),</span>
+                                         <span class="n">method</span><span class="o">=</span><span class="s">&#39;nearest&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">ravel</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">v</span>
+
+</div>
+<div class="viewcode-block" id="cut"><a class="viewcode-back" href="../../api/gridder.html#fatiando.gridder.cut">[docs]</a><span class="k">def</span> <span class="nf">cut</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">scalars</span><span class="p">,</span> <span class="n">area</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Return a subsection of a grid.</span>
+
+<span class="sd">    The returned subsection is not a copy! In technical terms, returns a slice</span>
+<span class="sd">    of the numpy arrays. So changes made to the subsection reflect on the</span>
+<span class="sd">    original grid. Use numpy.copy to make copies of the subsections and avoid</span>
+<span class="sd">    this.</span>
+
+<span class="sd">    Parameters:</span>
+
+<span class="sd">    * x, y</span>
+<span class="sd">        Arrays with the x and y coordinates of the data points.</span>
+<span class="sd">    * scalars</span>
+<span class="sd">        List of arrays with the scalar values assigned to the grid points.</span>
+<span class="sd">    * area</span>
+<span class="sd">        ``(x1, x2, y1, y2)``: Borders of the subsection</span>
+
+<span class="sd">    Returns:</span>
+
+<span class="sd">    * ``[subx, suby, subscalars]``</span>
+<span class="sd">        Arrays with x and y coordinates and scalar values of the subsection.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">xmin</span><span class="p">,</span> <span class="n">xmax</span><span class="p">,</span> <span class="n">ymin</span><span class="p">,</span> <span class="n">ymax</span> <span class="o">=</span> <span class="n">area</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">!=</span> <span class="nb">len</span><span class="p">(</span><span class="n">y</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s">&quot;x and y must have the same length&quot;</span><span class="p">)</span>
+    <span class="n">inside</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">xrange</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+              <span class="k">if</span> <span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="n">xmin</span> <span class="ow">and</span> <span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="n">xmax</span>
+              <span class="ow">and</span> <span class="n">y</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="n">ymin</span> <span class="ow">and</span> <span class="n">y</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="n">ymax</span><span class="p">]</span>
+    <span class="k">return</span> <span class="p">[</span><span class="n">x</span><span class="p">[</span><span class="n">inside</span><span class="p">],</span> <span class="n">y</span><span class="p">[</span><span class="n">inside</span><span class="p">],</span> <span class="p">[</span><span class="n">s</span><span class="p">[</span><span class="n">inside</span><span class="p">]</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">scalars</span><span class="p">]]</span></div>
+</pre></div>
+
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2012-2014, Leonardo Uieda.
+      Last updated on Mar 05, 2015.
+    </p>
+  </div>
+
+  <a href="https://github.com/snide/sphinx_rtd_theme">Sphinx theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../',
+            VERSION:'0.3',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../_static/doctools.js"></script>
+      <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

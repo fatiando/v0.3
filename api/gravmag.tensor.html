@@ -1,0 +1,479 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Utilities for operating on the gradient tensor (fatiando.gravmag.tensor) &mdash; Fatiando a Terra v0.3</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+  
+
+  
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="top" title="Fatiando a Terra v0.3" href="../index.html"/>
+        <link rel="up" title="Gravity and magnetics (fatiando.gravmag)" href="gravmag.html"/>
+        <link rel="next" title="3D Euler deconvolution methods (fatiando.gravmag.euler)" href="gravmag.euler.html"/>
+        <link rel="prev" title="Equivalent layer processing (fatiando.gravmag.eqlayer)" href="gravmag.eqlayer.html"/> 
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-nav-search">
+        <a href="../index.html" class="fa fa-home"> Fatiando a Terra</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+        
+        
+            <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../contributors.html">Contributors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../license.html">License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../changelog.html">Changelog</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../changelog.html#version-0-3">Version 0.3</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../changelog.html#version-0-2">Version 0.2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../changelog.html#version-0-1">Version 0.1</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../install.html">Installing Fatiando</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../install.html#which-python">Which Python?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../install.html#installing-the-dependencies">Installing the dependencies</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../install.html#id1">Installing Fatiando</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../install.html#installing-the-latest-development-version">Installing the latest development version</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../install.html#testing-the-install">Testing the install</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="reference internal" href="fatiando.html">API Reference: The <tt class="docutils literal"><span class="pre">fatiando</span></tt> package</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="gravmag.html">Gravity and magnetics (<tt class="docutils literal"><span class="pre">fatiando.gravmag</span></tt>)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="seismic.html">Seismics and seismology (<tt class="docutils literal"><span class="pre">fatiando.seismic</span></tt>)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="geothermal.html">Geothermal heat (<tt class="docutils literal"><span class="pre">fatiando.geothermal</span></tt>)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mesher.html">Meshing (<tt class="docutils literal"><span class="pre">fatiando.mesher</span></tt>)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="gridder.html">Gridding (<tt class="docutils literal"><span class="pre">fatiando.gridder</span></tt>)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vis.html">Visualization (<tt class="docutils literal"><span class="pre">fatiando.vis</span></tt>)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="datasets.html">Fetch data from the internet (<tt class="docutils literal"><span class="pre">fatiando.datasets</span></tt>)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="gui.html">Graphical user interfaces (<tt class="docutils literal"><span class="pre">fatiando.gui</span></tt>)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="utils.html">Miscellaneous Utilities (<tt class="docutils literal"><span class="pre">fatiando.utils</span></tt>)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="constants.html">Physical constants and unit conversions (<tt class="docutils literal"><span class="pre">fatiando.constants</span></tt>)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="inversion.html">Inverse problems framework (<tt class="docutils literal"><span class="pre">fatiando.inversion</span></tt>)</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../cookbook.html">Cookbook</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/datasets_crust2.0_tesseroid.html">Datasets: Fetch the CRUST2.0 model, convert it to tesseroids and calculate its gravity signal in parallel</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/geothermal_climsig_abrupt.html">Geothermal: Forward and inverse modeling of an abrupt change in temperature measured in a well</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/geothermal_climsig_linear.html">Geothermal: Forward and inverse modeling of a linear change in temperature measured in a well</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/geothermal_climsig_wrong.html">Geothermal: Climate signal: What happens when assuming a climate change is linear, when in fact it was abrupt?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/gravmag_2d_polygon_interactive.html">GravMag: Interactive 2D forward modeling with polygons</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/gravmag_2d_polygon_picker.html">GravMag: 2D forward modeling with polygons</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/gravmag_basin2d_trapezoidal.html">GravMag: Simple gravity inversion for the relief of a 2D trapezoidal basin</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/gravmag_basin2d_trapezoidal_forward.html">GravMag: Interactive 2D forward gravity modeling of a trapezoidal basin</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/gravmag_basin2d_triangular.html">GravMag: Simple gravity inversion for the relief of a 2D triangular basin</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/gravmag_basin2d_triangular_forward.html">GravMag: Interactive 2D forward gravity modeling of a triangular basin</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/gravmag_eqlayer_joint.html">GravMag: Fit an equivalent layer to gravity and gravity gradient data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/gravmag_eqlayer_pel_polereduc.html">GravMag: Use the Polynomial Equivalent Layer to reduce a magnetic total field anomaly to the pole</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/gravmag_eqlayer_pel_upcontinue.html">GravMag: Use the polynomial equivalent layer to upward continue gravity data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/gravmag_eqlayer_polereduc.html">GravMag: Use an equivalent layer to reduce a magnetic total field anomaly to the pole</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/gravmag_eqlayer_upcontinue.html">GravMag: Use an equivalent layer to upward continue gravity data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/gravmag_euler_classic.html">GravMag: Classic 3D Euler deconvolution of magnetic data (single window)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/gravmag_euler_classic_expanding_window.html">GravMag: Classic 3D Euler deconvolution of magnetic data using an expanding window</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/gravmag_euler_classic_moving_window.html">GravMag: Classic 3D Euler deconvolution of magnetic data using a moving window</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/gravmag_fourier_ansig.html">GravMag: Calculate the analytic signal of a total field anomaly using FFT</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/gravmag_fourier_deriv.html">GravMag: Calculating the derivatives of the gravity anomaly using FFT</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/gravmag_grav_polyprism.html">GravMag: Forward gravity modeling using a stack of 3D polygonal model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/gravmag_grav_prism.html">GravMag: Forward modeling of the gravitational potential and its derivatives using 3D model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/gravmag_grav_sphere.html">GravMag: Forward modeling of the gravity anomaly and gravity gradient tensor using model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/gravmag_grav_tesseroid.html">GravMag: Forward modeling of the gravitational potential and its derivatives using tesseroids</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/gravmag_harvester_grav.html">GravMag: 3D gravity inversion by planting anomalous densities using <tt class="docutils literal"><span class="pre">harvester</span></tt> (more complex interactive example)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/gravmag_harvester_tensor.html">GravMag: 3D gravity gradient inversion by planting anomalous densities using <tt class="docutils literal"><span class="pre">harvester</span></tt> (with non-targeted sources)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/gravmag_harvester_weights.html">GravMag: Using data weights in 3D inversion using <tt class="docutils literal"><span class="pre">harvester</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/gravmag_imaging_geninv.html">GravMag: 3D imaging using the Generalized Inverse method on synthetic gravity data (more complex model + noisy data)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/gravmag_imaging_migration.html">GravMag: 3D imaging using the migration method on synthetic gravity data (more complex model + noisy data)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/gravmag_imaging_sandwich.html">GravMag: 3D imaging using the sandwich model method on synthetic gravity data (simple example)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/gravmag_mag_polyprism.html">GravMag: 3D forward modeling of total-field magnetic anomaly using polygonal prisms</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/gravmag_mag_prism.html">GravMag: 3D forward modeling of total-field magnetic anomaly using rectangular prisms (model with induced and remanent magnetization)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/gravmag_mag_sphere.html">GravMag: 3D forward modeling of total-field magnetic anomaly using spheres</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/gravmag_magdir_dipolemagdir.html">GravMag: Use the DipoleMagDir class to estimate the magnetization direction of dipoles with known centers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/gravmag_normal_gravity.html">GravMag: Calculate the gravity disturbance and Bouguer anomaly for Hawaii</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/gravmag_tensor_centerofmass.html">GravMag: Center of mass estimation using the first eigenvector of the gravity gradient tensor (simple model)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/gravmag_tensor_centerofmass_expanding_window.html">GravMag: Center of mass estimation using the first eigenvector of the gravity gradient tensor (2 sources with expanding windows)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/gravmag_tensor_invariants.html">GravMag: Calculate the gravity gradient tensor invariants</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/gravmag_tensor_polyprism.html">GravMag: Generate synthetic gradient tensor data from polygonal prisms</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/gravmag_tensor_prism_noisy.html">GravMag: Generate noise-corrupted gravity gradient tensor data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/gravmag_upcontinue.html">GravMag: Upward continuation of noisy gz data using the analytical formula</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/grid_cut.html">Gridding: Cut a section from a grid</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/grid_interpolate.html">Gridding: Grid irregularly sampled data.</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/grid_profile.html">Gridding: Extract a profile from map data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/grid_scatter.html">Gridding: Generate and plot irregular grids (scatter)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/grid_surfer.html">Gridding: Load a Surfer ASCII grid file</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/mesher_pointgrid.html">Meshing: Making a grid of 3D point sources</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/mesher_prismmesh.html">Meshing: Make and plot a 3D prism mesh</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/mesher_prismmesh_filter.html">Meshing: Filter prisms from a 3D prism mesh based on their physical properties</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/mesher_prismmesh_topo.html">Meshing: Make and plot a 3D prism mesh with topography</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/mesher_prismmesh_vardens.html">Meshing: Make a 3D prism mesh with depth-varying density</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/mesher_prismrelief_topo.html">Meshing: Generate a 3D prism model of the topography</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/mesher_squaremesh_from_image.html">Meshing: Generate a SquareMesh and get the physical properties from an image</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/mesher_tesseroid.html">Meshing: Make and plot a tesseroid with the Earth</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/mesher_tesseroidmesh.html">Meshing: Make and plot a tesseroid mesh</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/mesher_tesseroidmesh_topo.html">Meshing: Make and plot a tesseroid mesh with topography</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/seismic_epic2d.html">Seismic: 2D epicenter estimation assuming a homogeneous and flat Earth</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/seismic_epic2d_iterate.html">Seismic: Show steps taken by different algorithms for 2D epicenter estimation on a flat Earth</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/seismic_profile_vertical.html">Seismic: Invert vertical seismic profile (VSP) traveltimes for the velocity of a layered model.</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/seismic_profile_vertical_interactive.html">Seismic: Interactive forward modeling of 1D vertical seismic profile (VSP) data in layered media</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/seismic_profile_vertical_smooth.html">Seismic: Invert vertical seismic profile (VSP) traveltimes using smoothness regularization and unknown layer thicknesses</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/seismic_srtomo_damped.html">Seismic: 2D straight-ray tomography using damping regularization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/seismic_srtomo_sharp.html">Seismic: 2D straight-ray tomography using sharpness (total variation) regularization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/seismic_srtomo_smooth.html">Seismic: 2D straight-ray tomography using smoothness regularization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/seismic_wavefd_elastic_psv.html">Seismic: 2D finite difference simulation of elastic P and SV wave propagation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/seismic_wavefd_elastic_sh.html">Seismic: 2D finite difference simulation of elastic SH wave propagation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/seismic_wavefd_love_wave.html">Seismic: 2D finite difference simulation of elastic SH wave propagation in a medium with a discontinuity (i.e., Moho), generating Love waves.</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/seismic_wavefd_rayleigh_wave.html">Seismic: 2D finite difference simulation of elastic P and SV wave propagation in a medium with a discontinuity (i.e., Moho), generating Rayleigh waves</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/seismic_wavefd_scalar.html">Seismic: 2D finite difference simulation of scalar wave propagation.</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/vis_mpl_basemap.html">Vis: Plot a map using the Orthographic map projection and filled contours</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/vis_mpl_basemap2.html">Vis: Plot a map using the Mercator map projection and pseudo-color</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/vis_mpl_basemap3.html">Vis: Plot a map using the Robinson map projection and contours</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/vis_mpl_contour.html">Vis: Plot contour lines and filled contours</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/vis_mpl_irregular_data.html">Vis: Plotting irregularly sampled map data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/vis_myv_color.html">Vis: Set the colors in figures, prisms, polygonal prisms and tesseroids.</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/vis_myv_earth.html">Vis: Plot the Earth, continents, inner and outer core in 3D with Mayavi2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/vis_myv_exaggerate.html">Vis: Exaggerate the vertical dimension of 3D plots</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../develop.html">Developer guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../develop.html#making-a-release">Making a release</a></li>
+</ul>
+</li>
+</ul>
+
+        
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../index.html">Fatiando a Terra</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../index.html">Docs</a> &raquo;</li>
+      
+          <li><a href="fatiando.html">API Reference: The <tt class="docutils literal"><span class="pre">fatiando</span></tt> package</a> &raquo;</li>
+      
+          <li><a href="gravmag.html">Gravity and magnetics (<tt class="docutils literal"><span class="pre">fatiando.gravmag</span></tt>)</a> &raquo;</li>
+      
+    <li>Utilities for operating on the gradient tensor (<tt class="docutils literal"><span class="pre">fatiando.gravmag.tensor</span></tt>)</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          <a href="../_sources/api/gravmag.tensor.txt" rel="nofollow"> View page source</a>
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            
+  <div class="section" id="module-fatiando.gravmag.tensor">
+<span id="utilities-for-operating-on-the-gradient-tensor-fatiando-gravmag-tensor"></span><span id="fatiando-gravmag-tensor"></span><h1>Utilities for operating on the gradient tensor (<tt class="docutils literal"><span class="pre">fatiando.gravmag.tensor</span></tt>)<a class="headerlink" href="#module-fatiando.gravmag.tensor" title="Permalink to this headline">¶</a></h1>
+<p>Utilities for operating on the gradient tensor of potential fields.</p>
+<p><strong>Functions</strong></p>
+<ul class="simple">
+<li><a class="reference internal" href="#fatiando.gravmag.tensor.invariants" title="fatiando.gravmag.tensor.invariants"><tt class="xref py py-func docutils literal"><span class="pre">invariants</span></tt></a>: Calculates the first
+(<span class="math">\(I_1\)</span>), second (<span class="math">\(I_2\)</span>), and dimensionless (<span class="math">\(I\)</span>) invariants</li>
+<li><a class="reference internal" href="#fatiando.gravmag.tensor.eigen" title="fatiando.gravmag.tensor.eigen"><tt class="xref py py-func docutils literal"><span class="pre">eigen</span></tt></a>: Calculates the eigenvalues and
+eigenvectors of an array of gradient tensor measurements</li>
+<li><a class="reference internal" href="#fatiando.gravmag.tensor.center_of_mass" title="fatiando.gravmag.tensor.center_of_mass"><tt class="xref py py-func docutils literal"><span class="pre">center_of_mass</span></tt></a>: Estimate the center of
+mass of sources from the first eigenvector using the method of
+Beiki and Pedersen (2010)</li>
+</ul>
+<p><strong>Theory</strong></p>
+<p>Following Pedersen and Rasmussen (1990), the characteristic polynomial of the
+gravity gradient tensor <span class="math">\(\mathbf{\Gamma}\)</span> is</p>
+<div class="math">
+\[\lambda^3 + I_1\lambda - I_2 = 0\]</div>
+<p>where <span class="math">\(\lambda\)</span> is an eigenvalue and <span class="math">\(I_1\)</span> and <span class="math">\(I_2\)</span> are
+the two invariants. The dimensionless invariant <span class="math">\(I\)</span> is</p>
+<div class="math">
+\[I = -\dfrac{(I_2/2)^2}{(I_1/3)^3}\]</div>
+<p>The invariant <span class="math">\(I\)</span> indicates the dimensionality of the source.
+<span class="math">\(I = 0\)</span> for 2 dimensional bodies and <span class="math">\(I = 1\)</span> for a monopole.</p>
+<p><strong>References</strong></p>
+<p>Beiki, M., and L. B. Pedersen (2010), Eigenvector analysis of gravity gradient
+tensor to locate geologic bodies, Geophysics, 75(6), I37, doi:10.1190/1.3484098</p>
+<p>Pedersen, L. B., and T. M. Rasmussen (1990), The gradient tensor of potential
+field anomalies: Some implications on data collection and data processing of
+maps, Geophysics, 55(12), 1558, doi:10.1190/1.1442807</p>
+<hr class="docutils" />
+<dl class="function">
+<dt id="fatiando.gravmag.tensor.center_of_mass">
+<tt class="descclassname">fatiando.gravmag.tensor.</tt><tt class="descname">center_of_mass</tt><big>(</big><em>x</em>, <em>y</em>, <em>z</em>, <em>eigvec1</em>, <em>windows=1</em>, <em>wcenter=None</em>, <em>wmin=None</em>, <em>wmax=None</em><big>)</big><a class="reference internal" href="../_modules/fatiando/gravmag/tensor.html#center_of_mass"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fatiando.gravmag.tensor.center_of_mass" title="Permalink to this definition">¶</a></dt>
+<dd><p>Estimates the center of mass of a source using the 1st eigenvector</p>
+<p>Uses the method of Beiki and Pedersen (2010) with an expanding window
+scheme to get the best estimate and deal with multiple sources.</p>
+<p>Parameters:</p>
+<ul>
+<li><dl class="first docutils">
+<dt>x, y, z <span class="classifier-delimiter">:</span> <span class="classifier">arrays</span></dt>
+<dd><p class="first last">The x, y, and z coordinates of the observation points</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>eigvec1 <span class="classifier-delimiter">:</span> <span class="classifier">array (shape = (N, 3) where N is the number of observations)</span></dt>
+<dd><p class="first last">The first eigenvector of the gravity gradient tensor at each
+observation point</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>windows <span class="classifier-delimiter">:</span> <span class="classifier">int</span></dt>
+<dd><p class="first last">The number of expanding windows to use</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>wcenter <span class="classifier-delimiter">:</span> <span class="classifier">list = [x, y]</span></dt>
+<dd><p class="first last">The [x, y] coordinates of the center of the expanding windows. Will
+default to the middle of the data area if None</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>wmin, wmax <span class="classifier-delimiter">:</span> <span class="classifier">float</span></dt>
+<dd><p class="first last">Minimum and maximum size of the expanding windows. Will default to
+10% data area and 100% data area, respectively, if None</p>
+</dd>
+</dl>
+</li>
+</ul>
+<p>Returns:</p>
+<ul>
+<li><dl class="first docutils">
+<dt>[xo, yo, zo] <span class="classifier-delimiter">:</span> <span class="classifier">floats</span></dt>
+<dd><p class="first last">xo, yo, zo are the coordinates of the estimated center of mass</p>
+</dd>
+</dl>
+</li>
+</ul>
+<p>Examples:</p>
+<p>Estimate the center of a sphere using some synthetic data:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">fatiando</span> <span class="kn">import</span> <span class="n">gridder</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">fatiando.mesher</span> <span class="kn">import</span> <span class="n">Sphere</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">fatiando.gravmag</span> <span class="kn">import</span> <span class="n">sphere</span><span class="p">,</span> <span class="n">tensor</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c"># Generate synthetic data using a sphere model</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c"># The center of the sphere is (-100, 0, 100)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">model</span> <span class="o">=</span> <span class="p">[</span><span class="n">Sphere</span><span class="p">(</span><span class="o">-</span><span class="mi">100</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="p">{</span><span class="s">&#39;density&#39;</span><span class="p">:</span><span class="mi">1000</span><span class="p">})]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span> <span class="o">=</span> <span class="n">gridder</span><span class="o">.</span><span class="n">regular</span><span class="p">((</span><span class="o">-</span><span class="mi">500</span><span class="p">,</span> <span class="mi">500</span><span class="p">,</span> <span class="o">-</span><span class="mi">500</span><span class="p">,</span> <span class="mi">500</span><span class="p">),</span> <span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="mi">20</span><span class="p">),</span> <span class="n">z</span><span class="o">=-</span><span class="mi">100</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">data</span> <span class="o">=</span> <span class="p">[</span><span class="n">sphere</span><span class="o">.</span><span class="n">gxx</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span><span class="p">,</span> <span class="n">model</span><span class="p">),</span>
+<span class="gp">... </span>        <span class="n">sphere</span><span class="o">.</span><span class="n">gxy</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span><span class="p">,</span> <span class="n">model</span><span class="p">),</span>
+<span class="gp">... </span>        <span class="n">sphere</span><span class="o">.</span><span class="n">gxz</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span><span class="p">,</span> <span class="n">model</span><span class="p">),</span>
+<span class="gp">... </span>        <span class="n">sphere</span><span class="o">.</span><span class="n">gyy</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span><span class="p">,</span> <span class="n">model</span><span class="p">),</span>
+<span class="gp">... </span>        <span class="n">sphere</span><span class="o">.</span><span class="n">gyz</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span><span class="p">,</span> <span class="n">model</span><span class="p">),</span>
+<span class="gp">... </span>        <span class="n">sphere</span><span class="o">.</span><span class="n">gzz</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span><span class="p">,</span> <span class="n">model</span><span class="p">)]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c"># Get the first eigenvector</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">eigenvals</span><span class="p">,</span> <span class="n">eigenvecs</span> <span class="o">=</span> <span class="n">tensor</span><span class="o">.</span><span class="n">eigen</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c"># Now estimate the center of mass</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">cm</span> <span class="o">=</span> <span class="n">tensor</span><span class="o">.</span><span class="n">center_of_mass</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span><span class="p">,</span> <span class="n">eigenvecs</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">cm</span>
+<span class="go">array([-100.,   20.,  100.])</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="fatiando.gravmag.tensor.eigen">
+<tt class="descclassname">fatiando.gravmag.tensor.</tt><tt class="descname">eigen</tt><big>(</big><em>tensor</em><big>)</big><a class="reference internal" href="../_modules/fatiando/gravmag/tensor.html#eigen"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fatiando.gravmag.tensor.eigen" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculates the eigenvalues and eigenvectors of the gradient tensor.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The coordinate system used is x-&gt;North, y-&gt;East, z-&gt;Down</p>
+</div>
+<p>Parameters:</p>
+<ul>
+<li><dl class="first docutils">
+<dt>tensor <span class="classifier-delimiter">:</span> <span class="classifier">list</span></dt>
+<dd><p class="first last">A list of arrays with the 6 components of the gradient tensor measured
+on a set of points. The order of the list should be:
+[gxx, gxy, gxz, gyy, gyz, gzz]</p>
+</dd>
+</dl>
+</li>
+</ul>
+<p>Returns:</p>
+<ul>
+<li><dl class="first docutils">
+<dt>result <span class="classifier-delimiter">:</span> <span class="classifier">list of lists</span></dt>
+<dd><p class="first">The eigenvalues and eigenvectors at each observation point.
+<tt class="docutils literal"><span class="pre">[[eigval1,</span> <span class="pre">eigval2,</span> <span class="pre">eigval3],</span> <span class="pre">[eigvec1,</span> <span class="pre">eigvec2,</span> <span class="pre">eigvec3]]</span></tt></p>
+<ul class="last">
+<li><dl class="first docutils">
+<dt>eigval1,2,3 <span class="classifier-delimiter">:</span> <span class="classifier">array</span></dt>
+<dd><p class="first last">The first, second, and third eigenvalues</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>eigvec1,2,3 <span class="classifier-delimiter">:</span> <span class="classifier">array (shape = (N, 3) where N is the number of points)</span></dt>
+<dd><p class="first last">The first, second, and third eigenvectors</p>
+</dd>
+</dl>
+</li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+<p>Example:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">tensor</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">3</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">]]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">eigenvals</span><span class="p">,</span> <span class="n">eigenvecs</span> <span class="o">=</span> <span class="n">eigen</span><span class="p">(</span><span class="n">tensor</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span> <span class="n">eigenvals</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">eigenvecs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="go">[ 3.] [[ 0.  1.  0.]]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span> <span class="n">eigenvals</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">eigenvecs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+<span class="go">[ 2.] [[ 1.  0.  0.]]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span> <span class="n">eigenvals</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">eigenvecs</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+<span class="go">[ 1.] [[ 0.  0.  1.]]</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="fatiando.gravmag.tensor.invariants">
+<tt class="descclassname">fatiando.gravmag.tensor.</tt><tt class="descname">invariants</tt><big>(</big><em>tensor</em><big>)</big><a class="reference internal" href="../_modules/fatiando/gravmag/tensor.html#invariants"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fatiando.gravmag.tensor.invariants" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculates the first, second, and dimensionless invariants of the gradient
+tensor.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The coordinate system used is x-&gt;North, y-&gt;East, z-&gt;Down</p>
+</div>
+<p>Parameters:</p>
+<ul>
+<li><dl class="first docutils">
+<dt>tensor <span class="classifier-delimiter">:</span> <span class="classifier">list</span></dt>
+<dd><p class="first last">A list of arrays with the 6 components of the gradient tensor measured
+on a set of points. The order of the list should be:
+[gxx, gxy, gxz, gyy, gyz, gzz]</p>
+</dd>
+</dl>
+</li>
+</ul>
+<p>Returns:</p>
+<ul>
+<li><dl class="first docutils">
+<dt>invariants <span class="classifier-delimiter">:</span> <span class="classifier">list = [<span class="math">\(I_1\)</span>, <span class="math">\(I_2\)</span>, <span class="math">\(I\)</span>]</span></dt>
+<dd><p class="first last">The invariants calculated for each point</p>
+</dd>
+</dl>
+</li>
+</ul>
+</dd></dl>
+
+</div>
+
+
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="gravmag.euler.html" class="btn btn-neutral float-right" title="3D Euler deconvolution methods (fatiando.gravmag.euler)"/>Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="gravmag.eqlayer.html" class="btn btn-neutral" title="Equivalent layer processing (fatiando.gravmag.eqlayer)"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2012-2014, Leonardo Uieda.
+      Last updated on Mar 05, 2015.
+    </p>
+  </div>
+
+  <a href="https://github.com/snide/sphinx_rtd_theme">Sphinx theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'0.3',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+      <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

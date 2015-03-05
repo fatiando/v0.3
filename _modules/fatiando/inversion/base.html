@@ -1,0 +1,1586 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>fatiando.inversion.base &mdash; Fatiando a Terra v0.3</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../../../_static/favicon.ico"/>
+  
+
+  
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="top" title="Fatiando a Terra v0.3" href="../../../index.html"/>
+        <link rel="up" title="Module code" href="../../index.html"/> 
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-nav-search">
+        <a href="../../../index.html" class="fa fa-home"> Fatiando a Terra</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+        
+        
+            <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../contributors.html">Contributors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../license.html">License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../changelog.html">Changelog</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../changelog.html#version-0-3">Version 0.3</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../changelog.html#version-0-2">Version 0.2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../changelog.html#version-0-1">Version 0.1</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../install.html">Installing Fatiando</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../install.html#which-python">Which Python?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../install.html#installing-the-dependencies">Installing the dependencies</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../install.html#id1">Installing Fatiando</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../install.html#installing-the-latest-development-version">Installing the latest development version</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../install.html#testing-the-install">Testing the install</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../api/fatiando.html">API Reference: The <tt class="docutils literal"><span class="pre">fatiando</span></tt> package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../api/gravmag.html">Gravity and magnetics (<tt class="docutils literal"><span class="pre">fatiando.gravmag</span></tt>)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../api/seismic.html">Seismics and seismology (<tt class="docutils literal"><span class="pre">fatiando.seismic</span></tt>)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../api/geothermal.html">Geothermal heat (<tt class="docutils literal"><span class="pre">fatiando.geothermal</span></tt>)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../api/mesher.html">Meshing (<tt class="docutils literal"><span class="pre">fatiando.mesher</span></tt>)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../api/gridder.html">Gridding (<tt class="docutils literal"><span class="pre">fatiando.gridder</span></tt>)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../api/vis.html">Visualization (<tt class="docutils literal"><span class="pre">fatiando.vis</span></tt>)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../api/datasets.html">Fetch data from the internet (<tt class="docutils literal"><span class="pre">fatiando.datasets</span></tt>)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../api/gui.html">Graphical user interfaces (<tt class="docutils literal"><span class="pre">fatiando.gui</span></tt>)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../api/utils.html">Miscellaneous Utilities (<tt class="docutils literal"><span class="pre">fatiando.utils</span></tt>)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../api/constants.html">Physical constants and unit conversions (<tt class="docutils literal"><span class="pre">fatiando.constants</span></tt>)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../api/inversion.html">Inverse problems framework (<tt class="docutils literal"><span class="pre">fatiando.inversion</span></tt>)</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../cookbook.html">Cookbook</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../cookbook/datasets_crust2.0_tesseroid.html">Datasets: Fetch the CRUST2.0 model, convert it to tesseroids and calculate its gravity signal in parallel</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../cookbook/geothermal_climsig_abrupt.html">Geothermal: Forward and inverse modeling of an abrupt change in temperature measured in a well</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../cookbook/geothermal_climsig_linear.html">Geothermal: Forward and inverse modeling of a linear change in temperature measured in a well</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../cookbook/geothermal_climsig_wrong.html">Geothermal: Climate signal: What happens when assuming a climate change is linear, when in fact it was abrupt?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../cookbook/gravmag_2d_polygon_interactive.html">GravMag: Interactive 2D forward modeling with polygons</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../cookbook/gravmag_2d_polygon_picker.html">GravMag: 2D forward modeling with polygons</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../cookbook/gravmag_basin2d_trapezoidal.html">GravMag: Simple gravity inversion for the relief of a 2D trapezoidal basin</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../cookbook/gravmag_basin2d_trapezoidal_forward.html">GravMag: Interactive 2D forward gravity modeling of a trapezoidal basin</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../cookbook/gravmag_basin2d_triangular.html">GravMag: Simple gravity inversion for the relief of a 2D triangular basin</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../cookbook/gravmag_basin2d_triangular_forward.html">GravMag: Interactive 2D forward gravity modeling of a triangular basin</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../cookbook/gravmag_eqlayer_joint.html">GravMag: Fit an equivalent layer to gravity and gravity gradient data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../cookbook/gravmag_eqlayer_pel_polereduc.html">GravMag: Use the Polynomial Equivalent Layer to reduce a magnetic total field anomaly to the pole</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../cookbook/gravmag_eqlayer_pel_upcontinue.html">GravMag: Use the polynomial equivalent layer to upward continue gravity data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../cookbook/gravmag_eqlayer_polereduc.html">GravMag: Use an equivalent layer to reduce a magnetic total field anomaly to the pole</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../cookbook/gravmag_eqlayer_upcontinue.html">GravMag: Use an equivalent layer to upward continue gravity data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../cookbook/gravmag_euler_classic.html">GravMag: Classic 3D Euler deconvolution of magnetic data (single window)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../cookbook/gravmag_euler_classic_expanding_window.html">GravMag: Classic 3D Euler deconvolution of magnetic data using an expanding window</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../cookbook/gravmag_euler_classic_moving_window.html">GravMag: Classic 3D Euler deconvolution of magnetic data using a moving window</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../cookbook/gravmag_fourier_ansig.html">GravMag: Calculate the analytic signal of a total field anomaly using FFT</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../cookbook/gravmag_fourier_deriv.html">GravMag: Calculating the derivatives of the gravity anomaly using FFT</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../cookbook/gravmag_grav_polyprism.html">GravMag: Forward gravity modeling using a stack of 3D polygonal model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../cookbook/gravmag_grav_prism.html">GravMag: Forward modeling of the gravitational potential and its derivatives using 3D model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../cookbook/gravmag_grav_sphere.html">GravMag: Forward modeling of the gravity anomaly and gravity gradient tensor using model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../cookbook/gravmag_grav_tesseroid.html">GravMag: Forward modeling of the gravitational potential and its derivatives using tesseroids</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../cookbook/gravmag_harvester_grav.html">GravMag: 3D gravity inversion by planting anomalous densities using <tt class="docutils literal"><span class="pre">harvester</span></tt> (more complex interactive example)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../cookbook/gravmag_harvester_tensor.html">GravMag: 3D gravity gradient inversion by planting anomalous densities using <tt class="docutils literal"><span class="pre">harvester</span></tt> (with non-targeted sources)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../cookbook/gravmag_harvester_weights.html">GravMag: Using data weights in 3D inversion using <tt class="docutils literal"><span class="pre">harvester</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../cookbook/gravmag_imaging_geninv.html">GravMag: 3D imaging using the Generalized Inverse method on synthetic gravity data (more complex model + noisy data)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../cookbook/gravmag_imaging_migration.html">GravMag: 3D imaging using the migration method on synthetic gravity data (more complex model + noisy data)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../cookbook/gravmag_imaging_sandwich.html">GravMag: 3D imaging using the sandwich model method on synthetic gravity data (simple example)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../cookbook/gravmag_mag_polyprism.html">GravMag: 3D forward modeling of total-field magnetic anomaly using polygonal prisms</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../cookbook/gravmag_mag_prism.html">GravMag: 3D forward modeling of total-field magnetic anomaly using rectangular prisms (model with induced and remanent magnetization)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../cookbook/gravmag_mag_sphere.html">GravMag: 3D forward modeling of total-field magnetic anomaly using spheres</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../cookbook/gravmag_magdir_dipolemagdir.html">GravMag: Use the DipoleMagDir class to estimate the magnetization direction of dipoles with known centers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../cookbook/gravmag_normal_gravity.html">GravMag: Calculate the gravity disturbance and Bouguer anomaly for Hawaii</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../cookbook/gravmag_tensor_centerofmass.html">GravMag: Center of mass estimation using the first eigenvector of the gravity gradient tensor (simple model)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../cookbook/gravmag_tensor_centerofmass_expanding_window.html">GravMag: Center of mass estimation using the first eigenvector of the gravity gradient tensor (2 sources with expanding windows)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../cookbook/gravmag_tensor_invariants.html">GravMag: Calculate the gravity gradient tensor invariants</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../cookbook/gravmag_tensor_polyprism.html">GravMag: Generate synthetic gradient tensor data from polygonal prisms</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../cookbook/gravmag_tensor_prism_noisy.html">GravMag: Generate noise-corrupted gravity gradient tensor data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../cookbook/gravmag_upcontinue.html">GravMag: Upward continuation of noisy gz data using the analytical formula</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../cookbook/grid_cut.html">Gridding: Cut a section from a grid</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../cookbook/grid_interpolate.html">Gridding: Grid irregularly sampled data.</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../cookbook/grid_profile.html">Gridding: Extract a profile from map data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../cookbook/grid_scatter.html">Gridding: Generate and plot irregular grids (scatter)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../cookbook/grid_surfer.html">Gridding: Load a Surfer ASCII grid file</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../cookbook/mesher_pointgrid.html">Meshing: Making a grid of 3D point sources</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../cookbook/mesher_prismmesh.html">Meshing: Make and plot a 3D prism mesh</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../cookbook/mesher_prismmesh_filter.html">Meshing: Filter prisms from a 3D prism mesh based on their physical properties</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../cookbook/mesher_prismmesh_topo.html">Meshing: Make and plot a 3D prism mesh with topography</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../cookbook/mesher_prismmesh_vardens.html">Meshing: Make a 3D prism mesh with depth-varying density</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../cookbook/mesher_prismrelief_topo.html">Meshing: Generate a 3D prism model of the topography</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../cookbook/mesher_squaremesh_from_image.html">Meshing: Generate a SquareMesh and get the physical properties from an image</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../cookbook/mesher_tesseroid.html">Meshing: Make and plot a tesseroid with the Earth</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../cookbook/mesher_tesseroidmesh.html">Meshing: Make and plot a tesseroid mesh</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../cookbook/mesher_tesseroidmesh_topo.html">Meshing: Make and plot a tesseroid mesh with topography</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../cookbook/seismic_epic2d.html">Seismic: 2D epicenter estimation assuming a homogeneous and flat Earth</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../cookbook/seismic_epic2d_iterate.html">Seismic: Show steps taken by different algorithms for 2D epicenter estimation on a flat Earth</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../cookbook/seismic_profile_vertical.html">Seismic: Invert vertical seismic profile (VSP) traveltimes for the velocity of a layered model.</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../cookbook/seismic_profile_vertical_interactive.html">Seismic: Interactive forward modeling of 1D vertical seismic profile (VSP) data in layered media</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../cookbook/seismic_profile_vertical_smooth.html">Seismic: Invert vertical seismic profile (VSP) traveltimes using smoothness regularization and unknown layer thicknesses</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../cookbook/seismic_srtomo_damped.html">Seismic: 2D straight-ray tomography using damping regularization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../cookbook/seismic_srtomo_sharp.html">Seismic: 2D straight-ray tomography using sharpness (total variation) regularization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../cookbook/seismic_srtomo_smooth.html">Seismic: 2D straight-ray tomography using smoothness regularization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../cookbook/seismic_wavefd_elastic_psv.html">Seismic: 2D finite difference simulation of elastic P and SV wave propagation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../cookbook/seismic_wavefd_elastic_sh.html">Seismic: 2D finite difference simulation of elastic SH wave propagation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../cookbook/seismic_wavefd_love_wave.html">Seismic: 2D finite difference simulation of elastic SH wave propagation in a medium with a discontinuity (i.e., Moho), generating Love waves.</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../cookbook/seismic_wavefd_rayleigh_wave.html">Seismic: 2D finite difference simulation of elastic P and SV wave propagation in a medium with a discontinuity (i.e., Moho), generating Rayleigh waves</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../cookbook/seismic_wavefd_scalar.html">Seismic: 2D finite difference simulation of scalar wave propagation.</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../cookbook/vis_mpl_basemap.html">Vis: Plot a map using the Orthographic map projection and filled contours</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../cookbook/vis_mpl_basemap2.html">Vis: Plot a map using the Mercator map projection and pseudo-color</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../cookbook/vis_mpl_basemap3.html">Vis: Plot a map using the Robinson map projection and contours</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../cookbook/vis_mpl_contour.html">Vis: Plot contour lines and filled contours</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../cookbook/vis_mpl_irregular_data.html">Vis: Plotting irregularly sampled map data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../cookbook/vis_myv_color.html">Vis: Set the colors in figures, prisms, polygonal prisms and tesseroids.</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../cookbook/vis_myv_earth.html">Vis: Plot the Earth, continents, inner and outer core in 3D with Mayavi2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../cookbook/vis_myv_exaggerate.html">Vis: Exaggerate the vertical dimension of 3D plots</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../develop.html">Developer guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../develop.html#making-a-release">Making a release</a></li>
+</ul>
+</li>
+</ul>
+
+        
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../../../index.html">Fatiando a Terra</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../../../index.html">Docs</a> &raquo;</li>
+      
+          <li><a href="../../index.html">Module code</a> &raquo;</li>
+      
+    <li>fatiando.inversion.base</li>
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            
+  <h1>Source code for fatiando.inversion.base</h1><div class="highlight"><pre>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">The base classes for inverse problem solving.</span>
+
+<span class="sd">All classes derive from :class:`~fatiando.inversion.base.Objective`. This class</span>
+<span class="sd">represents an objective function, a scalar function of a parameter vector.</span>
+
+<span class="sd">The main powerhouse of this module is the</span>
+<span class="sd">:class:`~fatiando.inversion.base.Misfit` class. It represents a data misfit</span>
+<span class="sd">function and knows how to fit a specified model to data using various solvers</span>
+<span class="sd">(see :mod:`~fatiando.inversion.solvers`). A model is specified by subclassing</span>
+<span class="sd">Misfit and implementing the</span>
+<span class="sd">:meth:`~fatiando.inversion.base.Misfit._get_predicted` and</span>
+<span class="sd">:meth:`~fatiando.inversion.base.Misfit._get_jacobian` methods, which are</span>
+<span class="sd">problem specific.</span>
+
+<span class="sd">See :mod:`fatiando.inversion` for examples, regularization, and more.</span>
+
+<span class="sd">----</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">division</span>
+<span class="kn">import</span> <span class="nn">hashlib</span>
+<span class="kn">import</span> <span class="nn">types</span>
+<span class="kn">import</span> <span class="nn">copy</span>
+<span class="kn">import</span> <span class="nn">numpy</span>
+<span class="kn">import</span> <span class="nn">scipy.sparse</span>
+
+<span class="kn">from</span> <span class="nn">.solvers</span> <span class="kn">import</span> <span class="n">linear</span><span class="p">,</span> <span class="n">levmarq</span><span class="p">,</span> <span class="n">steepest</span><span class="p">,</span> <span class="n">newton</span><span class="p">,</span> <span class="n">acor</span>
+<span class="kn">from</span> <span class="nn">..utils</span> <span class="kn">import</span> <span class="n">safe_dot</span>
+
+
+<div class="viewcode-block" id="Objective"><a class="viewcode-back" href="../../../api/inversion.base.html#fatiando.inversion.base.Objective">[docs]</a><span class="k">class</span> <span class="nc">Objective</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    An objective function for an inverse problem.</span>
+
+<span class="sd">    Objective functions know how to calculate their value, gradient and/or</span>
+<span class="sd">    Hessian matrix for a given parameter vector *p*. The methods that implement</span>
+<span class="sd">    these should have the following format::</span>
+
+<span class="sd">        def _get_value(self, p):</span>
+<span class="sd">            &#39;&#39;&#39;</span>
+<span class="sd">            Calculate the value of the objetive function.</span>
+
+<span class="sd">            Parameters:</span>
+
+<span class="sd">            * p : 1d-array or None</span>
+<span class="sd">                The parameter vector.</span>
+
+<span class="sd">            Returns:</span>
+
+<span class="sd">            * value : float</span>
+
+<span class="sd">            &#39;&#39;&#39;</span>
+<span class="sd">            ...</span>
+
+<span class="sd">        def _get_hessian(self, p):</span>
+<span class="sd">            &#39;&#39;&#39;</span>
+<span class="sd">            Calculates the Hessian matrix.</span>
+
+<span class="sd">            Parameters:</span>
+
+<span class="sd">            * p : 1d-array</span>
+<span class="sd">                The parameter vector where the Hessian is evaluated</span>
+
+<span class="sd">            Returns:</span>
+
+<span class="sd">            * hessian : 2d-array</span>
+
+<span class="sd">            &#39;&#39;&#39;</span>
+<span class="sd">            ...</span>
+
+<span class="sd">        def _get_gradient(self, p):</span>
+<span class="sd">            &#39;&#39;&#39;</span>
+<span class="sd">            The gradient vector.</span>
+
+<span class="sd">            Parameters:</span>
+
+<span class="sd">            * p : 1d-array</span>
+<span class="sd">                The parameter vector where the gradient is evaluated</span>
+
+<span class="sd">            Returns:</span>
+
+<span class="sd">            * gradient : 1d-array</span>
+
+<span class="sd">            &#39;&#39;&#39;</span>
+<span class="sd">            ...</span>
+
+<span class="sd">    These methods are problem specific and need to be implemented when</span>
+<span class="sd">    subclassing *Objective*.</span>
+
+<span class="sd">    *Objective* has methods that find the parameter vector that minimizes it:</span>
+
+<span class="sd">    * :meth:`~fatiando.inversion.base.Objective.newton`</span>
+<span class="sd">    * :meth:`~fatiando.inversion.base.Objective.levmarq`</span>
+<span class="sd">    * :meth:`~fatiando.inversion.base.Objective.steepest`</span>
+<span class="sd">    * :meth:`~fatiando.inversion.base.Objective.acor`</span>
+
+<span class="sd">    Parameters:</span>
+
+<span class="sd">    * nparams : int</span>
+<span class="sd">        The number of parameters the objective function takes.</span>
+<span class="sd">    * islinear : True or False</span>
+<span class="sd">        Wether the functions is linear with respect to the parameters.</span>
+
+<span class="sd">    Operations:</span>
+
+<span class="sd">    For joint inversion and regularization, you can add *Objective*</span>
+<span class="sd">    instances together and multiply them by scalars (i.e., regularization</span>
+<span class="sd">    parameters):</span>
+
+<span class="sd">    &gt;&gt;&gt; class MyObjective(Objective):</span>
+<span class="sd">    ...     def __init__(self, scale):</span>
+<span class="sd">    ...         super(MyObjective, self).__init__(10, True)</span>
+<span class="sd">    ...         self._scalar = scale</span>
+<span class="sd">    ...     def _get_value(self, p):</span>
+<span class="sd">    ...         return self._scalar*p</span>
+<span class="sd">    &gt;&gt;&gt; a = MyObjective(2)</span>
+<span class="sd">    &gt;&gt;&gt; a.value(3)</span>
+<span class="sd">    6</span>
+<span class="sd">    &gt;&gt;&gt; b = MyObjective(-3)</span>
+<span class="sd">    &gt;&gt;&gt; b.value(3)</span>
+<span class="sd">    -9</span>
+<span class="sd">    &gt;&gt;&gt; c = a + b</span>
+<span class="sd">    &gt;&gt;&gt; c.value(3)</span>
+<span class="sd">    -3</span>
+<span class="sd">    &gt;&gt;&gt; d = 0.5*c</span>
+<span class="sd">    &gt;&gt;&gt; d.value(3)</span>
+<span class="sd">    -1.5</span>
+<span class="sd">    &gt;&gt;&gt; e = a + 2*b</span>
+<span class="sd">    &gt;&gt;&gt; e.value(3)</span>
+<span class="sd">    -12</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nparams</span><span class="p">,</span> <span class="n">islinear</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">islinear</span> <span class="o">=</span> <span class="n">islinear</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">nparams</span> <span class="o">=</span> <span class="n">nparams</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ndata</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_scale</span> <span class="o">=</span> <span class="bp">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_parents</span> <span class="o">=</span> <span class="bp">None</span>
+
+    <span class="k">def</span> <span class="nf">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s">&#39;Objective instance&#39;</span>
+
+<div class="viewcode-block" id="Objective.value"><a class="viewcode-back" href="../../../api/inversion.base.html#fatiando.inversion.base.Objective.value">[docs]</a>    <span class="k">def</span> <span class="nf">value</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">p</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        The value (scalar) of this objective function at *p*</span>
+
+<span class="sd">        Parameters:</span>
+
+<span class="sd">        * p : 1d-array</span>
+<span class="sd">            The parameter vector</span>
+
+<span class="sd">        Returns:</span>
+
+<span class="sd">        * value : float</span>
+<span class="sd">            The value of this Objective function. If this is the sum of 1 or</span>
+<span class="sd">            more objective functions, value will be the sum of the values.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_parents</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_value</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_scale</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+                <span class="n">obj1</span><span class="p">,</span> <span class="n">obj2</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_parents</span>
+                <span class="k">return</span> <span class="n">obj1</span><span class="o">.</span><span class="n">value</span><span class="p">(</span><span class="n">p</span><span class="p">)</span> <span class="o">+</span> <span class="n">obj2</span><span class="o">.</span><span class="n">value</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_parents</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">,</span> \
+                    <span class="s">&#39;Result of multiplying Objective produces &gt; one parent.&#39;</span>
+                <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_scale</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">_parents</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">value</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
+</div>
+<div class="viewcode-block" id="Objective.gradient"><a class="viewcode-back" href="../../../api/inversion.base.html#fatiando.inversion.base.Objective.gradient">[docs]</a>    <span class="k">def</span> <span class="nf">gradient</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">p</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        The gradient vector of this objective function at *p*</span>
+
+<span class="sd">        Parameters:</span>
+
+<span class="sd">        * p : 1d-array</span>
+<span class="sd">            The parameter vector</span>
+
+<span class="sd">        Returns:</span>
+
+<span class="sd">        * gradient : 1d-array</span>
+<span class="sd">            The gradient of this Objective function. If this is the sum of 1 or</span>
+<span class="sd">            more objective functions, gradient will be the sum of the gradients</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_parents</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_gradient</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_scale</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+                <span class="n">obj1</span><span class="p">,</span> <span class="n">obj2</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_parents</span>
+                <span class="k">return</span> <span class="n">obj1</span><span class="o">.</span><span class="n">gradient</span><span class="p">(</span><span class="n">p</span><span class="p">)</span> <span class="o">+</span> <span class="n">obj2</span><span class="o">.</span><span class="n">gradient</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_parents</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">,</span> \
+                    <span class="s">&#39;Result of multiplying Objective produces &gt; one parent.&#39;</span>
+                <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_scale</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">_parents</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">gradient</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
+</div>
+<div class="viewcode-block" id="Objective.hessian"><a class="viewcode-back" href="../../../api/inversion.base.html#fatiando.inversion.base.Objective.hessian">[docs]</a>    <span class="k">def</span> <span class="nf">hessian</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">p</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        The Hessian matrix of this objective function at *p*</span>
+
+<span class="sd">        Parameters:</span>
+
+<span class="sd">        * p : 1d-array</span>
+<span class="sd">            The parameter vector</span>
+
+<span class="sd">        Returns:</span>
+
+<span class="sd">        * hessian : 2d-array</span>
+<span class="sd">            The Hessian of this Objective function. If this is the sum of 1 or</span>
+<span class="sd">            more objective functions, hessian will be the sum of the Hessians</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_parents</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_hessian</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_scale</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+                <span class="n">obj1</span><span class="p">,</span> <span class="n">obj2</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_parents</span>
+                <span class="k">return</span> <span class="n">obj1</span><span class="o">.</span><span class="n">hessian</span><span class="p">(</span><span class="n">p</span><span class="p">)</span> <span class="o">+</span> <span class="n">obj2</span><span class="o">.</span><span class="n">hessian</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_parents</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">,</span> \
+                    <span class="s">&#39;Result of multiplying Objective produces &gt; one parent.&#39;</span>
+                <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_scale</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">_parents</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">hessian</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
+</div>
+    <span class="k">def</span> <span class="nf">__add__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Examples:</span>
+
+<span class="sd">        &gt;&gt;&gt; class MyObjective(Objective):</span>
+<span class="sd">        ...     def __init__(self, n, scale):</span>
+<span class="sd">        ...         super(MyObjective, self).__init__(n, True)</span>
+<span class="sd">        ...         self._scalar = scale</span>
+<span class="sd">        ...     def _get_value(self, p):</span>
+<span class="sd">        ...         return self._scalar*p</span>
+<span class="sd">        &gt;&gt;&gt; a = MyObjective(10, 2)</span>
+<span class="sd">        &gt;&gt;&gt; b = MyObjective(10, -3)</span>
+<span class="sd">        &gt;&gt;&gt; c = a + b</span>
+<span class="sd">        &gt;&gt;&gt; c.value(3)</span>
+<span class="sd">        -3</span>
+<span class="sd">        &gt;&gt;&gt; a.value(3) + b.value(3)</span>
+<span class="sd">        -3</span>
+
+<span class="sd">        Every Objective should be a copy:</span>
+
+<span class="sd">        &gt;&gt;&gt; c is a</span>
+<span class="sd">        False</span>
+<span class="sd">        &gt;&gt;&gt; c is b</span>
+<span class="sd">        False</span>
+<span class="sd">        &gt;&gt;&gt; c._parents[0] is a</span>
+<span class="sd">        False</span>
+<span class="sd">        &gt;&gt;&gt; c._parents[1] is b</span>
+<span class="sd">        False</span>
+
+<span class="sd">        Modifying the 2 Objectives should not alter the sum:</span>
+
+<span class="sd">        &gt;&gt;&gt; a._scalar = 10</span>
+<span class="sd">        &gt;&gt;&gt; b._scalar = 20</span>
+<span class="sd">        &gt;&gt;&gt; a.value(3) + b.value(3)</span>
+<span class="sd">        90</span>
+<span class="sd">        &gt;&gt;&gt; c.value(3)</span>
+<span class="sd">        -3</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">nparams</span> <span class="o">!=</span> <span class="n">other</span><span class="o">.</span><span class="n">nparams</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                <span class="s">&quot;Can only add functions with same number of parameters&quot;</span><span class="p">)</span>
+        <span class="c"># Make a shallow copy of self to return. If returned self, would</span>
+        <span class="c"># overwrite the original class and might get recurrence issues</span>
+        <span class="n">tmp</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+        <span class="n">tmp</span><span class="o">.</span><span class="n">_scale</span> <span class="o">=</span> <span class="bp">None</span>
+        <span class="n">tmp</span><span class="o">.</span><span class="n">_parents</span> <span class="o">=</span> <span class="p">[</span><span class="n">copy</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="bp">self</span><span class="p">),</span> <span class="n">copy</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="n">other</span><span class="p">)]</span>
+        <span class="k">return</span> <span class="n">tmp</span>
+
+    <span class="k">def</span> <span class="nf">__mul__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Examples:</span>
+
+<span class="sd">        &gt;&gt;&gt; class MyObjective(Objective):</span>
+<span class="sd">        ...     def __init__(self, n, scale):</span>
+<span class="sd">        ...         super(MyObjective, self).__init__(n, True)</span>
+<span class="sd">        ...         self._scalar = scale</span>
+<span class="sd">        ...     def _get_value(self, p):</span>
+<span class="sd">        ...         return self._scalar*p</span>
+<span class="sd">        &gt;&gt;&gt; a = MyObjective(10, 2)</span>
+<span class="sd">        &gt;&gt;&gt; b = MyObjective(10, -3)</span>
+<span class="sd">        &gt;&gt;&gt; d = 0.5*a</span>
+<span class="sd">        &gt;&gt;&gt; d.value(3)</span>
+<span class="sd">        3.0</span>
+<span class="sd">        &gt;&gt;&gt; e = a + 2*b</span>
+<span class="sd">        &gt;&gt;&gt; e.value(3)</span>
+<span class="sd">        -12</span>
+<span class="sd">        &gt;&gt;&gt; f = 3*a + b</span>
+<span class="sd">        &gt;&gt;&gt; f.value(3)</span>
+<span class="sd">        9</span>
+
+<span class="sd">        Every Objective should be a copy:</span>
+
+<span class="sd">        &gt;&gt;&gt; d is a</span>
+<span class="sd">        False</span>
+<span class="sd">        &gt;&gt;&gt; e is a</span>
+<span class="sd">        False</span>
+<span class="sd">        &gt;&gt;&gt; e is b</span>
+<span class="sd">        False</span>
+<span class="sd">        &gt;&gt;&gt; f is a</span>
+<span class="sd">        False</span>
+<span class="sd">        &gt;&gt;&gt; f is b</span>
+<span class="sd">        False</span>
+
+<span class="sd">        Modifying the 2 Objectives should not alter the multiplication:</span>
+
+<span class="sd">        &gt;&gt;&gt; a._scalar = 10</span>
+<span class="sd">        &gt;&gt;&gt; b._scalar = 20</span>
+<span class="sd">        &gt;&gt;&gt; 0.5*a.value(3)</span>
+<span class="sd">        15.0</span>
+<span class="sd">        &gt;&gt;&gt; d.value(3)</span>
+<span class="sd">        3.0</span>
+<span class="sd">        &gt;&gt;&gt; a.value(3) + 2*b.value(3)</span>
+<span class="sd">        150</span>
+<span class="sd">        &gt;&gt;&gt; e.value(3)</span>
+<span class="sd">        -12</span>
+<span class="sd">        &gt;&gt;&gt; f.value(3)</span>
+<span class="sd">        9</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="nb">int</span><span class="p">)</span> <span class="ow">and</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="nb">float</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s">&#39;Can only multiply a Objective by a float or int&#39;</span><span class="p">)</span>
+        <span class="c"># Make a shallow copy of self to return. If returned self, would</span>
+        <span class="c"># overwrite the original class and might get recurrence issues</span>
+        <span class="n">tmp</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+        <span class="n">tmp</span><span class="o">.</span><span class="n">_scale</span> <span class="o">=</span> <span class="n">other</span>
+        <span class="n">tmp</span><span class="o">.</span><span class="n">_parents</span> <span class="o">=</span> <span class="p">[</span><span class="n">copy</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="bp">self</span><span class="p">)]</span>
+        <span class="k">return</span> <span class="n">tmp</span>
+
+    <span class="k">def</span> <span class="nf">__rmul__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__mul__</span><span class="p">(</span><span class="n">other</span><span class="p">)</span>
+
+<div class="viewcode-block" id="Objective.levmarq"><a class="viewcode-back" href="../../../api/inversion.base.html#fatiando.inversion.base.Objective.levmarq">[docs]</a>    <span class="k">def</span> <span class="nf">levmarq</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">initial</span><span class="p">,</span> <span class="n">maxit</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span> <span class="n">maxsteps</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">lamb</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">dlamb</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+                <span class="n">tol</span><span class="o">=</span><span class="mi">10</span> <span class="o">**</span> <span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="n">precondition</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">iterate</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Solve using the Levemberg-Marquardt algorithm.</span>
+
+<span class="sd">        See :func:`fatiando.inversion.solvers.levmarq` for more details.</span>
+
+<span class="sd">        Parameters:</span>
+
+<span class="sd">        * initial : 1d-array</span>
+<span class="sd">            The initial estimate for the gradient descent.</span>
+<span class="sd">        * maxit : int</span>
+<span class="sd">            The maximum number of iterations allowed.</span>
+<span class="sd">        * maxsteps : int</span>
+<span class="sd">            The maximum number of times to try to take a step before giving</span>
+<span class="sd">            up</span>
+<span class="sd">        * lamb : float</span>
+<span class="sd">            Initial amount of step regularization. The larger this is, the</span>
+<span class="sd">            more the algorithm will resemble Steepest Descent in the initial</span>
+<span class="sd">            iterations.</span>
+<span class="sd">        * dlamb : float</span>
+<span class="sd">            Factor by which *lamb* is divided or multiplied when taking steps</span>
+<span class="sd">        * tol : float</span>
+<span class="sd">            The convergence criterion. The lower it is, the more steps are</span>
+<span class="sd">            permitted</span>
+<span class="sd">        * precondition : True or False</span>
+<span class="sd">            If True, will use Jacobi preconditioning</span>
+<span class="sd">        * iterate : True or False</span>
+<span class="sd">            If True, will return an iterator that yields one estimated</span>
+<span class="sd">            parameter vector at a time for each iteration of the algorithm</span>
+
+<span class="sd">        Returns:</span>
+
+<span class="sd">        * estimate : 1d-array</span>
+<span class="sd">            The estimated parameter vector</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">solver</span> <span class="o">=</span> <span class="n">levmarq</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">hessian</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">gradient</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">value</span><span class="p">,</span> <span class="n">initial</span><span class="p">,</span>
+                         <span class="n">maxit</span><span class="o">=</span><span class="n">maxit</span><span class="p">,</span> <span class="n">maxsteps</span><span class="o">=</span><span class="n">maxsteps</span><span class="p">,</span> <span class="n">lamb</span><span class="o">=</span><span class="n">lamb</span><span class="p">,</span>
+                         <span class="n">dlamb</span><span class="o">=</span><span class="n">dlamb</span><span class="p">,</span> <span class="n">tol</span><span class="o">=</span><span class="n">tol</span><span class="p">,</span> <span class="n">precondition</span><span class="o">=</span><span class="n">precondition</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">iterate</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">solver</span>
+        <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">solver</span><span class="p">:</span>
+            <span class="k">continue</span>
+        <span class="k">return</span> <span class="n">p</span>
+</div>
+<div class="viewcode-block" id="Objective.newton"><a class="viewcode-back" href="../../../api/inversion.base.html#fatiando.inversion.base.Objective.newton">[docs]</a>    <span class="k">def</span> <span class="nf">newton</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">initial</span><span class="p">,</span> <span class="n">maxit</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span> <span class="n">tol</span><span class="o">=</span><span class="mi">10</span> <span class="o">**</span> <span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="n">precondition</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
+               <span class="n">iterate</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Minimize an objective function using Newton&#39;s method.</span>
+
+<span class="sd">        See :func:`fatiando.inversion.solvers.newton` for more details.</span>
+
+<span class="sd">        Parameters:</span>
+
+<span class="sd">        * initial : 1d-array</span>
+<span class="sd">            The initial estimate for the gradient descent.</span>
+<span class="sd">        * maxit : int</span>
+<span class="sd">            The maximum number of iterations allowed.</span>
+<span class="sd">        * tol : float</span>
+<span class="sd">            The convergence criterion. The lower it is, the more steps are</span>
+<span class="sd">            permitted.</span>
+<span class="sd">        * precondition : True or False</span>
+<span class="sd">            If True, will use Jacobi preconditioning.</span>
+<span class="sd">        * iterate : True or False</span>
+<span class="sd">            If True, will return an iterator that yields one estimated</span>
+<span class="sd">            parameter vector at a time for each iteration of the algorithm</span>
+
+<span class="sd">        Returns:</span>
+
+<span class="sd">        * estimate : 1d-array</span>
+<span class="sd">            The estimated parameter vector</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">solver</span> <span class="o">=</span> <span class="n">newton</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">hessian</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">gradient</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">value</span><span class="p">,</span> <span class="n">initial</span><span class="p">,</span>
+                        <span class="n">maxit</span><span class="o">=</span><span class="n">maxit</span><span class="p">,</span> <span class="n">tol</span><span class="o">=</span><span class="n">tol</span><span class="p">,</span> <span class="n">precondition</span><span class="o">=</span><span class="n">precondition</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">iterate</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">solver</span>
+        <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">solver</span><span class="p">:</span>
+            <span class="k">continue</span>
+        <span class="k">return</span> <span class="n">p</span>
+</div>
+<div class="viewcode-block" id="Objective.steepest"><a class="viewcode-back" href="../../../api/inversion.base.html#fatiando.inversion.base.Objective.steepest">[docs]</a>    <span class="k">def</span> <span class="nf">steepest</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">initial</span><span class="p">,</span> <span class="n">stepsize</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">maxsteps</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span> <span class="n">maxit</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span>
+                 <span class="n">tol</span><span class="o">=</span><span class="mi">10</span> <span class="o">**</span> <span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="n">iterate</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Minimize an objective function using the Steepest Descent method.</span>
+
+<span class="sd">        See :func:`fatiando.inversion.solvers.steepest` for more details.</span>
+
+<span class="sd">        Parameters:</span>
+
+<span class="sd">        * initial : 1d-array</span>
+<span class="sd">            The initial estimate for the gradient descent.</span>
+<span class="sd">        * maxit : int</span>
+<span class="sd">            The maximum number of iterations allowed.</span>
+<span class="sd">        * maxsteps : int</span>
+<span class="sd">            The maximum number of times to try to take a step before giving</span>
+<span class="sd">            up</span>
+<span class="sd">        * stepsize : float</span>
+<span class="sd">            Initial amount of step step size.</span>
+<span class="sd">        * tol : float</span>
+<span class="sd">            The convergence criterion. The lower it is, the more steps are</span>
+<span class="sd">            permitted.</span>
+<span class="sd">        * iterate : True or False</span>
+<span class="sd">            If True, will return an iterator that yields one estimated</span>
+<span class="sd">            parameter vector at a time for each iteration of the algorithm</span>
+
+<span class="sd">        Returns:</span>
+
+<span class="sd">        * estimate : 1d-array</span>
+<span class="sd">            The estimated parameter vector</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">solver</span> <span class="o">=</span> <span class="n">steepest</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">gradient</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">value</span><span class="p">,</span> <span class="n">initial</span><span class="p">,</span> <span class="n">maxit</span><span class="o">=</span><span class="n">maxit</span><span class="p">,</span>
+                          <span class="n">maxsteps</span><span class="o">=</span><span class="n">maxsteps</span><span class="p">,</span> <span class="n">stepsize</span><span class="o">=</span><span class="n">stepsize</span><span class="p">,</span> <span class="n">tol</span><span class="o">=</span><span class="n">tol</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">iterate</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">solver</span>
+        <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">solver</span><span class="p">:</span>
+            <span class="k">continue</span>
+        <span class="k">return</span> <span class="n">p</span>
+</div>
+<div class="viewcode-block" id="Objective.acor"><a class="viewcode-back" href="../../../api/inversion.base.html#fatiando.inversion.base.Objective.acor">[docs]</a>    <span class="k">def</span> <span class="nf">acor</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">bounds</span><span class="p">,</span> <span class="n">nants</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">archive_size</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">maxit</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span>
+             <span class="n">diverse</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">evap</span><span class="o">=</span><span class="mf">0.85</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">iterate</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Minimize the objective function using ACO-R.</span>
+
+<span class="sd">        See :func:`fatiando.inversion.solvers.acor` for more details.</span>
+
+<span class="sd">        Parameters:</span>
+
+<span class="sd">        * bounds : list</span>
+<span class="sd">            The bounds of the search space. If only two values are given,</span>
+<span class="sd">            will interpret as the minimum and maximum, respectively, for all</span>
+<span class="sd">            parameters.</span>
+<span class="sd">            Alternatively, you can given a minimum and maximum for each</span>
+<span class="sd">            parameter, e.g., for a problem with 3 parameters you could give</span>
+<span class="sd">            `bounds = [min1, max1, min2, max2, min3, max3]`.</span>
+<span class="sd">        * nants : int</span>
+<span class="sd">            The number of ants to use in the search. Defaults to the number</span>
+<span class="sd">            of parameters.</span>
+<span class="sd">        * archive_size : int</span>
+<span class="sd">            The number of solutions to keep in the solution archive.</span>
+<span class="sd">            Defaults to 10 x nants</span>
+<span class="sd">        * maxit : int</span>
+<span class="sd">            The number of iterations to run.</span>
+<span class="sd">        * diverse : float</span>
+<span class="sd">            Scalar from 0 to 1, non-inclusive, that controls how much better</span>
+<span class="sd">            solutions are favored when constructing new ones.</span>
+<span class="sd">        * evap : float</span>
+<span class="sd">            The pheromone evaporation rate (evap &gt; 0). Controls how spread</span>
+<span class="sd">            out the search is.</span>
+<span class="sd">        * seed : None or int</span>
+<span class="sd">            Seed for the random number generator.</span>
+<span class="sd">        * iterate : True or False</span>
+<span class="sd">            If True, will return an iterator that yields one estimated</span>
+<span class="sd">            parameter vector at a time for each iteration of the algorithm</span>
+
+<span class="sd">        Returns:</span>
+
+<span class="sd">        * estimate : 1d-array</span>
+<span class="sd">            The best estimate</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">solver</span> <span class="o">=</span> <span class="n">acor</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">value</span><span class="p">,</span> <span class="n">bounds</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">nparams</span><span class="p">,</span> <span class="n">nants</span><span class="o">=</span><span class="n">nants</span><span class="p">,</span>
+                      <span class="n">archive_size</span><span class="o">=</span><span class="n">archive_size</span><span class="p">,</span> <span class="n">maxit</span><span class="o">=</span><span class="n">maxit</span><span class="p">,</span> <span class="n">diverse</span><span class="o">=</span><span class="n">diverse</span><span class="p">,</span>
+                      <span class="n">evap</span><span class="o">=</span><span class="n">evap</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="n">seed</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">iterate</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">solver</span>
+        <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">solver</span><span class="p">:</span>
+            <span class="k">continue</span>
+        <span class="k">return</span> <span class="n">p</span>
+
+</div></div>
+<div class="viewcode-block" id="Misfit"><a class="viewcode-back" href="../../../api/inversion.base.html#fatiando.inversion.base.Misfit">[docs]</a><span class="k">class</span> <span class="nc">Misfit</span><span class="p">(</span><span class="n">Objective</span><span class="p">):</span>
+
+    <span class="sd">r&quot;&quot;&quot;</span>
+<span class="sd">    An l2-norm data-misfit function.</span>
+
+<span class="sd">    This is a kind of objective function that measures the misfit between</span>
+<span class="sd">    observed data :math:`\bar{d}^o` and data predicted by a set of model</span>
+<span class="sd">    parameters :math:`\bar{d} = \bar{f}(\bar{p})`.</span>
+
+<span class="sd">    The l2-norm data-misfit is defined as:</span>
+
+<span class="sd">    .. math::</span>
+
+<span class="sd">        \phi(\bar{p}) = \dfrac{\bar{r}^T\bar{r}}{N}</span>
+
+<span class="sd">    where :math:`\bar{r} = \bar{d}^o - \bar{d}` is the residual vector and</span>
+<span class="sd">    :math:`N` is the number of data.</span>
+
+<span class="sd">    This class inherits the solvers from</span>
+<span class="sd">    :class:`~fatiando.inversion.base.Objective` that estimate a parameter</span>
+<span class="sd">    vector :math:`\bar{p}` that minimizes it.</span>
+<span class="sd">    See :class:`~fatiando.inversion.base.Objective` for more details.</span>
+
+<span class="sd">    When subclassing this class, you must implement two methods:</span>
+
+<span class="sd">    * ``_get_predicted(self, p)``: calculates the predicted data</span>
+<span class="sd">      :math:`\bar{d}` for a given parameter vector ``p``</span>
+<span class="sd">    * ``_get_jacobian(self, p)``: calculates the Jacobian matrix of</span>
+<span class="sd">      :math:`\bar{f}(\bar{p})` evaluated at ``p``</span>
+
+<span class="sd">    If :math:`\bar{f}` is linear, then the Jacobian will be cached in memory so</span>
+<span class="sd">    that it is only calculated once when using the class multiple times. So</span>
+<span class="sd">    solving the same problem with different methods or using an iterative</span>
+<span class="sd">    method doesn&#39;t have the penalty of recalculating the Jacobian.</span>
+
+<span class="sd">    .. tip::</span>
+
+<span class="sd">        See :mod:`fatiando.inversion` for examples of usage.</span>
+
+<span class="sd">    Parameters:</span>
+
+<span class="sd">    * data : 1d-array</span>
+<span class="sd">        The observed data vector :math:`\bar{d}^o`</span>
+<span class="sd">    * positional : dict</span>
+<span class="sd">        A dictionary with the positional arguments of the data, for example, x,</span>
+<span class="sd">        y coordinates, depths, etc. Keys should the string name of the argument</span>
+<span class="sd">        and values should be 1d-arrays with the same size as *data*.</span>
+<span class="sd">    * model : dict</span>
+<span class="sd">        A dictionary with the model parameters, like the mesh, physical</span>
+<span class="sd">        properties, etc.</span>
+<span class="sd">    * nparams : int</span>
+<span class="sd">        The number of parameters in parameter vector :math:`\bar{p}`</span>
+<span class="sd">    * weights : 1d-array</span>
+<span class="sd">        Weights to be applied to the each element in *data* when computing the</span>
+<span class="sd">        l2-norm. Effectively the diagonal of a matrix :math:`\bar{\bar{W}}`</span>
+<span class="sd">        such that :math:`\phi = \bar{r}^T\bar{\bar{W}}\bar{r}`</span>
+<span class="sd">    * islinear : True or False</span>
+<span class="sd">        Whether :math:`\bar{f}` is linear or not.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">positional</span><span class="p">,</span> <span class="n">model</span><span class="p">,</span> <span class="n">nparams</span><span class="p">,</span> <span class="n">weights</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>
+                 <span class="n">islinear</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">Misfit</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="n">nparams</span><span class="p">,</span> <span class="n">islinear</span><span class="o">=</span><span class="n">islinear</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="n">data</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ndata</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">positional</span> <span class="o">=</span> <span class="n">positional</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">model</span> <span class="o">=</span> <span class="n">model</span>
+        <span class="c"># To cache the latest computations (or for linear problems)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_cache</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s">&#39;predicted&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s">&#39;hash&#39;</span><span class="p">:</span> <span class="s">&#39;&#39;</span><span class="p">,</span> <span class="s">&#39;array&#39;</span><span class="p">:</span> <span class="bp">None</span><span class="p">},</span>
+            <span class="s">&#39;jacobian&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s">&#39;hash&#39;</span><span class="p">:</span> <span class="s">&#39;&#39;</span><span class="p">,</span> <span class="s">&#39;array&#39;</span><span class="p">:</span> <span class="bp">None</span><span class="p">},</span>
+            <span class="s">&#39;hessian&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s">&#39;hash&#39;</span><span class="p">:</span> <span class="s">&#39;&#39;</span><span class="p">,</span> <span class="s">&#39;array&#39;</span><span class="p">:</span> <span class="bp">None</span><span class="p">}}</span>
+        <span class="c"># Set default arguments for fit</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">default_solver_args</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s">&#39;linear&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s">&#39;precondition&#39;</span><span class="p">:</span> <span class="bp">True</span><span class="p">},</span>
+            <span class="s">&#39;newton&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s">&#39;initial&#39;</span><span class="p">:</span> <span class="bp">None</span><span class="p">,</span>
+                       <span class="s">&#39;maxit&#39;</span><span class="p">:</span> <span class="mi">30</span><span class="p">,</span>
+                       <span class="s">&#39;tol&#39;</span><span class="p">:</span> <span class="mi">10</span> <span class="o">**</span> <span class="o">-</span><span class="mi">5</span><span class="p">,</span>
+                       <span class="s">&#39;precondition&#39;</span><span class="p">:</span> <span class="bp">True</span><span class="p">},</span>
+            <span class="s">&#39;levmarq&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s">&#39;initial&#39;</span><span class="p">:</span> <span class="bp">None</span><span class="p">,</span>
+                        <span class="s">&#39;maxit&#39;</span><span class="p">:</span> <span class="mi">30</span><span class="p">,</span>
+                        <span class="s">&#39;maxsteps&#39;</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span>
+                        <span class="s">&#39;lamb&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+                        <span class="s">&#39;dlamb&#39;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+                        <span class="s">&#39;tol&#39;</span><span class="p">:</span> <span class="mi">10</span> <span class="o">**</span> <span class="o">-</span><span class="mi">5</span><span class="p">,</span>
+                        <span class="s">&#39;precondition&#39;</span><span class="p">:</span> <span class="bp">True</span><span class="p">},</span>
+            <span class="s">&#39;steepest&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s">&#39;initial&#39;</span><span class="p">:</span> <span class="bp">None</span><span class="p">,</span>
+                         <span class="s">&#39;stepsize&#39;</span><span class="p">:</span> <span class="mf">0.1</span><span class="p">,</span>
+                         <span class="s">&#39;maxsteps&#39;</span><span class="p">:</span> <span class="mi">30</span><span class="p">,</span>
+                         <span class="s">&#39;maxit&#39;</span><span class="p">:</span> <span class="mi">1000</span><span class="p">,</span>
+                         <span class="s">&#39;tol&#39;</span><span class="p">:</span> <span class="mi">10</span> <span class="o">**</span> <span class="o">-</span><span class="mi">5</span><span class="p">},</span>
+            <span class="s">&#39;acor&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s">&#39;bounds&#39;</span><span class="p">:</span> <span class="bp">None</span><span class="p">,</span>
+                     <span class="s">&#39;nants&#39;</span><span class="p">:</span> <span class="bp">None</span><span class="p">,</span>
+                     <span class="s">&#39;archive_size&#39;</span><span class="p">:</span> <span class="bp">None</span><span class="p">,</span>
+                     <span class="s">&#39;maxit&#39;</span><span class="p">:</span> <span class="mi">1000</span><span class="p">,</span>
+                     <span class="s">&#39;diverse&#39;</span><span class="p">:</span> <span class="mf">0.5</span><span class="p">,</span>
+                     <span class="s">&#39;evap&#39;</span><span class="p">:</span> <span class="mf">0.85</span><span class="p">,</span>
+                     <span class="s">&#39;seed&#39;</span><span class="p">:</span> <span class="bp">None</span><span class="p">}}</span>
+        <span class="c"># Data weights</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">weights</span> <span class="o">=</span> <span class="bp">None</span>
+        <span class="k">if</span> <span class="n">weights</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">set_weights</span><span class="p">(</span><span class="n">weights</span><span class="p">)</span>
+        <span class="c"># So that don&#39;t need to use config on linear problems</span>
+        <span class="k">if</span> <span class="n">islinear</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="p">(</span><span class="n">method</span><span class="o">=</span><span class="s">&#39;linear&#39;</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">hasher</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">hashlib</span><span class="o">.</span><span class="n">sha1</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">.</span><span class="n">hexdigest</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">_clear_cache</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="s">&quot;Reset the cached matrices&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_cache</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s">&#39;predicted&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s">&#39;hash&#39;</span><span class="p">:</span> <span class="s">&#39;&#39;</span><span class="p">,</span> <span class="s">&#39;array&#39;</span><span class="p">:</span> <span class="bp">None</span><span class="p">},</span>
+            <span class="s">&#39;jacobian&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s">&#39;hash&#39;</span><span class="p">:</span> <span class="s">&#39;&#39;</span><span class="p">,</span> <span class="s">&#39;array&#39;</span><span class="p">:</span> <span class="bp">None</span><span class="p">},</span>
+            <span class="s">&#39;hessian&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s">&#39;hash&#39;</span><span class="p">:</span> <span class="s">&#39;&#39;</span><span class="p">,</span> <span class="s">&#39;array&#39;</span><span class="p">:</span> <span class="bp">None</span><span class="p">}}</span>
+
+    <span class="k">def</span> <span class="nf">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s">&#39;Misfit instance&#39;</span>
+
+<div class="viewcode-block" id="Misfit.subset"><a class="viewcode-back" href="../../../api/inversion.base.html#fatiando.inversion.base.Misfit.subset">[docs]</a>    <span class="k">def</span> <span class="nf">subset</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">indices</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Produce a shallow copy of this object with only a subset of the data.</span>
+
+<span class="sd">        Additionally cuts the *positional* arguments and Jacobian matrix (if it</span>
+<span class="sd">        is present in the cache).</span>
+
+<span class="sd">        Parameters:</span>
+
+<span class="sd">        * indices : list of ints or 1d-array of bools</span>
+<span class="sd">            The indices that correspond to the subset.</span>
+
+<span class="sd">        Returns:</span>
+
+<span class="sd">        * subset : Misfit</span>
+<span class="sd">            A copy of this object</span>
+
+<span class="sd">        Examples:</span>
+
+<span class="sd">        &gt;&gt;&gt; import numpy as np</span>
+<span class="sd">        &gt;&gt;&gt; solver = Misfit(np.array([1, 2, 3, 10]),</span>
+<span class="sd">        ...                 positional={&#39;x&#39;:np.array([4, 5, 6, 100])},</span>
+<span class="sd">        ...                 model={&#39;d&#39;:12},</span>
+<span class="sd">        ...                 nparams=2)</span>
+<span class="sd">        &gt;&gt;&gt; # Populate the cache to show what happens to it</span>
+<span class="sd">        &gt;&gt;&gt; solver._cache[&#39;jacobian&#39;][&#39;array&#39;] = np.array(</span>
+<span class="sd">        ...     [[1, 2],</span>
+<span class="sd">        ...      [3, 4],</span>
+<span class="sd">        ...      [5, 6],</span>
+<span class="sd">        ...      [7, 8]])</span>
+<span class="sd">        &gt;&gt;&gt; solver._cache[&#39;hessian&#39;][&#39;array&#39;] = np.ones((2, 2))</span>
+<span class="sd">        &gt;&gt;&gt; solver._cache[&#39;predicted&#39;][&#39;array&#39;] = np.ones(4)</span>
+<span class="sd">        &gt;&gt;&gt; # Get the subset</span>
+<span class="sd">        &gt;&gt;&gt; sub = solver.subset([1, 3])</span>
+<span class="sd">        &gt;&gt;&gt; sub.ndata</span>
+<span class="sd">        2</span>
+<span class="sd">        &gt;&gt;&gt; sub.data</span>
+<span class="sd">        array([ 2, 10])</span>
+<span class="sd">        &gt;&gt;&gt; sub.positional</span>
+<span class="sd">        {&#39;x&#39;: array([  5, 100])}</span>
+<span class="sd">        &gt;&gt;&gt; sub.model</span>
+<span class="sd">        {&#39;d&#39;: 12}</span>
+<span class="sd">        &gt;&gt;&gt; sub._cache[&#39;jacobian&#39;][&#39;array&#39;]</span>
+<span class="sd">        array([[3, 4],</span>
+<span class="sd">               [7, 8]])</span>
+<span class="sd">        &gt;&gt;&gt; sub._cache[&#39;hessian&#39;][&#39;array&#39;] is None</span>
+<span class="sd">        True</span>
+<span class="sd">        &gt;&gt;&gt; sub._cache[&#39;predicted&#39;][&#39;array&#39;] is None</span>
+<span class="sd">        True</span>
+<span class="sd">        &gt;&gt;&gt; # The original solver stays the same</span>
+<span class="sd">        &gt;&gt;&gt; solver.data</span>
+<span class="sd">        array([ 1,  2,  3, 10])</span>
+<span class="sd">        &gt;&gt;&gt; solver.positional</span>
+<span class="sd">        {&#39;x&#39;: array([  4,   5,   6, 100])}</span>
+<span class="sd">        &gt;&gt;&gt; solver.model</span>
+<span class="sd">        {&#39;d&#39;: 12}</span>
+<span class="sd">        &gt;&gt;&gt; solver._cache[&#39;jacobian&#39;][&#39;array&#39;]</span>
+<span class="sd">        array([[1, 2],</span>
+<span class="sd">               [3, 4],</span>
+<span class="sd">               [5, 6],</span>
+<span class="sd">               [7, 8]])</span>
+<span class="sd">        &gt;&gt;&gt; solver._cache[&#39;hessian&#39;][&#39;array&#39;]</span>
+<span class="sd">        array([[ 1.,  1.],</span>
+<span class="sd">               [ 1.,  1.]])</span>
+<span class="sd">        &gt;&gt;&gt; solver._cache[&#39;predicted&#39;][&#39;array&#39;]</span>
+<span class="sd">        array([ 1.,  1.,  1.,  1.])</span>
+<span class="sd">        &gt;&gt;&gt; # Can also use a numpy array of booleans</span>
+<span class="sd">        &gt;&gt;&gt; sub = solver.subset(np.array([False, True, False, True]))</span>
+<span class="sd">        &gt;&gt;&gt; sub.ndata</span>
+<span class="sd">        2</span>
+<span class="sd">        &gt;&gt;&gt; sub.data</span>
+<span class="sd">        array([ 2, 10])</span>
+<span class="sd">        &gt;&gt;&gt; sub.positional</span>
+<span class="sd">        {&#39;x&#39;: array([  5, 100])}</span>
+<span class="sd">        &gt;&gt;&gt; sub.model</span>
+<span class="sd">        {&#39;d&#39;: 12}</span>
+<span class="sd">        &gt;&gt;&gt; sub._cache[&#39;jacobian&#39;][&#39;array&#39;]</span>
+<span class="sd">        array([[3, 4],</span>
+<span class="sd">               [7, 8]])</span>
+<span class="sd">        &gt;&gt;&gt; sub._cache[&#39;hessian&#39;][&#39;array&#39;] is None</span>
+<span class="sd">        True</span>
+<span class="sd">        &gt;&gt;&gt; sub._cache[&#39;predicted&#39;][&#39;array&#39;] is None</span>
+<span class="sd">        True</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">sub</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+        <span class="n">sub</span><span class="o">.</span><span class="n">model</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+        <span class="n">sub</span><span class="o">.</span><span class="n">_cache</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cache</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+        <span class="n">sub</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="n">sub</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="n">indices</span><span class="p">]</span>
+        <span class="n">sub</span><span class="o">.</span><span class="n">positional</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">((</span><span class="n">k</span><span class="p">,</span> <span class="n">sub</span><span class="o">.</span><span class="n">positional</span><span class="p">[</span><span class="n">k</span><span class="p">][</span><span class="n">indices</span><span class="p">])</span>
+                              <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">sub</span><span class="o">.</span><span class="n">positional</span><span class="p">)</span>
+        <span class="n">sub</span><span class="o">.</span><span class="n">_clear_cache</span><span class="p">()</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cache</span><span class="p">[</span><span class="s">&#39;jacobian&#39;</span><span class="p">][</span><span class="s">&#39;array&#39;</span><span class="p">]</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="n">sub</span><span class="o">.</span><span class="n">_cache</span><span class="p">[</span><span class="s">&#39;jacobian&#39;</span><span class="p">][</span><span class="s">&#39;array&#39;</span><span class="p">]</span> <span class="o">=</span> \
+                <span class="bp">self</span><span class="o">.</span><span class="n">_cache</span><span class="p">[</span><span class="s">&#39;jacobian&#39;</span><span class="p">][</span><span class="s">&#39;array&#39;</span><span class="p">][</span><span class="n">indices</span><span class="p">]</span>
+        <span class="n">sub</span><span class="o">.</span><span class="n">ndata</span> <span class="o">=</span> <span class="n">sub</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">size</span>
+        <span class="k">return</span> <span class="n">sub</span>
+</div>
+<div class="viewcode-block" id="Misfit.set_weights"><a class="viewcode-back" href="../../../api/inversion.base.html#fatiando.inversion.base.Misfit.set_weights">[docs]</a>    <span class="k">def</span> <span class="nf">set_weights</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">weights</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Set the data weights array.</span>
+
+<span class="sd">        See :class:`~fatiando.inversion.base.Misfit` for more information.</span>
+
+<span class="sd">        Parameters:</span>
+
+<span class="sd">        * weights : 1d-array</span>
+<span class="sd">            A vector with the data weights.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">weights</span> <span class="o">=</span> <span class="n">scipy</span><span class="o">.</span><span class="n">sparse</span><span class="o">.</span><span class="n">diags</span><span class="p">(</span><span class="n">weights</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="c"># Weights change the Hessian</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_cache</span><span class="p">[</span><span class="s">&#39;hessian&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="s">&#39;hash&#39;</span><span class="p">:</span> <span class="s">&#39;&#39;</span><span class="p">,</span> <span class="s">&#39;array&#39;</span><span class="p">:</span> <span class="bp">None</span><span class="p">}</span>
+        <span class="k">return</span> <span class="bp">self</span>
+</div>
+<div class="viewcode-block" id="Misfit.residuals"><a class="viewcode-back" href="../../../api/inversion.base.html#fatiando.inversion.base.Misfit.residuals">[docs]</a>    <span class="k">def</span> <span class="nf">residuals</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">p</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Calculate the residuals vector (observed - predicted data).</span>
+
+<span class="sd">        Parameters:</span>
+
+<span class="sd">        * p : 1d-array or None</span>
+<span class="sd">            The parameter vector used to calculate the residuals. If None, will</span>
+<span class="sd">            use the current estimate stored in ``estimate_``.</span>
+
+<span class="sd">        Returns:</span>
+
+<span class="sd">        * residuals : 1d-array or list of 1d-arrays</span>
+<span class="sd">            The residual vector. If this is the sum of 1 or more Misfit</span>
+<span class="sd">            instances, will return the residual vector from each of the summed</span>
+<span class="sd">            misfits in the order of the sum.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">p</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="n">p</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">p_</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_parents</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="n">res</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">predicted</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">res</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="k">for</span> <span class="n">o</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_parents</span><span class="p">:</span>
+                <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">o</span><span class="p">,</span> <span class="s">&#39;residuals&#39;</span><span class="p">):</span>
+                    <span class="n">aux</span> <span class="o">=</span> <span class="n">o</span><span class="o">.</span><span class="n">residuals</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
+                    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">aux</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
+                        <span class="n">res</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">aux</span><span class="p">)</span>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="n">res</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">aux</span><span class="p">)</span>
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">res</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="n">res</span> <span class="o">=</span> <span class="n">res</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="k">return</span> <span class="n">res</span>
+</div>
+<div class="viewcode-block" id="Misfit.predicted"><a class="viewcode-back" href="../../../api/inversion.base.html#fatiando.inversion.base.Misfit.predicted">[docs]</a>    <span class="k">def</span> <span class="nf">predicted</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">p</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Calculate the predicted data for a given parameter vector.</span>
+
+<span class="sd">        Parameters:</span>
+
+<span class="sd">        * p : 1d-array or None</span>
+<span class="sd">            The parameter vector used to calculate the predicted data. If None,</span>
+<span class="sd">            will use the current estimate stored in ``estimate_``.</span>
+
+<span class="sd">        Returns:</span>
+
+<span class="sd">        * predicted : 1d-array or list of 1d-arrays</span>
+<span class="sd">            The predicted data. If this is the sum of 1 or more Misfit</span>
+<span class="sd">            instances, will return the predicted data from each of the summed</span>
+<span class="sd">            misfits in the order of the sum.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">p</span> <span class="o">==</span> <span class="s">&#39;null&#39;</span><span class="p">:</span>
+            <span class="n">pred</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">p</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+                <span class="n">p</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">p_</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_parents</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+                <span class="nb">hash</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">hasher</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
+                <span class="k">if</span> <span class="nb">hash</span> <span class="o">!=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cache</span><span class="p">[</span><span class="s">&#39;predicted&#39;</span><span class="p">][</span><span class="s">&#39;hash&#39;</span><span class="p">]:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">_cache</span><span class="p">[</span><span class="s">&#39;predicted&#39;</span><span class="p">][</span><span class="s">&#39;array&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_predicted</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">_cache</span><span class="p">[</span><span class="s">&#39;predicted&#39;</span><span class="p">][</span><span class="s">&#39;hash&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">hash</span>
+                <span class="n">pred</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cache</span><span class="p">[</span><span class="s">&#39;predicted&#39;</span><span class="p">][</span><span class="s">&#39;array&#39;</span><span class="p">]</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">pred</span> <span class="o">=</span> <span class="p">[]</span>
+                <span class="k">for</span> <span class="n">o</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_parents</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">o</span><span class="p">,</span> <span class="s">&#39;predicted&#39;</span><span class="p">):</span>
+                        <span class="n">aux</span> <span class="o">=</span> <span class="n">o</span><span class="o">.</span><span class="n">predicted</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
+                        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">aux</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
+                            <span class="n">pred</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">aux</span><span class="p">)</span>
+                        <span class="k">else</span><span class="p">:</span>
+                            <span class="n">pred</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">aux</span><span class="p">)</span>
+                <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">pred</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+                    <span class="n">pred</span> <span class="o">=</span> <span class="n">pred</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="k">return</span> <span class="n">pred</span>
+</div>
+<div class="viewcode-block" id="Misfit.jacobian"><a class="viewcode-back" href="../../../api/inversion.base.html#fatiando.inversion.base.Misfit.jacobian">[docs]</a>    <span class="k">def</span> <span class="nf">jacobian</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">p</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Calculate the Jacobian matrix evaluated at a given parameter vector.</span>
+
+<span class="sd">        The Jacobian matrix is cached in memory, so passing the same</span>
+<span class="sd">        parameter vector again will not trigger a re-calculation. However, only</span>
+<span class="sd">        one matrix is cached at a time.</span>
+
+<span class="sd">        Parameters:</span>
+
+<span class="sd">        * p : 1d-array or None</span>
+<span class="sd">            The parameter vector. If the problem is linear, pass ``None``</span>
+
+<span class="sd">        Returns:</span>
+
+<span class="sd">        * jacobian : 2d-array</span>
+<span class="sd">            The Jacobian matrix</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">islinear</span><span class="p">:</span>
+            <span class="nb">hash</span> <span class="o">=</span> <span class="s">&#39;&#39;</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="nb">hash</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">hasher</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nb">hash</span> <span class="o">!=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cache</span><span class="p">[</span><span class="s">&#39;jacobian&#39;</span><span class="p">][</span><span class="s">&#39;hash&#39;</span><span class="p">]</span> <span class="ow">or</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_cache</span><span class="p">[</span><span class="s">&#39;jacobian&#39;</span><span class="p">][</span><span class="s">&#39;array&#39;</span><span class="p">]</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_cache</span><span class="p">[</span><span class="s">&#39;jacobian&#39;</span><span class="p">][</span><span class="s">&#39;array&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_jacobian</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_cache</span><span class="p">[</span><span class="s">&#39;jacobian&#39;</span><span class="p">][</span><span class="s">&#39;hash&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">hash</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cache</span><span class="p">[</span><span class="s">&#39;jacobian&#39;</span><span class="p">][</span><span class="s">&#39;array&#39;</span><span class="p">]</span>
+</div>
+    <span class="k">def</span> <span class="nf">_get_value</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">p</span><span class="p">):</span>
+        <span class="sd">r&quot;&quot;&quot;</span>
+<span class="sd">        Calculate the value of the misfit for a given parameter vector.</span>
+
+<span class="sd">        The value is given by:</span>
+
+<span class="sd">        .. math::</span>
+
+<span class="sd">            \phi(\bar{p}) = \dfrac{\bar{r}^T\bar{\bar{W}}\bar{r}}{N}</span>
+
+
+<span class="sd">        where :math:`\bar{r}` is the residual vector and :math:`bar{\bar{W}}`</span>
+<span class="sd">        are optional data weights.</span>
+
+<span class="sd">        Parameters:</span>
+
+<span class="sd">        * p : 1d-array or None</span>
+<span class="sd">            The parameter vector.</span>
+
+<span class="sd">        Returns:</span>
+
+<span class="sd">        * value : float</span>
+<span class="sd">            The value of the misfit function.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">weights</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">numpy</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">data</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">predicted</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
+            <span class="p">)</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">ndata</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">numpy</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">weights</span> <span class="o">*</span> <span class="p">(</span>
+                <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">predicted</span><span class="p">(</span><span class="n">p</span><span class="p">))</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span>
+            <span class="p">)</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">ndata</span>
+
+    <span class="k">def</span> <span class="nf">_get_hessian</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">p</span><span class="p">):</span>
+        <span class="sd">r&quot;&quot;&quot;</span>
+<span class="sd">        The Hessian of the misfit function with respect to the parameters.</span>
+
+<span class="sd">        Calculated using the Gauss approximation:</span>
+
+<span class="sd">        .. math::</span>
+
+<span class="sd">            \bar{\bar{H}} \approx 2\bar{\bar{J}}^T\bar{\bar{J}}</span>
+
+<span class="sd">        where :math:`\bar{\bar{J}}` is the Jacobian matrix.</span>
+
+<span class="sd">        For linear problems, the Hessian matrix is cached in memory, so calling</span>
+<span class="sd">        this method again will not trigger a re-calculation.</span>
+
+<span class="sd">        Parameters:</span>
+
+<span class="sd">        * p : 1d-array</span>
+<span class="sd">            The parameter vector where the Hessian is evaluated</span>
+
+<span class="sd">        Returns:</span>
+
+<span class="sd">        * hessian : 2d-array</span>
+<span class="sd">            The Hessian matrix</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">islinear</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cache</span><span class="p">[</span><span class="s">&#39;hessian&#39;</span><span class="p">][</span><span class="s">&#39;array&#39;</span><span class="p">]</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="n">hessian</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cache</span><span class="p">[</span><span class="s">&#39;hessian&#39;</span><span class="p">][</span><span class="s">&#39;array&#39;</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">jacobian</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">jacobian</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">weights</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+                <span class="n">hessian</span> <span class="o">=</span> <span class="p">(</span><span class="mi">2</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">ndata</span><span class="p">)</span> <span class="o">*</span> <span class="n">safe_dot</span><span class="p">(</span><span class="n">jacobian</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="n">jacobian</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">hessian</span> <span class="o">=</span> <span class="p">(</span><span class="mi">2</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">ndata</span><span class="p">)</span> <span class="o">*</span> <span class="n">safe_dot</span><span class="p">(</span>
+                    <span class="n">jacobian</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">weights</span> <span class="o">*</span> <span class="n">jacobian</span><span class="p">)</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">islinear</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_cache</span><span class="p">[</span><span class="s">&#39;hessian&#39;</span><span class="p">][</span><span class="s">&#39;array&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">hessian</span>
+        <span class="k">return</span> <span class="n">hessian</span>
+
+    <span class="k">def</span> <span class="nf">_get_gradient</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">p</span><span class="p">):</span>
+        <span class="sd">r&quot;&quot;&quot;</span>
+<span class="sd">        The gradient vector of the misfit function.</span>
+
+<span class="sd">        .. math::</span>
+
+<span class="sd">            \bar{g} = -2\bar{\bar{J}}^T\bar{r}</span>
+
+<span class="sd">        where :math:`\bar{\bar{J}}` is the Jacobian matrix and :math:`\bar{r}`</span>
+<span class="sd">        is the residual vector.</span>
+
+<span class="sd">        Parameters:</span>
+
+<span class="sd">        * p : 1d-array</span>
+<span class="sd">            The parameter vector where the gradient is evaluated</span>
+
+<span class="sd">        Returns:</span>
+
+<span class="sd">        * gradient : 1d-array</span>
+<span class="sd">            The gradient vector.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">jacobian</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">jacobian</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">weights</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="n">grad</span> <span class="o">=</span> <span class="p">(</span><span class="o">-</span><span class="mi">2</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">ndata</span><span class="p">)</span> <span class="o">*</span> <span class="n">safe_dot</span><span class="p">(</span>
+                <span class="n">jacobian</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">predicted</span><span class="p">(</span><span class="n">p</span><span class="p">))</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">grad</span> <span class="o">=</span> <span class="p">(</span><span class="o">-</span><span class="mi">2</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">ndata</span><span class="p">)</span> <span class="o">*</span> <span class="n">safe_dot</span><span class="p">(</span>
+                <span class="n">jacobian</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">weights</span> <span class="o">*</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">predicted</span><span class="p">(</span><span class="n">p</span><span class="p">)))</span>
+        <span class="c"># Check if the gradient isn&#39;t a one column matrix</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">grad</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="c"># Need to convert it to a 1d array so that hell won&#39;t break loose</span>
+            <span class="n">grad</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">grad</span><span class="p">)</span><span class="o">.</span><span class="n">ravel</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">grad</span>
+
+    <span class="c"># Addition needs some tweaks</span>
+    <span class="k">def</span> <span class="nf">__add__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Examples:</span>
+
+<span class="sd">        Added Misfits should not share a cache. Bellow are some tests for this</span>
+<span class="sd">        behaviour:</span>
+
+<span class="sd">        &gt;&gt;&gt; import numpy as np</span>
+<span class="sd">        &gt;&gt;&gt; class MyMisfit(Misfit):</span>
+<span class="sd">        ...     def __init__(self, data, factor):</span>
+<span class="sd">        ...         super(MyMisfit, self).__init__(data, {}, {}, 2,</span>
+<span class="sd">        ...                                        islinear=True)</span>
+<span class="sd">        ...         self._factor = factor</span>
+<span class="sd">        ...     def _get_predicted(self, p):</span>
+<span class="sd">        ...         return 2*p</span>
+<span class="sd">        ...     def _get_jacobian(self, p):</span>
+<span class="sd">        ...         shape = (self.ndata, a.nparams)</span>
+<span class="sd">        ...         return self._factor*np.ones(shape)</span>
+<span class="sd">        &gt;&gt;&gt; a = MyMisfit([1, 2, 3], np.array([1, 2]))</span>
+<span class="sd">        &gt;&gt;&gt; a._cache[&#39;jacobian&#39;][&#39;array&#39;] is None</span>
+<span class="sd">        True</span>
+<span class="sd">        &gt;&gt;&gt; a._cache[&#39;hessian&#39;][&#39;array&#39;] is None</span>
+<span class="sd">        True</span>
+<span class="sd">        &gt;&gt;&gt; b = MyMisfit([1, 2, 3], 1)</span>
+<span class="sd">        &gt;&gt;&gt; b._cache[&#39;jacobian&#39;][&#39;array&#39;] is None</span>
+<span class="sd">        True</span>
+<span class="sd">        &gt;&gt;&gt; b._cache[&#39;hessian&#39;][&#39;array&#39;] is None</span>
+<span class="sd">        True</span>
+<span class="sd">        &gt;&gt;&gt; c = a + b</span>
+<span class="sd">        &gt;&gt;&gt; c._cache[&#39;jacobian&#39;][&#39;array&#39;] is None</span>
+<span class="sd">        True</span>
+<span class="sd">        &gt;&gt;&gt; c._cache[&#39;hessian&#39;][&#39;array&#39;] is None</span>
+<span class="sd">        True</span>
+<span class="sd">        &gt;&gt;&gt; [p._cache[&#39;jacobian&#39;][&#39;array&#39;] is None for p in c._parents]</span>
+<span class="sd">        [True, True]</span>
+<span class="sd">        &gt;&gt;&gt; [p._cache[&#39;hessian&#39;][&#39;array&#39;] is None for p in c._parents]</span>
+<span class="sd">        [True, True]</span>
+
+<span class="sd">        Calling a.jacobian and a.hessian should fill the cache of a but not</span>
+<span class="sd">        of the parents of c:</span>
+
+<span class="sd">        &gt;&gt;&gt; p = np.array([1, 2])</span>
+<span class="sd">        &gt;&gt;&gt; a.jacobian(p)</span>
+<span class="sd">        array([[ 1.,  2.],</span>
+<span class="sd">               [ 1.,  2.],</span>
+<span class="sd">               [ 1.,  2.]])</span>
+<span class="sd">        &gt;&gt;&gt; a._cache[&#39;jacobian&#39;][&#39;array&#39;]</span>
+<span class="sd">        array([[ 1.,  2.],</span>
+<span class="sd">               [ 1.,  2.],</span>
+<span class="sd">               [ 1.,  2.]])</span>
+<span class="sd">        &gt;&gt;&gt; [p._cache[&#39;jacobian&#39;][&#39;array&#39;] is None for p in c._parents]</span>
+<span class="sd">        [True, True]</span>
+<span class="sd">        &gt;&gt;&gt; a.hessian(p)</span>
+<span class="sd">        array([[ 2.,  4.],</span>
+<span class="sd">               [ 4.,  8.]])</span>
+<span class="sd">        &gt;&gt;&gt; a._cache[&#39;hessian&#39;][&#39;array&#39;]</span>
+<span class="sd">        array([[ 2.,  4.],</span>
+<span class="sd">               [ 4.,  8.]])</span>
+<span class="sd">        &gt;&gt;&gt; [p._cache[&#39;hessian&#39;][&#39;array&#39;] is None for p in c._parents]</span>
+<span class="sd">        [True, True]</span>
+
+<span class="sd">        The same goes for b:</span>
+
+<span class="sd">        &gt;&gt;&gt; b.jacobian(p)</span>
+<span class="sd">        array([[ 1.,  1.],</span>
+<span class="sd">               [ 1.,  1.],</span>
+<span class="sd">               [ 1.,  1.]])</span>
+<span class="sd">        &gt;&gt;&gt; b._cache[&#39;jacobian&#39;][&#39;array&#39;]</span>
+<span class="sd">        array([[ 1.,  1.],</span>
+<span class="sd">               [ 1.,  1.],</span>
+<span class="sd">               [ 1.,  1.]])</span>
+<span class="sd">        &gt;&gt;&gt; [p._cache[&#39;jacobian&#39;][&#39;array&#39;] is None for p in c._parents]</span>
+<span class="sd">        [True, True]</span>
+<span class="sd">        &gt;&gt;&gt; b.hessian(p)</span>
+<span class="sd">        array([[ 2.,  2.],</span>
+<span class="sd">               [ 2.,  2.]])</span>
+<span class="sd">        &gt;&gt;&gt; b._cache[&#39;hessian&#39;][&#39;array&#39;]</span>
+<span class="sd">        array([[ 2.,  2.],</span>
+<span class="sd">               [ 2.,  2.]])</span>
+<span class="sd">        &gt;&gt;&gt; [p._cache[&#39;hessian&#39;][&#39;array&#39;] is None for p in c._parents]</span>
+<span class="sd">        [True, True]</span>
+
+<span class="sd">        Just as well, calling c.hessian should not fill the cache of a or b:</span>
+
+<span class="sd">        &gt;&gt;&gt; a._clear_cache()</span>
+<span class="sd">        &gt;&gt;&gt; b._clear_cache()</span>
+<span class="sd">        &gt;&gt;&gt; c.hessian(p)</span>
+<span class="sd">        array([[  4.,   6.],</span>
+<span class="sd">               [  6.,  10.]])</span>
+<span class="sd">        &gt;&gt;&gt; c._parents[0]._cache[&#39;hessian&#39;][&#39;array&#39;]</span>
+<span class="sd">        array([[ 2.,  4.],</span>
+<span class="sd">               [ 4.,  8.]])</span>
+<span class="sd">        &gt;&gt;&gt; c._parents[1]._cache[&#39;hessian&#39;][&#39;array&#39;]</span>
+<span class="sd">        array([[ 2.,  2.],</span>
+<span class="sd">               [ 2.,  2.]])</span>
+<span class="sd">        &gt;&gt;&gt; a._cache[&#39;hessian&#39;][&#39;array&#39;] is None</span>
+<span class="sd">        True</span>
+<span class="sd">        &gt;&gt;&gt; b._cache[&#39;hessian&#39;][&#39;array&#39;] is None</span>
+<span class="sd">        True</span>
+
+<span class="sd">        But creating c after filling the cache of a and b should result in c</span>
+<span class="sd">        whose parents have their cache filled:</span>
+
+<span class="sd">        &gt;&gt;&gt; a.hessian(p)</span>
+<span class="sd">        array([[ 2.,  4.],</span>
+<span class="sd">               [ 4.,  8.]])</span>
+<span class="sd">        &gt;&gt;&gt; c = a + b</span>
+<span class="sd">        &gt;&gt;&gt; c._parents[0]._cache[&#39;jacobian&#39;][&#39;array&#39;]</span>
+<span class="sd">        array([[ 1.,  2.],</span>
+<span class="sd">               [ 1.,  2.],</span>
+<span class="sd">               [ 1.,  2.]])</span>
+<span class="sd">        &gt;&gt;&gt; c._parents[0]._cache[&#39;hessian&#39;][&#39;array&#39;]</span>
+<span class="sd">        array([[ 2.,  4.],</span>
+<span class="sd">               [ 4.,  8.]])</span>
+<span class="sd">        &gt;&gt;&gt; c._parents[1]._cache[&#39;jacobian&#39;][&#39;array&#39;] is None</span>
+<span class="sd">        True</span>
+<span class="sd">        &gt;&gt;&gt; c._parents[1]._cache[&#39;hessian&#39;][&#39;array&#39;] is None</span>
+<span class="sd">        True</span>
+<span class="sd">        &gt;&gt;&gt; b.hessian(p)</span>
+<span class="sd">        array([[ 2.,  2.],</span>
+<span class="sd">               [ 2.,  2.]])</span>
+<span class="sd">        &gt;&gt;&gt; c = a + b</span>
+<span class="sd">        &gt;&gt;&gt; c._parents[1]._cache[&#39;jacobian&#39;][&#39;array&#39;]</span>
+<span class="sd">        array([[ 1.,  1.],</span>
+<span class="sd">               [ 1.,  1.],</span>
+<span class="sd">               [ 1.,  1.]])</span>
+<span class="sd">        &gt;&gt;&gt; c._parents[1]._cache[&#39;hessian&#39;][&#39;array&#39;]</span>
+<span class="sd">        array([[ 2.,  2.],</span>
+<span class="sd">               [ 2.,  2.]])</span>
+
+<span class="sd">        This should also work when adding something that is not a Misfit:</span>
+
+<span class="sd">        &gt;&gt;&gt; from fatiando.inversion.regularization import Damping</span>
+<span class="sd">        &gt;&gt;&gt; c = Damping(2)</span>
+<span class="sd">        &gt;&gt;&gt; a._clear_cache()</span>
+<span class="sd">        &gt;&gt;&gt; b._clear_cache()</span>
+<span class="sd">        &gt;&gt;&gt; d = a + b + 3*c</span>
+<span class="sd">        &gt;&gt;&gt; d.hessian(p)</span>
+<span class="sd">        matrix([[ 10.,   6.],</span>
+<span class="sd">                [  6.,  16.]])</span>
+<span class="sd">        &gt;&gt;&gt; a._cache[&#39;jacobian&#39;][&#39;array&#39;] is None</span>
+<span class="sd">        True</span>
+<span class="sd">        &gt;&gt;&gt; b._cache[&#39;jacobian&#39;][&#39;array&#39;] is None</span>
+<span class="sd">        True</span>
+<span class="sd">        &gt;&gt;&gt; d._parents[0]._parents[0]._cache[&#39;jacobian&#39;][&#39;array&#39;]</span>
+<span class="sd">        array([[ 1.,  2.],</span>
+<span class="sd">               [ 1.,  2.],</span>
+<span class="sd">               [ 1.,  2.]])</span>
+<span class="sd">        &gt;&gt;&gt; d._parents[0]._parents[1]._cache[&#39;jacobian&#39;][&#39;array&#39;]</span>
+<span class="sd">        array([[ 1.,  1.],</span>
+<span class="sd">               [ 1.,  1.],</span>
+<span class="sd">               [ 1.,  1.]])</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">tmp</span> <span class="o">=</span> <span class="nb">super</span><span class="p">(</span><span class="n">Misfit</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__add__</span><span class="p">(</span><span class="n">other</span><span class="p">)</span>
+        <span class="c"># Cache is not shared. This would cause a problem if I made 2 or more</span>
+        <span class="c"># sums and then tried to alter the cache of both at the same time (in a</span>
+        <span class="c"># parallel run, for example).</span>
+        <span class="c"># A shallow copy is used so the cached matrices is not copied.</span>
+        <span class="k">for</span> <span class="n">o</span> <span class="ow">in</span> <span class="n">tmp</span><span class="o">.</span><span class="n">_parents</span><span class="p">:</span>
+            <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">o</span><span class="p">,</span> <span class="s">&#39;_cache&#39;</span><span class="p">):</span>
+                <span class="n">o</span><span class="o">.</span><span class="n">_cache</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">([</span><span class="n">k</span><span class="p">,</span> <span class="n">o</span><span class="o">.</span><span class="n">_cache</span><span class="p">[</span><span class="n">k</span><span class="p">]</span><span class="o">.</span><span class="n">copy</span><span class="p">()]</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">o</span><span class="o">.</span><span class="n">_cache</span><span class="p">)</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">o</span><span class="p">,</span> <span class="n">Misfit</span><span class="p">):</span>
+                <span class="n">o</span><span class="o">.</span><span class="n">model</span> <span class="o">=</span> <span class="n">o</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+                <span class="n">o</span><span class="o">.</span><span class="n">positional</span> <span class="o">=</span> <span class="n">o</span><span class="o">.</span><span class="n">positional</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+        <span class="n">tmp</span><span class="o">.</span><span class="n">_clear_cache</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">tmp</span>
+
+<div class="viewcode-block" id="Misfit.config"><a class="viewcode-back" href="../../../api/inversion.base.html#fatiando.inversion.base.Misfit.config">[docs]</a>    <span class="k">def</span> <span class="nf">config</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">method</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Configure the optimization method and its parameters.</span>
+
+<span class="sd">        This sets the method used by</span>
+<span class="sd">        :meth:`~fatiando.inversion.base.Misfit.fit` and the keyword arguments</span>
+<span class="sd">        that are passed to it.</span>
+
+<span class="sd">        Parameters:</span>
+
+<span class="sd">        * method : string</span>
+<span class="sd">            The optimization method. One of: ``&#39;linear&#39;``, ``&#39;newton&#39;``,</span>
+<span class="sd">            ``&#39;levmarq&#39;``, ``&#39;steepest&#39;``, ``&#39;acor&#39;``</span>
+
+<span class="sd">        Other keyword arguments that can be passed are the ones allowed by each</span>
+<span class="sd">        method.</span>
+
+<span class="sd">        Some methods have required arguments:</span>
+
+<span class="sd">        * *newton*, *levmarq* and *steepest* require the ``initial`` argument</span>
+<span class="sd">          (an initial estimate for the gradient descent)</span>
+<span class="sd">        * *acor* requires the ``bounds`` argument (min/max values for the</span>
+<span class="sd">          search space)</span>
+
+<span class="sd">        See the corresponding docstrings for more information:</span>
+
+<span class="sd">        * :meth:`~fatiando.inversion.base.Misfit.linear`</span>
+<span class="sd">        * :meth:`~fatiando.inversion.base.Objective.newton`</span>
+<span class="sd">        * :meth:`~fatiando.inversion.base.Objective.levmarq`</span>
+<span class="sd">        * :meth:`~fatiando.inversion.base.Objective.steepest`</span>
+<span class="sd">        * :meth:`~fatiando.inversion.base.Objective.acor`</span>
+
+<span class="sd">        .. note::</span>
+
+<span class="sd">            The *iterate* keyword is not supported by *fit*.</span>
+<span class="sd">            Use the individual methods to step through iterations.</span>
+
+
+<span class="sd">        Examples:</span>
+
+<span class="sd">        &gt;&gt;&gt; s = Misfit([1, 2], {}, {}, 2).config(</span>
+<span class="sd">        ...     method=&#39;newton&#39;, precondition=False,</span>
+<span class="sd">        ...     initial=[0, 0], maxit=10, tol=0.01)</span>
+<span class="sd">        &gt;&gt;&gt; s.fit_method</span>
+<span class="sd">        &#39;newton&#39;</span>
+<span class="sd">        &gt;&gt;&gt; for k, v in sorted(s.fit_args.items()):</span>
+<span class="sd">        ...     print k, &#39;:&#39;, v</span>
+<span class="sd">        initial : [0, 0]</span>
+<span class="sd">        maxit : 10</span>
+<span class="sd">        precondition : False</span>
+<span class="sd">        tol : 0.01</span>
+<span class="sd">        &gt;&gt;&gt; # Omitted arguments will fall back to the method defaults</span>
+<span class="sd">        &gt;&gt;&gt; s = s.config(method=&#39;levmarq&#39;, initial=[1, 1])</span>
+<span class="sd">        &gt;&gt;&gt; for k, v in sorted(s.fit_args.items()):</span>
+<span class="sd">        ...     print k, &#39;:&#39;, v</span>
+<span class="sd">        dlamb : 2</span>
+<span class="sd">        initial : [1, 1]</span>
+<span class="sd">        lamb : 1</span>
+<span class="sd">        maxit : 30</span>
+<span class="sd">        maxsteps : 10</span>
+<span class="sd">        precondition : True</span>
+<span class="sd">        tol : 1e-05</span>
+<span class="sd">        &gt;&gt;&gt; # For non-linear gradient solvers, *initial* is required</span>
+<span class="sd">        &gt;&gt;&gt; s.config(method=&#39;newton&#39;)</span>
+<span class="sd">        Traceback (most recent call last):</span>
+<span class="sd">            ...</span>
+<span class="sd">        AttributeError: Missing required *initial* argument for &#39;newton&#39;</span>
+<span class="sd">        &gt;&gt;&gt; # For ACO-R, *bounds* is required</span>
+<span class="sd">        &gt;&gt;&gt; s.config(method=&#39;acor&#39;)</span>
+<span class="sd">        Traceback (most recent call last):</span>
+<span class="sd">            ...</span>
+<span class="sd">        AttributeError: Missing required *bounds* argument for &#39;acor&#39;</span>
+<span class="sd">        &gt;&gt;&gt; # fit doesn&#39;t support the *iterate* argument</span>
+<span class="sd">        &gt;&gt;&gt; s.config(method=&#39;steepest&#39;, iterate=True, initial=[1, 1])</span>
+<span class="sd">        Traceback (most recent call last):</span>
+<span class="sd">            ...</span>
+<span class="sd">        AttributeError: Invalid argument &#39;iterate&#39;</span>
+<span class="sd">        &gt;&gt;&gt; # You can only pass arguments for that specific solver</span>
+<span class="sd">        &gt;&gt;&gt; s.config(method=&#39;newton&#39;, lamb=10, initial=[1, 1])</span>
+<span class="sd">        Traceback (most recent call last):</span>
+<span class="sd">            ...</span>
+<span class="sd">        AttributeError: Invalid argument &#39;lamb&#39; for &#39;newton&#39;</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">method</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">default_solver_args</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s">&quot;Invalid method &#39;</span><span class="si">%s</span><span class="s">&#39;&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">method</span><span class="p">))</span>
+        <span class="k">if</span> <span class="s">&#39;iterate&#39;</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">AttributeError</span><span class="p">(</span><span class="s">&quot;Invalid argument &#39;iterate&#39;&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">method</span> <span class="ow">in</span> <span class="p">[</span><span class="s">&#39;newton&#39;</span><span class="p">,</span> <span class="s">&#39;levmarq&#39;</span><span class="p">,</span> <span class="s">&#39;steepest&#39;</span><span class="p">]</span> <span class="ow">and</span>
+                <span class="s">&#39;initial&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">AttributeError</span><span class="p">(</span>
+                <span class="s">&quot;Missing required *initial* argument for &#39;</span><span class="si">%s</span><span class="s">&#39;&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">method</span><span class="p">))</span>
+        <span class="k">if</span> <span class="n">method</span> <span class="o">==</span> <span class="s">&#39;acor&#39;</span> <span class="ow">and</span> <span class="s">&#39;bounds&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">AttributeError</span><span class="p">(</span>
+                <span class="s">&quot;Missing required *bounds* argument for &#39;</span><span class="si">%s</span><span class="s">&#39;&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">method</span><span class="p">))</span>
+        <span class="n">args</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">default_solver_args</span><span class="p">[</span><span class="n">method</span><span class="p">]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">k</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">args</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">AttributeError</span><span class="p">(</span><span class="s">&quot;Invalid argument &#39;</span><span class="si">%s</span><span class="s">&#39; for &#39;</span><span class="si">%s</span><span class="s">&#39;&quot;</span>
+                                     <span class="o">%</span> <span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">method</span><span class="p">))</span>
+            <span class="n">args</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">kwargs</span><span class="p">[</span><span class="n">k</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fit_method</span> <span class="o">=</span> <span class="n">method</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fit_args</span> <span class="o">=</span> <span class="n">args</span>
+        <span class="k">return</span> <span class="bp">self</span>
+</div>
+    <span class="nd">@property</span>
+<div class="viewcode-block" id="Misfit.p_"><a class="viewcode-back" href="../../../api/inversion.base.html#fatiando.inversion.base.Misfit.p_">[docs]</a>    <span class="k">def</span> <span class="nf">p_</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        The current estimated parameter vector.</span>
+
+<span class="sd">        Returns:</span>
+
+<span class="sd">        * p : 1d-array or None</span>
+<span class="sd">            The parameter vector. None, if</span>
+<span class="sd">            :meth:`~fatiando.inversion.base.Misfit.fit` hasn&#39;t been called</span>
+<span class="sd">            yet.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s">&#39;_p&#39;</span><span class="p">):</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_p</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">None</span>
+</div>
+    <span class="nd">@property</span>
+<div class="viewcode-block" id="Misfit.estimate_"><a class="viewcode-back" href="../../../api/inversion.base.html#fatiando.inversion.base.Misfit.estimate_">[docs]</a>    <span class="k">def</span> <span class="nf">estimate_</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        The current estimate.</span>
+
+<span class="sd">        .. note::</span>
+
+<span class="sd">            May be a formatted version of the parameter vector. It is</span>
+<span class="sd">            recommened that you use this when accessing the estimate and use</span>
+<span class="sd">            :meth:`~fatiando.inversion.base.Misfit.p_` when you want the raw</span>
+<span class="sd">            parameter vector.</span>
+
+<span class="sd">        Returns:</span>
+
+<span class="sd">        * p : 1d-array or None</span>
+<span class="sd">            The parameter vector. None, if</span>
+<span class="sd">            :meth:`~fatiando.inversion.base.Misfit.fit` hasn&#39;t been called</span>
+<span class="sd">            yet.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s">&#39;_estimate&#39;</span><span class="p">):</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_estimate</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">None</span>
+</div>
+<div class="viewcode-block" id="Misfit.fit"><a class="viewcode-back" href="../../../api/inversion.base.html#fatiando.inversion.base.Misfit.fit">[docs]</a>    <span class="k">def</span> <span class="nf">fit</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Solve for the parameter vector that minimizes this objective function.</span>
+
+<span class="sd">        Uses the optimization method and parameters defined using the</span>
+<span class="sd">        :meth:`~fatiando.inversion.base.Misfit.config` method.</span>
+
+<span class="sd">        The estimated parameter vector can be accessed through the</span>
+<span class="sd">        :meth:`~fatiando.inversion.base.Misfit.p_` property. A (possibly)</span>
+<span class="sd">        formatted version (converted to a more manageble type) of the estimate</span>
+<span class="sd">        can be accessed through</span>
+<span class="sd">        :meth:`~fatiando.inversion.base.Misfit.estimate_`.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_p</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">fit_method</span><span class="p">)(</span><span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">fit_args</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_estimate</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_p</span>
+        <span class="k">return</span> <span class="bp">self</span>
+</div>
+<div class="viewcode-block" id="Misfit.linear"><a class="viewcode-back" href="../../../api/inversion.base.html#fatiando.inversion.base.Misfit.linear">[docs]</a>    <span class="k">def</span> <span class="nf">linear</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">precondition</span><span class="o">=</span><span class="bp">True</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Solve for the parameter vector assuming that the problem is linear.</span>
+
+<span class="sd">        See :func:`fatiando.inversion.solvers.linear` for more details.</span>
+
+<span class="sd">        Parameters:</span>
+
+<span class="sd">        * precondition : True or False</span>
+<span class="sd">            If True, will use Jacobi preconditioning.</span>
+
+<span class="sd">        Returns:</span>
+
+<span class="sd">        * estimate : 1d-array</span>
+<span class="sd">            The estimated parameter vector</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">hessian</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">hessian</span><span class="p">(</span><span class="s">&#39;null&#39;</span><span class="p">)</span>
+        <span class="n">gradient</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">gradient</span><span class="p">(</span><span class="s">&#39;null&#39;</span><span class="p">)</span>
+        <span class="n">p</span> <span class="o">=</span> <span class="n">linear</span><span class="p">(</span><span class="n">hessian</span><span class="p">,</span> <span class="n">gradient</span><span class="p">,</span> <span class="n">precondition</span><span class="o">=</span><span class="n">precondition</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">p</span></div></div>
+</pre></div>
+
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2012-2014, Leonardo Uieda.
+      Last updated on Mar 05, 2015.
+    </p>
+  </div>
+
+  <a href="https://github.com/snide/sphinx_rtd_theme">Sphinx theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../../',
+            VERSION:'0.3',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="../../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../../_static/doctools.js"></script>
+      <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

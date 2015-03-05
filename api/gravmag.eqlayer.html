@@ -1,0 +1,804 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Equivalent layer processing (fatiando.gravmag.eqlayer) &mdash; Fatiando a Terra v0.3</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+  
+
+  
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="top" title="Fatiando a Terra v0.3" href="../index.html"/>
+        <link rel="up" title="Gravity and magnetics (fatiando.gravmag)" href="gravmag.html"/>
+        <link rel="next" title="Utilities for operating on the gradient tensor (fatiando.gravmag.tensor)" href="gravmag.tensor.html"/>
+        <link rel="prev" title="Imaging methods for potential fields (fatiando.gravmag.imaging)" href="gravmag.imaging.html"/> 
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-nav-search">
+        <a href="../index.html" class="fa fa-home"> Fatiando a Terra</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+        
+        
+            <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../contributors.html">Contributors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../license.html">License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../changelog.html">Changelog</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../changelog.html#version-0-3">Version 0.3</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../changelog.html#version-0-2">Version 0.2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../changelog.html#version-0-1">Version 0.1</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../install.html">Installing Fatiando</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../install.html#which-python">Which Python?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../install.html#installing-the-dependencies">Installing the dependencies</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../install.html#id1">Installing Fatiando</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../install.html#installing-the-latest-development-version">Installing the latest development version</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../install.html#testing-the-install">Testing the install</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="reference internal" href="fatiando.html">API Reference: The <tt class="docutils literal"><span class="pre">fatiando</span></tt> package</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="gravmag.html">Gravity and magnetics (<tt class="docutils literal"><span class="pre">fatiando.gravmag</span></tt>)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="seismic.html">Seismics and seismology (<tt class="docutils literal"><span class="pre">fatiando.seismic</span></tt>)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="geothermal.html">Geothermal heat (<tt class="docutils literal"><span class="pre">fatiando.geothermal</span></tt>)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mesher.html">Meshing (<tt class="docutils literal"><span class="pre">fatiando.mesher</span></tt>)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="gridder.html">Gridding (<tt class="docutils literal"><span class="pre">fatiando.gridder</span></tt>)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vis.html">Visualization (<tt class="docutils literal"><span class="pre">fatiando.vis</span></tt>)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="datasets.html">Fetch data from the internet (<tt class="docutils literal"><span class="pre">fatiando.datasets</span></tt>)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="gui.html">Graphical user interfaces (<tt class="docutils literal"><span class="pre">fatiando.gui</span></tt>)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="utils.html">Miscellaneous Utilities (<tt class="docutils literal"><span class="pre">fatiando.utils</span></tt>)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="constants.html">Physical constants and unit conversions (<tt class="docutils literal"><span class="pre">fatiando.constants</span></tt>)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="inversion.html">Inverse problems framework (<tt class="docutils literal"><span class="pre">fatiando.inversion</span></tt>)</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../cookbook.html">Cookbook</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/datasets_crust2.0_tesseroid.html">Datasets: Fetch the CRUST2.0 model, convert it to tesseroids and calculate its gravity signal in parallel</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/geothermal_climsig_abrupt.html">Geothermal: Forward and inverse modeling of an abrupt change in temperature measured in a well</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/geothermal_climsig_linear.html">Geothermal: Forward and inverse modeling of a linear change in temperature measured in a well</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/geothermal_climsig_wrong.html">Geothermal: Climate signal: What happens when assuming a climate change is linear, when in fact it was abrupt?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/gravmag_2d_polygon_interactive.html">GravMag: Interactive 2D forward modeling with polygons</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/gravmag_2d_polygon_picker.html">GravMag: 2D forward modeling with polygons</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/gravmag_basin2d_trapezoidal.html">GravMag: Simple gravity inversion for the relief of a 2D trapezoidal basin</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/gravmag_basin2d_trapezoidal_forward.html">GravMag: Interactive 2D forward gravity modeling of a trapezoidal basin</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/gravmag_basin2d_triangular.html">GravMag: Simple gravity inversion for the relief of a 2D triangular basin</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/gravmag_basin2d_triangular_forward.html">GravMag: Interactive 2D forward gravity modeling of a triangular basin</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/gravmag_eqlayer_joint.html">GravMag: Fit an equivalent layer to gravity and gravity gradient data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/gravmag_eqlayer_pel_polereduc.html">GravMag: Use the Polynomial Equivalent Layer to reduce a magnetic total field anomaly to the pole</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/gravmag_eqlayer_pel_upcontinue.html">GravMag: Use the polynomial equivalent layer to upward continue gravity data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/gravmag_eqlayer_polereduc.html">GravMag: Use an equivalent layer to reduce a magnetic total field anomaly to the pole</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/gravmag_eqlayer_upcontinue.html">GravMag: Use an equivalent layer to upward continue gravity data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/gravmag_euler_classic.html">GravMag: Classic 3D Euler deconvolution of magnetic data (single window)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/gravmag_euler_classic_expanding_window.html">GravMag: Classic 3D Euler deconvolution of magnetic data using an expanding window</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/gravmag_euler_classic_moving_window.html">GravMag: Classic 3D Euler deconvolution of magnetic data using a moving window</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/gravmag_fourier_ansig.html">GravMag: Calculate the analytic signal of a total field anomaly using FFT</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/gravmag_fourier_deriv.html">GravMag: Calculating the derivatives of the gravity anomaly using FFT</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/gravmag_grav_polyprism.html">GravMag: Forward gravity modeling using a stack of 3D polygonal model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/gravmag_grav_prism.html">GravMag: Forward modeling of the gravitational potential and its derivatives using 3D model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/gravmag_grav_sphere.html">GravMag: Forward modeling of the gravity anomaly and gravity gradient tensor using model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/gravmag_grav_tesseroid.html">GravMag: Forward modeling of the gravitational potential and its derivatives using tesseroids</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/gravmag_harvester_grav.html">GravMag: 3D gravity inversion by planting anomalous densities using <tt class="docutils literal"><span class="pre">harvester</span></tt> (more complex interactive example)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/gravmag_harvester_tensor.html">GravMag: 3D gravity gradient inversion by planting anomalous densities using <tt class="docutils literal"><span class="pre">harvester</span></tt> (with non-targeted sources)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/gravmag_harvester_weights.html">GravMag: Using data weights in 3D inversion using <tt class="docutils literal"><span class="pre">harvester</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/gravmag_imaging_geninv.html">GravMag: 3D imaging using the Generalized Inverse method on synthetic gravity data (more complex model + noisy data)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/gravmag_imaging_migration.html">GravMag: 3D imaging using the migration method on synthetic gravity data (more complex model + noisy data)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/gravmag_imaging_sandwich.html">GravMag: 3D imaging using the sandwich model method on synthetic gravity data (simple example)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/gravmag_mag_polyprism.html">GravMag: 3D forward modeling of total-field magnetic anomaly using polygonal prisms</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/gravmag_mag_prism.html">GravMag: 3D forward modeling of total-field magnetic anomaly using rectangular prisms (model with induced and remanent magnetization)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/gravmag_mag_sphere.html">GravMag: 3D forward modeling of total-field magnetic anomaly using spheres</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/gravmag_magdir_dipolemagdir.html">GravMag: Use the DipoleMagDir class to estimate the magnetization direction of dipoles with known centers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/gravmag_normal_gravity.html">GravMag: Calculate the gravity disturbance and Bouguer anomaly for Hawaii</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/gravmag_tensor_centerofmass.html">GravMag: Center of mass estimation using the first eigenvector of the gravity gradient tensor (simple model)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/gravmag_tensor_centerofmass_expanding_window.html">GravMag: Center of mass estimation using the first eigenvector of the gravity gradient tensor (2 sources with expanding windows)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/gravmag_tensor_invariants.html">GravMag: Calculate the gravity gradient tensor invariants</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/gravmag_tensor_polyprism.html">GravMag: Generate synthetic gradient tensor data from polygonal prisms</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/gravmag_tensor_prism_noisy.html">GravMag: Generate noise-corrupted gravity gradient tensor data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/gravmag_upcontinue.html">GravMag: Upward continuation of noisy gz data using the analytical formula</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/grid_cut.html">Gridding: Cut a section from a grid</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/grid_interpolate.html">Gridding: Grid irregularly sampled data.</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/grid_profile.html">Gridding: Extract a profile from map data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/grid_scatter.html">Gridding: Generate and plot irregular grids (scatter)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/grid_surfer.html">Gridding: Load a Surfer ASCII grid file</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/mesher_pointgrid.html">Meshing: Making a grid of 3D point sources</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/mesher_prismmesh.html">Meshing: Make and plot a 3D prism mesh</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/mesher_prismmesh_filter.html">Meshing: Filter prisms from a 3D prism mesh based on their physical properties</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/mesher_prismmesh_topo.html">Meshing: Make and plot a 3D prism mesh with topography</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/mesher_prismmesh_vardens.html">Meshing: Make a 3D prism mesh with depth-varying density</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/mesher_prismrelief_topo.html">Meshing: Generate a 3D prism model of the topography</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/mesher_squaremesh_from_image.html">Meshing: Generate a SquareMesh and get the physical properties from an image</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/mesher_tesseroid.html">Meshing: Make and plot a tesseroid with the Earth</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/mesher_tesseroidmesh.html">Meshing: Make and plot a tesseroid mesh</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/mesher_tesseroidmesh_topo.html">Meshing: Make and plot a tesseroid mesh with topography</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/seismic_epic2d.html">Seismic: 2D epicenter estimation assuming a homogeneous and flat Earth</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/seismic_epic2d_iterate.html">Seismic: Show steps taken by different algorithms for 2D epicenter estimation on a flat Earth</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/seismic_profile_vertical.html">Seismic: Invert vertical seismic profile (VSP) traveltimes for the velocity of a layered model.</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/seismic_profile_vertical_interactive.html">Seismic: Interactive forward modeling of 1D vertical seismic profile (VSP) data in layered media</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/seismic_profile_vertical_smooth.html">Seismic: Invert vertical seismic profile (VSP) traveltimes using smoothness regularization and unknown layer thicknesses</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/seismic_srtomo_damped.html">Seismic: 2D straight-ray tomography using damping regularization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/seismic_srtomo_sharp.html">Seismic: 2D straight-ray tomography using sharpness (total variation) regularization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/seismic_srtomo_smooth.html">Seismic: 2D straight-ray tomography using smoothness regularization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/seismic_wavefd_elastic_psv.html">Seismic: 2D finite difference simulation of elastic P and SV wave propagation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/seismic_wavefd_elastic_sh.html">Seismic: 2D finite difference simulation of elastic SH wave propagation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/seismic_wavefd_love_wave.html">Seismic: 2D finite difference simulation of elastic SH wave propagation in a medium with a discontinuity (i.e., Moho), generating Love waves.</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/seismic_wavefd_rayleigh_wave.html">Seismic: 2D finite difference simulation of elastic P and SV wave propagation in a medium with a discontinuity (i.e., Moho), generating Rayleigh waves</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/seismic_wavefd_scalar.html">Seismic: 2D finite difference simulation of scalar wave propagation.</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/vis_mpl_basemap.html">Vis: Plot a map using the Orthographic map projection and filled contours</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/vis_mpl_basemap2.html">Vis: Plot a map using the Mercator map projection and pseudo-color</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/vis_mpl_basemap3.html">Vis: Plot a map using the Robinson map projection and contours</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/vis_mpl_contour.html">Vis: Plot contour lines and filled contours</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/vis_mpl_irregular_data.html">Vis: Plotting irregularly sampled map data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/vis_myv_color.html">Vis: Set the colors in figures, prisms, polygonal prisms and tesseroids.</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/vis_myv_earth.html">Vis: Plot the Earth, continents, inner and outer core in 3D with Mayavi2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/vis_myv_exaggerate.html">Vis: Exaggerate the vertical dimension of 3D plots</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../develop.html">Developer guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../develop.html#making-a-release">Making a release</a></li>
+</ul>
+</li>
+</ul>
+
+        
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../index.html">Fatiando a Terra</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../index.html">Docs</a> &raquo;</li>
+      
+          <li><a href="fatiando.html">API Reference: The <tt class="docutils literal"><span class="pre">fatiando</span></tt> package</a> &raquo;</li>
+      
+          <li><a href="gravmag.html">Gravity and magnetics (<tt class="docutils literal"><span class="pre">fatiando.gravmag</span></tt>)</a> &raquo;</li>
+      
+    <li>Equivalent layer processing (<tt class="docutils literal"><span class="pre">fatiando.gravmag.eqlayer</span></tt>)</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          <a href="../_sources/api/gravmag.eqlayer.txt" rel="nofollow"> View page source</a>
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            
+  <div class="section" id="module-fatiando.gravmag.eqlayer">
+<span id="equivalent-layer-processing-fatiando-gravmag-eqlayer"></span><span id="fatiando-gravmag-eqlayer"></span><h1>Equivalent layer processing (<tt class="docutils literal"><span class="pre">fatiando.gravmag.eqlayer</span></tt>)<a class="headerlink" href="#module-fatiando.gravmag.eqlayer" title="Permalink to this headline">¶</a></h1>
+<p>Equivalent layer processing.</p>
+<p>Use the classes here to estimate an equivalent layer from potential field data.
+Then you can use the estimated layer to perform tranformations (gridding,
+continuation, derivation, reduction to the pole, etc.) by forward modeling
+the layer. Use <a class="reference internal" href="gravmag.sphere.html#module-fatiando.gravmag.sphere" title="fatiando.gravmag.sphere"><tt class="xref py py-mod docutils literal"><span class="pre">fatiando.gravmag.sphere</span></tt></a> for forward modeling.</p>
+<p><strong>Algorithms</strong></p>
+<ul class="simple">
+<li><a class="reference internal" href="#fatiando.gravmag.eqlayer.EQLGravity" title="fatiando.gravmag.eqlayer.EQLGravity"><tt class="xref py py-class docutils literal"><span class="pre">EQLGravity</span></tt></a> and
+<a class="reference internal" href="#fatiando.gravmag.eqlayer.EQLTotalField" title="fatiando.gravmag.eqlayer.EQLTotalField"><tt class="xref py py-class docutils literal"><span class="pre">EQLTotalField</span></tt></a>: The classic (space domain)
+equivalent layer as formulated in Li and Oldenburg (2010) or
+Oliveira Jr. et al (2012).
+Doesn&#8217;t have wavelet compression or other tweaks.</li>
+<li><a class="reference internal" href="#fatiando.gravmag.eqlayer.PELGravity" title="fatiando.gravmag.eqlayer.PELGravity"><tt class="xref py py-class docutils literal"><span class="pre">PELGravity</span></tt></a> and
+<a class="reference internal" href="#fatiando.gravmag.eqlayer.PELTotalField" title="fatiando.gravmag.eqlayer.PELTotalField"><tt class="xref py py-class docutils literal"><span class="pre">PELTotalField</span></tt></a>: The polynomial equivalent
+layer of Oliveira Jr. et al (2012). A fast and memory efficient algorithm.</li>
+</ul>
+<p><strong>References</strong></p>
+<p>Li, Y., and D. W. Oldenburg (2010), Rapid construction of equivalent sources
+using wavelets, Geophysics, 75(3), L51-L59, doi:10.1190/1.3378764.</p>
+<p>Oliveira Jr., V. C., V. C. F. Barbosa, and L. Uieda (2012), Polynomial
+equivalent layer, Geophysics, 78(1), G1-G13, doi:10.1190/geo2012-0196.1.</p>
+<hr class="docutils" />
+<dl class="class">
+<dt id="fatiando.gravmag.eqlayer.EQLBase">
+<em class="property">class </em><tt class="descclassname">fatiando.gravmag.eqlayer.</tt><tt class="descname">EQLBase</tt><big>(</big><em>x</em>, <em>y</em>, <em>z</em>, <em>data</em>, <em>grid</em><big>)</big><a class="reference internal" href="../_modules/fatiando/gravmag/eqlayer.html#EQLBase"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fatiando.gravmag.eqlayer.EQLBase" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="inversion.base.html#fatiando.inversion.base.Misfit" title="fatiando.inversion.base.Misfit"><tt class="xref py py-class docutils literal"><span class="pre">fatiando.inversion.base.Misfit</span></tt></a></p>
+<p>Base class for the classic equivalent layer.</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="fatiando.gravmag.eqlayer.EQLGravity">
+<em class="property">class </em><tt class="descclassname">fatiando.gravmag.eqlayer.</tt><tt class="descname">EQLGravity</tt><big>(</big><em>x</em>, <em>y</em>, <em>z</em>, <em>data</em>, <em>grid</em>, <em>field='gz'</em><big>)</big><a class="reference internal" href="../_modules/fatiando/gravmag/eqlayer.html#EQLGravity"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fatiando.gravmag.eqlayer.EQLGravity" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#fatiando.gravmag.eqlayer.EQLBase" title="fatiando.gravmag.eqlayer.EQLBase"><tt class="xref py py-class docutils literal"><span class="pre">fatiando.gravmag.eqlayer.EQLBase</span></tt></a></p>
+<p>Estimate an equivalent layer from gravity data.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Assumes x = North, y = East, z = Down.</p>
+</div>
+<p>Parameters:</p>
+<ul>
+<li><dl class="first docutils">
+<dt>x, y, z <span class="classifier-delimiter">:</span> <span class="classifier">1d-arrays</span></dt>
+<dd><p class="first last">The x, y, z coordinates of each data point.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>data <span class="classifier-delimiter">:</span> <span class="classifier">1d-array</span></dt>
+<dd><p class="first last">The gravity data at each point.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>grid <span class="classifier-delimiter">:</span> <span class="classifier"><a class="reference internal" href="mesher.html#fatiando.mesher.PointGrid" title="fatiando.mesher.PointGrid"><tt class="xref py py-class docutils literal"><span class="pre">PointGrid</span></tt></a></span></dt>
+<dd><p class="first last">The sources in the equivalent layer. Will invert for the density of
+each point in the grid.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>field <span class="classifier-delimiter">:</span> <span class="classifier">string</span></dt>
+<dd><p class="first last">Which gravitational field is the data. Options are: <tt class="docutils literal"><span class="pre">'gz'</span></tt> (gravity
+anomaly), <tt class="docutils literal"><span class="pre">'gxx'</span></tt>, <tt class="docutils literal"><span class="pre">'gxy'</span></tt>, ..., <tt class="docutils literal"><span class="pre">'gzz'</span></tt> (gravity gradient
+tensor). Defaults to <tt class="docutils literal"><span class="pre">'gz'</span></tt>.</p>
+</dd>
+</dl>
+</li>
+</ul>
+<p>Examples:</p>
+<p>Use the layer to fit some gravity data and check is our layer is able to
+produce data at a different locations (i.e., interpolate, upward continue)</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">fatiando</span> <span class="kn">import</span> <span class="n">gridder</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">fatiando.gravmag</span> <span class="kn">import</span> <span class="n">sphere</span><span class="p">,</span> <span class="n">prism</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">fatiando.mesher</span> <span class="kn">import</span> <span class="n">Sphere</span><span class="p">,</span> <span class="n">Prism</span><span class="p">,</span> <span class="n">PointGrid</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">fatiando.inversion.regularization</span> <span class="kn">import</span> <span class="n">Damping</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c"># Produce some gravity data</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">area</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10000</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">10000</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span> <span class="o">=</span> <span class="n">gridder</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">area</span><span class="p">,</span> <span class="mi">500</span><span class="p">,</span> <span class="n">z</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">model</span> <span class="o">=</span> <span class="p">[</span><span class="n">Prism</span><span class="p">(</span><span class="mi">4500</span><span class="p">,</span> <span class="mi">5500</span><span class="p">,</span> <span class="mi">4500</span><span class="p">,</span> <span class="mi">5500</span><span class="p">,</span> <span class="mi">200</span><span class="p">,</span> <span class="mi">5000</span><span class="p">,</span> <span class="p">{</span><span class="s">&#39;density&#39;</span><span class="p">:</span><span class="mi">1000</span><span class="p">})]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">gz</span> <span class="o">=</span> <span class="n">prism</span><span class="o">.</span><span class="n">gz</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span><span class="p">,</span> <span class="n">model</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c"># Setup a layer</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">layer</span> <span class="o">=</span> <span class="n">PointGrid</span><span class="p">(</span><span class="n">area</span><span class="p">,</span> <span class="mi">500</span><span class="p">,</span> <span class="p">(</span><span class="mi">25</span><span class="p">,</span> <span class="mi">25</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">solver</span> <span class="o">=</span> <span class="p">(</span><span class="n">EQLGravity</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span><span class="p">,</span> <span class="n">gz</span><span class="p">,</span> <span class="n">layer</span><span class="p">)</span> <span class="o">+</span>
+<span class="gp">... </span>          <span class="mi">10</span><span class="o">**-</span><span class="mi">26</span><span class="o">*</span><span class="n">Damping</span><span class="p">(</span><span class="n">layer</span><span class="o">.</span><span class="n">size</span><span class="p">))</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c"># Check the fit</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span><span class="n">gz</span><span class="p">,</span> <span class="n">solver</span><span class="o">.</span><span class="n">predicted</span><span class="p">(),</span> <span class="n">rtol</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span> <span class="n">atol</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c"># Add the densities to the layer</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">layer</span><span class="o">.</span><span class="n">addprop</span><span class="p">(</span><span class="s">&#39;density&#39;</span><span class="p">,</span> <span class="n">solver</span><span class="o">.</span><span class="n">estimate_</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c"># Make a regular grid</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span> <span class="o">=</span> <span class="n">gridder</span><span class="o">.</span><span class="n">regular</span><span class="p">(</span><span class="n">area</span><span class="p">,</span> <span class="p">(</span><span class="mi">30</span><span class="p">,</span> <span class="mi">30</span><span class="p">),</span> <span class="n">z</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c"># Interpolate and check agains the model</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">gz_layer</span> <span class="o">=</span> <span class="n">sphere</span><span class="o">.</span><span class="n">gz</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span><span class="p">,</span> <span class="n">layer</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">gz_model</span> <span class="o">=</span> <span class="n">prism</span><span class="o">.</span><span class="n">gz</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span><span class="p">,</span> <span class="n">model</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span><span class="n">gz_layer</span><span class="p">,</span> <span class="n">gz_model</span><span class="p">,</span> <span class="n">rtol</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span> <span class="n">atol</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c"># Upward continue and check agains model data</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">zup</span> <span class="o">=</span> <span class="n">z</span> <span class="o">-</span> <span class="mi">50</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">gz_layer</span> <span class="o">=</span> <span class="n">sphere</span><span class="o">.</span><span class="n">gz</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">zup</span><span class="p">,</span> <span class="n">layer</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">gz_model</span> <span class="o">=</span> <span class="n">prism</span><span class="o">.</span><span class="n">gz</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">zup</span><span class="p">,</span> <span class="n">model</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span><span class="n">gz_layer</span><span class="p">,</span> <span class="n">gz_model</span><span class="p">,</span> <span class="n">rtol</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span> <span class="n">atol</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+<p>If you have multiple types of gravity data (like gravity anomaly and
+gradient tensor components), you can add EQLGravity instances together for
+a joint inversion:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span> <span class="o">=</span> <span class="n">gridder</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">area</span><span class="p">,</span> <span class="mi">500</span><span class="p">,</span> <span class="n">z</span><span class="o">=-</span><span class="mi">150</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">gz</span> <span class="o">=</span> <span class="n">prism</span><span class="o">.</span><span class="n">gz</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span><span class="p">,</span> <span class="n">model</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">gzz</span> <span class="o">=</span> <span class="n">prism</span><span class="o">.</span><span class="n">gzz</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span><span class="p">,</span> <span class="n">model</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c"># Setup a layer</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">layer</span> <span class="o">=</span> <span class="n">PointGrid</span><span class="p">(</span><span class="n">area</span><span class="p">,</span> <span class="mi">500</span><span class="p">,</span> <span class="p">(</span><span class="mi">25</span><span class="p">,</span> <span class="mi">25</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">solver</span> <span class="o">=</span> <span class="p">(</span><span class="n">EQLGravity</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span><span class="p">,</span> <span class="n">gz</span><span class="p">,</span> <span class="n">layer</span><span class="p">,</span> <span class="n">field</span><span class="o">=</span><span class="s">&#39;gz&#39;</span><span class="p">)</span> <span class="o">+</span>
+<span class="gp">... </span>          <span class="n">EQLGravity</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span><span class="p">,</span> <span class="n">gzz</span><span class="p">,</span> <span class="n">layer</span><span class="p">,</span> <span class="n">field</span><span class="o">=</span><span class="s">&#39;gzz&#39;</span><span class="p">)</span> <span class="o">+</span>
+<span class="gp">... </span>          <span class="mi">10</span><span class="o">**-</span><span class="mi">24</span><span class="o">*</span><span class="n">Damping</span><span class="p">(</span><span class="n">layer</span><span class="o">.</span><span class="n">size</span><span class="p">))</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c"># Check the fit</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">gz_pred</span><span class="p">,</span> <span class="n">gzz_pred</span> <span class="o">=</span> <span class="n">solver</span><span class="o">.</span><span class="n">predicted</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span><span class="n">gz</span><span class="p">,</span> <span class="n">gz_pred</span><span class="p">,</span> <span class="n">rtol</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span> <span class="n">atol</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span><span class="n">gzz</span><span class="p">,</span> <span class="n">gzz_pred</span><span class="p">,</span> <span class="n">rtol</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span> <span class="n">atol</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c"># Add the densities to the layer</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">layer</span><span class="o">.</span><span class="n">addprop</span><span class="p">(</span><span class="s">&#39;density&#39;</span><span class="p">,</span> <span class="n">solver</span><span class="o">.</span><span class="n">estimate_</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c"># Upward continue gzz only and check agains model data</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">zup</span> <span class="o">=</span> <span class="n">z</span> <span class="o">-</span> <span class="mi">50</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">gzz_layer</span> <span class="o">=</span> <span class="n">sphere</span><span class="o">.</span><span class="n">gzz</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">zup</span><span class="p">,</span> <span class="n">layer</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">gzz_model</span> <span class="o">=</span> <span class="n">prism</span><span class="o">.</span><span class="n">gzz</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">zup</span><span class="p">,</span> <span class="n">model</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span><span class="n">gzz_layer</span><span class="p">,</span> <span class="n">gzz_model</span><span class="p">,</span> <span class="n">rtol</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span> <span class="n">atol</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="class">
+<dt id="fatiando.gravmag.eqlayer.EQLTotalField">
+<em class="property">class </em><tt class="descclassname">fatiando.gravmag.eqlayer.</tt><tt class="descname">EQLTotalField</tt><big>(</big><em>x</em>, <em>y</em>, <em>z</em>, <em>data</em>, <em>inc</em>, <em>dec</em>, <em>grid</em>, <em>sinc=None</em>, <em>sdec=None</em><big>)</big><a class="reference internal" href="../_modules/fatiando/gravmag/eqlayer.html#EQLTotalField"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fatiando.gravmag.eqlayer.EQLTotalField" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#fatiando.gravmag.eqlayer.EQLBase" title="fatiando.gravmag.eqlayer.EQLBase"><tt class="xref py py-class docutils literal"><span class="pre">fatiando.gravmag.eqlayer.EQLBase</span></tt></a></p>
+<p>Estimate an equivalent layer from total field magnetic anomaly data.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Assumes x = North, y = East, z = Down.</p>
+</div>
+<p>Parameters:</p>
+<ul>
+<li><dl class="first docutils">
+<dt>x, y, z <span class="classifier-delimiter">:</span> <span class="classifier">1d-arrays</span></dt>
+<dd><p class="first last">The x, y, z coordinates of each data point.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>data <span class="classifier-delimiter">:</span> <span class="classifier">1d-array</span></dt>
+<dd><p class="first last">The total field anomaly data at each point.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>inc, dec <span class="classifier-delimiter">:</span> <span class="classifier">floats</span></dt>
+<dd><p class="first last">The inclination and declination of the inducing field</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>grid <span class="classifier-delimiter">:</span> <span class="classifier"><a class="reference internal" href="mesher.html#fatiando.mesher.PointGrid" title="fatiando.mesher.PointGrid"><tt class="xref py py-class docutils literal"><span class="pre">PointGrid</span></tt></a></span></dt>
+<dd><p class="first last">The sources in the equivalent layer. Will invert for the magnetization
+intensity of each point in the grid.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>sinc, sdec <span class="classifier-delimiter">:</span> <span class="classifier">None or floats</span></dt>
+<dd><p class="first last">The inclination and declination of the equivalent layer. Use these if
+there is remanent magnetization and the total magnetization of the
+layer if different from the induced magnetization.
+If there is only induced magnetization, use None</p>
+</dd>
+</dl>
+</li>
+</ul>
+<p>Examples:</p>
+<p>Use the layer to fit some synthetic data and check is our layer is able to
+produce data at a different locations (i.e., interpolate, upward continue,
+reduce to the pole)</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">fatiando</span> <span class="kn">import</span> <span class="n">gridder</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">fatiando.gravmag</span> <span class="kn">import</span> <span class="n">sphere</span><span class="p">,</span> <span class="n">prism</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">fatiando.mesher</span> <span class="kn">import</span> <span class="n">Sphere</span><span class="p">,</span> <span class="n">Prism</span><span class="p">,</span> <span class="n">PointGrid</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">fatiando.inversion.regularization</span> <span class="kn">import</span> <span class="n">Damping</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c"># Produce some synthetic data</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">area</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1000</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span> <span class="o">=</span> <span class="n">gridder</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">area</span><span class="p">,</span> <span class="mi">500</span><span class="p">,</span> <span class="n">z</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">model</span> <span class="o">=</span> <span class="p">[</span><span class="n">Prism</span><span class="p">(</span><span class="mi">450</span><span class="p">,</span> <span class="mi">550</span><span class="p">,</span> <span class="mi">450</span><span class="p">,</span> <span class="mi">550</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">500</span><span class="p">,</span> <span class="p">{</span><span class="s">&#39;magnetization&#39;</span><span class="p">:</span><span class="mi">5</span><span class="p">})]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">inc</span><span class="p">,</span> <span class="n">dec</span> <span class="o">=</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">23</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tf</span> <span class="o">=</span> <span class="n">prism</span><span class="o">.</span><span class="n">tf</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span><span class="p">,</span> <span class="n">model</span><span class="p">,</span> <span class="n">inc</span><span class="p">,</span> <span class="n">dec</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c"># Setup a layer</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">layer</span> <span class="o">=</span> <span class="n">PointGrid</span><span class="p">(</span><span class="n">area</span><span class="p">,</span> <span class="mi">200</span><span class="p">,</span> <span class="p">(</span><span class="mi">25</span><span class="p">,</span> <span class="mi">25</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">solver</span> <span class="o">=</span> <span class="p">(</span><span class="n">EQLTotalField</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span><span class="p">,</span> <span class="n">tf</span><span class="p">,</span> <span class="n">inc</span><span class="p">,</span> <span class="n">dec</span><span class="p">,</span> <span class="n">layer</span><span class="p">)</span> <span class="o">+</span>
+<span class="gp">... </span>          <span class="mi">10</span><span class="o">**-</span><span class="mi">19</span><span class="o">*</span><span class="n">Damping</span><span class="p">(</span><span class="n">layer</span><span class="o">.</span><span class="n">size</span><span class="p">))</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c"># Check the fit</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span><span class="n">tf</span><span class="p">,</span> <span class="n">solver</span><span class="o">.</span><span class="n">predicted</span><span class="p">(),</span> <span class="n">rtol</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span> <span class="n">atol</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c"># Add the magnetization to the layer</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">layer</span><span class="o">.</span><span class="n">addprop</span><span class="p">(</span><span class="s">&#39;magnetization&#39;</span><span class="p">,</span> <span class="n">solver</span><span class="o">.</span><span class="n">estimate_</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c"># Make a regular grid</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span> <span class="o">=</span> <span class="n">gridder</span><span class="o">.</span><span class="n">regular</span><span class="p">(</span><span class="n">area</span><span class="p">,</span> <span class="p">(</span><span class="mi">30</span><span class="p">,</span> <span class="mi">30</span><span class="p">),</span> <span class="n">z</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c"># Interpolate and check agains the model</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tf_layer</span> <span class="o">=</span> <span class="n">sphere</span><span class="o">.</span><span class="n">tf</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span><span class="p">,</span> <span class="n">layer</span><span class="p">,</span> <span class="n">inc</span><span class="p">,</span> <span class="n">dec</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tf_model</span> <span class="o">=</span> <span class="n">prism</span><span class="o">.</span><span class="n">tf</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span><span class="p">,</span> <span class="n">model</span><span class="p">,</span> <span class="n">inc</span><span class="p">,</span> <span class="n">dec</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span><span class="n">tf_layer</span><span class="p">,</span> <span class="n">tf_model</span><span class="p">,</span> <span class="n">rtol</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span> <span class="n">atol</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c"># Upward continue and check agains model data</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">zup</span> <span class="o">=</span> <span class="n">z</span> <span class="o">-</span> <span class="mi">50</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tf_layer</span> <span class="o">=</span> <span class="n">sphere</span><span class="o">.</span><span class="n">tf</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">zup</span><span class="p">,</span> <span class="n">layer</span><span class="p">,</span> <span class="n">inc</span><span class="p">,</span> <span class="n">dec</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tf_model</span> <span class="o">=</span> <span class="n">prism</span><span class="o">.</span><span class="n">tf</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">zup</span><span class="p">,</span> <span class="n">model</span><span class="p">,</span> <span class="n">inc</span><span class="p">,</span> <span class="n">dec</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span><span class="n">tf_layer</span><span class="p">,</span> <span class="n">tf_model</span><span class="p">,</span> <span class="n">rtol</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span> <span class="n">atol</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c"># Reduce to the pole and check agains model data</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tf_layer</span> <span class="o">=</span> <span class="n">sphere</span><span class="o">.</span><span class="n">tf</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">zup</span><span class="p">,</span> <span class="n">layer</span><span class="p">,</span> <span class="mi">90</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tf_model</span> <span class="o">=</span> <span class="n">prism</span><span class="o">.</span><span class="n">tf</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">zup</span><span class="p">,</span> <span class="n">model</span><span class="p">,</span> <span class="mi">90</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span><span class="n">tf_layer</span><span class="p">,</span> <span class="n">tf_model</span><span class="p">,</span> <span class="n">rtol</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span> <span class="n">atol</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="class">
+<dt id="fatiando.gravmag.eqlayer.PELBase">
+<em class="property">class </em><tt class="descclassname">fatiando.gravmag.eqlayer.</tt><tt class="descname">PELBase</tt><big>(</big><em>x</em>, <em>y</em>, <em>z</em>, <em>data</em>, <em>grid</em>, <em>windows</em>, <em>degree</em><big>)</big><a class="reference internal" href="../_modules/fatiando/gravmag/eqlayer.html#PELBase"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fatiando.gravmag.eqlayer.PELBase" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="inversion.base.html#fatiando.inversion.base.Misfit" title="fatiando.inversion.base.Misfit"><tt class="xref py py-class docutils literal"><span class="pre">fatiando.inversion.base.Misfit</span></tt></a></p>
+<p>Base class for the Polynomial Equivalent Layer.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Overloads <em>fit</em> to convert the estimated coefficients to physical
+properties. The coefficients are stored in the <tt class="docutils literal"><span class="pre">coeffs_</span></tt> attribute.</p>
+</div>
+<dl class="method">
+<dt id="fatiando.gravmag.eqlayer.PELBase.fit">
+<tt class="descname">fit</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/fatiando/gravmag/eqlayer.html#PELBase.fit"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fatiando.gravmag.eqlayer.PELBase.fit" title="Permalink to this definition">¶</a></dt>
+<dd><p>Solve for the physical property distribution that fits the data.</p>
+<p>Uses the optimization method and parameters defined using the
+<tt class="xref py py-meth docutils literal"><span class="pre">config</span></tt> method.</p>
+<p>The estimated physical properties can be accessed through
+<tt class="xref py py-meth docutils literal"><span class="pre">estimate_</span></tt>.
+The estimate polynomial coefficients are stored in the <tt class="docutils literal"><span class="pre">coeffs_</span></tt>
+attribute.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="fatiando.gravmag.eqlayer.PELGravity">
+<em class="property">class </em><tt class="descclassname">fatiando.gravmag.eqlayer.</tt><tt class="descname">PELGravity</tt><big>(</big><em>x</em>, <em>y</em>, <em>z</em>, <em>data</em>, <em>grid</em>, <em>windows</em>, <em>degree</em>, <em>field='gz'</em><big>)</big><a class="reference internal" href="../_modules/fatiando/gravmag/eqlayer.html#PELGravity"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fatiando.gravmag.eqlayer.PELGravity" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#fatiando.gravmag.eqlayer.PELBase" title="fatiando.gravmag.eqlayer.PELBase"><tt class="xref py py-class docutils literal"><span class="pre">fatiando.gravmag.eqlayer.PELBase</span></tt></a></p>
+<p>Estimate a polynomial equivalent layer from gravity data.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Assumes x = North, y = East, z = Down.</p>
+</div>
+<p>Parameters:</p>
+<ul>
+<li><dl class="first docutils">
+<dt>x, y, z <span class="classifier-delimiter">:</span> <span class="classifier">1d-arrays</span></dt>
+<dd><p class="first last">The x, y, z coordinates of each data point.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>data <span class="classifier-delimiter">:</span> <span class="classifier">1d-array</span></dt>
+<dd><p class="first last">The gravity data at each point.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>grid <span class="classifier-delimiter">:</span> <span class="classifier"><a class="reference internal" href="mesher.html#fatiando.mesher.PointGrid" title="fatiando.mesher.PointGrid"><tt class="xref py py-class docutils literal"><span class="pre">PointGrid</span></tt></a></span></dt>
+<dd><p class="first last">The sources in the equivalent layer. Will invert for the density of
+each point in the grid.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>windows <span class="classifier-delimiter">:</span> <span class="classifier">tuple = (ny, nx)</span></dt>
+<dd><p class="first last">The number of windows that the layer will be divided in the y and x
+directions, respectively</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>degree <span class="classifier-delimiter">:</span> <span class="classifier">int</span></dt>
+<dd><p class="first last">The degree of the bivariate polynomials used in each window of the PEL</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>field <span class="classifier-delimiter">:</span> <span class="classifier">string</span></dt>
+<dd><p class="first last">Which gravitational field is the data. Options are: <tt class="docutils literal"><span class="pre">'gz'</span></tt> (gravity
+anomaly), <tt class="docutils literal"><span class="pre">'gxx'</span></tt>, <tt class="docutils literal"><span class="pre">'gxy'</span></tt>, ..., <tt class="docutils literal"><span class="pre">'gzz'</span></tt> (gravity gradient
+tensor). Defaults to <tt class="docutils literal"><span class="pre">'gz'</span></tt>.</p>
+</dd>
+</dl>
+</li>
+</ul>
+<p>Examples:</p>
+<p>Use the layer to fit some gravity data and check is our layer is able to
+produce data at a different locations (i.e., interpolate, upward continue)</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">fatiando</span> <span class="kn">import</span> <span class="n">gridder</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">fatiando.gravmag</span> <span class="kn">import</span> <span class="n">sphere</span><span class="p">,</span> <span class="n">prism</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">fatiando.mesher</span> <span class="kn">import</span> <span class="n">Sphere</span><span class="p">,</span> <span class="n">Prism</span><span class="p">,</span> <span class="n">PointGrid</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c"># Produce some gravity data</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">area</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10000</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">10000</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span> <span class="o">=</span> <span class="n">gridder</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">area</span><span class="p">,</span> <span class="mi">500</span><span class="p">,</span> <span class="n">z</span><span class="o">=-</span><span class="mi">150</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">model</span> <span class="o">=</span> <span class="p">[</span><span class="n">Prism</span><span class="p">(</span><span class="mi">4500</span><span class="p">,</span> <span class="mi">5500</span><span class="p">,</span> <span class="mi">4500</span><span class="p">,</span> <span class="mi">5500</span><span class="p">,</span> <span class="mi">200</span><span class="p">,</span> <span class="mi">5000</span><span class="p">,</span> <span class="p">{</span><span class="s">&#39;density&#39;</span><span class="p">:</span><span class="mi">1000</span><span class="p">})]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">gz</span> <span class="o">=</span> <span class="n">prism</span><span class="o">.</span><span class="n">gz</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span><span class="p">,</span> <span class="n">model</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c"># Setup a layer</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">layer</span> <span class="o">=</span> <span class="n">PointGrid</span><span class="p">(</span><span class="n">area</span><span class="p">,</span> <span class="mi">500</span><span class="p">,</span> <span class="p">(</span><span class="mi">48</span><span class="p">,</span> <span class="mi">48</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">windows</span> <span class="o">=</span> <span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">12</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">degree</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">solver</span> <span class="o">=</span> <span class="p">(</span><span class="n">PELGravity</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span><span class="p">,</span> <span class="n">gz</span><span class="p">,</span> <span class="n">layer</span><span class="p">,</span> <span class="n">windows</span><span class="p">,</span> <span class="n">degree</span><span class="p">)</span> <span class="o">+</span>
+<span class="gp">... </span>          <span class="mi">10</span><span class="o">**-</span><span class="mi">27</span><span class="o">*</span><span class="n">PELSmoothness</span><span class="p">(</span><span class="n">layer</span><span class="p">,</span> <span class="n">windows</span><span class="p">,</span> <span class="n">degree</span><span class="p">))</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c"># Check the fit</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span><span class="n">gz</span><span class="p">,</span> <span class="n">solver</span><span class="o">.</span><span class="n">predicted</span><span class="p">(),</span> <span class="n">rtol</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span> <span class="n">atol</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c"># Add the densities to the layer</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">layer</span><span class="o">.</span><span class="n">addprop</span><span class="p">(</span><span class="s">&#39;density&#39;</span><span class="p">,</span> <span class="n">solver</span><span class="o">.</span><span class="n">estimate_</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c"># Upward continue and check agains model data</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">zup</span> <span class="o">=</span> <span class="n">z</span> <span class="o">-</span> <span class="mi">50</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">gz_layer</span> <span class="o">=</span> <span class="n">sphere</span><span class="o">.</span><span class="n">gz</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">zup</span><span class="p">,</span> <span class="n">layer</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">gz_model</span> <span class="o">=</span> <span class="n">prism</span><span class="o">.</span><span class="n">gz</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">zup</span><span class="p">,</span> <span class="n">model</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span><span class="n">gz_layer</span><span class="p">,</span> <span class="n">gz_model</span><span class="p">,</span> <span class="n">rtol</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span> <span class="n">atol</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c"># Make a regular grid</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span> <span class="o">=</span> <span class="n">gridder</span><span class="o">.</span><span class="n">regular</span><span class="p">(</span><span class="n">area</span><span class="p">,</span> <span class="p">(</span><span class="mi">30</span><span class="p">,</span> <span class="mi">30</span><span class="p">),</span> <span class="n">z</span><span class="o">=-</span><span class="mi">150</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c"># Interpolate and check agains the model</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">gz_layer</span> <span class="o">=</span> <span class="n">sphere</span><span class="o">.</span><span class="n">gz</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span><span class="p">,</span> <span class="n">layer</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">gz_model</span> <span class="o">=</span> <span class="n">prism</span><span class="o">.</span><span class="n">gz</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span><span class="p">,</span> <span class="n">model</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span><span class="n">gz_layer</span><span class="p">,</span> <span class="n">gz_model</span><span class="p">,</span> <span class="n">rtol</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span> <span class="n">atol</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="class">
+<dt id="fatiando.gravmag.eqlayer.PELSmoothness">
+<em class="property">class </em><tt class="descclassname">fatiando.gravmag.eqlayer.</tt><tt class="descname">PELSmoothness</tt><big>(</big><em>grid</em>, <em>windows</em>, <em>degree</em><big>)</big><a class="reference internal" href="../_modules/fatiando/gravmag/eqlayer.html#PELSmoothness"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fatiando.gravmag.eqlayer.PELSmoothness" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="inversion.regularization.html#fatiando.inversion.regularization.Smoothness" title="fatiando.inversion.regularization.Smoothness"><tt class="xref py py-class docutils literal"><span class="pre">fatiando.inversion.regularization.Smoothness</span></tt></a></p>
+<p>Regularization to &#8220;join&#8221; neighboring windows in the PEL.</p>
+<p>Use this with <a class="reference internal" href="#fatiando.gravmag.eqlayer.PELGravity" title="fatiando.gravmag.eqlayer.PELGravity"><tt class="xref py py-class docutils literal"><span class="pre">PELGravity</span></tt></a> and
+<a class="reference internal" href="#fatiando.gravmag.eqlayer.PELTotalField" title="fatiando.gravmag.eqlayer.PELTotalField"><tt class="xref py py-class docutils literal"><span class="pre">PELTotalField</span></tt></a>.</p>
+<p>Parameters passed to PELSmoothness must be the same as passed to the PEL
+solvers.</p>
+<p>Parameters:</p>
+<ul>
+<li><dl class="first docutils">
+<dt>grid <span class="classifier-delimiter">:</span> <span class="classifier"><a class="reference internal" href="mesher.html#fatiando.mesher.PointGrid" title="fatiando.mesher.PointGrid"><tt class="xref py py-class docutils literal"><span class="pre">PointGrid</span></tt></a></span></dt>
+<dd><p class="first last">The sources in the equivalent layer.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>windows <span class="classifier-delimiter">:</span> <span class="classifier">tuple = (ny, nx)</span></dt>
+<dd><p class="first last">The number of windows that the layer will be divided in the y and x
+directions, respectively.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>degree <span class="classifier-delimiter">:</span> <span class="classifier">int</span></dt>
+<dd><p class="first last">The degree of the bivariate polynomials used in each window of the PEL</p>
+</dd>
+</dl>
+</li>
+</ul>
+<p>See the docstring of <a class="reference internal" href="#fatiando.gravmag.eqlayer.PELGravity" title="fatiando.gravmag.eqlayer.PELGravity"><tt class="xref py py-class docutils literal"><span class="pre">PELGravity</span></tt></a> for an
+example usage.</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="fatiando.gravmag.eqlayer.PELTotalField">
+<em class="property">class </em><tt class="descclassname">fatiando.gravmag.eqlayer.</tt><tt class="descname">PELTotalField</tt><big>(</big><em>x</em>, <em>y</em>, <em>z</em>, <em>data</em>, <em>inc</em>, <em>dec</em>, <em>grid</em>, <em>windows</em>, <em>degree</em>, <em>sinc=None</em>, <em>sdec=None</em><big>)</big><a class="reference internal" href="../_modules/fatiando/gravmag/eqlayer.html#PELTotalField"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fatiando.gravmag.eqlayer.PELTotalField" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#fatiando.gravmag.eqlayer.PELBase" title="fatiando.gravmag.eqlayer.PELBase"><tt class="xref py py-class docutils literal"><span class="pre">fatiando.gravmag.eqlayer.PELBase</span></tt></a></p>
+<p>Estimate a polynomial equivalent layer from magnetic total field anomaly.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Assumes x = North, y = East, z = Down.</p>
+</div>
+<p>Parameters:</p>
+<ul>
+<li><dl class="first docutils">
+<dt>x, y, z <span class="classifier-delimiter">:</span> <span class="classifier">1d-arrays</span></dt>
+<dd><p class="first last">The x, y, z coordinates of each data point.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>data <span class="classifier-delimiter">:</span> <span class="classifier">1d-array</span></dt>
+<dd><p class="first last">The total field magnetic anomaly data at each point.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>inc, dec <span class="classifier-delimiter">:</span> <span class="classifier">floats</span></dt>
+<dd><p class="first last">The inclination and declination of the inducing field</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>grid <span class="classifier-delimiter">:</span> <span class="classifier"><a class="reference internal" href="mesher.html#fatiando.mesher.PointGrid" title="fatiando.mesher.PointGrid"><tt class="xref py py-class docutils literal"><span class="pre">PointGrid</span></tt></a></span></dt>
+<dd><p class="first last">The sources in the equivalent layer. Will invert for the magnetization
+intensity of each point in the grid.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>windows <span class="classifier-delimiter">:</span> <span class="classifier">tuple = (ny, nx)</span></dt>
+<dd><p class="first last">The number of windows that the layer will be divided in the y and x
+directions, respectively</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>degree <span class="classifier-delimiter">:</span> <span class="classifier">int</span></dt>
+<dd><p class="first last">The degree of the bivariate polynomials used in each window of the PEL</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>sinc, sdec <span class="classifier-delimiter">:</span> <span class="classifier">None or floats</span></dt>
+<dd><p class="first last">The inclination and declination of the equivalent layer. Use these if
+there is remanent magnetization and the total magnetization of the
+layer if different from the induced magnetization.
+If there is only induced magnetization, use None</p>
+</dd>
+</dl>
+</li>
+</ul>
+<p>Examples:</p>
+<p>Use the layer to fit some synthetic data and check is our layer is able to
+produce data at a different locations (i.e., interpolate, upward continue,
+reduce to the pole)</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">fatiando</span> <span class="kn">import</span> <span class="n">gridder</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">fatiando.gravmag</span> <span class="kn">import</span> <span class="n">sphere</span><span class="p">,</span> <span class="n">prism</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">fatiando.mesher</span> <span class="kn">import</span> <span class="n">Sphere</span><span class="p">,</span> <span class="n">Prism</span><span class="p">,</span> <span class="n">PointGrid</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c"># Produce some synthetic data</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">area</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1000</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span> <span class="o">=</span> <span class="n">gridder</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">area</span><span class="p">,</span> <span class="mi">500</span><span class="p">,</span> <span class="n">z</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">model</span> <span class="o">=</span> <span class="p">[</span><span class="n">Prism</span><span class="p">(</span><span class="mi">450</span><span class="p">,</span> <span class="mi">550</span><span class="p">,</span> <span class="mi">450</span><span class="p">,</span> <span class="mi">550</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">500</span><span class="p">,</span> <span class="p">{</span><span class="s">&#39;magnetization&#39;</span><span class="p">:</span><span class="mi">5</span><span class="p">})]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">inc</span><span class="p">,</span> <span class="n">dec</span> <span class="o">=</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">23</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tf</span> <span class="o">=</span> <span class="n">prism</span><span class="o">.</span><span class="n">tf</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span><span class="p">,</span> <span class="n">model</span><span class="p">,</span> <span class="n">inc</span><span class="p">,</span> <span class="n">dec</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c"># Setup a layer</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">layer</span> <span class="o">=</span> <span class="n">PointGrid</span><span class="p">(</span><span class="n">area</span><span class="p">,</span> <span class="mi">200</span><span class="p">,</span> <span class="p">(</span><span class="mi">60</span><span class="p">,</span> <span class="mi">60</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">windows</span> <span class="o">=</span> <span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">12</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">degree</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">solver</span> <span class="o">=</span> <span class="p">(</span><span class="n">PELTotalField</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span><span class="p">,</span> <span class="n">tf</span><span class="p">,</span> <span class="n">inc</span><span class="p">,</span> <span class="n">dec</span><span class="p">,</span> <span class="n">layer</span><span class="p">,</span> <span class="n">windows</span><span class="p">,</span> <span class="n">degree</span><span class="p">)</span>
+<span class="gp">... </span>          <span class="o">+</span> <span class="mi">10</span><span class="o">**-</span><span class="mi">15</span><span class="o">*</span><span class="n">PELSmoothness</span><span class="p">(</span><span class="n">layer</span><span class="p">,</span> <span class="n">windows</span><span class="p">,</span> <span class="n">degree</span><span class="p">))</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c"># Check the fit</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span><span class="n">tf</span><span class="p">,</span> <span class="n">solver</span><span class="o">.</span><span class="n">predicted</span><span class="p">(),</span> <span class="n">rtol</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span> <span class="n">atol</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c"># Add the magnetization to the layer</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">layer</span><span class="o">.</span><span class="n">addprop</span><span class="p">(</span><span class="s">&#39;magnetization&#39;</span><span class="p">,</span> <span class="n">solver</span><span class="o">.</span><span class="n">estimate_</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c"># Upward continue and check agains model data</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">zup</span> <span class="o">=</span> <span class="n">z</span> <span class="o">-</span> <span class="mi">50</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tf_layer</span> <span class="o">=</span> <span class="n">sphere</span><span class="o">.</span><span class="n">tf</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">zup</span><span class="p">,</span> <span class="n">layer</span><span class="p">,</span> <span class="n">inc</span><span class="p">,</span> <span class="n">dec</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tf_model</span> <span class="o">=</span> <span class="n">prism</span><span class="o">.</span><span class="n">tf</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">zup</span><span class="p">,</span> <span class="n">model</span><span class="p">,</span> <span class="n">inc</span><span class="p">,</span> <span class="n">dec</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span><span class="n">tf_layer</span><span class="p">,</span> <span class="n">tf_model</span><span class="p">,</span> <span class="n">rtol</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span> <span class="n">atol</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c"># Reduce to the pole and check agains model data</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tf_layer</span> <span class="o">=</span> <span class="n">sphere</span><span class="o">.</span><span class="n">tf</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">zup</span><span class="p">,</span> <span class="n">layer</span><span class="p">,</span> <span class="mi">90</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tf_model</span> <span class="o">=</span> <span class="n">prism</span><span class="o">.</span><span class="n">tf</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">zup</span><span class="p">,</span> <span class="n">model</span><span class="p">,</span> <span class="mi">90</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span><span class="n">tf_layer</span><span class="p">,</span> <span class="n">tf_model</span><span class="p">,</span> <span class="n">rtol</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span> <span class="n">atol</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c"># Interpolate and check agains the model</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span> <span class="o">=</span> <span class="n">gridder</span><span class="o">.</span><span class="n">regular</span><span class="p">(</span><span class="n">area</span><span class="p">,</span> <span class="p">(</span><span class="mi">30</span><span class="p">,</span> <span class="mi">30</span><span class="p">),</span> <span class="n">z</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tf_layer</span> <span class="o">=</span> <span class="n">sphere</span><span class="o">.</span><span class="n">tf</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span><span class="p">,</span> <span class="n">layer</span><span class="p">,</span> <span class="n">inc</span><span class="p">,</span> <span class="n">dec</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tf_model</span> <span class="o">=</span> <span class="n">prism</span><span class="o">.</span><span class="n">tf</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span><span class="p">,</span> <span class="n">model</span><span class="p">,</span> <span class="n">inc</span><span class="p">,</span> <span class="n">dec</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span><span class="n">tf_layer</span><span class="p">,</span> <span class="n">tf_model</span><span class="p">,</span> <span class="n">rtol</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span> <span class="n">atol</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="fatiando.gravmag.eqlayer.ncoeffs">
+<tt class="descclassname">fatiando.gravmag.eqlayer.</tt><tt class="descname">ncoeffs</tt><big>(</big><em>degree</em><big>)</big><a class="reference internal" href="../_modules/fatiando/gravmag/eqlayer.html#ncoeffs"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fatiando.gravmag.eqlayer.ncoeffs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculate the number of coefficients in a bivarite polynomail.</p>
+<p>Parameters:</p>
+<ul>
+<li><dl class="first docutils">
+<dt>degree <span class="classifier-delimiter">:</span> <span class="classifier">int</span></dt>
+<dd><p class="first last">The degree of the polynomial</p>
+</dd>
+</dl>
+</li>
+</ul>
+<p>Returns:</p>
+<ul>
+<li><dl class="first docutils">
+<dt>n <span class="classifier-delimiter">:</span> <span class="classifier">int</span></dt>
+<dd><p class="first last">The number of coefficients</p>
+</dd>
+</dl>
+</li>
+</ul>
+<p>Examples:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">ncoeffs</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="go">3</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ncoeffs</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="go">6</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ncoeffs</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<span class="go">10</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ncoeffs</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+<span class="go">15</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</div>
+
+
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="gravmag.tensor.html" class="btn btn-neutral float-right" title="Utilities for operating on the gradient tensor (fatiando.gravmag.tensor)"/>Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="gravmag.imaging.html" class="btn btn-neutral" title="Imaging methods for potential fields (fatiando.gravmag.imaging)"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2012-2014, Leonardo Uieda.
+      Last updated on Mar 05, 2015.
+    </p>
+  </div>
+
+  <a href="https://github.com/snide/sphinx_rtd_theme">Sphinx theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'0.3',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+      <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

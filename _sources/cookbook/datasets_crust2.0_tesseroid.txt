@@ -1,0 +1,12 @@
+.. _cookbook_datasets_crust2.0_tesseroid:
+
+Datasets: Fetch the CRUST2.0 model, convert it to tesseroids and calculate its gravity signal in parallel
+==========================================================================================================
+
+.. raw:: html
+
+    [<a href="../_static/cookbook/datasets_crust2.0_tesseroid.py">source code</a>]
+
+.. literalinclude:: ../../cookbook/datasets_crust2.0_tesseroid.py
+    :language: python
+    :linenos:

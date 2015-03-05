@@ -1,0 +1,12 @@
+.. _cookbook_gravmag_harvester_weights:
+
+GravMag: Using data weights in 3D inversion using :mod:`harvester`
+===================================================================
+
+.. raw:: html
+
+    [<a href="../_static/cookbook/gravmag_harvester_weights.py">source code</a>]
+
+.. literalinclude:: ../../cookbook/gravmag_harvester_weights.py
+    :language: python
+    :linenos:

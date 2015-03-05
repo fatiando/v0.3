@@ -1,0 +1,1602 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Forward modeling with spheres (fatiando.gravmag.sphere) &mdash; Fatiando a Terra v0.3</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+  
+
+  
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="top" title="Fatiando a Terra v0.3" href="../index.html"/>
+        <link rel="up" title="Gravity and magnetics (fatiando.gravmag)" href="gravmag.html"/>
+        <link rel="next" title="Forward modeling with tesseroids (fatiando.gravmag.tesseroid)" href="gravmag.tesseroid.html"/>
+        <link rel="prev" title="Forward modeling with 3D polygonal prisms (fatiando.gravmag.polyprism)" href="gravmag.polyprism.html"/> 
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-nav-search">
+        <a href="../index.html" class="fa fa-home"> Fatiando a Terra</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+        
+        
+            <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../contributors.html">Contributors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../license.html">License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../changelog.html">Changelog</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../changelog.html#version-0-3">Version 0.3</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../changelog.html#version-0-2">Version 0.2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../changelog.html#version-0-1">Version 0.1</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../install.html">Installing Fatiando</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../install.html#which-python">Which Python?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../install.html#installing-the-dependencies">Installing the dependencies</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../install.html#id1">Installing Fatiando</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../install.html#installing-the-latest-development-version">Installing the latest development version</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../install.html#testing-the-install">Testing the install</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="reference internal" href="fatiando.html">API Reference: The <tt class="docutils literal"><span class="pre">fatiando</span></tt> package</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="gravmag.html">Gravity and magnetics (<tt class="docutils literal"><span class="pre">fatiando.gravmag</span></tt>)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="seismic.html">Seismics and seismology (<tt class="docutils literal"><span class="pre">fatiando.seismic</span></tt>)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="geothermal.html">Geothermal heat (<tt class="docutils literal"><span class="pre">fatiando.geothermal</span></tt>)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mesher.html">Meshing (<tt class="docutils literal"><span class="pre">fatiando.mesher</span></tt>)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="gridder.html">Gridding (<tt class="docutils literal"><span class="pre">fatiando.gridder</span></tt>)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vis.html">Visualization (<tt class="docutils literal"><span class="pre">fatiando.vis</span></tt>)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="datasets.html">Fetch data from the internet (<tt class="docutils literal"><span class="pre">fatiando.datasets</span></tt>)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="gui.html">Graphical user interfaces (<tt class="docutils literal"><span class="pre">fatiando.gui</span></tt>)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="utils.html">Miscellaneous Utilities (<tt class="docutils literal"><span class="pre">fatiando.utils</span></tt>)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="constants.html">Physical constants and unit conversions (<tt class="docutils literal"><span class="pre">fatiando.constants</span></tt>)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="inversion.html">Inverse problems framework (<tt class="docutils literal"><span class="pre">fatiando.inversion</span></tt>)</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../cookbook.html">Cookbook</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/datasets_crust2.0_tesseroid.html">Datasets: Fetch the CRUST2.0 model, convert it to tesseroids and calculate its gravity signal in parallel</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/geothermal_climsig_abrupt.html">Geothermal: Forward and inverse modeling of an abrupt change in temperature measured in a well</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/geothermal_climsig_linear.html">Geothermal: Forward and inverse modeling of a linear change in temperature measured in a well</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/geothermal_climsig_wrong.html">Geothermal: Climate signal: What happens when assuming a climate change is linear, when in fact it was abrupt?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/gravmag_2d_polygon_interactive.html">GravMag: Interactive 2D forward modeling with polygons</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/gravmag_2d_polygon_picker.html">GravMag: 2D forward modeling with polygons</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/gravmag_basin2d_trapezoidal.html">GravMag: Simple gravity inversion for the relief of a 2D trapezoidal basin</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/gravmag_basin2d_trapezoidal_forward.html">GravMag: Interactive 2D forward gravity modeling of a trapezoidal basin</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/gravmag_basin2d_triangular.html">GravMag: Simple gravity inversion for the relief of a 2D triangular basin</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/gravmag_basin2d_triangular_forward.html">GravMag: Interactive 2D forward gravity modeling of a triangular basin</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/gravmag_eqlayer_joint.html">GravMag: Fit an equivalent layer to gravity and gravity gradient data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/gravmag_eqlayer_pel_polereduc.html">GravMag: Use the Polynomial Equivalent Layer to reduce a magnetic total field anomaly to the pole</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/gravmag_eqlayer_pel_upcontinue.html">GravMag: Use the polynomial equivalent layer to upward continue gravity data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/gravmag_eqlayer_polereduc.html">GravMag: Use an equivalent layer to reduce a magnetic total field anomaly to the pole</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/gravmag_eqlayer_upcontinue.html">GravMag: Use an equivalent layer to upward continue gravity data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/gravmag_euler_classic.html">GravMag: Classic 3D Euler deconvolution of magnetic data (single window)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/gravmag_euler_classic_expanding_window.html">GravMag: Classic 3D Euler deconvolution of magnetic data using an expanding window</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/gravmag_euler_classic_moving_window.html">GravMag: Classic 3D Euler deconvolution of magnetic data using a moving window</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/gravmag_fourier_ansig.html">GravMag: Calculate the analytic signal of a total field anomaly using FFT</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/gravmag_fourier_deriv.html">GravMag: Calculating the derivatives of the gravity anomaly using FFT</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/gravmag_grav_polyprism.html">GravMag: Forward gravity modeling using a stack of 3D polygonal model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/gravmag_grav_prism.html">GravMag: Forward modeling of the gravitational potential and its derivatives using 3D model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/gravmag_grav_sphere.html">GravMag: Forward modeling of the gravity anomaly and gravity gradient tensor using model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/gravmag_grav_tesseroid.html">GravMag: Forward modeling of the gravitational potential and its derivatives using tesseroids</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/gravmag_harvester_grav.html">GravMag: 3D gravity inversion by planting anomalous densities using <tt class="docutils literal"><span class="pre">harvester</span></tt> (more complex interactive example)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/gravmag_harvester_tensor.html">GravMag: 3D gravity gradient inversion by planting anomalous densities using <tt class="docutils literal"><span class="pre">harvester</span></tt> (with non-targeted sources)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/gravmag_harvester_weights.html">GravMag: Using data weights in 3D inversion using <tt class="docutils literal"><span class="pre">harvester</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/gravmag_imaging_geninv.html">GravMag: 3D imaging using the Generalized Inverse method on synthetic gravity data (more complex model + noisy data)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/gravmag_imaging_migration.html">GravMag: 3D imaging using the migration method on synthetic gravity data (more complex model + noisy data)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/gravmag_imaging_sandwich.html">GravMag: 3D imaging using the sandwich model method on synthetic gravity data (simple example)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/gravmag_mag_polyprism.html">GravMag: 3D forward modeling of total-field magnetic anomaly using polygonal prisms</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/gravmag_mag_prism.html">GravMag: 3D forward modeling of total-field magnetic anomaly using rectangular prisms (model with induced and remanent magnetization)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/gravmag_mag_sphere.html">GravMag: 3D forward modeling of total-field magnetic anomaly using spheres</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/gravmag_magdir_dipolemagdir.html">GravMag: Use the DipoleMagDir class to estimate the magnetization direction of dipoles with known centers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/gravmag_normal_gravity.html">GravMag: Calculate the gravity disturbance and Bouguer anomaly for Hawaii</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/gravmag_tensor_centerofmass.html">GravMag: Center of mass estimation using the first eigenvector of the gravity gradient tensor (simple model)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/gravmag_tensor_centerofmass_expanding_window.html">GravMag: Center of mass estimation using the first eigenvector of the gravity gradient tensor (2 sources with expanding windows)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/gravmag_tensor_invariants.html">GravMag: Calculate the gravity gradient tensor invariants</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/gravmag_tensor_polyprism.html">GravMag: Generate synthetic gradient tensor data from polygonal prisms</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/gravmag_tensor_prism_noisy.html">GravMag: Generate noise-corrupted gravity gradient tensor data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/gravmag_upcontinue.html">GravMag: Upward continuation of noisy gz data using the analytical formula</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/grid_cut.html">Gridding: Cut a section from a grid</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/grid_interpolate.html">Gridding: Grid irregularly sampled data.</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/grid_profile.html">Gridding: Extract a profile from map data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/grid_scatter.html">Gridding: Generate and plot irregular grids (scatter)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/grid_surfer.html">Gridding: Load a Surfer ASCII grid file</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/mesher_pointgrid.html">Meshing: Making a grid of 3D point sources</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/mesher_prismmesh.html">Meshing: Make and plot a 3D prism mesh</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/mesher_prismmesh_filter.html">Meshing: Filter prisms from a 3D prism mesh based on their physical properties</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/mesher_prismmesh_topo.html">Meshing: Make and plot a 3D prism mesh with topography</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/mesher_prismmesh_vardens.html">Meshing: Make a 3D prism mesh with depth-varying density</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/mesher_prismrelief_topo.html">Meshing: Generate a 3D prism model of the topography</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/mesher_squaremesh_from_image.html">Meshing: Generate a SquareMesh and get the physical properties from an image</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/mesher_tesseroid.html">Meshing: Make and plot a tesseroid with the Earth</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/mesher_tesseroidmesh.html">Meshing: Make and plot a tesseroid mesh</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/mesher_tesseroidmesh_topo.html">Meshing: Make and plot a tesseroid mesh with topography</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/seismic_epic2d.html">Seismic: 2D epicenter estimation assuming a homogeneous and flat Earth</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/seismic_epic2d_iterate.html">Seismic: Show steps taken by different algorithms for 2D epicenter estimation on a flat Earth</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/seismic_profile_vertical.html">Seismic: Invert vertical seismic profile (VSP) traveltimes for the velocity of a layered model.</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/seismic_profile_vertical_interactive.html">Seismic: Interactive forward modeling of 1D vertical seismic profile (VSP) data in layered media</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/seismic_profile_vertical_smooth.html">Seismic: Invert vertical seismic profile (VSP) traveltimes using smoothness regularization and unknown layer thicknesses</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/seismic_srtomo_damped.html">Seismic: 2D straight-ray tomography using damping regularization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/seismic_srtomo_sharp.html">Seismic: 2D straight-ray tomography using sharpness (total variation) regularization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/seismic_srtomo_smooth.html">Seismic: 2D straight-ray tomography using smoothness regularization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/seismic_wavefd_elastic_psv.html">Seismic: 2D finite difference simulation of elastic P and SV wave propagation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/seismic_wavefd_elastic_sh.html">Seismic: 2D finite difference simulation of elastic SH wave propagation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/seismic_wavefd_love_wave.html">Seismic: 2D finite difference simulation of elastic SH wave propagation in a medium with a discontinuity (i.e., Moho), generating Love waves.</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/seismic_wavefd_rayleigh_wave.html">Seismic: 2D finite difference simulation of elastic P and SV wave propagation in a medium with a discontinuity (i.e., Moho), generating Rayleigh waves</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/seismic_wavefd_scalar.html">Seismic: 2D finite difference simulation of scalar wave propagation.</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/vis_mpl_basemap.html">Vis: Plot a map using the Orthographic map projection and filled contours</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/vis_mpl_basemap2.html">Vis: Plot a map using the Mercator map projection and pseudo-color</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/vis_mpl_basemap3.html">Vis: Plot a map using the Robinson map projection and contours</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/vis_mpl_contour.html">Vis: Plot contour lines and filled contours</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/vis_mpl_irregular_data.html">Vis: Plotting irregularly sampled map data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/vis_myv_color.html">Vis: Set the colors in figures, prisms, polygonal prisms and tesseroids.</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/vis_myv_earth.html">Vis: Plot the Earth, continents, inner and outer core in 3D with Mayavi2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/vis_myv_exaggerate.html">Vis: Exaggerate the vertical dimension of 3D plots</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../develop.html">Developer guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../develop.html#making-a-release">Making a release</a></li>
+</ul>
+</li>
+</ul>
+
+        
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../index.html">Fatiando a Terra</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../index.html">Docs</a> &raquo;</li>
+      
+          <li><a href="fatiando.html">API Reference: The <tt class="docutils literal"><span class="pre">fatiando</span></tt> package</a> &raquo;</li>
+      
+          <li><a href="gravmag.html">Gravity and magnetics (<tt class="docutils literal"><span class="pre">fatiando.gravmag</span></tt>)</a> &raquo;</li>
+      
+    <li>Forward modeling with spheres (<tt class="docutils literal"><span class="pre">fatiando.gravmag.sphere</span></tt>)</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          <a href="../_sources/api/gravmag.sphere.txt" rel="nofollow"> View page source</a>
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            
+  <div class="section" id="module-fatiando.gravmag.sphere">
+<span id="forward-modeling-with-spheres-fatiando-gravmag-sphere"></span><span id="fatiando-gravmag-sphere"></span><h1>Forward modeling with spheres (<tt class="docutils literal"><span class="pre">fatiando.gravmag.sphere</span></tt>)<a class="headerlink" href="#module-fatiando.gravmag.sphere" title="Permalink to this headline">¶</a></h1>
+<p>Calculate the potential fields of a homogeneous sphere.</p>
+<p><strong>Magnetic</strong></p>
+<p>Calculates the magnetic effect produced by an sphere. The functions are
+based on Blakely (1995).</p>
+<ul class="simple">
+<li><a class="reference internal" href="#fatiando.gravmag.sphere.tf" title="fatiando.gravmag.sphere.tf"><tt class="xref py py-func docutils literal"><span class="pre">tf</span></tt></a>: calculates the total-field anomaly</li>
+<li><a class="reference internal" href="#fatiando.gravmag.sphere.bx" title="fatiando.gravmag.sphere.bx"><tt class="xref py py-func docutils literal"><span class="pre">bx</span></tt></a>: calculates the x component of the
+induction</li>
+<li><a class="reference internal" href="#fatiando.gravmag.sphere.by" title="fatiando.gravmag.sphere.by"><tt class="xref py py-func docutils literal"><span class="pre">by</span></tt></a>: calculates the y component of the
+induction</li>
+<li><a class="reference internal" href="#fatiando.gravmag.sphere.bz" title="fatiando.gravmag.sphere.bz"><tt class="xref py py-func docutils literal"><span class="pre">bz</span></tt></a>: calculates the z component of the
+induction</li>
+</ul>
+<p>Remember that:</p>
+<p>The magnetization <span class="math">\(\mathbf{M}\)</span> and the dipole moment <span class="math">\(\mathbf{m}\)</span>
+are related with the volume V:</p>
+<div class="math">
+\[\mathbf{M} = \dfrac{\mathbf{m}}{V}.\]</div>
+<p>The total-field anomaly is:</p>
+<div class="math">
+\[\Delta T = |\mathbf{T}| - |\mathbf{F}|,\]</div>
+<p>where <span class="math">\(\mathbf{T}\)</span> is the measured field and <span class="math">\(\mathbf{F}\)</span> is a
+reference (regional) field. The forward modeling functions
+<a class="reference internal" href="#fatiando.gravmag.sphere.bx" title="fatiando.gravmag.sphere.bx"><tt class="xref py py-func docutils literal"><span class="pre">bx</span></tt></a>, <a class="reference internal" href="#fatiando.gravmag.sphere.by" title="fatiando.gravmag.sphere.by"><tt class="xref py py-func docutils literal"><span class="pre">by</span></tt></a>,
+and <a class="reference internal" href="#fatiando.gravmag.sphere.bz" title="fatiando.gravmag.sphere.bz"><tt class="xref py py-func docutils literal"><span class="pre">bz</span></tt></a> calculate the 3 components of the
+field perturbation <span class="math">\(\Delta\mathbf{F}\)</span></p>
+<div class="math">
+\[\Delta\mathbf{F} = \mathbf{T} - \mathbf{F}.\]</div>
+<p>Then the total-field anomaly caused by the sphere is</p>
+<div class="math">
+\[\Delta T \approx \hat{\mathbf{F}}\cdot\Delta\mathbf{F}.\]</div>
+<p><strong>Gravity</strong></p>
+<p>Calculates the gravitational acceleration and gravity gradient tensor
+components.</p>
+<ul class="simple">
+<li><a class="reference internal" href="#fatiando.gravmag.sphere.gz" title="fatiando.gravmag.sphere.gz"><tt class="xref py py-func docutils literal"><span class="pre">gz</span></tt></a></li>
+<li><a class="reference internal" href="#fatiando.gravmag.sphere.gxx" title="fatiando.gravmag.sphere.gxx"><tt class="xref py py-func docutils literal"><span class="pre">gxx</span></tt></a></li>
+<li><a class="reference internal" href="#fatiando.gravmag.sphere.gxy" title="fatiando.gravmag.sphere.gxy"><tt class="xref py py-func docutils literal"><span class="pre">gxy</span></tt></a></li>
+<li><a class="reference internal" href="#fatiando.gravmag.sphere.gxz" title="fatiando.gravmag.sphere.gxz"><tt class="xref py py-func docutils literal"><span class="pre">gxz</span></tt></a></li>
+<li><a class="reference internal" href="#fatiando.gravmag.sphere.gyy" title="fatiando.gravmag.sphere.gyy"><tt class="xref py py-func docutils literal"><span class="pre">gyy</span></tt></a></li>
+<li><a class="reference internal" href="#fatiando.gravmag.sphere.gyz" title="fatiando.gravmag.sphere.gyz"><tt class="xref py py-func docutils literal"><span class="pre">gyz</span></tt></a></li>
+<li><a class="reference internal" href="#fatiando.gravmag.sphere.gzz" title="fatiando.gravmag.sphere.gzz"><tt class="xref py py-func docutils literal"><span class="pre">gzz</span></tt></a></li>
+</ul>
+<p><strong>Auxiliary Functions</strong></p>
+<p>Calculates the second derivatives of the function</p>
+<div class="math">
+\[\phi(x,y,z) = \frac{4}{3} \pi R^3 \frac{1}{r}\]</div>
+<p>with respect to the variables <span class="math">\(x\)</span>, <span class="math">\(y\)</span>, and <span class="math">\(z\)</span>. In
+this equation,</p>
+<div class="math">
+\[r = \sqrt{(x - \nu)^2 + (y - \eta)^2 + (z - \zeta)^2},\]</div>
+<p>and <span class="math">\(R\)</span> is the radius of a sphere with centre at the Cartesian
+coordinates <span class="math">\(\nu\)</span>, <span class="math">\(\eta\)</span> and <span class="math">\(\zeta\)</span>.</p>
+<p>These second derivatives are used to calculate the total field magnetic anomaly
+and the gravity gradient tensor components.</p>
+<ul class="simple">
+<li><a class="reference internal" href="#fatiando.gravmag.sphere.kernelxx" title="fatiando.gravmag.sphere.kernelxx"><tt class="xref py py-func docutils literal"><span class="pre">kernelxx</span></tt></a></li>
+<li><a class="reference internal" href="#fatiando.gravmag.sphere.kernelxy" title="fatiando.gravmag.sphere.kernelxy"><tt class="xref py py-func docutils literal"><span class="pre">kernelxy</span></tt></a></li>
+<li><a class="reference internal" href="#fatiando.gravmag.sphere.kernelxz" title="fatiando.gravmag.sphere.kernelxz"><tt class="xref py py-func docutils literal"><span class="pre">kernelxz</span></tt></a></li>
+<li><a class="reference internal" href="#fatiando.gravmag.sphere.kernelyy" title="fatiando.gravmag.sphere.kernelyy"><tt class="xref py py-func docutils literal"><span class="pre">kernelyy</span></tt></a></li>
+<li><a class="reference internal" href="#fatiando.gravmag.sphere.kernelyz" title="fatiando.gravmag.sphere.kernelyz"><tt class="xref py py-func docutils literal"><span class="pre">kernelyz</span></tt></a></li>
+<li><a class="reference internal" href="#fatiando.gravmag.sphere.kernelzz" title="fatiando.gravmag.sphere.kernelzz"><tt class="xref py py-func docutils literal"><span class="pre">kernelzz</span></tt></a></li>
+</ul>
+<p><strong>References</strong></p>
+<p>Blakely, R. J. (1995), Potential Theory in Gravity and Magnetic Applications,
+Cambridge University Press.</p>
+<hr class="docutils" />
+<dl class="function">
+<dt id="fatiando.gravmag.sphere.bx">
+<tt class="descclassname">fatiando.gravmag.sphere.</tt><tt class="descname">bx</tt><big>(</big><em>xp</em>, <em>yp</em>, <em>zp</em>, <em>spheres</em><big>)</big><a class="reference internal" href="../_modules/fatiando/gravmag/sphere.html#bx"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fatiando.gravmag.sphere.bx" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculates the x component of the magnetic induction produced by spheres.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Input units are SI. Output is in nT</p>
+</div>
+<p>Parameters:</p>
+<ul>
+<li><dl class="first docutils">
+<dt>xp, yp, zp <span class="classifier-delimiter">:</span> <span class="classifier">arrays</span></dt>
+<dd><p class="first last">The x, y, and z coordinates where the anomaly will be calculated</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>spheres <span class="classifier-delimiter">:</span> <span class="classifier">list of <a class="reference internal" href="mesher.html#fatiando.mesher.Sphere" title="fatiando.mesher.Sphere"><tt class="xref py py-class docutils literal"><span class="pre">fatiando.mesher.Sphere</span></tt></a></span></dt>
+<dd><p class="first last">The spheres. Spheres must have the physical property
+<tt class="docutils literal"><span class="pre">'magnetization'</span></tt>. Spheres without <tt class="docutils literal"><span class="pre">'magnetization'</span></tt> will be
+ignored. The <tt class="docutils literal"><span class="pre">'magnetization'</span></tt> must be a vector.</p>
+</dd>
+</dl>
+</li>
+</ul>
+<p>Returns:</p>
+<ul>
+<li><dl class="first docutils">
+<dt>bx: array</dt>
+<dd><p class="first last">The x component of the magnetic induction</p>
+</dd>
+</dl>
+</li>
+</ul>
+<p>Example:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">fatiando</span> <span class="kn">import</span> <span class="n">mesher</span><span class="p">,</span> <span class="n">gridder</span><span class="p">,</span> <span class="n">utils</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c"># Create a model formed by two spheres</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c"># The magnetization of each sphere is a vector</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">model</span> <span class="o">=</span> <span class="p">[</span>
+<span class="gp">... </span>        <span class="n">mesher</span><span class="o">.</span><span class="n">Sphere</span><span class="p">(</span><span class="mi">1000</span><span class="p">,</span> <span class="mi">1000</span><span class="p">,</span> <span class="mi">600</span><span class="p">,</span> <span class="mi">500</span><span class="p">,</span>
+<span class="gp">... </span>            <span class="p">{</span><span class="s">&#39;magnetization&#39;</span><span class="p">:</span><span class="n">utils</span><span class="o">.</span><span class="n">ang2vec</span><span class="p">(</span><span class="mi">13</span><span class="p">,</span> <span class="o">-</span><span class="mi">10</span><span class="p">,</span> <span class="mi">28</span><span class="p">)}),</span>
+<span class="gp">... </span>        <span class="n">mesher</span><span class="o">.</span><span class="n">Sphere</span><span class="p">(</span><span class="o">-</span><span class="mi">1000</span><span class="p">,</span> <span class="o">-</span><span class="mi">1000</span><span class="p">,</span> <span class="mi">600</span><span class="p">,</span> <span class="mi">500</span><span class="p">,</span>
+<span class="gp">... </span>            <span class="p">{</span><span class="s">&#39;magnetization&#39;</span><span class="p">:</span><span class="n">utils</span><span class="o">.</span><span class="n">ang2vec</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">70</span><span class="p">,</span> <span class="o">-</span><span class="mi">5</span><span class="p">)})]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c"># Create a regular grid at 100m height</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">shape</span> <span class="o">=</span> <span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">area</span> <span class="o">=</span> <span class="p">(</span><span class="o">-</span><span class="mi">3000</span><span class="p">,</span> <span class="mi">3000</span><span class="p">,</span> <span class="o">-</span><span class="mi">3000</span><span class="p">,</span> <span class="mi">3000</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">xp</span><span class="p">,</span> <span class="n">yp</span><span class="p">,</span> <span class="n">zp</span> <span class="o">=</span> <span class="n">gridder</span><span class="o">.</span><span class="n">regular</span><span class="p">(</span><span class="n">area</span><span class="p">,</span> <span class="n">shape</span><span class="p">,</span> <span class="n">z</span><span class="o">=-</span><span class="mi">100</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c"># Calculate the bx component</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">b</span> <span class="ow">in</span> <span class="n">bx</span><span class="p">(</span><span class="n">xp</span><span class="p">,</span> <span class="n">yp</span><span class="p">,</span> <span class="n">zp</span><span class="p">,</span> <span class="n">model</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="k">print</span> <span class="s">&#39;</span><span class="si">%15.8e</span><span class="s">&#39;</span> <span class="o">%</span> <span class="n">b</span>
+<span class="go"> 1.58002397e+01</span>
+<span class="go">-1.76820799e+01</span>
+<span class="go">-1.48049248e+01</span>
+<span class="go">-5.75238567e+00</span>
+<span class="go"> 9.17572697e+01</span>
+<span class="go">-4.94607307e+02</span>
+<span class="go">-7.92213872e+01</span>
+<span class="go">-4.37781621e+00</span>
+<span class="go"> 2.97032297e+01</span>
+<span class="go"> 7.36803996e+01</span>
+<span class="go">-1.73332620e+03</span>
+<span class="go"> 1.15884125e+02</span>
+<span class="go"> 4.55847152e+00</span>
+<span class="go">-1.31173236e+01</span>
+<span class="go">-6.42912671e+01</span>
+<span class="go"> 2.98847909e+01</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="fatiando.gravmag.sphere.by">
+<tt class="descclassname">fatiando.gravmag.sphere.</tt><tt class="descname">by</tt><big>(</big><em>xp</em>, <em>yp</em>, <em>zp</em>, <em>spheres</em><big>)</big><a class="reference internal" href="../_modules/fatiando/gravmag/sphere.html#by"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fatiando.gravmag.sphere.by" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculates the y component of the magnetic induction produced by spheres.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Input units are SI. Output is in nT</p>
+</div>
+<p>Parameters:</p>
+<ul>
+<li><dl class="first docutils">
+<dt>xp, yp, zp <span class="classifier-delimiter">:</span> <span class="classifier">arrays</span></dt>
+<dd><p class="first last">The x, y, and z coordinates where the anomaly will be calculated</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>spheres <span class="classifier-delimiter">:</span> <span class="classifier">list of <a class="reference internal" href="mesher.html#fatiando.mesher.Sphere" title="fatiando.mesher.Sphere"><tt class="xref py py-class docutils literal"><span class="pre">fatiando.mesher.Sphere</span></tt></a></span></dt>
+<dd><p class="first last">The spheres. Spheres must have the physical property
+<tt class="docutils literal"><span class="pre">'magnetization'</span></tt>. Spheres without <tt class="docutils literal"><span class="pre">'magnetization'</span></tt> will be
+ignored. The <tt class="docutils literal"><span class="pre">'magnetization'</span></tt> must be a vector.</p>
+</dd>
+</dl>
+</li>
+</ul>
+<p>Returns:</p>
+<ul>
+<li><dl class="first docutils">
+<dt>by: array</dt>
+<dd><p class="first last">The y component of the magnetic induction</p>
+</dd>
+</dl>
+</li>
+</ul>
+<p>Example:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">fatiando</span> <span class="kn">import</span> <span class="n">mesher</span><span class="p">,</span> <span class="n">gridder</span><span class="p">,</span> <span class="n">utils</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c"># Create a model formed by two spheres</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c"># The magnetization of each sphere is a vector</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">model</span> <span class="o">=</span> <span class="p">[</span>
+<span class="gp">... </span>        <span class="n">mesher</span><span class="o">.</span><span class="n">Sphere</span><span class="p">(</span><span class="mi">1000</span><span class="p">,</span> <span class="mi">1000</span><span class="p">,</span> <span class="mi">600</span><span class="p">,</span> <span class="mi">500</span><span class="p">,</span>
+<span class="gp">... </span>            <span class="p">{</span><span class="s">&#39;magnetization&#39;</span><span class="p">:</span><span class="n">utils</span><span class="o">.</span><span class="n">ang2vec</span><span class="p">(</span><span class="mi">13</span><span class="p">,</span> <span class="o">-</span><span class="mi">10</span><span class="p">,</span> <span class="mi">28</span><span class="p">)}),</span>
+<span class="gp">... </span>        <span class="n">mesher</span><span class="o">.</span><span class="n">Sphere</span><span class="p">(</span><span class="o">-</span><span class="mi">1000</span><span class="p">,</span> <span class="o">-</span><span class="mi">1000</span><span class="p">,</span> <span class="mi">600</span><span class="p">,</span> <span class="mi">500</span><span class="p">,</span>
+<span class="gp">... </span>            <span class="p">{</span><span class="s">&#39;magnetization&#39;</span><span class="p">:</span><span class="n">utils</span><span class="o">.</span><span class="n">ang2vec</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">70</span><span class="p">,</span> <span class="o">-</span><span class="mi">5</span><span class="p">)})]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c"># Create a regular grid at 100m height</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">shape</span> <span class="o">=</span> <span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">area</span> <span class="o">=</span> <span class="p">(</span><span class="o">-</span><span class="mi">3000</span><span class="p">,</span> <span class="mi">3000</span><span class="p">,</span> <span class="o">-</span><span class="mi">3000</span><span class="p">,</span> <span class="mi">3000</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">xp</span><span class="p">,</span> <span class="n">yp</span><span class="p">,</span> <span class="n">zp</span> <span class="o">=</span> <span class="n">gridder</span><span class="o">.</span><span class="n">regular</span><span class="p">(</span><span class="n">area</span><span class="p">,</span> <span class="n">shape</span><span class="p">,</span> <span class="n">z</span><span class="o">=-</span><span class="mi">100</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c"># Calculate the by component</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">b</span> <span class="ow">in</span> <span class="n">by</span><span class="p">(</span><span class="n">xp</span><span class="p">,</span> <span class="n">yp</span><span class="p">,</span> <span class="n">zp</span><span class="p">,</span> <span class="n">model</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="k">print</span> <span class="s">&#39;</span><span class="si">%15.8e</span><span class="s">&#39;</span> <span class="o">%</span> <span class="n">b</span>
+<span class="go"> 2.51394441e+01</span>
+<span class="go"> 5.71383698e+01</span>
+<span class="go"> 7.46666729e+00</span>
+<span class="go">-4.53730551e+00</span>
+<span class="go"> 7.44792258e+00</span>
+<span class="go"> 8.22174414e+01</span>
+<span class="go"> 4.53451310e+01</span>
+<span class="go">-3.06885735e+01</span>
+<span class="go">-2.49929765e+01</span>
+<span class="go">-8.41961087e+01</span>
+<span class="go">-9.17412395e+02</span>
+<span class="go">-3.18422413e+01</span>
+<span class="go">-1.32728556e+01</span>
+<span class="go">-3.03825859e+01</span>
+<span class="go"> 6.67990083e+01</span>
+<span class="go"> 4.21366247e+01</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="fatiando.gravmag.sphere.bz">
+<tt class="descclassname">fatiando.gravmag.sphere.</tt><tt class="descname">bz</tt><big>(</big><em>xp</em>, <em>yp</em>, <em>zp</em>, <em>spheres</em><big>)</big><a class="reference internal" href="../_modules/fatiando/gravmag/sphere.html#bz"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fatiando.gravmag.sphere.bz" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculates the z component of the magnetic induction produced by spheres.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Input units are SI. Output is in nT</p>
+</div>
+<p>Parameters:</p>
+<ul>
+<li><dl class="first docutils">
+<dt>xp, yp, zp <span class="classifier-delimiter">:</span> <span class="classifier">arrays</span></dt>
+<dd><p class="first last">The x, y, and z coordinates where the anomaly will be calculated</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>spheres <span class="classifier-delimiter">:</span> <span class="classifier">list of <a class="reference internal" href="mesher.html#fatiando.mesher.Sphere" title="fatiando.mesher.Sphere"><tt class="xref py py-class docutils literal"><span class="pre">fatiando.mesher.Sphere</span></tt></a></span></dt>
+<dd><p class="first last">The spheres. Spheres must have the physical property
+<tt class="docutils literal"><span class="pre">'magnetization'</span></tt>. Spheres without <tt class="docutils literal"><span class="pre">'magnetization'</span></tt> will be
+ignored. The <tt class="docutils literal"><span class="pre">'magnetization'</span></tt> must be a vector.</p>
+</dd>
+</dl>
+</li>
+</ul>
+<p>Returns:</p>
+<ul>
+<li><dl class="first docutils">
+<dt>bz: array</dt>
+<dd><p class="first last">The z component of the magnetic induction</p>
+</dd>
+</dl>
+</li>
+</ul>
+<p>Example:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">fatiando</span> <span class="kn">import</span> <span class="n">mesher</span><span class="p">,</span> <span class="n">gridder</span><span class="p">,</span> <span class="n">utils</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c"># Create a model formed by two spheres</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c"># The magnetization of each sphere is a vector</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">model</span> <span class="o">=</span> <span class="p">[</span>
+<span class="gp">... </span>        <span class="n">mesher</span><span class="o">.</span><span class="n">Sphere</span><span class="p">(</span><span class="mi">1000</span><span class="p">,</span> <span class="mi">1000</span><span class="p">,</span> <span class="mi">600</span><span class="p">,</span> <span class="mi">500</span><span class="p">,</span>
+<span class="gp">... </span>            <span class="p">{</span><span class="s">&#39;magnetization&#39;</span><span class="p">:</span><span class="n">utils</span><span class="o">.</span><span class="n">ang2vec</span><span class="p">(</span><span class="mi">13</span><span class="p">,</span> <span class="o">-</span><span class="mi">10</span><span class="p">,</span> <span class="mi">28</span><span class="p">)}),</span>
+<span class="gp">... </span>        <span class="n">mesher</span><span class="o">.</span><span class="n">Sphere</span><span class="p">(</span><span class="o">-</span><span class="mi">1000</span><span class="p">,</span> <span class="o">-</span><span class="mi">1000</span><span class="p">,</span> <span class="mi">600</span><span class="p">,</span> <span class="mi">500</span><span class="p">,</span>
+<span class="gp">... </span>            <span class="p">{</span><span class="s">&#39;magnetization&#39;</span><span class="p">:</span><span class="n">utils</span><span class="o">.</span><span class="n">ang2vec</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">70</span><span class="p">,</span> <span class="o">-</span><span class="mi">5</span><span class="p">)})]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c"># Create a regular grid at 100m height</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">shape</span> <span class="o">=</span> <span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">area</span> <span class="o">=</span> <span class="p">(</span><span class="o">-</span><span class="mi">3000</span><span class="p">,</span> <span class="mi">3000</span><span class="p">,</span> <span class="o">-</span><span class="mi">3000</span><span class="p">,</span> <span class="mi">3000</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">xp</span><span class="p">,</span> <span class="n">yp</span><span class="p">,</span> <span class="n">zp</span> <span class="o">=</span> <span class="n">gridder</span><span class="o">.</span><span class="n">regular</span><span class="p">(</span><span class="n">area</span><span class="p">,</span> <span class="n">shape</span><span class="p">,</span> <span class="n">z</span><span class="o">=-</span><span class="mi">100</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c"># Calculate the bz component</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">b</span> <span class="ow">in</span> <span class="n">bz</span><span class="p">(</span><span class="n">xp</span><span class="p">,</span> <span class="n">yp</span><span class="p">,</span> <span class="n">zp</span><span class="p">,</span> <span class="n">model</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="k">print</span> <span class="s">&#39;</span><span class="si">%15.8e</span><span class="s">&#39;</span> <span class="o">%</span> <span class="n">b</span>
+<span class="go">-1.13152279e+01</span>
+<span class="go">-3.24362266e+01</span>
+<span class="go">-1.63235805e+01</span>
+<span class="go">-4.48136597e+00</span>
+<span class="go">-1.27492012e+01</span>
+<span class="go"> 2.89101261e+03</span>
+<span class="go">-1.30263918e+01</span>
+<span class="go">-9.64182996e+00</span>
+<span class="go">-6.45566985e+00</span>
+<span class="go"> 3.32987598e+01</span>
+<span class="go">-7.08905624e+02</span>
+<span class="go">-5.55139945e+01</span>
+<span class="go">-1.35745203e+00</span>
+<span class="go"> 2.91949888e+00</span>
+<span class="go">-2.78345635e+01</span>
+<span class="go">-1.69425703e+01</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="fatiando.gravmag.sphere.gxx">
+<tt class="descclassname">fatiando.gravmag.sphere.</tt><tt class="descname">gxx</tt><big>(</big><em>xp</em>, <em>yp</em>, <em>zp</em>, <em>spheres</em>, <em>dens=None</em><big>)</big><a class="reference internal" href="../_modules/fatiando/gravmag/sphere.html#gxx"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fatiando.gravmag.sphere.gxx" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculates the <span class="math">\(g_{xx}\)</span> gravity gradient component.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The coordinate system of the input parameters is to be
+x -&gt; North, y -&gt; East and z -&gt; Down.</p>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">All input values in SI and output in Eotvos!</p>
+</div>
+<p>Parameters:</p>
+<ul>
+<li><dl class="first docutils">
+<dt>xp, yp, zp <span class="classifier-delimiter">:</span> <span class="classifier">arrays</span></dt>
+<dd><p class="first last">The x, y, and z coordinates where the field will be calculated</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>spheres <span class="classifier-delimiter">:</span> <span class="classifier">list of <a class="reference internal" href="mesher.html#fatiando.mesher.Sphere" title="fatiando.mesher.Sphere"><tt class="xref py py-class docutils literal"><span class="pre">fatiando.mesher.Sphere</span></tt></a></span></dt>
+<dd><p class="first last">The spheres. Spheres must have the property <tt class="docutils literal"><span class="pre">'density'</span></tt>. Those
+without will be ignored.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>dens <span class="classifier-delimiter">:</span> <span class="classifier">float or None</span></dt>
+<dd><p class="first last">If not None, will use this value instead of the <tt class="docutils literal"><span class="pre">'density'</span></tt> property
+of the spheres. Use this, e.g., for sensitivity matrix building.</p>
+</dd>
+</dl>
+</li>
+</ul>
+<p>Returns:</p>
+<ul>
+<li><dl class="first docutils">
+<dt>res <span class="classifier-delimiter">:</span> <span class="classifier">array</span></dt>
+<dd><p class="first last">The field calculated on xp, yp, zp</p>
+</dd>
+</dl>
+</li>
+</ul>
+<p>Example:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">fatiando</span> <span class="kn">import</span> <span class="n">mesher</span><span class="p">,</span> <span class="n">gridder</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c"># Create a sphere model</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">sphere</span> <span class="o">=</span> <span class="p">[</span><span class="n">mesher</span><span class="o">.</span><span class="n">Sphere</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="p">{</span><span class="s">&#39;density&#39;</span><span class="p">:</span><span class="mf">1.</span><span class="p">})]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c"># Create a regular grid at 0m height</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">shape</span> <span class="o">=</span> <span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">area</span> <span class="o">=</span> <span class="p">(</span><span class="o">-</span><span class="mi">30</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="o">-</span><span class="mi">30</span><span class="p">,</span> <span class="mi">30</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">xp</span><span class="p">,</span> <span class="n">yp</span><span class="p">,</span> <span class="n">zp</span> <span class="o">=</span> <span class="n">gridder</span><span class="o">.</span><span class="n">regular</span><span class="p">(</span><span class="n">area</span><span class="p">,</span> <span class="n">shape</span><span class="p">,</span> <span class="n">z</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">g</span> <span class="ow">in</span> <span class="n">gxx</span><span class="p">(</span><span class="n">xp</span><span class="p">,</span> <span class="n">yp</span><span class="p">,</span> <span class="n">zp</span><span class="p">,</span> <span class="n">sphere</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="k">print</span> <span class="s">&#39;</span><span class="si">%15.8e</span><span class="s">&#39;</span> <span class="o">%</span> <span class="n">g</span>
+<span class="go"> 1.71893959e-06</span>
+<span class="go">-6.02473678e-06</span>
+<span class="go">-6.02473678e-06</span>
+<span class="go"> 1.71893959e-06</span>
+<span class="go"> 1.39192195e-05</span>
+<span class="go"> 2.76067131e-05</span>
+<span class="go"> 2.76067131e-05</span>
+<span class="go"> 1.39192195e-05</span>
+<span class="go"> 1.39192195e-05</span>
+<span class="go"> 2.76067131e-05</span>
+<span class="go"> 2.76067131e-05</span>
+<span class="go"> 1.39192195e-05</span>
+<span class="go"> 1.71893959e-06</span>
+<span class="go">-6.02473678e-06</span>
+<span class="go">-6.02473678e-06</span>
+<span class="go"> 1.71893959e-06</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="fatiando.gravmag.sphere.gxy">
+<tt class="descclassname">fatiando.gravmag.sphere.</tt><tt class="descname">gxy</tt><big>(</big><em>xp</em>, <em>yp</em>, <em>zp</em>, <em>spheres</em>, <em>dens=None</em><big>)</big><a class="reference internal" href="../_modules/fatiando/gravmag/sphere.html#gxy"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fatiando.gravmag.sphere.gxy" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculates the <span class="math">\(g_{xy}\)</span> gravity gradient component.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The coordinate system of the input parameters is to be
+x -&gt; North, y -&gt; East and z -&gt; Down.</p>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">All input values in SI and output in Eotvos!</p>
+</div>
+<p>Parameters:</p>
+<ul>
+<li><dl class="first docutils">
+<dt>xp, yp, zp <span class="classifier-delimiter">:</span> <span class="classifier">arrays</span></dt>
+<dd><p class="first last">The x, y, and z coordinates where the field will be calculated</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>spheres <span class="classifier-delimiter">:</span> <span class="classifier">list of <a class="reference internal" href="mesher.html#fatiando.mesher.Sphere" title="fatiando.mesher.Sphere"><tt class="xref py py-class docutils literal"><span class="pre">fatiando.mesher.Sphere</span></tt></a></span></dt>
+<dd><p class="first last">The spheres. Spheres must have the property <tt class="docutils literal"><span class="pre">'density'</span></tt>. Those
+without will be ignored.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>dens <span class="classifier-delimiter">:</span> <span class="classifier">float or None</span></dt>
+<dd><p class="first last">If not None, will use this value instead of the <tt class="docutils literal"><span class="pre">'density'</span></tt> property
+of the spheres. Use this, e.g., for sensitivity matrix building.</p>
+</dd>
+</dl>
+</li>
+</ul>
+<p>Returns:</p>
+<ul>
+<li><dl class="first docutils">
+<dt>res <span class="classifier-delimiter">:</span> <span class="classifier">array</span></dt>
+<dd><p class="first last">The field calculated on xp, yp, zp</p>
+</dd>
+</dl>
+</li>
+</ul>
+<p>Example:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">fatiando</span> <span class="kn">import</span> <span class="n">mesher</span><span class="p">,</span> <span class="n">gridder</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c"># Create a sphere model</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">sphere</span> <span class="o">=</span> <span class="p">[</span><span class="n">mesher</span><span class="o">.</span><span class="n">Sphere</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="p">{</span><span class="s">&#39;density&#39;</span><span class="p">:</span><span class="mf">1.</span><span class="p">})]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c"># Create a regular grid at 0m height</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">shape</span> <span class="o">=</span> <span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">area</span> <span class="o">=</span> <span class="p">(</span><span class="o">-</span><span class="mi">30</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="o">-</span><span class="mi">30</span><span class="p">,</span> <span class="mi">30</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">xp</span><span class="p">,</span> <span class="n">yp</span><span class="p">,</span> <span class="n">zp</span> <span class="o">=</span> <span class="n">gridder</span><span class="o">.</span><span class="n">regular</span><span class="p">(</span><span class="n">area</span><span class="p">,</span> <span class="n">shape</span><span class="p">,</span> <span class="n">z</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c"># Calculate the gxy component</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">g</span> <span class="ow">in</span> <span class="n">gxy</span><span class="p">(</span><span class="n">xp</span><span class="p">,</span> <span class="n">yp</span><span class="p">,</span> <span class="n">zp</span><span class="p">,</span> <span class="n">sphere</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="k">print</span> <span class="s">&#39;</span><span class="si">%15.8e</span><span class="s">&#39;</span> <span class="o">%</span> <span class="n">g</span>
+<span class="go"> 5.30415646e-06</span>
+<span class="go"> 7.47898359e-06</span>
+<span class="go">-7.47898359e-06</span>
+<span class="go">-5.30415646e-06</span>
+<span class="go"> 7.47898359e-06</span>
+<span class="go"> 1.10426852e-04</span>
+<span class="go">-1.10426852e-04</span>
+<span class="go">-7.47898359e-06</span>
+<span class="go">-7.47898359e-06</span>
+<span class="go">-1.10426852e-04</span>
+<span class="go"> 1.10426852e-04</span>
+<span class="go"> 7.47898359e-06</span>
+<span class="go">-5.30415646e-06</span>
+<span class="go">-7.47898359e-06</span>
+<span class="go"> 7.47898359e-06</span>
+<span class="go"> 5.30415646e-06</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="fatiando.gravmag.sphere.gxz">
+<tt class="descclassname">fatiando.gravmag.sphere.</tt><tt class="descname">gxz</tt><big>(</big><em>xp</em>, <em>yp</em>, <em>zp</em>, <em>spheres</em>, <em>dens=None</em><big>)</big><a class="reference internal" href="../_modules/fatiando/gravmag/sphere.html#gxz"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fatiando.gravmag.sphere.gxz" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculates the <span class="math">\(g_{xz}\)</span> gravity gradient component.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The coordinate system of the input parameters is to be
+x -&gt; North, y -&gt; East and z -&gt; Down.</p>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">All input values in SI and output in Eotvos!</p>
+</div>
+<p>Parameters:</p>
+<ul>
+<li><dl class="first docutils">
+<dt>xp, yp, zp <span class="classifier-delimiter">:</span> <span class="classifier">arrays</span></dt>
+<dd><p class="first last">The x, y, and z coordinates where the field will be calculated</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>spheres <span class="classifier-delimiter">:</span> <span class="classifier">list of <a class="reference internal" href="mesher.html#fatiando.mesher.Sphere" title="fatiando.mesher.Sphere"><tt class="xref py py-class docutils literal"><span class="pre">fatiando.mesher.Sphere</span></tt></a></span></dt>
+<dd><p class="first last">The spheres. Spheres must have the property <tt class="docutils literal"><span class="pre">'density'</span></tt>. Those
+without will be ignored.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>dens <span class="classifier-delimiter">:</span> <span class="classifier">float or None</span></dt>
+<dd><p class="first last">If not None, will use this value instead of the <tt class="docutils literal"><span class="pre">'density'</span></tt> property
+of the spheres. Use this, e.g., for sensitivity matrix building.</p>
+</dd>
+</dl>
+</li>
+</ul>
+<p>Returns:</p>
+<ul>
+<li><dl class="first docutils">
+<dt>res <span class="classifier-delimiter">:</span> <span class="classifier">array</span></dt>
+<dd><p class="first last">The field calculated on xp, yp, zp</p>
+</dd>
+</dl>
+</li>
+</ul>
+<p>Example:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">fatiando</span> <span class="kn">import</span> <span class="n">mesher</span><span class="p">,</span> <span class="n">gridder</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c"># Create a sphere model</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">sphere</span> <span class="o">=</span> <span class="p">[</span><span class="n">mesher</span><span class="o">.</span><span class="n">Sphere</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="p">{</span><span class="s">&#39;density&#39;</span><span class="p">:</span><span class="mf">1.</span><span class="p">})]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c"># Create a regular grid at 0m height</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">shape</span> <span class="o">=</span> <span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">area</span> <span class="o">=</span> <span class="p">(</span><span class="o">-</span><span class="mi">30</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="o">-</span><span class="mi">30</span><span class="p">,</span> <span class="mi">30</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">xp</span><span class="p">,</span> <span class="n">yp</span><span class="p">,</span> <span class="n">zp</span> <span class="o">=</span> <span class="n">gridder</span><span class="o">.</span><span class="n">regular</span><span class="p">(</span><span class="n">area</span><span class="p">,</span> <span class="n">shape</span><span class="p">,</span> <span class="n">z</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c"># Calculate the gxz component</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">g</span> <span class="ow">in</span> <span class="n">gxz</span><span class="p">(</span><span class="n">xp</span><span class="p">,</span> <span class="n">yp</span><span class="p">,</span> <span class="n">zp</span><span class="p">,</span> <span class="n">sphere</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="k">print</span> <span class="s">&#39;</span><span class="si">%15.8e</span><span class="s">&#39;</span> <span class="o">%</span> <span class="n">g</span>
+<span class="go"> 8.84026077e-07</span>
+<span class="go"> 1.24649726e-06</span>
+<span class="go">-1.24649726e-06</span>
+<span class="go">-8.84026077e-07</span>
+<span class="go"> 3.73949179e-06</span>
+<span class="go"> 5.52134262e-05</span>
+<span class="go">-5.52134262e-05</span>
+<span class="go">-3.73949179e-06</span>
+<span class="go"> 3.73949179e-06</span>
+<span class="go"> 5.52134262e-05</span>
+<span class="go">-5.52134262e-05</span>
+<span class="go">-3.73949179e-06</span>
+<span class="go"> 8.84026077e-07</span>
+<span class="go"> 1.24649726e-06</span>
+<span class="go">-1.24649726e-06</span>
+<span class="go">-8.84026077e-07</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="fatiando.gravmag.sphere.gyy">
+<tt class="descclassname">fatiando.gravmag.sphere.</tt><tt class="descname">gyy</tt><big>(</big><em>xp</em>, <em>yp</em>, <em>zp</em>, <em>spheres</em>, <em>dens=None</em><big>)</big><a class="reference internal" href="../_modules/fatiando/gravmag/sphere.html#gyy"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fatiando.gravmag.sphere.gyy" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculates the <span class="math">\(g_{yy}\)</span> gravity gradient component.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The coordinate system of the input parameters is to be
+x -&gt; North, y -&gt; East and z -&gt; Down.</p>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">All input values in SI and output in Eotvos!</p>
+</div>
+<p>Parameters:</p>
+<ul>
+<li><dl class="first docutils">
+<dt>xp, yp, zp <span class="classifier-delimiter">:</span> <span class="classifier">arrays</span></dt>
+<dd><p class="first last">The x, y, and z coordinates where the field will be calculated</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>spheres <span class="classifier-delimiter">:</span> <span class="classifier">list of <a class="reference internal" href="mesher.html#fatiando.mesher.Sphere" title="fatiando.mesher.Sphere"><tt class="xref py py-class docutils literal"><span class="pre">fatiando.mesher.Sphere</span></tt></a></span></dt>
+<dd><p class="first last">The spheres. Spheres must have the property <tt class="docutils literal"><span class="pre">'density'</span></tt>. Those
+without will be ignored.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>dens <span class="classifier-delimiter">:</span> <span class="classifier">float or None</span></dt>
+<dd><p class="first last">If not None, will use this value instead of the <tt class="docutils literal"><span class="pre">'density'</span></tt> property
+of the spheres. Use this, e.g., for sensitivity matrix building.</p>
+</dd>
+</dl>
+</li>
+</ul>
+<p>Returns:</p>
+<ul>
+<li><dl class="first docutils">
+<dt>res <span class="classifier-delimiter">:</span> <span class="classifier">array</span></dt>
+<dd><p class="first last">The field calculated on xp, yp, zp</p>
+</dd>
+</dl>
+</li>
+</ul>
+<p>Example:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">fatiando</span> <span class="kn">import</span> <span class="n">mesher</span><span class="p">,</span> <span class="n">gridder</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c"># Create a sphere model</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">sphere</span> <span class="o">=</span> <span class="p">[</span><span class="n">mesher</span><span class="o">.</span><span class="n">Sphere</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="p">{</span><span class="s">&#39;density&#39;</span><span class="p">:</span><span class="mf">1.</span><span class="p">})]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c"># Create a regular grid at 0m height</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">shape</span> <span class="o">=</span> <span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">area</span> <span class="o">=</span> <span class="p">(</span><span class="o">-</span><span class="mi">30</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="o">-</span><span class="mi">30</span><span class="p">,</span> <span class="mi">30</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">xp</span><span class="p">,</span> <span class="n">yp</span><span class="p">,</span> <span class="n">zp</span> <span class="o">=</span> <span class="n">gridder</span><span class="o">.</span><span class="n">regular</span><span class="p">(</span><span class="n">area</span><span class="p">,</span> <span class="n">shape</span><span class="p">,</span> <span class="n">z</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c"># Calculate the gyy component</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">g</span> <span class="ow">in</span> <span class="n">gyy</span><span class="p">(</span><span class="n">xp</span><span class="p">,</span> <span class="n">yp</span><span class="p">,</span> <span class="n">zp</span><span class="p">,</span> <span class="n">sphere</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="k">print</span> <span class="s">&#39;</span><span class="si">%15.8e</span><span class="s">&#39;</span> <span class="o">%</span> <span class="n">g</span>
+<span class="go"> 1.71893959e-06</span>
+<span class="go"> 1.39192195e-05</span>
+<span class="go"> 1.39192195e-05</span>
+<span class="go"> 1.71893959e-06</span>
+<span class="go">-6.02473678e-06</span>
+<span class="go"> 2.76067131e-05</span>
+<span class="go"> 2.76067131e-05</span>
+<span class="go">-6.02473678e-06</span>
+<span class="go">-6.02473678e-06</span>
+<span class="go"> 2.76067131e-05</span>
+<span class="go"> 2.76067131e-05</span>
+<span class="go">-6.02473678e-06</span>
+<span class="go"> 1.71893959e-06</span>
+<span class="go"> 1.39192195e-05</span>
+<span class="go"> 1.39192195e-05</span>
+<span class="go"> 1.71893959e-06</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="fatiando.gravmag.sphere.gyz">
+<tt class="descclassname">fatiando.gravmag.sphere.</tt><tt class="descname">gyz</tt><big>(</big><em>xp</em>, <em>yp</em>, <em>zp</em>, <em>spheres</em>, <em>dens=None</em><big>)</big><a class="reference internal" href="../_modules/fatiando/gravmag/sphere.html#gyz"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fatiando.gravmag.sphere.gyz" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculates the <span class="math">\(g_{yz}\)</span> gravity gradient component.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The coordinate system of the input parameters is to be
+x -&gt; North, y -&gt; East and z -&gt; Down.</p>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">All input values in SI and output in Eotvos!</p>
+</div>
+<p>Parameters:</p>
+<ul>
+<li><dl class="first docutils">
+<dt>xp, yp, zp <span class="classifier-delimiter">:</span> <span class="classifier">arrays</span></dt>
+<dd><p class="first last">The x, y, and z coordinates where the field will be calculated</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>spheres <span class="classifier-delimiter">:</span> <span class="classifier">list of <a class="reference internal" href="mesher.html#fatiando.mesher.Sphere" title="fatiando.mesher.Sphere"><tt class="xref py py-class docutils literal"><span class="pre">fatiando.mesher.Sphere</span></tt></a></span></dt>
+<dd><p class="first last">The spheres. Spheres must have the property <tt class="docutils literal"><span class="pre">'density'</span></tt>. Those
+without will be ignored.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>dens <span class="classifier-delimiter">:</span> <span class="classifier">float or None</span></dt>
+<dd><p class="first last">If not None, will use this value instead of the <tt class="docutils literal"><span class="pre">'density'</span></tt> property
+of the spheres. Use this, e.g., for sensitivity matrix building.</p>
+</dd>
+</dl>
+</li>
+</ul>
+<p>Returns:</p>
+<ul>
+<li><dl class="first docutils">
+<dt>res <span class="classifier-delimiter">:</span> <span class="classifier">array</span></dt>
+<dd><p class="first last">The field calculated on xp, yp, zp</p>
+</dd>
+</dl>
+</li>
+</ul>
+<p>Example:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">fatiando</span> <span class="kn">import</span> <span class="n">mesher</span><span class="p">,</span> <span class="n">gridder</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c"># Create a sphere model</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">sphere</span> <span class="o">=</span> <span class="p">[</span><span class="n">mesher</span><span class="o">.</span><span class="n">Sphere</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="p">{</span><span class="s">&#39;density&#39;</span><span class="p">:</span><span class="mf">1.</span><span class="p">})]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c"># Create a regular grid at 0m height</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">shape</span> <span class="o">=</span> <span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">area</span> <span class="o">=</span> <span class="p">(</span><span class="o">-</span><span class="mi">30</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="o">-</span><span class="mi">30</span><span class="p">,</span> <span class="mi">30</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">xp</span><span class="p">,</span> <span class="n">yp</span><span class="p">,</span> <span class="n">zp</span> <span class="o">=</span> <span class="n">gridder</span><span class="o">.</span><span class="n">regular</span><span class="p">(</span><span class="n">area</span><span class="p">,</span> <span class="n">shape</span><span class="p">,</span> <span class="n">z</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c"># Calculate the gyz component</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">g</span> <span class="ow">in</span> <span class="n">gyz</span><span class="p">(</span><span class="n">xp</span><span class="p">,</span> <span class="n">yp</span><span class="p">,</span> <span class="n">zp</span><span class="p">,</span> <span class="n">sphere</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="k">print</span> <span class="s">&#39;</span><span class="si">%15.8e</span><span class="s">&#39;</span> <span class="o">%</span> <span class="n">g</span>
+<span class="go"> 8.84026077e-07</span>
+<span class="go"> 3.73949179e-06</span>
+<span class="go"> 3.73949179e-06</span>
+<span class="go"> 8.84026077e-07</span>
+<span class="go"> 1.24649726e-06</span>
+<span class="go"> 5.52134262e-05</span>
+<span class="go"> 5.52134262e-05</span>
+<span class="go"> 1.24649726e-06</span>
+<span class="go">-1.24649726e-06</span>
+<span class="go">-5.52134262e-05</span>
+<span class="go">-5.52134262e-05</span>
+<span class="go">-1.24649726e-06</span>
+<span class="go">-8.84026077e-07</span>
+<span class="go">-3.73949179e-06</span>
+<span class="go">-3.73949179e-06</span>
+<span class="go">-8.84026077e-07</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="fatiando.gravmag.sphere.gz">
+<tt class="descclassname">fatiando.gravmag.sphere.</tt><tt class="descname">gz</tt><big>(</big><em>xp</em>, <em>yp</em>, <em>zp</em>, <em>spheres</em>, <em>dens=None</em><big>)</big><a class="reference internal" href="../_modules/fatiando/gravmag/sphere.html#gz"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fatiando.gravmag.sphere.gz" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculates the <span class="math">\(g_z\)</span> gravity acceleration component.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The coordinate system of the input parameters is to be
+x -&gt; North, y -&gt; East and z -&gt; Down.</p>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">All input values in SI and output in mGal!</p>
+</div>
+<p>Parameters:</p>
+<ul>
+<li><dl class="first docutils">
+<dt>xp, yp, zp <span class="classifier-delimiter">:</span> <span class="classifier">arrays</span></dt>
+<dd><p class="first last">The x, y, and z coordinates where the field will be calculated</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>spheres <span class="classifier-delimiter">:</span> <span class="classifier">list of <a class="reference internal" href="mesher.html#fatiando.mesher.Sphere" title="fatiando.mesher.Sphere"><tt class="xref py py-class docutils literal"><span class="pre">fatiando.mesher.Sphere</span></tt></a></span></dt>
+<dd><p class="first last">The spheres. Spheres must have the property <tt class="docutils literal"><span class="pre">'density'</span></tt>. Those
+without will be ignored.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>dens <span class="classifier-delimiter">:</span> <span class="classifier">float or None</span></dt>
+<dd><p class="first last">If not None, will use this value instead of the <tt class="docutils literal"><span class="pre">'density'</span></tt> property
+of the spheres. Use this, e.g., for sensitivity matrix building.</p>
+</dd>
+</dl>
+</li>
+</ul>
+<p>Returns:</p>
+<ul>
+<li><dl class="first docutils">
+<dt>res <span class="classifier-delimiter">:</span> <span class="classifier">array</span></dt>
+<dd><p class="first last">The field calculated on xp, yp, zp</p>
+</dd>
+</dl>
+</li>
+</ul>
+</dd></dl>
+
+<dl class="function">
+<dt id="fatiando.gravmag.sphere.gzz">
+<tt class="descclassname">fatiando.gravmag.sphere.</tt><tt class="descname">gzz</tt><big>(</big><em>xp</em>, <em>yp</em>, <em>zp</em>, <em>spheres</em>, <em>dens=None</em><big>)</big><a class="reference internal" href="../_modules/fatiando/gravmag/sphere.html#gzz"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fatiando.gravmag.sphere.gzz" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculates the <span class="math">\(g_{zz}\)</span> gravity gradient component.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The coordinate system of the input parameters is to be
+x -&gt; North, y -&gt; East and z -&gt; Down.</p>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">All input values in SI and output in Eotvos!</p>
+</div>
+<p>Parameters:</p>
+<ul>
+<li><dl class="first docutils">
+<dt>xp, yp, zp <span class="classifier-delimiter">:</span> <span class="classifier">arrays</span></dt>
+<dd><p class="first last">The x, y, and z coordinates where the field will be calculated</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>spheres <span class="classifier-delimiter">:</span> <span class="classifier">list of <a class="reference internal" href="mesher.html#fatiando.mesher.Sphere" title="fatiando.mesher.Sphere"><tt class="xref py py-class docutils literal"><span class="pre">fatiando.mesher.Sphere</span></tt></a></span></dt>
+<dd><p class="first last">The spheres. Spheres must have the property <tt class="docutils literal"><span class="pre">'density'</span></tt>. Those
+without will be ignored.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>dens <span class="classifier-delimiter">:</span> <span class="classifier">float or None</span></dt>
+<dd><p class="first last">If not None, will use this value instead of the <tt class="docutils literal"><span class="pre">'density'</span></tt> property
+of the spheres. Use this, e.g., for sensitivity matrix building.</p>
+</dd>
+</dl>
+</li>
+</ul>
+<p>Returns:</p>
+<ul>
+<li><dl class="first docutils">
+<dt>res <span class="classifier-delimiter">:</span> <span class="classifier">array</span></dt>
+<dd><p class="first last">The field calculated on xp, yp, zp</p>
+</dd>
+</dl>
+</li>
+</ul>
+<p>Example:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">fatiando</span> <span class="kn">import</span> <span class="n">mesher</span><span class="p">,</span> <span class="n">gridder</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c"># Create a sphere model</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">sphere</span> <span class="o">=</span> <span class="p">[</span><span class="n">mesher</span><span class="o">.</span><span class="n">Sphere</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="p">{</span><span class="s">&#39;density&#39;</span><span class="p">:</span><span class="mf">1.</span><span class="p">})]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c"># Create a regular grid at 0m height</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">shape</span> <span class="o">=</span> <span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">area</span> <span class="o">=</span> <span class="p">(</span><span class="o">-</span><span class="mi">30</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="o">-</span><span class="mi">30</span><span class="p">,</span> <span class="mi">30</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">xp</span><span class="p">,</span> <span class="n">yp</span><span class="p">,</span> <span class="n">zp</span> <span class="o">=</span> <span class="n">gridder</span><span class="o">.</span><span class="n">regular</span><span class="p">(</span><span class="n">area</span><span class="p">,</span> <span class="n">shape</span><span class="p">,</span> <span class="n">z</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c"># Calculate the gzz component</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">g</span> <span class="ow">in</span> <span class="n">gzz</span><span class="p">(</span><span class="n">xp</span><span class="p">,</span> <span class="n">yp</span><span class="p">,</span> <span class="n">zp</span><span class="p">,</span> <span class="n">sphere</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="k">print</span> <span class="s">&#39;</span><span class="si">%15.8e</span><span class="s">&#39;</span> <span class="o">%</span> <span class="n">g</span>
+<span class="go">-3.43787919e-06</span>
+<span class="go">-7.89448267e-06</span>
+<span class="go">-7.89448267e-06</span>
+<span class="go">-3.43787919e-06</span>
+<span class="go">-7.89448267e-06</span>
+<span class="go">-5.52134262e-05</span>
+<span class="go">-5.52134262e-05</span>
+<span class="go">-7.89448267e-06</span>
+<span class="go">-7.89448267e-06</span>
+<span class="go">-5.52134262e-05</span>
+<span class="go">-5.52134262e-05</span>
+<span class="go">-7.89448267e-06</span>
+<span class="go">-3.43787919e-06</span>
+<span class="go">-7.89448267e-06</span>
+<span class="go">-7.89448267e-06</span>
+<span class="go">-3.43787919e-06</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="fatiando.gravmag.sphere.kernelxx">
+<tt class="descclassname">fatiando.gravmag.sphere.</tt><tt class="descname">kernelxx</tt><big>(</big><em>xp</em>, <em>yp</em>, <em>zp</em>, <em>sphere</em><big>)</big><a class="reference internal" href="../_modules/fatiando/gravmag/sphere.html#kernelxx"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fatiando.gravmag.sphere.kernelxx" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculates the function</p>
+<div class="math">
+\[\frac{\partial^2 \phi(x,y,z)}{\partial x^2},\]</div>
+<p>where</p>
+<div class="math">
+\[\phi(x,y,z) = \frac{4}{3} \pi R^3 \frac{1}{r}\]</div>
+<p>and</p>
+<div class="math">
+\[r = \sqrt{(x - \nu)^2 + (y - \eta)^2 + (z - \zeta)^2}.\]</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The coordinate system of the input parameters is to be
+x -&gt; North, y -&gt; East and z -&gt; Down.</p>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">All input and output values in SI!</p>
+</div>
+<p>Parameters:</p>
+<ul>
+<li><dl class="first docutils">
+<dt>xp, yp, zp <span class="classifier-delimiter">:</span> <span class="classifier">arrays</span></dt>
+<dd><p class="first last">The x, y, and z coordinates where the function will be
+calculated</p>
+</dd>
+</dl>
+</li>
+<li><p class="first">sphere : object of <a class="reference internal" href="mesher.html#fatiando.mesher.Sphere" title="fatiando.mesher.Sphere"><tt class="xref py py-class docutils literal"><span class="pre">fatiando.mesher.Sphere</span></tt></a></p>
+</li>
+</ul>
+<p>Returns:</p>
+<ul>
+<li><dl class="first docutils">
+<dt>res <span class="classifier-delimiter">:</span> <span class="classifier">array</span></dt>
+<dd><p class="first last">The function calculated on xp, yp, zp</p>
+</dd>
+</dl>
+</li>
+</ul>
+<p>Example:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">fatiando</span> <span class="kn">import</span> <span class="n">mesher</span><span class="p">,</span> <span class="n">gridder</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c"># Create a sphere model</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">sphere</span> <span class="o">=</span> <span class="n">mesher</span><span class="o">.</span><span class="n">Sphere</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c"># Create a regular grid at 0m height</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">shape</span> <span class="o">=</span> <span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">area</span> <span class="o">=</span> <span class="p">(</span><span class="o">-</span><span class="mi">30</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="o">-</span><span class="mi">30</span><span class="p">,</span> <span class="mi">30</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">xp</span><span class="p">,</span> <span class="n">yp</span><span class="p">,</span> <span class="n">zp</span> <span class="o">=</span> <span class="n">gridder</span><span class="o">.</span><span class="n">regular</span><span class="p">(</span><span class="n">area</span><span class="p">,</span> <span class="n">shape</span><span class="p">,</span> <span class="n">z</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c"># Calculate the function</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">kxx</span> <span class="o">=</span> <span class="n">kernelxx</span><span class="p">(</span><span class="n">xp</span><span class="p">,</span> <span class="n">yp</span><span class="p">,</span> <span class="n">zp</span><span class="p">,</span> <span class="n">sphere</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">kxx</span><span class="p">:</span>
+<span class="gp">... </span>    <span class="k">print</span> <span class="s">&#39;</span><span class="si">%15.8e</span><span class="s">&#39;</span> <span class="o">%</span> <span class="n">k</span>
+<span class="go"> 2.57596223e-05</span>
+<span class="go">-9.02852807e-05</span>
+<span class="go">-9.02852807e-05</span>
+<span class="go"> 2.57596223e-05</span>
+<span class="go"> 2.08590131e-04</span>
+<span class="go"> 4.13707675e-04</span>
+<span class="go"> 4.13707675e-04</span>
+<span class="go"> 2.08590131e-04</span>
+<span class="go"> 2.08590131e-04</span>
+<span class="go"> 4.13707675e-04</span>
+<span class="go"> 4.13707675e-04</span>
+<span class="go"> 2.08590131e-04</span>
+<span class="go"> 2.57596223e-05</span>
+<span class="go">-9.02852807e-05</span>
+<span class="go">-9.02852807e-05</span>
+<span class="go"> 2.57596223e-05</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="fatiando.gravmag.sphere.kernelxy">
+<tt class="descclassname">fatiando.gravmag.sphere.</tt><tt class="descname">kernelxy</tt><big>(</big><em>xp</em>, <em>yp</em>, <em>zp</em>, <em>sphere</em><big>)</big><a class="reference internal" href="../_modules/fatiando/gravmag/sphere.html#kernelxy"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fatiando.gravmag.sphere.kernelxy" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculates the function</p>
+<div class="math">
+\[\frac{\partial^2 \phi(x,y,z)}{\partial x \partial y},\]</div>
+<p>where</p>
+<div class="math">
+\[\phi(x,y,z) = \frac{4}{3} \pi R^3 \frac{1}{r}\]</div>
+<p>and</p>
+<div class="math">
+\[r = \sqrt{(x - \nu)^2 + (y - \eta)^2 + (z - \zeta)^2}.\]</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The coordinate system of the input parameters is to be
+x -&gt; North, y -&gt; East and z -&gt; Down.</p>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">All input and output values in SI!</p>
+</div>
+<p>Parameters:</p>
+<ul>
+<li><dl class="first docutils">
+<dt>xp, yp, zp <span class="classifier-delimiter">:</span> <span class="classifier">arrays</span></dt>
+<dd><p class="first last">The x, y, and z coordinates where the function will be
+calculated</p>
+</dd>
+</dl>
+</li>
+<li><p class="first">sphere : object of <a class="reference internal" href="mesher.html#fatiando.mesher.Sphere" title="fatiando.mesher.Sphere"><tt class="xref py py-class docutils literal"><span class="pre">fatiando.mesher.Sphere</span></tt></a></p>
+</li>
+</ul>
+<p>Returns:</p>
+<ul>
+<li><dl class="first docutils">
+<dt>res <span class="classifier-delimiter">:</span> <span class="classifier">array</span></dt>
+<dd><p class="first last">The function calculated on xp, yp, zp</p>
+</dd>
+</dl>
+</li>
+</ul>
+<p>Example:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">fatiando</span> <span class="kn">import</span> <span class="n">mesher</span><span class="p">,</span> <span class="n">gridder</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c"># Create a sphere model</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">sphere</span> <span class="o">=</span> <span class="n">mesher</span><span class="o">.</span><span class="n">Sphere</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c"># Create a regular grid at 0m height</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">shape</span> <span class="o">=</span> <span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">area</span> <span class="o">=</span> <span class="p">(</span><span class="o">-</span><span class="mi">30</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="o">-</span><span class="mi">30</span><span class="p">,</span> <span class="mi">30</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">xp</span><span class="p">,</span> <span class="n">yp</span><span class="p">,</span> <span class="n">zp</span> <span class="o">=</span> <span class="n">gridder</span><span class="o">.</span><span class="n">regular</span><span class="p">(</span><span class="n">area</span><span class="p">,</span> <span class="n">shape</span><span class="p">,</span> <span class="n">z</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c"># Calculate the function</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">kxy</span> <span class="o">=</span> <span class="n">kernelxy</span><span class="p">(</span><span class="n">xp</span><span class="p">,</span> <span class="n">yp</span><span class="p">,</span> <span class="n">zp</span><span class="p">,</span> <span class="n">sphere</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">kxy</span><span class="p">:</span>
+<span class="gp">... </span>    <span class="k">print</span> <span class="s">&#39;</span><span class="si">%15.8e</span><span class="s">&#39;</span> <span class="o">%</span> <span class="n">k</span>
+<span class="go"> 7.94868344e-05</span>
+<span class="go"> 1.12078279e-04</span>
+<span class="go">-1.12078279e-04</span>
+<span class="go">-7.94868344e-05</span>
+<span class="go"> 1.12078279e-04</span>
+<span class="go"> 1.65483070e-03</span>
+<span class="go">-1.65483070e-03</span>
+<span class="go">-1.12078279e-04</span>
+<span class="go">-1.12078279e-04</span>
+<span class="go">-1.65483070e-03</span>
+<span class="go"> 1.65483070e-03</span>
+<span class="go"> 1.12078279e-04</span>
+<span class="go">-7.94868344e-05</span>
+<span class="go">-1.12078279e-04</span>
+<span class="go"> 1.12078279e-04</span>
+<span class="go"> 7.94868344e-05</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="fatiando.gravmag.sphere.kernelxz">
+<tt class="descclassname">fatiando.gravmag.sphere.</tt><tt class="descname">kernelxz</tt><big>(</big><em>xp</em>, <em>yp</em>, <em>zp</em>, <em>sphere</em><big>)</big><a class="reference internal" href="../_modules/fatiando/gravmag/sphere.html#kernelxz"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fatiando.gravmag.sphere.kernelxz" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculates the function</p>
+<div class="math">
+\[\frac{\partial^2 \phi(x,y,z)}{\partial x \partial z},\]</div>
+<p>where</p>
+<div class="math">
+\[\phi(x,y,z) = \frac{4}{3} \pi R^3 \frac{1}{r}\]</div>
+<p>and</p>
+<div class="math">
+\[r = \sqrt{(x - \nu)^2 + (y - \eta)^2 + (z - \zeta)^2}.\]</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The coordinate system of the input parameters is to be
+x -&gt; North, y -&gt; East and z -&gt; Down.</p>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">All input and output values in SI!</p>
+</div>
+<p>Parameters:</p>
+<ul>
+<li><dl class="first docutils">
+<dt>xp, yp, zp <span class="classifier-delimiter">:</span> <span class="classifier">arrays</span></dt>
+<dd><p class="first last">The x, y, and z coordinates where the function will be
+calculated</p>
+</dd>
+</dl>
+</li>
+<li><p class="first">sphere : object of <a class="reference internal" href="mesher.html#fatiando.mesher.Sphere" title="fatiando.mesher.Sphere"><tt class="xref py py-class docutils literal"><span class="pre">fatiando.mesher.Sphere</span></tt></a></p>
+</li>
+</ul>
+<p>Returns:</p>
+<ul>
+<li><dl class="first docutils">
+<dt>res <span class="classifier-delimiter">:</span> <span class="classifier">array</span></dt>
+<dd><p class="first last">The function calculated on xp, yp, zp</p>
+</dd>
+</dl>
+</li>
+</ul>
+<p>Example:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">fatiando</span> <span class="kn">import</span> <span class="n">mesher</span><span class="p">,</span> <span class="n">gridder</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c"># Create a sphere model</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">sphere</span> <span class="o">=</span> <span class="n">mesher</span><span class="o">.</span><span class="n">Sphere</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c"># Create a regular grid at 0m height</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">shape</span> <span class="o">=</span> <span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">area</span> <span class="o">=</span> <span class="p">(</span><span class="o">-</span><span class="mi">30</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="o">-</span><span class="mi">30</span><span class="p">,</span> <span class="mi">30</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">xp</span><span class="p">,</span> <span class="n">yp</span><span class="p">,</span> <span class="n">zp</span> <span class="o">=</span> <span class="n">gridder</span><span class="o">.</span><span class="n">regular</span><span class="p">(</span><span class="n">area</span><span class="p">,</span> <span class="n">shape</span><span class="p">,</span> <span class="n">z</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c"># Calculate the function</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">kxz</span> <span class="o">=</span> <span class="n">kernelxz</span><span class="p">(</span><span class="n">xp</span><span class="p">,</span> <span class="n">yp</span><span class="p">,</span> <span class="n">zp</span><span class="p">,</span> <span class="n">sphere</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">kxz</span><span class="p">:</span>
+<span class="gp">... </span>    <span class="k">print</span> <span class="s">&#39;</span><span class="si">%15.8e</span><span class="s">&#39;</span> <span class="o">%</span> <span class="n">k</span>
+<span class="go"> 1.32478057e-05</span>
+<span class="go"> 1.86797132e-05</span>
+<span class="go">-1.86797132e-05</span>
+<span class="go">-1.32478057e-05</span>
+<span class="go"> 5.60391397e-05</span>
+<span class="go"> 8.27415349e-04</span>
+<span class="go">-8.27415349e-04</span>
+<span class="go">-5.60391397e-05</span>
+<span class="go"> 5.60391397e-05</span>
+<span class="go"> 8.27415349e-04</span>
+<span class="go">-8.27415349e-04</span>
+<span class="go">-5.60391397e-05</span>
+<span class="go"> 1.32478057e-05</span>
+<span class="go"> 1.86797132e-05</span>
+<span class="go">-1.86797132e-05</span>
+<span class="go">-1.32478057e-05</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="fatiando.gravmag.sphere.kernelyy">
+<tt class="descclassname">fatiando.gravmag.sphere.</tt><tt class="descname">kernelyy</tt><big>(</big><em>xp</em>, <em>yp</em>, <em>zp</em>, <em>sphere</em><big>)</big><a class="reference internal" href="../_modules/fatiando/gravmag/sphere.html#kernelyy"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fatiando.gravmag.sphere.kernelyy" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculates the function</p>
+<div class="math">
+\[\frac{\partial^2 \phi(x,y,z)}{\partial y^2},\]</div>
+<p>where</p>
+<div class="math">
+\[\phi(x,y,z) = \frac{4}{3} \pi R^3 \frac{1}{r}\]</div>
+<p>and</p>
+<div class="math">
+\[r = \sqrt{(x - \nu)^2 + (y - \eta)^2 + (z - \zeta)^2}.\]</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The coordinate system of the input parameters is to be
+x -&gt; North, y -&gt; East and z -&gt; Down.</p>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">All input and output values in SI!</p>
+</div>
+<p>Parameters:</p>
+<ul>
+<li><dl class="first docutils">
+<dt>xp, yp, zp <span class="classifier-delimiter">:</span> <span class="classifier">arrays</span></dt>
+<dd><p class="first last">The x, y, and z coordinates where the function will be
+calculated</p>
+</dd>
+</dl>
+</li>
+<li><p class="first">sphere : object of <a class="reference internal" href="mesher.html#fatiando.mesher.Sphere" title="fatiando.mesher.Sphere"><tt class="xref py py-class docutils literal"><span class="pre">fatiando.mesher.Sphere</span></tt></a></p>
+</li>
+</ul>
+<p>Returns:</p>
+<ul>
+<li><dl class="first docutils">
+<dt>res <span class="classifier-delimiter">:</span> <span class="classifier">array</span></dt>
+<dd><p class="first last">The function calculated on xp, yp, zp</p>
+</dd>
+</dl>
+</li>
+</ul>
+<p>Example:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">fatiando</span> <span class="kn">import</span> <span class="n">mesher</span><span class="p">,</span> <span class="n">gridder</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c"># Create a sphere model</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">sphere</span> <span class="o">=</span> <span class="n">mesher</span><span class="o">.</span><span class="n">Sphere</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c"># Create a regular grid at 0m height</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">shape</span> <span class="o">=</span> <span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">area</span> <span class="o">=</span> <span class="p">(</span><span class="o">-</span><span class="mi">30</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="o">-</span><span class="mi">30</span><span class="p">,</span> <span class="mi">30</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">xp</span><span class="p">,</span> <span class="n">yp</span><span class="p">,</span> <span class="n">zp</span> <span class="o">=</span> <span class="n">gridder</span><span class="o">.</span><span class="n">regular</span><span class="p">(</span><span class="n">area</span><span class="p">,</span> <span class="n">shape</span><span class="p">,</span> <span class="n">z</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c"># Calculate the function</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">kyy</span> <span class="o">=</span> <span class="n">kernelyy</span><span class="p">(</span><span class="n">xp</span><span class="p">,</span> <span class="n">yp</span><span class="p">,</span> <span class="n">zp</span><span class="p">,</span> <span class="n">sphere</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">kyy</span><span class="p">:</span>
+<span class="gp">... </span>    <span class="k">print</span> <span class="s">&#39;</span><span class="si">%15.8e</span><span class="s">&#39;</span> <span class="o">%</span> <span class="n">k</span>
+<span class="go"> 2.57596223e-05</span>
+<span class="go"> 2.08590131e-04</span>
+<span class="go"> 2.08590131e-04</span>
+<span class="go"> 2.57596223e-05</span>
+<span class="go">-9.02852807e-05</span>
+<span class="go"> 4.13707675e-04</span>
+<span class="go"> 4.13707675e-04</span>
+<span class="go">-9.02852807e-05</span>
+<span class="go">-9.02852807e-05</span>
+<span class="go"> 4.13707675e-04</span>
+<span class="go"> 4.13707675e-04</span>
+<span class="go">-9.02852807e-05</span>
+<span class="go"> 2.57596223e-05</span>
+<span class="go"> 2.08590131e-04</span>
+<span class="go"> 2.08590131e-04</span>
+<span class="go"> 2.57596223e-05</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="fatiando.gravmag.sphere.kernelyz">
+<tt class="descclassname">fatiando.gravmag.sphere.</tt><tt class="descname">kernelyz</tt><big>(</big><em>xp</em>, <em>yp</em>, <em>zp</em>, <em>sphere</em><big>)</big><a class="reference internal" href="../_modules/fatiando/gravmag/sphere.html#kernelyz"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fatiando.gravmag.sphere.kernelyz" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculates the function</p>
+<div class="math">
+\[\frac{\partial^2 \phi(x,y,z)}{\partial y \partial z},\]</div>
+<p>where</p>
+<div class="math">
+\[\phi(x,y,z) = \frac{4}{3} \pi R^3 \frac{1}{r}\]</div>
+<p>and</p>
+<div class="math">
+\[r = \sqrt{(x - \nu)^2 + (y - \eta)^2 + (z - \zeta)^2}.\]</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The coordinate system of the input parameters is to be
+x -&gt; North, y -&gt; East and z -&gt; Down.</p>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">All input and output values in SI!</p>
+</div>
+<p>Parameters:</p>
+<ul>
+<li><dl class="first docutils">
+<dt>xp, yp, zp <span class="classifier-delimiter">:</span> <span class="classifier">arrays</span></dt>
+<dd><p class="first last">The x, y, and z coordinates where the function will be
+calculated</p>
+</dd>
+</dl>
+</li>
+<li><p class="first">sphere : object of <a class="reference internal" href="mesher.html#fatiando.mesher.Sphere" title="fatiando.mesher.Sphere"><tt class="xref py py-class docutils literal"><span class="pre">fatiando.mesher.Sphere</span></tt></a></p>
+</li>
+</ul>
+<p>Returns:</p>
+<ul>
+<li><dl class="first docutils">
+<dt>res <span class="classifier-delimiter">:</span> <span class="classifier">array</span></dt>
+<dd><p class="first last">The function calculated on xp, yp, zp</p>
+</dd>
+</dl>
+</li>
+</ul>
+<p>Example:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">fatiando</span> <span class="kn">import</span> <span class="n">mesher</span><span class="p">,</span> <span class="n">gridder</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c"># Create a sphere model</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">sphere</span> <span class="o">=</span> <span class="n">mesher</span><span class="o">.</span><span class="n">Sphere</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c"># Create a regular grid at 0m height</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">shape</span> <span class="o">=</span> <span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">area</span> <span class="o">=</span> <span class="p">(</span><span class="o">-</span><span class="mi">30</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="o">-</span><span class="mi">30</span><span class="p">,</span> <span class="mi">30</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">xp</span><span class="p">,</span> <span class="n">yp</span><span class="p">,</span> <span class="n">zp</span> <span class="o">=</span> <span class="n">gridder</span><span class="o">.</span><span class="n">regular</span><span class="p">(</span><span class="n">area</span><span class="p">,</span> <span class="n">shape</span><span class="p">,</span> <span class="n">z</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c"># Calculate the function</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">kyz</span> <span class="o">=</span> <span class="n">kernelyz</span><span class="p">(</span><span class="n">xp</span><span class="p">,</span> <span class="n">yp</span><span class="p">,</span> <span class="n">zp</span><span class="p">,</span> <span class="n">sphere</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">kyz</span><span class="p">:</span>
+<span class="gp">... </span>    <span class="k">print</span> <span class="s">&#39;</span><span class="si">%15.8e</span><span class="s">&#39;</span> <span class="o">%</span> <span class="n">k</span>
+<span class="go"> 1.32478057e-05</span>
+<span class="go"> 5.60391397e-05</span>
+<span class="go"> 5.60391397e-05</span>
+<span class="go"> 1.32478057e-05</span>
+<span class="go"> 1.86797132e-05</span>
+<span class="go"> 8.27415349e-04</span>
+<span class="go"> 8.27415349e-04</span>
+<span class="go"> 1.86797132e-05</span>
+<span class="go">-1.86797132e-05</span>
+<span class="go">-8.27415349e-04</span>
+<span class="go">-8.27415349e-04</span>
+<span class="go">-1.86797132e-05</span>
+<span class="go">-1.32478057e-05</span>
+<span class="go">-5.60391397e-05</span>
+<span class="go">-5.60391397e-05</span>
+<span class="go">-1.32478057e-05</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="fatiando.gravmag.sphere.kernelzz">
+<tt class="descclassname">fatiando.gravmag.sphere.</tt><tt class="descname">kernelzz</tt><big>(</big><em>xp</em>, <em>yp</em>, <em>zp</em>, <em>sphere</em><big>)</big><a class="reference internal" href="../_modules/fatiando/gravmag/sphere.html#kernelzz"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fatiando.gravmag.sphere.kernelzz" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculates the function</p>
+<div class="math">
+\[\frac{\partial^2 \phi(x,y,z)}{\partial z^2},\]</div>
+<p>where</p>
+<div class="math">
+\[\phi(x,y,z) = \frac{4}{3} \pi R^3 \frac{1}{r}\]</div>
+<p>and</p>
+<div class="math">
+\[r = \sqrt{(x - \nu)^2 + (y - \eta)^2 + (z - \zeta)^2}.\]</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The coordinate system of the input parameters is to be
+x -&gt; North, y -&gt; East and z -&gt; Down.</p>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">All input and output values in SI!</p>
+</div>
+<p>Parameters:</p>
+<ul>
+<li><dl class="first docutils">
+<dt>xp, yp, zp <span class="classifier-delimiter">:</span> <span class="classifier">arrays</span></dt>
+<dd><p class="first last">The x, y, and z coordinates where the function will be
+calculated</p>
+</dd>
+</dl>
+</li>
+<li><p class="first">sphere : object of <a class="reference internal" href="mesher.html#fatiando.mesher.Sphere" title="fatiando.mesher.Sphere"><tt class="xref py py-class docutils literal"><span class="pre">fatiando.mesher.Sphere</span></tt></a></p>
+</li>
+</ul>
+<p>Returns:</p>
+<ul>
+<li><dl class="first docutils">
+<dt>res <span class="classifier-delimiter">:</span> <span class="classifier">array</span></dt>
+<dd><p class="first last">The function calculated on xp, yp, zp</p>
+</dd>
+</dl>
+</li>
+</ul>
+<p>Example:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">fatiando</span> <span class="kn">import</span> <span class="n">mesher</span><span class="p">,</span> <span class="n">gridder</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c"># Create a sphere model</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">sphere</span> <span class="o">=</span> <span class="n">mesher</span><span class="o">.</span><span class="n">Sphere</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c"># Create a regular grid at 0m height</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">shape</span> <span class="o">=</span> <span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">area</span> <span class="o">=</span> <span class="p">(</span><span class="o">-</span><span class="mi">30</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="o">-</span><span class="mi">30</span><span class="p">,</span> <span class="mi">30</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">xp</span><span class="p">,</span> <span class="n">yp</span><span class="p">,</span> <span class="n">zp</span> <span class="o">=</span> <span class="n">gridder</span><span class="o">.</span><span class="n">regular</span><span class="p">(</span><span class="n">area</span><span class="p">,</span> <span class="n">shape</span><span class="p">,</span> <span class="n">z</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c"># Calculate the function</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">kzz</span> <span class="o">=</span> <span class="n">kernelzz</span><span class="p">(</span><span class="n">xp</span><span class="p">,</span> <span class="n">yp</span><span class="p">,</span> <span class="n">zp</span><span class="p">,</span> <span class="n">sphere</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">kzz</span><span class="p">:</span>
+<span class="gp">... </span>    <span class="k">print</span> <span class="s">&#39;</span><span class="si">%15.8e</span><span class="s">&#39;</span> <span class="o">%</span> <span class="n">k</span>
+<span class="go">-5.15192445e-05</span>
+<span class="go">-1.18304851e-04</span>
+<span class="go">-1.18304851e-04</span>
+<span class="go">-5.15192445e-05</span>
+<span class="go">-1.18304851e-04</span>
+<span class="go">-8.27415349e-04</span>
+<span class="go">-8.27415349e-04</span>
+<span class="go">-1.18304851e-04</span>
+<span class="go">-1.18304851e-04</span>
+<span class="go">-8.27415349e-04</span>
+<span class="go">-8.27415349e-04</span>
+<span class="go">-1.18304851e-04</span>
+<span class="go">-5.15192445e-05</span>
+<span class="go">-1.18304851e-04</span>
+<span class="go">-1.18304851e-04</span>
+<span class="go">-5.15192445e-05</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="fatiando.gravmag.sphere.tf">
+<tt class="descclassname">fatiando.gravmag.sphere.</tt><tt class="descname">tf</tt><big>(</big><em>xp</em>, <em>yp</em>, <em>zp</em>, <em>spheres</em>, <em>inc</em>, <em>dec</em>, <em>pmag=None</em><big>)</big><a class="reference internal" href="../_modules/fatiando/gravmag/sphere.html#tf"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fatiando.gravmag.sphere.tf" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculate the total-field anomaly of spheres.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Input units are SI. Output is in nT</p>
+</div>
+<p>Parameters:</p>
+<ul>
+<li><dl class="first docutils">
+<dt>xp, yp, zp <span class="classifier-delimiter">:</span> <span class="classifier">arrays</span></dt>
+<dd><p class="first last">The x, y, and z coordinates where the anomaly will be calculated</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>spheres <span class="classifier-delimiter">:</span> <span class="classifier">list of <a class="reference internal" href="mesher.html#fatiando.mesher.Sphere" title="fatiando.mesher.Sphere"><tt class="xref py py-class docutils literal"><span class="pre">fatiando.mesher.Sphere</span></tt></a></span></dt>
+<dd><p class="first last">The spheres. Spheres must have the physical property
+<tt class="docutils literal"><span class="pre">'magnetization'</span></tt>. Spheres without <tt class="docutils literal"><span class="pre">'magnetization'</span></tt> will be
+ignored.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>inc <span class="classifier-delimiter">:</span> <span class="classifier">float</span></dt>
+<dd><p class="first last">The inclination of the regional field (in degrees)</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>dec <span class="classifier-delimiter">:</span> <span class="classifier">float</span></dt>
+<dd><p class="first last">The declination of the regional field (in degrees)</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>pmag <span class="classifier-delimiter">:</span> <span class="classifier">[mx, my, mz] or None</span></dt>
+<dd><p class="first last">A magnetization vector. If not None, will use this value instead of the
+<tt class="docutils literal"><span class="pre">'magnetization'</span></tt> property of the spheres. Use this, e.g., for
+sensitivity matrix building.</p>
+</dd>
+</dl>
+</li>
+</ul>
+<p>Returns:</p>
+<ul>
+<li><dl class="first docutils">
+<dt>tf <span class="classifier-delimiter">:</span> <span class="classifier">array</span></dt>
+<dd><p class="first last">The total-field anomaly</p>
+</dd>
+</dl>
+</li>
+</ul>
+<p>Example:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">fatiando</span> <span class="kn">import</span> <span class="n">mesher</span><span class="p">,</span> <span class="n">gridder</span><span class="p">,</span> <span class="n">utils</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c"># Set the inclination and declination of the regional field</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">inc</span><span class="p">,</span> <span class="n">dec</span> <span class="o">=</span> <span class="o">-</span><span class="mi">30</span><span class="p">,</span> <span class="mi">45</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c"># Create a sphere model</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">model</span> <span class="o">=</span> <span class="p">[</span>
+<span class="gp">... </span>        <span class="c"># One with induced magnetization</span>
+<span class="gp">... </span>        <span class="n">mesher</span><span class="o">.</span><span class="n">Sphere</span><span class="p">(</span><span class="mi">1000</span><span class="p">,</span> <span class="mi">1000</span><span class="p">,</span> <span class="mi">600</span><span class="p">,</span> <span class="mi">500</span><span class="p">,</span> <span class="p">{</span><span class="s">&#39;magnetization&#39;</span><span class="p">:</span><span class="mi">5</span><span class="p">}),</span>
+<span class="gp">... </span>        <span class="c"># and one with remanent</span>
+<span class="gp">... </span>        <span class="n">mesher</span><span class="o">.</span><span class="n">Sphere</span><span class="p">(</span><span class="o">-</span><span class="mi">1000</span><span class="p">,</span> <span class="o">-</span><span class="mi">1000</span><span class="p">,</span> <span class="mi">600</span><span class="p">,</span> <span class="mi">500</span><span class="p">,</span>
+<span class="gp">... </span>            <span class="p">{</span><span class="s">&#39;magnetization&#39;</span><span class="p">:</span><span class="n">utils</span><span class="o">.</span><span class="n">ang2vec</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">70</span><span class="p">,</span> <span class="o">-</span><span class="mi">5</span><span class="p">)})]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c"># Create a regular grid at 100m height</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">shape</span> <span class="o">=</span> <span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">area</span> <span class="o">=</span> <span class="p">(</span><span class="o">-</span><span class="mi">3000</span><span class="p">,</span> <span class="mi">3000</span><span class="p">,</span> <span class="o">-</span><span class="mi">3000</span><span class="p">,</span> <span class="mi">3000</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">xp</span><span class="p">,</span> <span class="n">yp</span><span class="p">,</span> <span class="n">zp</span> <span class="o">=</span> <span class="n">gridder</span><span class="o">.</span><span class="n">regular</span><span class="p">(</span><span class="n">area</span><span class="p">,</span> <span class="n">shape</span><span class="p">,</span> <span class="n">z</span><span class="o">=-</span><span class="mi">100</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c"># Calculate the anomaly for a given regional field</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">tf</span><span class="p">(</span><span class="n">xp</span><span class="p">,</span> <span class="n">yp</span><span class="p">,</span> <span class="n">zp</span><span class="p">,</span> <span class="n">model</span><span class="p">,</span> <span class="n">inc</span><span class="p">,</span> <span class="n">dec</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="k">print</span> <span class="s">&#39;</span><span class="si">%15.8e</span><span class="s">&#39;</span> <span class="o">%</span> <span class="n">t</span>
+<span class="go"> 2.72951375e+01</span>
+<span class="go"> 3.63637351e+01</span>
+<span class="go"> 5.35842876e+00</span>
+<span class="go"> 6.65189557e-02</span>
+<span class="go"> 6.01998831e+01</span>
+<span class="go">-1.71920499e+03</span>
+<span class="go"> 3.30025228e+00</span>
+<span class="go">-5.13176612e+00</span>
+<span class="go"> 1.47871812e+00</span>
+<span class="go">-3.96103758e+01</span>
+<span class="go">-1.85654021e+02</span>
+<span class="go"> 2.18002960e+01</span>
+<span class="go">-2.82713826e+00</span>
+<span class="go">-1.10341542e+01</span>
+<span class="go"> 1.93353982e+01</span>
+<span class="go"> 2.03174254e+01</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</div>
+
+
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="gravmag.tesseroid.html" class="btn btn-neutral float-right" title="Forward modeling with tesseroids (fatiando.gravmag.tesseroid)"/>Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="gravmag.polyprism.html" class="btn btn-neutral" title="Forward modeling with 3D polygonal prisms (fatiando.gravmag.polyprism)"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2012-2014, Leonardo Uieda.
+      Last updated on Mar 05, 2015.
+    </p>
+  </div>
+
+  <a href="https://github.com/snide/sphinx_rtd_theme">Sphinx theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'0.3',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+      <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

@@ -1,0 +1,12 @@
+.. _cookbook_gravmag_eqlayer_upcontinue:
+
+GravMag: Use an equivalent layer to upward continue gravity data
+=================================================================
+
+.. raw:: html
+
+    [<a href="../_static/cookbook/gravmag_eqlayer_upcontinue.py">source code</a>]
+
+.. literalinclude:: ../../cookbook/gravmag_eqlayer_upcontinue.py
+    :language: python
+    :linenos:

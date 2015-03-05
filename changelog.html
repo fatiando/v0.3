@@ -1,0 +1,448 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Changelog &mdash; Fatiando a Terra v0.3</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="_static/favicon.ico"/>
+  
+
+  
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="top" title="Fatiando a Terra v0.3" href="index.html"/>
+        <link rel="next" title="Installing Fatiando" href="install.html"/>
+        <link rel="prev" title="License" href="license.html"/> 
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-nav-search">
+        <a href="index.html" class="fa fa-home"> Fatiando a Terra</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+        
+        
+            <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="contributors.html">Contributors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="license.html">License</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="">Changelog</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#version-0-3">Version 0.3</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#version-0-2">Version 0.2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#version-0-1">Version 0.1</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="install.html">Installing Fatiando</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="install.html#which-python">Which Python?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="install.html#installing-the-dependencies">Installing the dependencies</a></li>
+<li class="toctree-l2"><a class="reference internal" href="install.html#id1">Installing Fatiando</a></li>
+<li class="toctree-l2"><a class="reference internal" href="install.html#installing-the-latest-development-version">Installing the latest development version</a></li>
+<li class="toctree-l2"><a class="reference internal" href="install.html#testing-the-install">Testing the install</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="api/fatiando.html">API Reference: The <tt class="docutils literal"><span class="pre">fatiando</span></tt> package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="api/gravmag.html">Gravity and magnetics (<tt class="docutils literal"><span class="pre">fatiando.gravmag</span></tt>)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/seismic.html">Seismics and seismology (<tt class="docutils literal"><span class="pre">fatiando.seismic</span></tt>)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/geothermal.html">Geothermal heat (<tt class="docutils literal"><span class="pre">fatiando.geothermal</span></tt>)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/mesher.html">Meshing (<tt class="docutils literal"><span class="pre">fatiando.mesher</span></tt>)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/gridder.html">Gridding (<tt class="docutils literal"><span class="pre">fatiando.gridder</span></tt>)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/vis.html">Visualization (<tt class="docutils literal"><span class="pre">fatiando.vis</span></tt>)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/datasets.html">Fetch data from the internet (<tt class="docutils literal"><span class="pre">fatiando.datasets</span></tt>)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/gui.html">Graphical user interfaces (<tt class="docutils literal"><span class="pre">fatiando.gui</span></tt>)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/utils.html">Miscellaneous Utilities (<tt class="docutils literal"><span class="pre">fatiando.utils</span></tt>)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/constants.html">Physical constants and unit conversions (<tt class="docutils literal"><span class="pre">fatiando.constants</span></tt>)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/inversion.html">Inverse problems framework (<tt class="docutils literal"><span class="pre">fatiando.inversion</span></tt>)</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="cookbook.html">Cookbook</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="cookbook/datasets_crust2.0_tesseroid.html">Datasets: Fetch the CRUST2.0 model, convert it to tesseroids and calculate its gravity signal in parallel</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cookbook/geothermal_climsig_abrupt.html">Geothermal: Forward and inverse modeling of an abrupt change in temperature measured in a well</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cookbook/geothermal_climsig_linear.html">Geothermal: Forward and inverse modeling of a linear change in temperature measured in a well</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cookbook/geothermal_climsig_wrong.html">Geothermal: Climate signal: What happens when assuming a climate change is linear, when in fact it was abrupt?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cookbook/gravmag_2d_polygon_interactive.html">GravMag: Interactive 2D forward modeling with polygons</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cookbook/gravmag_2d_polygon_picker.html">GravMag: 2D forward modeling with polygons</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cookbook/gravmag_basin2d_trapezoidal.html">GravMag: Simple gravity inversion for the relief of a 2D trapezoidal basin</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cookbook/gravmag_basin2d_trapezoidal_forward.html">GravMag: Interactive 2D forward gravity modeling of a trapezoidal basin</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cookbook/gravmag_basin2d_triangular.html">GravMag: Simple gravity inversion for the relief of a 2D triangular basin</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cookbook/gravmag_basin2d_triangular_forward.html">GravMag: Interactive 2D forward gravity modeling of a triangular basin</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cookbook/gravmag_eqlayer_joint.html">GravMag: Fit an equivalent layer to gravity and gravity gradient data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cookbook/gravmag_eqlayer_pel_polereduc.html">GravMag: Use the Polynomial Equivalent Layer to reduce a magnetic total field anomaly to the pole</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cookbook/gravmag_eqlayer_pel_upcontinue.html">GravMag: Use the polynomial equivalent layer to upward continue gravity data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cookbook/gravmag_eqlayer_polereduc.html">GravMag: Use an equivalent layer to reduce a magnetic total field anomaly to the pole</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cookbook/gravmag_eqlayer_upcontinue.html">GravMag: Use an equivalent layer to upward continue gravity data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cookbook/gravmag_euler_classic.html">GravMag: Classic 3D Euler deconvolution of magnetic data (single window)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cookbook/gravmag_euler_classic_expanding_window.html">GravMag: Classic 3D Euler deconvolution of magnetic data using an expanding window</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cookbook/gravmag_euler_classic_moving_window.html">GravMag: Classic 3D Euler deconvolution of magnetic data using a moving window</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cookbook/gravmag_fourier_ansig.html">GravMag: Calculate the analytic signal of a total field anomaly using FFT</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cookbook/gravmag_fourier_deriv.html">GravMag: Calculating the derivatives of the gravity anomaly using FFT</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cookbook/gravmag_grav_polyprism.html">GravMag: Forward gravity modeling using a stack of 3D polygonal model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cookbook/gravmag_grav_prism.html">GravMag: Forward modeling of the gravitational potential and its derivatives using 3D model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cookbook/gravmag_grav_sphere.html">GravMag: Forward modeling of the gravity anomaly and gravity gradient tensor using model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cookbook/gravmag_grav_tesseroid.html">GravMag: Forward modeling of the gravitational potential and its derivatives using tesseroids</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cookbook/gravmag_harvester_grav.html">GravMag: 3D gravity inversion by planting anomalous densities using <tt class="docutils literal"><span class="pre">harvester</span></tt> (more complex interactive example)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cookbook/gravmag_harvester_tensor.html">GravMag: 3D gravity gradient inversion by planting anomalous densities using <tt class="docutils literal"><span class="pre">harvester</span></tt> (with non-targeted sources)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cookbook/gravmag_harvester_weights.html">GravMag: Using data weights in 3D inversion using <tt class="docutils literal"><span class="pre">harvester</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="cookbook/gravmag_imaging_geninv.html">GravMag: 3D imaging using the Generalized Inverse method on synthetic gravity data (more complex model + noisy data)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cookbook/gravmag_imaging_migration.html">GravMag: 3D imaging using the migration method on synthetic gravity data (more complex model + noisy data)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cookbook/gravmag_imaging_sandwich.html">GravMag: 3D imaging using the sandwich model method on synthetic gravity data (simple example)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cookbook/gravmag_mag_polyprism.html">GravMag: 3D forward modeling of total-field magnetic anomaly using polygonal prisms</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cookbook/gravmag_mag_prism.html">GravMag: 3D forward modeling of total-field magnetic anomaly using rectangular prisms (model with induced and remanent magnetization)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cookbook/gravmag_mag_sphere.html">GravMag: 3D forward modeling of total-field magnetic anomaly using spheres</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cookbook/gravmag_magdir_dipolemagdir.html">GravMag: Use the DipoleMagDir class to estimate the magnetization direction of dipoles with known centers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cookbook/gravmag_normal_gravity.html">GravMag: Calculate the gravity disturbance and Bouguer anomaly for Hawaii</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cookbook/gravmag_tensor_centerofmass.html">GravMag: Center of mass estimation using the first eigenvector of the gravity gradient tensor (simple model)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cookbook/gravmag_tensor_centerofmass_expanding_window.html">GravMag: Center of mass estimation using the first eigenvector of the gravity gradient tensor (2 sources with expanding windows)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cookbook/gravmag_tensor_invariants.html">GravMag: Calculate the gravity gradient tensor invariants</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cookbook/gravmag_tensor_polyprism.html">GravMag: Generate synthetic gradient tensor data from polygonal prisms</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cookbook/gravmag_tensor_prism_noisy.html">GravMag: Generate noise-corrupted gravity gradient tensor data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cookbook/gravmag_upcontinue.html">GravMag: Upward continuation of noisy gz data using the analytical formula</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cookbook/grid_cut.html">Gridding: Cut a section from a grid</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cookbook/grid_interpolate.html">Gridding: Grid irregularly sampled data.</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cookbook/grid_profile.html">Gridding: Extract a profile from map data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cookbook/grid_scatter.html">Gridding: Generate and plot irregular grids (scatter)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cookbook/grid_surfer.html">Gridding: Load a Surfer ASCII grid file</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cookbook/mesher_pointgrid.html">Meshing: Making a grid of 3D point sources</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cookbook/mesher_prismmesh.html">Meshing: Make and plot a 3D prism mesh</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cookbook/mesher_prismmesh_filter.html">Meshing: Filter prisms from a 3D prism mesh based on their physical properties</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cookbook/mesher_prismmesh_topo.html">Meshing: Make and plot a 3D prism mesh with topography</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cookbook/mesher_prismmesh_vardens.html">Meshing: Make a 3D prism mesh with depth-varying density</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cookbook/mesher_prismrelief_topo.html">Meshing: Generate a 3D prism model of the topography</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cookbook/mesher_squaremesh_from_image.html">Meshing: Generate a SquareMesh and get the physical properties from an image</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cookbook/mesher_tesseroid.html">Meshing: Make and plot a tesseroid with the Earth</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cookbook/mesher_tesseroidmesh.html">Meshing: Make and plot a tesseroid mesh</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cookbook/mesher_tesseroidmesh_topo.html">Meshing: Make and plot a tesseroid mesh with topography</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cookbook/seismic_epic2d.html">Seismic: 2D epicenter estimation assuming a homogeneous and flat Earth</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cookbook/seismic_epic2d_iterate.html">Seismic: Show steps taken by different algorithms for 2D epicenter estimation on a flat Earth</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cookbook/seismic_profile_vertical.html">Seismic: Invert vertical seismic profile (VSP) traveltimes for the velocity of a layered model.</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cookbook/seismic_profile_vertical_interactive.html">Seismic: Interactive forward modeling of 1D vertical seismic profile (VSP) data in layered media</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cookbook/seismic_profile_vertical_smooth.html">Seismic: Invert vertical seismic profile (VSP) traveltimes using smoothness regularization and unknown layer thicknesses</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cookbook/seismic_srtomo_damped.html">Seismic: 2D straight-ray tomography using damping regularization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cookbook/seismic_srtomo_sharp.html">Seismic: 2D straight-ray tomography using sharpness (total variation) regularization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cookbook/seismic_srtomo_smooth.html">Seismic: 2D straight-ray tomography using smoothness regularization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cookbook/seismic_wavefd_elastic_psv.html">Seismic: 2D finite difference simulation of elastic P and SV wave propagation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cookbook/seismic_wavefd_elastic_sh.html">Seismic: 2D finite difference simulation of elastic SH wave propagation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cookbook/seismic_wavefd_love_wave.html">Seismic: 2D finite difference simulation of elastic SH wave propagation in a medium with a discontinuity (i.e., Moho), generating Love waves.</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cookbook/seismic_wavefd_rayleigh_wave.html">Seismic: 2D finite difference simulation of elastic P and SV wave propagation in a medium with a discontinuity (i.e., Moho), generating Rayleigh waves</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cookbook/seismic_wavefd_scalar.html">Seismic: 2D finite difference simulation of scalar wave propagation.</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cookbook/vis_mpl_basemap.html">Vis: Plot a map using the Orthographic map projection and filled contours</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cookbook/vis_mpl_basemap2.html">Vis: Plot a map using the Mercator map projection and pseudo-color</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cookbook/vis_mpl_basemap3.html">Vis: Plot a map using the Robinson map projection and contours</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cookbook/vis_mpl_contour.html">Vis: Plot contour lines and filled contours</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cookbook/vis_mpl_irregular_data.html">Vis: Plotting irregularly sampled map data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cookbook/vis_myv_color.html">Vis: Set the colors in figures, prisms, polygonal prisms and tesseroids.</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cookbook/vis_myv_earth.html">Vis: Plot the Earth, continents, inner and outer core in 3D with Mayavi2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cookbook/vis_myv_exaggerate.html">Vis: Exaggerate the vertical dimension of 3D plots</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="develop.html">Developer guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="develop.html#making-a-release">Making a release</a></li>
+</ul>
+</li>
+</ul>
+
+        
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="index.html">Fatiando a Terra</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="index.html">Docs</a> &raquo;</li>
+      
+    <li>Changelog</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          <a href="_sources/changelog.txt" rel="nofollow"> View page source</a>
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            
+  <div class="section" id="changelog">
+<span id="id1"></span><h1>Changelog<a class="headerlink" href="#changelog" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="version-0-3">
+<h2>Version 0.3<a class="headerlink" href="#version-0-3" title="Permalink to this headline">¶</a></h2>
+<p><strong>Release date</strong>: 2014-10-28</p>
+<p><strong>Changes</strong>:</p>
+<ul class="simple">
+<li><strong>New module</strong> <a class="reference internal" href="api/gravmag.normal_gravity.html#fatiando-gravmag-normal-gravity"><em>fatiando.gravmag.normal_gravity</em></a> to calculate normal gravity (the gravity
+of reference ellipsoids).
+(<a class="reference external" href="https://github.com/fatiando/fatiando/pull/133">PR 133</a>)</li>
+<li>Using <a class="reference external" href="https://github.com/warner/python-versioneer">versioneer</a> to manage
+version numbers. Access the version number + git commit hash from
+<tt class="docutils literal"><span class="pre">fatiando.__version__</span></tt>.
+(<a class="reference external" href="https://github.com/fatiando/fatiando/pull/117">PR 117</a>)</li>
+<li><strong>BUG FIX</strong>: <a class="reference internal" href="api/gravmag.prism.html#fatiando-gravmag-prism"><em>fatiando.gravmag.prism</em></a>
+gravitational field functions give correct results in all sides of the prism.
+There were singularities due to log(0) and weird results because of arctan2.
+(<a class="reference external" href="https://github.com/fatiando/fatiando/pull/113">PR 113</a>)</li>
+<li><a class="reference external" href="http://www.python.org/dev/peps/pep-0008/">PEP8</a> compliance (started by
+&#64;SamuelMarks).
+(<a class="reference external" href="https://github.com/fatiando/fatiando/pull/115">PR 115</a>)</li>
+<li>Multithreaded parallelism with OpenMP in
+<a class="reference internal" href="api/gravmag.sphere.html#fatiando-gravmag-sphere"><em>fatiando.gravmag.sphere</em></a>,
+<a class="reference internal" href="api/gravmag.polyprism.html#fatiando-gravmag-polyprism"><em>fatiando.gravmag.polyprism</em></a> and
+<a class="reference internal" href="api/gravmag.prism.html#fatiando-gravmag-prism"><em>fatiando.gravmag.prism</em></a>.
+Speedups are range from practically none to over 3x.
+Works automatically.
+<strong>Windows users will have to install an extra dependency!</strong>
+See the <a class="reference internal" href="install.html#install"><em>install instructions</em></a>.
+(<a class="reference external" href="https://github.com/fatiando/fatiando/pull/106">PR 106</a>)</li>
+<li>Faster Cython implementations of
+<a class="reference internal" href="api/gravmag.sphere.html#fatiando-gravmag-sphere"><em>fatiando.gravmag.sphere</em></a> and
+<a class="reference internal" href="api/gravmag.polyprism.html#fatiando-gravmag-polyprism"><em>fatiando.gravmag.polyprism</em></a>.
+Also separated gravmag forward modeling functions into &#8220;kernels&#8221; for gravity
+tensor components. This allows them to be reused in the magnetic field
+computations.
+(<a class="reference external" href="https://github.com/fatiando/fatiando/pull/105">PR 105</a>)</li>
+<li>Added <tt class="docutils literal"><span class="pre">xy2ne</span></tt> flag for <tt class="docutils literal"><span class="pre">square</span></tt> and <tt class="docutils literal"><span class="pre">points</span></tt> functions in
+<a class="reference internal" href="api/vis.mpl.html#fatiando-vis-mpl"><em>fatiando.vis.mpl</em></a>.
+(<a class="reference external" href="https://github.com/fatiando/fatiando/pull/94">PR 94</a>)</li>
+<li><strong>New</strong> class <tt class="docutils literal"><span class="pre">LCurve</span></tt> in <a class="reference internal" href="api/inversion.regularization.html#fatiando-inversion-regularization"><em>fatiando.inversion.regularization</em></a> for estimating the regularization
+parameter using an L-curve criterion.
+(<a class="reference external" href="https://github.com/fatiando/fatiando/pull/90">PR 90</a>)</li>
+<li>Added support for <tt class="docutils literal"><span class="pre">vmin</span></tt> and <tt class="docutils literal"><span class="pre">vmax</span></tt> arguments in
+<a class="reference internal" href="api/vis.mpl.html#fatiando-vis-mpl"><em>fatiando.vis.mpl.contourf</em></a>.
+(<a class="reference external" href="https://github.com/fatiando/fatiando/pull/89">PR 89</a>)</li>
+<li><strong>New</strong> module <a class="reference internal" href="api/gravmag.magdir.html#fatiando-gravmag-magdir"><em>fatiando.gravmag.magdir</em></a> for
+estimating the total magnetization vector of multiple sources.
+(<a class="reference external" href="https://github.com/fatiando/fatiando/pull/87">PR 87</a>)</li>
+</ul>
+</div>
+<div class="section" id="version-0-2">
+<h2>Version 0.2<a class="headerlink" href="#version-0-2" title="Permalink to this headline">¶</a></h2>
+<p><strong>Release date</strong>: 2014-01-15</p>
+<p><strong>Changes</strong>:</p>
+<ul class="simple">
+<li>Complete re-implementation of <a class="reference internal" href="api/inversion.html#fatiando-inversion"><em>fatiando.inversion</em></a>
+and all modules that depended on it. Inversion routines now have a standard
+interface. (<a class="reference external" href="https://github.com/fatiando/fatiando/pull/72">PR 72</a>)</li>
+<li>Added moving window solution for Euler deconvolution in
+<a class="reference internal" href="api/gravmag.euler.html#fatiando-gravmag-euler"><em>fatiando.gravmag.euler</em></a>.
+(<a class="reference external" href="https://github.com/fatiando/fatiando/pull/85">PR 85</a>)</li>
+<li>Renamed the <tt class="docutils literal"><span class="pre">fatiando.io</span></tt> module to
+<a class="reference internal" href="api/datasets.html#fatiando-datasets"><em>fatiando.datasets</em></a>
+(<a class="reference external" href="https://github.com/fatiando/fatiando/pull/82">PR 82</a>)</li>
+<li><a class="reference internal" href="api/utils.html#fatiando-utils"><em>fatiando.utils.contaminate</em></a> can now take multiple data
+vectors and stddevs</li>
+<li>2x speed-up of <a class="reference internal" href="api/gravmag.talwani.html#fatiando-gravmag-talwani"><em>fatiando.gravmag.talwani</em></a>
+with smarter numpy array usage. (<a class="reference external" href="https://github.com/fatiando/fatiando/pull/57">PR 57</a>)</li>
+<li>300x speed-up of <a class="reference internal" href="api/seismic.ttime2d.html#fatiando-seismic-ttime2d"><em>fatiando.seismic.ttime2d</em></a>
+with new Cython code. (<a class="reference external" href="https://github.com/fatiando/fatiando/pull/62">PR 62</a>)</li>
+<li>Speed-up of <a class="reference internal" href="api/gravmag.tesseroid.html#fatiando-gravmag-tesseroid"><em>fatiando.gravmag.tesseroid</em></a>
+with better Cython code. (<a class="reference external" href="https://github.com/fatiando/fatiando/pull/58">PR 58</a>)</li>
+<li>Various tweaks to <a class="reference internal" href="api/vis.myv.html#fatiando-vis-myv"><em>fatiando.vis.myv</em></a>. (<a class="reference external" href="https://github.com/fatiando/fatiando/pull/56">PR 56</a> and <a class="reference external" href="https://github.com/fatiando/fatiando/pull/60">PR 60</a>)</li>
+<li><strong>New</strong> gravity gradient tensor modeling with spheres in
+<a class="reference internal" href="api/gravmag.sphere.html#fatiando-gravmag-sphere"><em>fatiando.gravmag.sphere</em></a>. (<a class="reference external" href="https://github.com/fatiando/fatiando/pull/55">PR 55</a> and <a class="reference external" href="https://github.com/fatiando/fatiando/pull/24">PR 24</a>, the first one by
+<a class="reference external" href="http://fatiando.org/people/oliveira-jr/">Vanderlei</a>)</li>
+<li><strong>New</strong> function <a class="reference internal" href="api/gridder.html#fatiando-gridder"><em>fatiando.gridder.profile</em></a> to
+extract a profile (cross-section) from map data. (<a class="reference external" href="https://github.com/fatiando/fatiando/pull/46">PR 46</a>)</li>
+<li>Better support for random numbers. <tt class="docutils literal"><span class="pre">contaminate</span></tt> function now guaranteed to
+use errors with zero mean. Can now control the random seed used in all
+functions relying on random numbers. (<a class="reference external" href="https://github.com/fatiando/fatiando/pull/41">PR 41</a>)</li>
+<li><strong>New</strong> scalar wave 2D finite differences modeling in
+<a class="reference internal" href="api/seismic.wavefd.html#fatiando-seismic-wavefd"><em>fatiando.seismic.wavefd</em></a>. (<a class="reference external" href="https://github.com/fatiando/fatiando/pull/38">PR 38</a> the first by <a class="reference external" href="http://www.fatiando.org/people/ferreira/">Andre</a>!)</li>
+<li><strong>New</strong> algorithms in <a class="reference internal" href="api/seismic.wavefd.html#fatiando-seismic-wavefd"><em>fatiando.seismic.wavefd</em></a> for elastic waves and a new scalar wave solver!
+Using staggered grid finite
+differences makes elastic wave methods are more stable. (<a class="reference external" href="https://github.com/fatiando/fatiando/pull/52">PR 52</a>)</li>
+<li><strong>New</strong> <tt class="docutils literal"><span class="pre">extrapolate_nans</span></tt> function in
+<a class="reference internal" href="api/gridder.html#fatiando-gridder"><em>fatiando.gridder</em></a> to fill NaNs and masked
+values in arrays using the nearest data point.</li>
+<li><tt class="docutils literal"><span class="pre">interp</span></tt> function of <a class="reference internal" href="api/gridder.html#fatiando-gridder"><em>fatiando.gridder</em></a> has option
+to extrapolate values outside the convex hull of the data (enabled by
+default). Uses better cubic interpolation by default and returns
+1D arrays like the rest of fatiando, instead of 2D. (<a class="reference external" href="https://github.com/fatiando/fatiando/pull/44">PR 44</a> and <a class="reference external" href="https://github.com/fatiando/fatiando/pull/42">PR 42</a>)</li>
+<li><strong>New</strong> function to load a grid in Surfer format. (<a class="reference external" href="https://github.com/fatiando/fatiando/pull/33">PR</a> the first by <a class="reference external" href="http://fatiando.org/people/santos/">Henrique</a>!)</li>
+<li><strong>New</strong> module <a class="reference internal" href="api/gravmag.eqlayer.html#fatiando-gravmag-eqlayer"><em>fatiando.gravmag.eqlayer</em></a> for
+equivalent layer processing of potential fields.</li>
+<li>Refactored all magnetic modeling and inversion to use either scalar or vector
+magnetization.</li>
+<li><tt class="docutils literal"><span class="pre">Seed</span></tt> class of
+<a class="reference internal" href="api/gravmag.harvester.html#fatiando-gravmag-harvester"><em>fatiando.gravmag.harvester</em></a> can now be
+used as a <tt class="docutils literal"><span class="pre">Prism</span></tt> object.</li>
+<li><a class="reference internal" href="api/gravmag.harvester.html#fatiando-gravmag-harvester"><em>fatiando.gravmag.harvester</em></a> now supports
+data weights and magnetic data inversion.</li>
+<li>Removed module <tt class="docutils literal"><span class="pre">fatiando.logger</span></tt>. (<a class="reference external" href="https://github.com/fatiando/fatiando/pull/30">PR 30</a>)</li>
+</ul>
+</div>
+<div class="section" id="version-0-1">
+<h2>Version 0.1<a class="headerlink" href="#version-0-1" title="Permalink to this headline">¶</a></h2>
+<p><strong>Release date</strong>: 2013-04-12</p>
+<p><strong>Changes</strong>:</p>
+<ul class="simple">
+<li>Change license to BSD (see the <a class="reference internal" href="license.html#license"><em>license text</em></a>).</li>
+<li>The API is now fully accessible by only importing <tt class="docutils literal"><span class="pre">fatiando</span></tt></li>
+<li>Added a <a class="reference internal" href="cookbook.html#cookbook"><em>Cookbook</em></a> section to the documentation with all the
+sample scripts from the cookbook folder.</li>
+<li>Implemented &#8220;Robust 3D gravity gradient inversion by planting anomalous
+densities&#8221; by Uieda and Barbosa (2012) in
+<a class="reference internal" href="api/gravmag.harvester.html#fatiando-gravmag-harvester"><em>fatiando.gravmag.harvester</em></a></li>
+<li>Added harvester command line program that runs this new inversion</li>
+<li>Added magnetic total field anomaly function to
+<a class="reference internal" href="api/gravmag.prism.html#fatiando-gravmag-prism"><em>fatiando.gravmag.prism</em></a></li>
+<li>Added <a class="reference internal" href="api/vis.myv.html#fatiando-vis-myv"><em>fatiando.vis.myv.savefig3d</em></a> to save a Mayavi
+scene</li>
+<li>Added <a class="reference internal" href="api/vis.myv.html#fatiando-vis-myv"><em>fatiando.vis.myv.polyprisms</em></a> 3D plotter
+function for PolygonalPrism</li>
+<li>Added <a class="reference internal" href="api/vis.myv.html#fatiando-vis-myv"><em>fatiando.vis.myv.points3d</em></a> 3D plotter
+function for points</li>
+<li>Added gravity gradient tensor components and magnetic total field anomaly to
+<a class="reference internal" href="api/gravmag.polyprism.html#fatiando-gravmag-polyprism"><em>fatiando.gravmag.polyprism</em></a></li>
+<li>Added option to control the line width to <cite>prisms</cite> and <cite>polyprisms</cite> in
+<a class="reference internal" href="api/vis.myv.html#fatiando-vis-myv"><em>fatiando.vis.myv</em></a></li>
+<li>Added module <a class="reference internal" href="api/gravmag.tensor.html#fatiando-gravmag-tensor"><em>fatiando.gravmag.tensor</em></a> for
+processing gradient tensor data. Includes eigenvalues and eigenvectors,
+tensor invariants, center of mass estimation, etc.</li>
+<li>Added module <a class="reference internal" href="api/gravmag.imaging.html#fatiando-gravmag-imaging"><em>fatiando.gravmag.imaging</em></a> with
+imaging methods for potential fields</li>
+<li>Added module <a class="reference internal" href="api/gravmag.euler.html#fatiando-gravmag-euler"><em>fatiando.gravmag.euler</em></a> with Euler
+deconvolution methods for potential field data</li>
+<li>Added module <a class="reference internal" href="api/seismic.wavefd.html#fatiando-seismic-wavefd"><em>fatiando.seismic.wavefd</em></a> with 2D
+Finite Difference simulations of elastic seismic waves</li>
+<li>Added unit conversion functions to <a class="reference internal" href="api/utils.html#fatiando-utils"><em>fatiando.utils</em></a></li>
+<li>Added tesseroids forward modeling <a class="reference internal" href="api/gravmag.tesseroid.html#fatiando-gravmag-tesseroid"><em>fatiando.gravmag.tesseroid</em></a>, meshing and plotting with Mayavi</li>
+<li>New <a class="reference internal" href="api/datasets.html#fatiando-io"><em>fatiando.io</em></a> module to fetch models and data from the
+web and convert them to useful formats (for now supports the CRUST2.0 global
+curstal model)</li>
+<li>If building inplace or packaging, the setup script puts the Mercurial
+changeset hash in a file. Then fatiando.logger.header
+loads the hash from file and put a &#8220;Unknown&#8221; if it can&#8217;t read.
+This way importing fatiando won&#8217;t fail if the there is no changeset
+information available.</li>
+<li><a class="reference internal" href="api/mesher.html#fatiando-mesher"><em>fatiando.mesher.PrismMesh.dump</em></a>: takes a mesh
+file, a property file and a property name. Saves the output to these files.</li>
+<li>Transformed all geometric elements (like Prism, Polygon, etc) into classes</li>
+<li>Ported all C extensions to Python + Numpy. This way compiling is not a
+prerequisite to installing</li>
+<li>Using <a class="reference external" href="http://www.cython.org">Cython</a> for optional extension modules. If
+they exist, they are loaded to replace the Python + Numpy versions. This all
+happens at runtime.</li>
+<li>Move all physical constants used in <tt class="docutils literal"><span class="pre">fatiando</span></tt> to module
+<a class="reference internal" href="api/constants.html#fatiando-constants"><em>fatiando.constants</em></a></li>
+<li>Data modules hidden inside functions in
+<a class="reference internal" href="api/gravmag.basin2d.html#fatiando-gravmag-basin2d"><em>fatiando.gravmag.basin2d</em></a></li>
+<li>Functions in <a class="reference internal" href="api/gravmag.basin2d.html#fatiando-gravmag-basin2d"><em>fatiando.gravmag.basin2d</em></a> spit
+out Polygons instead of the vertices estimated. Now you don&#8217;t have to build
+the polygons by hand.</li>
+</ul>
+</div>
+</div>
+
+
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="install.html" class="btn btn-neutral float-right" title="Installing Fatiando"/>Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="license.html" class="btn btn-neutral" title="License"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2012-2014, Leonardo Uieda.
+      Last updated on Mar 05, 2015.
+    </p>
+  </div>
+
+  <a href="https://github.com/snide/sphinx_rtd_theme">Sphinx theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'0.3',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+      <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

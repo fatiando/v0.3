@@ -1,0 +1,983 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Regularization (fatiando.inversion.regularization) &mdash; Fatiando a Terra v0.3</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+  
+
+  
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="top" title="Fatiando a Terra v0.3" href="../index.html"/>
+        <link rel="up" title="Inverse problems framework (fatiando.inversion)" href="inversion.html"/>
+        <link rel="next" title="Cookbook" href="../cookbook.html"/>
+        <link rel="prev" title="Optimization routines (fatiando.inversion.solvers)" href="inversion.solvers.html"/> 
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-nav-search">
+        <a href="../index.html" class="fa fa-home"> Fatiando a Terra</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+        
+        
+            <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../contributors.html">Contributors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../license.html">License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../changelog.html">Changelog</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../changelog.html#version-0-3">Version 0.3</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../changelog.html#version-0-2">Version 0.2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../changelog.html#version-0-1">Version 0.1</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../install.html">Installing Fatiando</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../install.html#which-python">Which Python?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../install.html#installing-the-dependencies">Installing the dependencies</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../install.html#id1">Installing Fatiando</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../install.html#installing-the-latest-development-version">Installing the latest development version</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../install.html#testing-the-install">Testing the install</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="reference internal" href="fatiando.html">API Reference: The <tt class="docutils literal"><span class="pre">fatiando</span></tt> package</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="gravmag.html">Gravity and magnetics (<tt class="docutils literal"><span class="pre">fatiando.gravmag</span></tt>)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="seismic.html">Seismics and seismology (<tt class="docutils literal"><span class="pre">fatiando.seismic</span></tt>)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="geothermal.html">Geothermal heat (<tt class="docutils literal"><span class="pre">fatiando.geothermal</span></tt>)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mesher.html">Meshing (<tt class="docutils literal"><span class="pre">fatiando.mesher</span></tt>)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="gridder.html">Gridding (<tt class="docutils literal"><span class="pre">fatiando.gridder</span></tt>)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vis.html">Visualization (<tt class="docutils literal"><span class="pre">fatiando.vis</span></tt>)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="datasets.html">Fetch data from the internet (<tt class="docutils literal"><span class="pre">fatiando.datasets</span></tt>)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="gui.html">Graphical user interfaces (<tt class="docutils literal"><span class="pre">fatiando.gui</span></tt>)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="utils.html">Miscellaneous Utilities (<tt class="docutils literal"><span class="pre">fatiando.utils</span></tt>)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="constants.html">Physical constants and unit conversions (<tt class="docutils literal"><span class="pre">fatiando.constants</span></tt>)</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="inversion.html">Inverse problems framework (<tt class="docutils literal"><span class="pre">fatiando.inversion</span></tt>)</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../cookbook.html">Cookbook</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/datasets_crust2.0_tesseroid.html">Datasets: Fetch the CRUST2.0 model, convert it to tesseroids and calculate its gravity signal in parallel</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/geothermal_climsig_abrupt.html">Geothermal: Forward and inverse modeling of an abrupt change in temperature measured in a well</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/geothermal_climsig_linear.html">Geothermal: Forward and inverse modeling of a linear change in temperature measured in a well</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/geothermal_climsig_wrong.html">Geothermal: Climate signal: What happens when assuming a climate change is linear, when in fact it was abrupt?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/gravmag_2d_polygon_interactive.html">GravMag: Interactive 2D forward modeling with polygons</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/gravmag_2d_polygon_picker.html">GravMag: 2D forward modeling with polygons</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/gravmag_basin2d_trapezoidal.html">GravMag: Simple gravity inversion for the relief of a 2D trapezoidal basin</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/gravmag_basin2d_trapezoidal_forward.html">GravMag: Interactive 2D forward gravity modeling of a trapezoidal basin</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/gravmag_basin2d_triangular.html">GravMag: Simple gravity inversion for the relief of a 2D triangular basin</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/gravmag_basin2d_triangular_forward.html">GravMag: Interactive 2D forward gravity modeling of a triangular basin</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/gravmag_eqlayer_joint.html">GravMag: Fit an equivalent layer to gravity and gravity gradient data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/gravmag_eqlayer_pel_polereduc.html">GravMag: Use the Polynomial Equivalent Layer to reduce a magnetic total field anomaly to the pole</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/gravmag_eqlayer_pel_upcontinue.html">GravMag: Use the polynomial equivalent layer to upward continue gravity data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/gravmag_eqlayer_polereduc.html">GravMag: Use an equivalent layer to reduce a magnetic total field anomaly to the pole</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/gravmag_eqlayer_upcontinue.html">GravMag: Use an equivalent layer to upward continue gravity data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/gravmag_euler_classic.html">GravMag: Classic 3D Euler deconvolution of magnetic data (single window)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/gravmag_euler_classic_expanding_window.html">GravMag: Classic 3D Euler deconvolution of magnetic data using an expanding window</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/gravmag_euler_classic_moving_window.html">GravMag: Classic 3D Euler deconvolution of magnetic data using a moving window</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/gravmag_fourier_ansig.html">GravMag: Calculate the analytic signal of a total field anomaly using FFT</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/gravmag_fourier_deriv.html">GravMag: Calculating the derivatives of the gravity anomaly using FFT</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/gravmag_grav_polyprism.html">GravMag: Forward gravity modeling using a stack of 3D polygonal model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/gravmag_grav_prism.html">GravMag: Forward modeling of the gravitational potential and its derivatives using 3D model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/gravmag_grav_sphere.html">GravMag: Forward modeling of the gravity anomaly and gravity gradient tensor using model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/gravmag_grav_tesseroid.html">GravMag: Forward modeling of the gravitational potential and its derivatives using tesseroids</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/gravmag_harvester_grav.html">GravMag: 3D gravity inversion by planting anomalous densities using <tt class="docutils literal"><span class="pre">harvester</span></tt> (more complex interactive example)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/gravmag_harvester_tensor.html">GravMag: 3D gravity gradient inversion by planting anomalous densities using <tt class="docutils literal"><span class="pre">harvester</span></tt> (with non-targeted sources)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/gravmag_harvester_weights.html">GravMag: Using data weights in 3D inversion using <tt class="docutils literal"><span class="pre">harvester</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/gravmag_imaging_geninv.html">GravMag: 3D imaging using the Generalized Inverse method on synthetic gravity data (more complex model + noisy data)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/gravmag_imaging_migration.html">GravMag: 3D imaging using the migration method on synthetic gravity data (more complex model + noisy data)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/gravmag_imaging_sandwich.html">GravMag: 3D imaging using the sandwich model method on synthetic gravity data (simple example)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/gravmag_mag_polyprism.html">GravMag: 3D forward modeling of total-field magnetic anomaly using polygonal prisms</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/gravmag_mag_prism.html">GravMag: 3D forward modeling of total-field magnetic anomaly using rectangular prisms (model with induced and remanent magnetization)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/gravmag_mag_sphere.html">GravMag: 3D forward modeling of total-field magnetic anomaly using spheres</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/gravmag_magdir_dipolemagdir.html">GravMag: Use the DipoleMagDir class to estimate the magnetization direction of dipoles with known centers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/gravmag_normal_gravity.html">GravMag: Calculate the gravity disturbance and Bouguer anomaly for Hawaii</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/gravmag_tensor_centerofmass.html">GravMag: Center of mass estimation using the first eigenvector of the gravity gradient tensor (simple model)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/gravmag_tensor_centerofmass_expanding_window.html">GravMag: Center of mass estimation using the first eigenvector of the gravity gradient tensor (2 sources with expanding windows)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/gravmag_tensor_invariants.html">GravMag: Calculate the gravity gradient tensor invariants</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/gravmag_tensor_polyprism.html">GravMag: Generate synthetic gradient tensor data from polygonal prisms</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/gravmag_tensor_prism_noisy.html">GravMag: Generate noise-corrupted gravity gradient tensor data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/gravmag_upcontinue.html">GravMag: Upward continuation of noisy gz data using the analytical formula</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/grid_cut.html">Gridding: Cut a section from a grid</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/grid_interpolate.html">Gridding: Grid irregularly sampled data.</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/grid_profile.html">Gridding: Extract a profile from map data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/grid_scatter.html">Gridding: Generate and plot irregular grids (scatter)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/grid_surfer.html">Gridding: Load a Surfer ASCII grid file</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/mesher_pointgrid.html">Meshing: Making a grid of 3D point sources</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/mesher_prismmesh.html">Meshing: Make and plot a 3D prism mesh</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/mesher_prismmesh_filter.html">Meshing: Filter prisms from a 3D prism mesh based on their physical properties</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/mesher_prismmesh_topo.html">Meshing: Make and plot a 3D prism mesh with topography</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/mesher_prismmesh_vardens.html">Meshing: Make a 3D prism mesh with depth-varying density</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/mesher_prismrelief_topo.html">Meshing: Generate a 3D prism model of the topography</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/mesher_squaremesh_from_image.html">Meshing: Generate a SquareMesh and get the physical properties from an image</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/mesher_tesseroid.html">Meshing: Make and plot a tesseroid with the Earth</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/mesher_tesseroidmesh.html">Meshing: Make and plot a tesseroid mesh</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/mesher_tesseroidmesh_topo.html">Meshing: Make and plot a tesseroid mesh with topography</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/seismic_epic2d.html">Seismic: 2D epicenter estimation assuming a homogeneous and flat Earth</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/seismic_epic2d_iterate.html">Seismic: Show steps taken by different algorithms for 2D epicenter estimation on a flat Earth</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/seismic_profile_vertical.html">Seismic: Invert vertical seismic profile (VSP) traveltimes for the velocity of a layered model.</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/seismic_profile_vertical_interactive.html">Seismic: Interactive forward modeling of 1D vertical seismic profile (VSP) data in layered media</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/seismic_profile_vertical_smooth.html">Seismic: Invert vertical seismic profile (VSP) traveltimes using smoothness regularization and unknown layer thicknesses</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/seismic_srtomo_damped.html">Seismic: 2D straight-ray tomography using damping regularization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/seismic_srtomo_sharp.html">Seismic: 2D straight-ray tomography using sharpness (total variation) regularization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/seismic_srtomo_smooth.html">Seismic: 2D straight-ray tomography using smoothness regularization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/seismic_wavefd_elastic_psv.html">Seismic: 2D finite difference simulation of elastic P and SV wave propagation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/seismic_wavefd_elastic_sh.html">Seismic: 2D finite difference simulation of elastic SH wave propagation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/seismic_wavefd_love_wave.html">Seismic: 2D finite difference simulation of elastic SH wave propagation in a medium with a discontinuity (i.e., Moho), generating Love waves.</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/seismic_wavefd_rayleigh_wave.html">Seismic: 2D finite difference simulation of elastic P and SV wave propagation in a medium with a discontinuity (i.e., Moho), generating Rayleigh waves</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/seismic_wavefd_scalar.html">Seismic: 2D finite difference simulation of scalar wave propagation.</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/vis_mpl_basemap.html">Vis: Plot a map using the Orthographic map projection and filled contours</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/vis_mpl_basemap2.html">Vis: Plot a map using the Mercator map projection and pseudo-color</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/vis_mpl_basemap3.html">Vis: Plot a map using the Robinson map projection and contours</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/vis_mpl_contour.html">Vis: Plot contour lines and filled contours</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/vis_mpl_irregular_data.html">Vis: Plotting irregularly sampled map data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/vis_myv_color.html">Vis: Set the colors in figures, prisms, polygonal prisms and tesseroids.</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/vis_myv_earth.html">Vis: Plot the Earth, continents, inner and outer core in 3D with Mayavi2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/vis_myv_exaggerate.html">Vis: Exaggerate the vertical dimension of 3D plots</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../develop.html">Developer guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../develop.html#making-a-release">Making a release</a></li>
+</ul>
+</li>
+</ul>
+
+        
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../index.html">Fatiando a Terra</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../index.html">Docs</a> &raquo;</li>
+      
+          <li><a href="fatiando.html">API Reference: The <tt class="docutils literal"><span class="pre">fatiando</span></tt> package</a> &raquo;</li>
+      
+          <li><a href="inversion.html">Inverse problems framework (<tt class="docutils literal"><span class="pre">fatiando.inversion</span></tt>)</a> &raquo;</li>
+      
+    <li>Regularization (<tt class="docutils literal"><span class="pre">fatiando.inversion.regularization</span></tt>)</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          <a href="../_sources/api/inversion.regularization.txt" rel="nofollow"> View page source</a>
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            
+  <div class="section" id="module-fatiando.inversion.regularization">
+<span id="regularization-fatiando-inversion-regularization"></span><span id="fatiando-inversion-regularization"></span><h1>Regularization (<tt class="docutils literal"><span class="pre">fatiando.inversion.regularization</span></tt>)<a class="headerlink" href="#module-fatiando.inversion.regularization" title="Permalink to this headline">¶</a></h1>
+<p>Ready made and base classes for regularization.</p>
+<p>All classes are derived from <a class="reference internal" href="inversion.base.html#fatiando.inversion.base.Objective" title="fatiando.inversion.base.Objective"><tt class="xref py py-class docutils literal"><span class="pre">Objective</span></tt></a> and
+should be used by summing them to a <a class="reference internal" href="inversion.base.html#fatiando.inversion.base.Misfit" title="fatiando.inversion.base.Misfit"><tt class="xref py py-class docutils literal"><span class="pre">Misfit</span></tt></a>
+derivative.</p>
+<p>The regularization parameter is set by multiplying the regularization instance
+by a scalar, e.g., <tt class="docutils literal"><span class="pre">solver</span> <span class="pre">=</span> <span class="pre">misfit</span> <span class="pre">+</span> <span class="pre">0.1*regularization</span></tt>.</p>
+<p>See <a class="reference internal" href="gravmag.eqlayer.html#fatiando.gravmag.eqlayer.EQLGravity" title="fatiando.gravmag.eqlayer.EQLGravity"><tt class="xref py py-class docutils literal"><span class="pre">fatiando.gravmag.eqlayer.EQLGravity</span></tt></a> for an example.</p>
+<p><strong>List of classes</strong></p>
+<ul class="simple">
+<li><a class="reference internal" href="#fatiando.inversion.regularization.Damping" title="fatiando.inversion.regularization.Damping"><tt class="xref py py-class docutils literal"><span class="pre">Damping</span></tt></a>: Damping regularization
+(or 0th order Tikhonov regularization)</li>
+<li><a class="reference internal" href="#fatiando.inversion.regularization.Smoothness" title="fatiando.inversion.regularization.Smoothness"><tt class="xref py py-class docutils literal"><span class="pre">Smoothness</span></tt></a>: Generic smoothness
+regularization (or 1st order Tikhonov regularization). Requires a finite
+difference matrix to specify the parameter derivatives to minimize.</li>
+<li><a class="reference internal" href="#fatiando.inversion.regularization.Smoothness1D" title="fatiando.inversion.regularization.Smoothness1D"><tt class="xref py py-class docutils literal"><span class="pre">Smoothness1D</span></tt></a>: Smoothness for 1D
+problems. Automatically builds a finite difference matrix based on the number
+of parameters</li>
+<li><a class="reference internal" href="#fatiando.inversion.regularization.Smoothness2D" title="fatiando.inversion.regularization.Smoothness2D"><tt class="xref py py-class docutils literal"><span class="pre">Smoothness2D</span></tt></a>: Smoothness for 2D
+grid based problems. Automatically builds a finite difference matrix of
+derivatives in the two spacial dimensions based on the shape of the parameter
+grid</li>
+<li><a class="reference internal" href="#fatiando.inversion.regularization.TotalVariation" title="fatiando.inversion.regularization.TotalVariation"><tt class="xref py py-class docutils literal"><span class="pre">TotalVariation</span></tt></a>: Generic total
+variation regularization (enforces sharpness of the solution). Requires a
+finite difference matrix to specify the parameter derivatives.</li>
+<li><a class="reference internal" href="#fatiando.inversion.regularization.TotalVariation1D" title="fatiando.inversion.regularization.TotalVariation1D"><tt class="xref py py-class docutils literal"><span class="pre">TotalVariation1D</span></tt></a>: Total variation
+for 1D problems. Similar to Smoothness1D</li>
+<li><a class="reference internal" href="#fatiando.inversion.regularization.TotalVariation2D" title="fatiando.inversion.regularization.TotalVariation2D"><tt class="xref py py-class docutils literal"><span class="pre">TotalVariation2D</span></tt></a>: Total variation
+for 2D grid based problems. Similar to Smoothness2D</li>
+</ul>
+<p><strong>Regularization parameter estimation</strong></p>
+<p>Bellow are classes that estimate an optimal value for the regularization
+parameter. They work exactly like an Objective function, i.e., run the
+inversion by calling their <cite>fit()</cite> method and accessing
+the estimates by <cite>p_</cite>, <cite>estimate_</cite>, <cite>residuals()</cite> and <cite>predicted()</cite>.</p>
+<ul class="simple">
+<li><a class="reference internal" href="#fatiando.inversion.regularization.LCurve" title="fatiando.inversion.regularization.LCurve"><tt class="xref py py-class docutils literal"><span class="pre">LCurve</span></tt></a>: Use an L-curve criterion.
+Runs the inversion using several regularization parameters. The best value
+is the one that falls on the corner of the log-log plot of the data
+misfit vs regularizing function. Only works for a single regularization.</li>
+</ul>
+<hr class="docutils" />
+<dl class="class">
+<dt id="fatiando.inversion.regularization.Damping">
+<em class="property">class </em><tt class="descclassname">fatiando.inversion.regularization.</tt><tt class="descname">Damping</tt><big>(</big><em>nparams</em><big>)</big><a class="reference internal" href="../_modules/fatiando/inversion/regularization.html#Damping"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fatiando.inversion.regularization.Damping" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="inversion.base.html#fatiando.inversion.base.Objective" title="fatiando.inversion.base.Objective"><tt class="xref py py-class docutils literal"><span class="pre">fatiando.inversion.base.Objective</span></tt></a></p>
+<p>Damping (0th order Tikhonov) regularization.</p>
+<p>Imposes the minimum norm of the parameter vector.</p>
+<p>The regularizing function if of the form</p>
+<div class="math">
+\[\theta^{NM}(\bar{p}) = \bar{p}^T\bar{p}\]</div>
+<p>Its gradient and Hessian matrices are, respectively,</p>
+<div class="math">
+\[\bar{\nabla}\theta^{NM}(\bar{p}) = 2\bar{\bar{I}}\bar{p}\]</div>
+<div class="math">
+\[\bar{\bar{\nabla}}\theta^{NM}(\bar{p}) = 2\bar{\bar{I}}\]</div>
+<p>Parameters:</p>
+<ul>
+<li><dl class="first docutils">
+<dt>nparams <span class="classifier-delimiter">:</span> <span class="classifier">int</span></dt>
+<dd><p class="first last">The number of parameter</p>
+</dd>
+</dl>
+</li>
+</ul>
+<p>Examples:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">damp</span> <span class="o">=</span> <span class="n">Damping</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">p</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">damp</span><span class="o">.</span><span class="n">value</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
+<span class="go">0.0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">damp</span><span class="o">.</span><span class="n">hessian</span><span class="p">(</span><span class="n">p</span><span class="p">)</span><span class="o">.</span><span class="n">todense</span><span class="p">()</span>
+<span class="go">matrix([[ 2.,  0.,  0.],</span>
+<span class="go">        [ 0.,  2.,  0.],</span>
+<span class="go">        [ 0.,  0.,  2.]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">damp</span><span class="o">.</span><span class="n">gradient</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
+<span class="go">array([ 0.,  0.,  0.])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">p</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">damp</span><span class="o">.</span><span class="n">value</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
+<span class="go">1.0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">damp</span><span class="o">.</span><span class="n">hessian</span><span class="p">(</span><span class="n">p</span><span class="p">)</span><span class="o">.</span><span class="n">todense</span><span class="p">()</span>
+<span class="go">matrix([[ 2.,  0.,  0.],</span>
+<span class="go">        [ 0.,  2.,  0.],</span>
+<span class="go">        [ 0.,  0.,  2.]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">damp</span><span class="o">.</span><span class="n">gradient</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
+<span class="go">array([ 2.,  0.,  0.])</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="class">
+<dt id="fatiando.inversion.regularization.LCurve">
+<em class="property">class </em><tt class="descclassname">fatiando.inversion.regularization.</tt><tt class="descname">LCurve</tt><big>(</big><em>datamisfit</em>, <em>regul</em>, <em>regul_params</em>, <em>loglog=True</em>, <em>jobs=None</em><big>)</big><a class="reference internal" href="../_modules/fatiando/inversion/regularization.html#LCurve"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fatiando.inversion.regularization.LCurve" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">object</span></tt></p>
+<p>Use the L-curve criterion to estimate the regularization parameter.</p>
+<p>Runs the inversion using several specified regularization parameters.
+The best value is the one that falls on the corner of the log-log plot of
+the data misfit vs regularizing function.
+This point is automatically found using the triangle method of
+Castellanos et al. (2002).</p>
+<p>This class behaves as <a class="reference internal" href="inversion.base.html#fatiando.inversion.base.Misfit" title="fatiando.inversion.base.Misfit"><tt class="xref py py-class docutils literal"><span class="pre">Misfit</span></tt></a>.
+To use it, simply call <tt class="docutils literal"><span class="pre">fit</span></tt> and optionally <tt class="docutils literal"><span class="pre">config</span></tt>.
+The estimate will be stored in <tt class="docutils literal"><span class="pre">estimate_</span></tt> and <tt class="docutils literal"><span class="pre">p_</span></tt>.
+The estimated regularization parameter will be stored in <tt class="docutils literal"><span class="pre">regul_param_</span></tt>.</p>
+<p>Parameters:</p>
+<ul>
+<li><dl class="first docutils">
+<dt>datamisfit <span class="classifier-delimiter">:</span> <span class="classifier"><a class="reference internal" href="inversion.base.html#fatiando.inversion.base.Misfit" title="fatiando.inversion.base.Misfit"><tt class="xref py py-class docutils literal"><span class="pre">Misfit</span></tt></a></span></dt>
+<dd><p class="first last">The data misfit instance for the inverse problem. Can be a sum of other
+misfits.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>regul <span class="classifier-delimiter">:</span> <span class="classifier">A class from <a class="reference internal" href="#module-fatiando.inversion.regularization" title="fatiando.inversion.regularization"><tt class="xref py py-mod docutils literal"><span class="pre">fatiando.inversion.regularization</span></tt></a></span></dt>
+<dd><p class="first last">The regularizing function.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>regul_params <span class="classifier-delimiter">:</span> <span class="classifier">list</span></dt>
+<dd><p class="first last">The values of the regularization parameter that will be tested.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>loglog <span class="classifier-delimiter">:</span> <span class="classifier">True or False</span></dt>
+<dd><p class="first last">If True, will use a log-log scale for the L-curve (recommended).</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>jobs <span class="classifier-delimiter">:</span> <span class="classifier">None or int</span></dt>
+<dd><p class="first last">If not None, will use <em>jobs</em> processes to calculate the L-curve.</p>
+</dd>
+</dl>
+</li>
+</ul>
+<p>References:</p>
+<p>Castellanos, J. L., S. Gomez, and V. Guerra (2002), The triangle method for
+finding the corner of the L-curve, Applied Numerical Mathematics, 43(4),
+359-373, doi:10.1016/S0168-9274(01)00179-9.</p>
+<p>Examples:</p>
+<p>We&#8217;ll use the L-curve to estimate the best regularization parameter for a
+smooth inversion using <a class="reference internal" href="seismic.srtomo.html#module-fatiando.seismic.srtomo" title="fatiando.seismic.srtomo"><tt class="xref py py-mod docutils literal"><span class="pre">fatiando.seismic.srtomo</span></tt></a>.</p>
+<p>First, we&#8217;ll setup some synthetic data:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">fatiando.mesher</span> <span class="kn">import</span> <span class="n">SquareMesh</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">fatiando.seismic</span> <span class="kn">import</span> <span class="n">ttime2d</span><span class="p">,</span> <span class="n">srtomo</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">fatiando.inversion.regularization</span> <span class="kn">import</span> <span class="n">Smoothness2D</span><span class="p">,</span> <span class="n">LCurve</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">fatiando</span> <span class="kn">import</span> <span class="n">utils</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">area</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">shape</span> <span class="o">=</span> <span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">model</span> <span class="o">=</span> <span class="n">SquareMesh</span><span class="p">(</span><span class="n">area</span><span class="p">,</span> <span class="n">shape</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">vp</span> <span class="o">=</span> <span class="mi">4</span><span class="o">*</span><span class="n">numpy</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">shape</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">vp</span><span class="p">[</span><span class="mi">3</span><span class="p">:</span><span class="mi">7</span><span class="p">,</span><span class="mi">3</span><span class="p">:</span><span class="mi">7</span><span class="p">]</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">vp</span>
+<span class="go">array([[  4.,   4.,   4.,   4.,   4.,   4.,   4.,   4.,   4.,   4.],</span>
+<span class="go">       [  4.,   4.,   4.,   4.,   4.,   4.,   4.,   4.,   4.,   4.],</span>
+<span class="go">       [  4.,   4.,   4.,   4.,   4.,   4.,   4.,   4.,   4.,   4.],</span>
+<span class="go">       [  4.,   4.,   4.,  10.,  10.,  10.,  10.,   4.,   4.,   4.],</span>
+<span class="go">       [  4.,   4.,   4.,  10.,  10.,  10.,  10.,   4.,   4.,   4.],</span>
+<span class="go">       [  4.,   4.,   4.,  10.,  10.,  10.,  10.,   4.,   4.,   4.],</span>
+<span class="go">       [  4.,   4.,   4.,  10.,  10.,  10.,  10.,   4.,   4.,   4.],</span>
+<span class="go">       [  4.,   4.,   4.,   4.,   4.,   4.,   4.,   4.,   4.,   4.],</span>
+<span class="go">       [  4.,   4.,   4.,   4.,   4.,   4.,   4.,   4.,   4.,   4.],</span>
+<span class="go">       [  4.,   4.,   4.,   4.,   4.,   4.,   4.,   4.,   4.,   4.]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">model</span><span class="o">.</span><span class="n">addprop</span><span class="p">(</span><span class="s">&#39;vp&#39;</span><span class="p">,</span> <span class="n">vp</span><span class="o">.</span><span class="n">ravel</span><span class="p">())</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">src_loc</span> <span class="o">=</span> <span class="n">utils</span><span class="o">.</span><span class="n">random_points</span><span class="p">(</span><span class="n">area</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">rec_loc</span> <span class="o">=</span> <span class="n">utils</span><span class="o">.</span><span class="n">circular_points</span><span class="p">(</span><span class="n">area</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="n">random</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">srcs</span><span class="p">,</span> <span class="n">recs</span> <span class="o">=</span> <span class="n">utils</span><span class="o">.</span><span class="n">connect_points</span><span class="p">(</span><span class="n">src_loc</span><span class="p">,</span> <span class="n">rec_loc</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tts</span> <span class="o">=</span> <span class="n">ttime2d</span><span class="o">.</span><span class="n">straight</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="s">&#39;vp&#39;</span><span class="p">,</span> <span class="n">srcs</span><span class="p">,</span> <span class="n">recs</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tts</span> <span class="o">=</span> <span class="n">utils</span><span class="o">.</span><span class="n">contaminate</span><span class="p">(</span><span class="n">tts</span><span class="p">,</span> <span class="mf">0.01</span><span class="p">,</span> <span class="n">percent</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Now we can setup a tomography by creating the necessary data misfit
+(<cite>SRTomo</cite>) and regularization (<cite>Smoothness2D</cite>) objects:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">mesh</span> <span class="o">=</span> <span class="n">SquareMesh</span><span class="p">(</span><span class="n">area</span><span class="p">,</span> <span class="n">shape</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">datamisfit</span> <span class="o">=</span> <span class="n">srtomo</span><span class="o">.</span><span class="n">SRTomo</span><span class="p">(</span><span class="n">tts</span><span class="p">,</span> <span class="n">srcs</span><span class="p">,</span> <span class="n">recs</span><span class="p">,</span> <span class="n">mesh</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">regul</span> <span class="o">=</span> <span class="n">Smoothness2D</span><span class="p">(</span><span class="n">mesh</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The tomography solver will be the <cite>LCurve</cite> solver. It works by calling
+<cite>fit()</cite> and accessing <cite>estimate_</cite>, exactly like any other solver:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">tomo</span> <span class="o">=</span> <span class="n">LCurve</span><span class="p">(</span><span class="n">datamisfit</span><span class="p">,</span> <span class="n">regul</span><span class="p">,</span> <span class="p">[</span><span class="mi">10</span><span class="o">**</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="o">-</span><span class="mi">10</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">)])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">e</span> <span class="o">=</span> <span class="n">tomo</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span><span class="o">.</span><span class="n">estimate_</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span> <span class="n">numpy</span><span class="o">.</span><span class="n">array_repr</span><span class="p">(</span><span class="n">e</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">shape</span><span class="p">),</span> <span class="n">precision</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="go">array([[  4.,   4.,   4.,   4.,   4.,   4.,   4.,   4.,   4.,   4.],</span>
+<span class="go">       [  4.,   4.,   4.,   4.,   4.,   4.,   4.,   4.,   4.,   4.],</span>
+<span class="go">       [  4.,   4.,   4.,   4.,   4.,   4.,   4.,   4.,   4.,   4.],</span>
+<span class="go">       [  4.,   4.,   4.,  11.,   9.,  11.,  10.,   4.,   4.,   4.],</span>
+<span class="go">       [  4.,   4.,   4.,  10.,  11.,  10.,  10.,   4.,   4.,   4.],</span>
+<span class="go">       [  4.,   4.,   4.,  10.,  10.,  10.,  10.,   4.,   4.,   4.],</span>
+<span class="go">       [  4.,   4.,   4.,  11.,  10.,  11.,   9.,   4.,   4.,   4.],</span>
+<span class="go">       [  4.,   4.,   4.,   4.,   4.,   4.,   4.,   4.,   4.,   4.],</span>
+<span class="go">       [  4.,   4.,   4.,   4.,   4.,   4.,   4.,   4.,   4.,   4.],</span>
+<span class="go">       [  4.,   4.,   4.,   4.,   4.,   4.,   4.,   4.,   4.,   4.]])</span>
+</pre></div>
+</div>
+<p>The estimated regularization parameter is stored in <cite>regul_param_</cite>:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">tomo</span><span class="o">.</span><span class="n">regul_param_</span>
+<span class="go">1e-05</span>
+</pre></div>
+</div>
+<p>The <cite>LCurve</cite> object also exposes the <cite>residuals()</cite> and <cite>predicted()</cite>
+methods of the data misfit class:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">residuals</span> <span class="o">=</span> <span class="n">tomo</span><span class="o">.</span><span class="n">residuals</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span> <span class="s">&#39;</span><span class="si">%.4f</span><span class="s"> </span><span class="si">%.4f</span><span class="s">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">residuals</span><span class="o">.</span><span class="n">mean</span><span class="p">(),</span> <span class="n">residuals</span><span class="o">.</span><span class="n">std</span><span class="p">())</span>
+<span class="go">-0.0000 0.0047</span>
+</pre></div>
+</div>
+<p><cite>LCurve</cite> also has a <cite>config</cite> method to configure the optimization process
+for non-linear problems, for example:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">initial</span> <span class="o">=</span> <span class="mf">1.</span><span class="o">/</span><span class="mf">4.</span><span class="o">*</span><span class="n">numpy</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">mesh</span><span class="o">.</span><span class="n">size</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tomo</span> <span class="o">=</span> <span class="n">LCurve</span><span class="p">(</span><span class="n">datamisfit</span><span class="p">,</span> <span class="n">regul</span><span class="p">,</span> <span class="p">[</span><span class="mi">10</span><span class="o">**</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="o">-</span><span class="mi">10</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">)])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">e</span> <span class="o">=</span> <span class="n">tomo</span><span class="o">.</span><span class="n">config</span><span class="p">(</span><span class="s">&#39;levmarq&#39;</span><span class="p">,</span> <span class="n">initial</span><span class="o">=</span><span class="n">initial</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span><span class="o">.</span><span class="n">estimate_</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tomo</span><span class="o">.</span><span class="n">regul_param_</span>
+<span class="go">1e-05</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span> <span class="n">numpy</span><span class="o">.</span><span class="n">array_repr</span><span class="p">(</span><span class="n">e</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">shape</span><span class="p">),</span> <span class="n">precision</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="go">array([[  4.,   4.,   4.,   4.,   4.,   4.,   4.,   4.,   4.,   4.],</span>
+<span class="go">       [  4.,   4.,   4.,   4.,   4.,   4.,   4.,   4.,   4.,   4.],</span>
+<span class="go">       [  4.,   4.,   4.,   4.,   4.,   4.,   4.,   4.,   4.,   4.],</span>
+<span class="go">       [  4.,   4.,   4.,  11.,   9.,  11.,  10.,   4.,   4.,   4.],</span>
+<span class="go">       [  4.,   4.,   4.,  10.,  11.,  10.,  10.,   4.,   4.,   4.],</span>
+<span class="go">       [  4.,   4.,   4.,  10.,  10.,  10.,  10.,   4.,   4.,   4.],</span>
+<span class="go">       [  4.,   4.,   4.,  11.,  10.,  11.,   9.,   4.,   4.,   4.],</span>
+<span class="go">       [  4.,   4.,   4.,   4.,   4.,   4.,   4.,   4.,   4.,   4.],</span>
+<span class="go">       [  4.,   4.,   4.,   4.,   4.,   4.,   4.,   4.,   4.,   4.],</span>
+<span class="go">       [  4.,   4.,   4.,   4.,   4.,   4.,   4.,   4.,   4.,   4.]])</span>
+</pre></div>
+</div>
+<dl class="method">
+<dt id="fatiando.inversion.regularization.LCurve.config">
+<tt class="descname">config</tt><big>(</big><em>method</em>, <em>**kwargs</em><big>)</big><a class="reference internal" href="../_modules/fatiando/inversion/regularization.html#LCurve.config"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fatiando.inversion.regularization.LCurve.config" title="Permalink to this definition">¶</a></dt>
+<dd><p>Configure the optimization method and its parameters.</p>
+<p>This sets the method used by
+<a class="reference internal" href="#fatiando.inversion.regularization.LCurve.fit" title="fatiando.inversion.regularization.LCurve.fit"><tt class="xref py py-meth docutils literal"><span class="pre">fit</span></tt></a> and the keyword
+arguments that are passed to it.</p>
+<p>Parameters:</p>
+<ul>
+<li><dl class="first docutils">
+<dt>method <span class="classifier-delimiter">:</span> <span class="classifier">string</span></dt>
+<dd><p class="first last">The optimization method. One of: <tt class="docutils literal"><span class="pre">'linear'</span></tt>, <tt class="docutils literal"><span class="pre">'newton'</span></tt>,
+<tt class="docutils literal"><span class="pre">'levmarq'</span></tt>, <tt class="docutils literal"><span class="pre">'steepest'</span></tt>, <tt class="docutils literal"><span class="pre">'acor'</span></tt></p>
+</dd>
+</dl>
+</li>
+</ul>
+<p>Other keyword arguments that can be passed are the ones allowed by each
+method.</p>
+<p>See <a class="reference internal" href="inversion.base.html#fatiando.inversion.base.Misfit.config" title="fatiando.inversion.base.Misfit.config"><tt class="xref py py-meth docutils literal"><span class="pre">fatiando.inversion.base.Misfit.config</span></tt></a>.</p>
+<p>Returns:</p>
+<ul class="simple">
+<li>self</li>
+</ul>
+</dd></dl>
+
+<dl class="method">
+<dt id="fatiando.inversion.regularization.LCurve.fit">
+<tt class="descname">fit</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/fatiando/inversion/regularization.html#LCurve.fit"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fatiando.inversion.regularization.LCurve.fit" title="Permalink to this definition">¶</a></dt>
+<dd><p>Solve for the parameter vector and optimum regularization parameter.</p>
+<p>Combines the data-misfit and regularization solvers using the range of
+regularization parameters provided and calls <tt class="docutils literal"><span class="pre">fit</span></tt> and <tt class="docutils literal"><span class="pre">config</span></tt> on
+each.</p>
+<p>The <tt class="docutils literal"><span class="pre">p_</span></tt> and <tt class="docutils literal"><span class="pre">estimate_</span></tt> attributes correspond to the combination
+that falls in the corner of the L-curve.</p>
+<p>The regularization parameter for this corner point if stored in the
+<tt class="docutils literal"><span class="pre">regul_param_</span></tt> attribute.</p>
+<p>Returns:</p>
+<ul class="simple">
+<li>self</li>
+</ul>
+</dd></dl>
+
+<dl class="method">
+<dt id="fatiando.inversion.regularization.LCurve.plot_lcurve">
+<tt class="descname">plot_lcurve</tt><big>(</big><em>guides=True</em><big>)</big><a class="reference internal" href="../_modules/fatiando/inversion/regularization.html#LCurve.plot_lcurve"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fatiando.inversion.regularization.LCurve.plot_lcurve" title="Permalink to this definition">¶</a></dt>
+<dd><p>Make a plot of the data-misfit x regularization values.</p>
+<p>The estimated corner value is shown as a blue triangle.</p>
+<p>Parameters:</p>
+<ul>
+<li><dl class="first docutils">
+<dt>guides <span class="classifier-delimiter">:</span> <span class="classifier">True or False</span></dt>
+<dd><p class="first last">Plot vertical and horizontal lines across the corner value.</p>
+</dd>
+</dl>
+</li>
+</ul>
+</dd></dl>
+
+<dl class="method">
+<dt id="fatiando.inversion.regularization.LCurve.predicted">
+<tt class="descname">predicted</tt><big>(</big><em>p=None</em><big>)</big><a class="reference internal" href="../_modules/fatiando/inversion/regularization.html#LCurve.predicted"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fatiando.inversion.regularization.LCurve.predicted" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the predicted data for a given parameter vector.</p>
+<p>Uses the solver that falls on the corner of the L-curve.</p>
+<p>Parameters:</p>
+<ul>
+<li><dl class="first docutils">
+<dt>p <span class="classifier-delimiter">:</span> <span class="classifier">1d-array or None</span></dt>
+<dd><p class="first last">The parameter vector used to calculate the predicted data. If None,
+will use the current estimate stored in <tt class="docutils literal"><span class="pre">estimate_</span></tt>.</p>
+</dd>
+</dl>
+</li>
+</ul>
+<p>Returns:</p>
+<ul>
+<li><dl class="first docutils">
+<dt>predicted <span class="classifier-delimiter">:</span> <span class="classifier">1d-array or list of 1d-arrays</span></dt>
+<dd><p class="first last">The predicted data. If this is the sum of 1 or more Misfit
+instances, will return the predicted data from each of the summed
+misfits in the order of the sum.</p>
+</dd>
+</dl>
+</li>
+</ul>
+</dd></dl>
+
+<dl class="method">
+<dt id="fatiando.inversion.regularization.LCurve.residuals">
+<tt class="descname">residuals</tt><big>(</big><em>p=None</em><big>)</big><a class="reference internal" href="../_modules/fatiando/inversion/regularization.html#LCurve.residuals"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fatiando.inversion.regularization.LCurve.residuals" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the residuals vector (observed - predicted data).</p>
+<p>Uses the solver that falls on the corner of the L-curve.</p>
+<p>Parameters:</p>
+<ul>
+<li><dl class="first docutils">
+<dt>p <span class="classifier-delimiter">:</span> <span class="classifier">1d-array or None</span></dt>
+<dd><p class="first last">The parameter vector used to calculate the residuals. If None, will
+use the current estimate stored in <tt class="docutils literal"><span class="pre">estimate_</span></tt>.</p>
+</dd>
+</dl>
+</li>
+</ul>
+<p>Returns:</p>
+<ul>
+<li><dl class="first docutils">
+<dt>residuals <span class="classifier-delimiter">:</span> <span class="classifier">1d-array or list of 1d-arrays</span></dt>
+<dd><p class="first last">The residual vector. If this is the sum of 1 or more Misfit
+instances, will return the residual vector from each of the summed
+misfits in the order of the sum.</p>
+</dd>
+</dl>
+</li>
+</ul>
+</dd></dl>
+
+<dl class="method">
+<dt id="fatiando.inversion.regularization.LCurve.select_corner">
+<tt class="descname">select_corner</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/fatiando/inversion/regularization.html#LCurve.select_corner"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fatiando.inversion.regularization.LCurve.select_corner" title="Permalink to this definition">¶</a></dt>
+<dd><p>Selects the corner value of the L-curve and sets the estimate to it.</p>
+<p>Uses the Triangle method of Castellanos et al. (2002).</p>
+<p>The index of the corner value is stored in the <tt class="docutils literal"><span class="pre">corner_</span></tt> attribute.</p>
+<p>Returns:</p>
+<ul class="simple">
+<li>self</li>
+</ul>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="fatiando.inversion.regularization.Smoothness">
+<em class="property">class </em><tt class="descclassname">fatiando.inversion.regularization.</tt><tt class="descname">Smoothness</tt><big>(</big><em>fdmat</em><big>)</big><a class="reference internal" href="../_modules/fatiando/inversion/regularization.html#Smoothness"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fatiando.inversion.regularization.Smoothness" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="inversion.base.html#fatiando.inversion.base.Objective" title="fatiando.inversion.base.Objective"><tt class="xref py py-class docutils literal"><span class="pre">fatiando.inversion.base.Objective</span></tt></a></p>
+<p>Smoothness (1st order Tikhonov) regularization.</p>
+<p>Imposes that adjacent parameters have values close to each other.</p>
+<p>The regularizing function if of the form</p>
+<div class="math">
+\[\theta^{SV}(\bar{p}) =
+\bar{p}^T \bar{\bar{R}}^T \bar{\bar{R}}\bar{p}\]</div>
+<p>Its gradient and Hessian matrices are, respectively,</p>
+<div class="math">
+\[\bar{\nabla}\theta^{SV}(\bar{p}) =
+2\bar{\bar{R}}^T \bar{\bar{R}}\bar{p}\]</div>
+<div class="math">
+\[\bar{\bar{\nabla}}\theta^{SV}(\bar{p}) =
+2\bar{\bar{R}}^T \bar{\bar{R}}\]</div>
+<p>in which matrix <span class="math">\(\bar{\bar{R}}\)</span> is a finite difference matrix. It
+represents the differences between one parameter and another and is what
+indicates what <em>adjacent</em> means.</p>
+<p>Parameters:</p>
+<ul>
+<li><dl class="first docutils">
+<dt>fdmat <span class="classifier-delimiter">:</span> <span class="classifier">2d-array or sparse matrix</span></dt>
+<dd><p class="first last">The finite difference matrix</p>
+</dd>
+</dl>
+</li>
+</ul>
+<p>Examples:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">fd</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
+<span class="gp">... </span>               <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">s</span> <span class="o">=</span> <span class="n">Smoothness</span><span class="p">(</span><span class="n">fd</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">p</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">s</span><span class="o">.</span><span class="n">value</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
+<span class="go">0.0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">s</span><span class="o">.</span><span class="n">gradient</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
+<span class="go">array([0, 0, 0])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">s</span><span class="o">.</span><span class="n">hessian</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
+<span class="go">array([[ 2, -2,  0],</span>
+<span class="go">       [-2,  4, -2],</span>
+<span class="go">       [ 0, -2,  2]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">p</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">s</span><span class="o">.</span><span class="n">value</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
+<span class="go">2.0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">s</span><span class="o">.</span><span class="n">gradient</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
+<span class="go">array([ 2, -4,  2])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">s</span><span class="o">.</span><span class="n">hessian</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
+<span class="go">array([[ 2, -2,  0],</span>
+<span class="go">       [-2,  4, -2],</span>
+<span class="go">       [ 0, -2,  2]])</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="class">
+<dt id="fatiando.inversion.regularization.Smoothness1D">
+<em class="property">class </em><tt class="descclassname">fatiando.inversion.regularization.</tt><tt class="descname">Smoothness1D</tt><big>(</big><em>npoints</em><big>)</big><a class="reference internal" href="../_modules/fatiando/inversion/regularization.html#Smoothness1D"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fatiando.inversion.regularization.Smoothness1D" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#fatiando.inversion.regularization.Smoothness" title="fatiando.inversion.regularization.Smoothness"><tt class="xref py py-class docutils literal"><span class="pre">fatiando.inversion.regularization.Smoothness</span></tt></a></p>
+<p>Smoothness regularization for 1D problems.</p>
+<p>Extends the generic <a class="reference internal" href="#fatiando.inversion.regularization.Smoothness" title="fatiando.inversion.regularization.Smoothness"><tt class="xref py py-class docutils literal"><span class="pre">Smoothness</span></tt></a>
+class by automatically building the finite difference matrix.</p>
+<p>Parameters:</p>
+<ul>
+<li><dl class="first docutils">
+<dt>npoints <span class="classifier-delimiter">:</span> <span class="classifier">int</span></dt>
+<dd><p class="first last">The number of parameters</p>
+</dd>
+</dl>
+</li>
+</ul>
+<p>Examples:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">s</span> <span class="o">=</span> <span class="n">Smoothness1D</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">p</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">s</span><span class="o">.</span><span class="n">value</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
+<span class="go">0.0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">s</span><span class="o">.</span><span class="n">gradient</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
+<span class="go">array([0, 0, 0])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">s</span><span class="o">.</span><span class="n">hessian</span><span class="p">(</span><span class="n">p</span><span class="p">)</span><span class="o">.</span><span class="n">todense</span><span class="p">()</span>
+<span class="go">matrix([[ 2, -2,  0],</span>
+<span class="go">        [-2,  4, -2],</span>
+<span class="go">        [ 0, -2,  2]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">p</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">s</span><span class="o">.</span><span class="n">value</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
+<span class="go">2.0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">s</span><span class="o">.</span><span class="n">gradient</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
+<span class="go">array([ 2, -4,  2])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">s</span><span class="o">.</span><span class="n">hessian</span><span class="p">(</span><span class="n">p</span><span class="p">)</span><span class="o">.</span><span class="n">todense</span><span class="p">()</span>
+<span class="go">matrix([[ 2, -2,  0],</span>
+<span class="go">        [-2,  4, -2],</span>
+<span class="go">        [ 0, -2,  2]])</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="class">
+<dt id="fatiando.inversion.regularization.Smoothness2D">
+<em class="property">class </em><tt class="descclassname">fatiando.inversion.regularization.</tt><tt class="descname">Smoothness2D</tt><big>(</big><em>shape</em><big>)</big><a class="reference internal" href="../_modules/fatiando/inversion/regularization.html#Smoothness2D"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fatiando.inversion.regularization.Smoothness2D" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#fatiando.inversion.regularization.Smoothness" title="fatiando.inversion.regularization.Smoothness"><tt class="xref py py-class docutils literal"><span class="pre">fatiando.inversion.regularization.Smoothness</span></tt></a></p>
+<p>Smoothness regularization for 2D problems.</p>
+<p>Extends the generic <a class="reference internal" href="#fatiando.inversion.regularization.Smoothness" title="fatiando.inversion.regularization.Smoothness"><tt class="xref py py-class docutils literal"><span class="pre">Smoothness</span></tt></a>
+class by automatically building the finite difference matrix.</p>
+<p>Parameters:</p>
+<ul>
+<li><dl class="first docutils">
+<dt>shape <span class="classifier-delimiter">:</span> <span class="classifier">tuple = (ny, nx)</span></dt>
+<dd><p class="first last">The shape of the parameter grid. Number of parameters in the y and x
+(or z and x, time and offset, etc) dimensions.</p>
+</dd>
+</dl>
+</li>
+</ul>
+<p>Examples:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">s</span> <span class="o">=</span> <span class="n">Smoothness2D</span><span class="p">((</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">p</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
+<span class="gp">... </span>              <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]])</span><span class="o">.</span><span class="n">ravel</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">s</span><span class="o">.</span><span class="n">value</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
+<span class="go">0.0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">s</span><span class="o">.</span><span class="n">gradient</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
+<span class="go">array([0, 0, 0, 0])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">s</span><span class="o">.</span><span class="n">hessian</span><span class="p">(</span><span class="n">p</span><span class="p">)</span><span class="o">.</span><span class="n">todense</span><span class="p">()</span>
+<span class="go">matrix([[ 4, -2, -2,  0],</span>
+<span class="go">        [-2,  4,  0, -2],</span>
+<span class="go">        [-2,  0,  4, -2],</span>
+<span class="go">        [ 0, -2, -2,  4]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">p</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
+<span class="gp">... </span>              <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]])</span><span class="o">.</span><span class="n">ravel</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">s</span><span class="o">.</span><span class="n">value</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
+<span class="go">12.0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">s</span><span class="o">.</span><span class="n">gradient</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
+<span class="go">array([ 0, -8,  0,  8])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">s</span><span class="o">.</span><span class="n">hessian</span><span class="p">(</span><span class="n">p</span><span class="p">)</span><span class="o">.</span><span class="n">todense</span><span class="p">()</span>
+<span class="go">matrix([[ 4, -2, -2,  0],</span>
+<span class="go">        [-2,  4,  0, -2],</span>
+<span class="go">        [-2,  0,  4, -2],</span>
+<span class="go">        [ 0, -2, -2,  4]])</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="class">
+<dt id="fatiando.inversion.regularization.TotalVariation">
+<em class="property">class </em><tt class="descclassname">fatiando.inversion.regularization.</tt><tt class="descname">TotalVariation</tt><big>(</big><em>beta</em>, <em>fdmat</em><big>)</big><a class="reference internal" href="../_modules/fatiando/inversion/regularization.html#TotalVariation"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fatiando.inversion.regularization.TotalVariation" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="inversion.base.html#fatiando.inversion.base.Objective" title="fatiando.inversion.base.Objective"><tt class="xref py py-class docutils literal"><span class="pre">fatiando.inversion.base.Objective</span></tt></a></p>
+<p>Total variation regularization.</p>
+<p>Imposes that adjacent parameters have a few sharp transitions.</p>
+<p>The regularizing function if of the form</p>
+<div class="math">
+\[\theta^{VT}(\bar{p}) = \sum\limits_{k=1}^L |v_k|\]</div>
+<p>where vector <span class="math">\(\bar{v} = \bar{\bar{R}}\bar{p}\)</span>. See
+<a class="reference internal" href="#fatiando.inversion.regularization.Smoothness" title="fatiando.inversion.regularization.Smoothness"><tt class="xref py py-class docutils literal"><span class="pre">Smoothness</span></tt></a> for the definition
+of the <span class="math">\(\bar{\bar{R}}\)</span> matrix.</p>
+<p>This functions is not differentiable at the null vector, so the following
+form is used to calculate the gradient and Hessian</p>
+<div class="math">
+\[\theta^{VT}(\bar{p}) \approx \theta^{VT}_\beta(\bar{p}) =
+\sum\limits_{k=1}^L \sqrt{v_k^2 + \beta}\]</div>
+<p>Its gradient and Hessian matrices are, respectively,</p>
+<div class="math">
+\[\bar{\nabla}\theta^{VT}_\beta(\bar{p}) =
+\bar{\bar{R}}^T \bar{q}(\bar{p})\]</div>
+<div class="math">
+\[\bar{\bar{\nabla}}\theta^{VT}_\beta(\bar{p}) =
+\bar{\bar{R}}^T \bar{\bar{Q}}(\bar{p})\bar{\bar{R}}\]</div>
+<p>and</p>
+<div class="math">
+\[\begin{split}\bar{q}(\bar{p}) =
+\begin{bmatrix}
+    \dfrac{v_1}{\sqrt{v_1^2 + \beta}} \\
+    \dfrac{v_2}{\sqrt{v_2^2 + \beta}} \\
+    \vdots \\ \dfrac{v_L}{\sqrt{v_L^2 + \beta}}
+\end{bmatrix}\end{split}\]</div>
+<div class="math">
+\[\begin{split}\bar{\bar{Q}}(\bar{p}) =
+\begin{bmatrix}
+    \dfrac{\beta}{(v_1^2 + \beta)^{\frac{3}{2}}} &amp; 0 &amp; \ldots &amp; 0 \\
+    0 &amp; \dfrac{\beta}{(v_2^2 + \beta)^{\frac{3}{2}}} &amp; \ldots &amp; 0 \\
+    \vdots &amp; \vdots &amp; \ddots &amp; \vdots \\
+    0 &amp; 0 &amp; \ldots &amp; \dfrac{\beta}{(v_L^2 + \beta)^{\frac{3}{2}}}
+\end{bmatrix}\end{split}\]</div>
+<p>Parameters:</p>
+<ul>
+<li><dl class="first docutils">
+<dt>beta <span class="classifier-delimiter">:</span> <span class="classifier">float</span></dt>
+<dd><p class="first last">The beta parameter for the differentiable approximation. The larger it
+is, the closer total variation is to
+<a class="reference internal" href="#fatiando.inversion.regularization.Smoothness" title="fatiando.inversion.regularization.Smoothness"><tt class="xref py py-class docutils literal"><span class="pre">Smoothness</span></tt></a>. Should be a
+small, positive value.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>fdmat <span class="classifier-delimiter">:</span> <span class="classifier">2d-array or sparse matrix</span></dt>
+<dd><p class="first last">The finite difference matrix</p>
+</dd>
+</dl>
+</li>
+</ul>
+</dd></dl>
+
+<dl class="class">
+<dt id="fatiando.inversion.regularization.TotalVariation1D">
+<em class="property">class </em><tt class="descclassname">fatiando.inversion.regularization.</tt><tt class="descname">TotalVariation1D</tt><big>(</big><em>beta</em>, <em>npoints</em><big>)</big><a class="reference internal" href="../_modules/fatiando/inversion/regularization.html#TotalVariation1D"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fatiando.inversion.regularization.TotalVariation1D" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#fatiando.inversion.regularization.TotalVariation" title="fatiando.inversion.regularization.TotalVariation"><tt class="xref py py-class docutils literal"><span class="pre">fatiando.inversion.regularization.TotalVariation</span></tt></a></p>
+<p>Total variation regularization for 1D problems.</p>
+<p>Extends the generic
+<a class="reference internal" href="#fatiando.inversion.regularization.TotalVariation" title="fatiando.inversion.regularization.TotalVariation"><tt class="xref py py-class docutils literal"><span class="pre">TotalVariation</span></tt></a>
+class by automatically building the finite difference matrix.</p>
+<p>Parameters:</p>
+<ul>
+<li><dl class="first docutils">
+<dt>beta <span class="classifier-delimiter">:</span> <span class="classifier">float</span></dt>
+<dd><p class="first last">The beta parameter for the differentiable approximation. The larger it
+is, the closer total variation is to
+<a class="reference internal" href="#fatiando.inversion.regularization.Smoothness" title="fatiando.inversion.regularization.Smoothness"><tt class="xref py py-class docutils literal"><span class="pre">Smoothness</span></tt></a>. Should be a
+small, positive value.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>npoints <span class="classifier-delimiter">:</span> <span class="classifier">int</span></dt>
+<dd><p class="first last">The number of parameters</p>
+</dd>
+</dl>
+</li>
+</ul>
+</dd></dl>
+
+<dl class="class">
+<dt id="fatiando.inversion.regularization.TotalVariation2D">
+<em class="property">class </em><tt class="descclassname">fatiando.inversion.regularization.</tt><tt class="descname">TotalVariation2D</tt><big>(</big><em>beta</em>, <em>shape</em><big>)</big><a class="reference internal" href="../_modules/fatiando/inversion/regularization.html#TotalVariation2D"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fatiando.inversion.regularization.TotalVariation2D" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#fatiando.inversion.regularization.TotalVariation" title="fatiando.inversion.regularization.TotalVariation"><tt class="xref py py-class docutils literal"><span class="pre">fatiando.inversion.regularization.TotalVariation</span></tt></a></p>
+<p>Total variation regularization for 2D problems.</p>
+<p>Extends the generic
+<a class="reference internal" href="#fatiando.inversion.regularization.TotalVariation" title="fatiando.inversion.regularization.TotalVariation"><tt class="xref py py-class docutils literal"><span class="pre">TotalVariation</span></tt></a>
+class by automatically building the finite difference matrix.</p>
+<p>Parameters:</p>
+<ul>
+<li><dl class="first docutils">
+<dt>beta <span class="classifier-delimiter">:</span> <span class="classifier">float</span></dt>
+<dd><p class="first last">The beta parameter for the differentiable approximation. The larger it
+is, the closer total variation is to
+<a class="reference internal" href="#fatiando.inversion.regularization.Smoothness" title="fatiando.inversion.regularization.Smoothness"><tt class="xref py py-class docutils literal"><span class="pre">Smoothness</span></tt></a>. Should be a
+small, positive value.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>shape <span class="classifier-delimiter">:</span> <span class="classifier">tuple = (ny, nx)</span></dt>
+<dd><p class="first last">The shape of the parameter grid. Number of parameters in the y and x
+(or z and x, time and offset, etc) dimensions.</p>
+</dd>
+</dl>
+</li>
+</ul>
+</dd></dl>
+
+<dl class="function">
+<dt id="fatiando.inversion.regularization.fd1d">
+<tt class="descclassname">fatiando.inversion.regularization.</tt><tt class="descname">fd1d</tt><big>(</big><em>size</em><big>)</big><a class="reference internal" href="../_modules/fatiando/inversion/regularization.html#fd1d"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fatiando.inversion.regularization.fd1d" title="Permalink to this definition">¶</a></dt>
+<dd><p>Produce a 1D finite difference matrix.</p>
+<p>Parameters:</p>
+<ul>
+<li><dl class="first docutils">
+<dt>size <span class="classifier-delimiter">:</span> <span class="classifier">int</span></dt>
+<dd><p class="first last">The number of points</p>
+</dd>
+</dl>
+</li>
+</ul>
+<p>Returns:</p>
+<ul>
+<li><dl class="first docutils">
+<dt>fd <span class="classifier-delimiter">:</span> <span class="classifier">sparse CSR matrix</span></dt>
+<dd><p class="first last">The finite difference matrix</p>
+</dd>
+</dl>
+</li>
+</ul>
+<p>Examples:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">fd1d</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">todense</span><span class="p">()</span>
+<span class="go">matrix([[ 1, -1]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">fd1d</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span><span class="o">.</span><span class="n">todense</span><span class="p">()</span>
+<span class="go">matrix([[ 1, -1,  0],</span>
+<span class="go">        [ 0,  1, -1]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">fd1d</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span><span class="o">.</span><span class="n">todense</span><span class="p">()</span>
+<span class="go">matrix([[ 1, -1,  0,  0],</span>
+<span class="go">        [ 0,  1, -1,  0],</span>
+<span class="go">        [ 0,  0,  1, -1]])</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="fatiando.inversion.regularization.fd2d">
+<tt class="descclassname">fatiando.inversion.regularization.</tt><tt class="descname">fd2d</tt><big>(</big><em>shape</em><big>)</big><a class="reference internal" href="../_modules/fatiando/inversion/regularization.html#fd2d"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fatiando.inversion.regularization.fd2d" title="Permalink to this definition">¶</a></dt>
+<dd><p>Produce a 2D finite difference matrix.</p>
+<p>Parameters:</p>
+<ul>
+<li><dl class="first docutils">
+<dt>shape <span class="classifier-delimiter">:</span> <span class="classifier">tuple = (ny, nx)</span></dt>
+<dd><p class="first last">The shape of the parameter grid. Number of parameters in the y and x
+(or z and x, time and offset, etc) dimensions.</p>
+</dd>
+</dl>
+</li>
+</ul>
+<p>Returns:</p>
+<ul>
+<li><dl class="first docutils">
+<dt>fd <span class="classifier-delimiter">:</span> <span class="classifier">sparse CSR matrix</span></dt>
+<dd><p class="first last">The finite difference matrix</p>
+</dd>
+</dl>
+</li>
+</ul>
+<p>Examples:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">fd2d</span><span class="p">((</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span><span class="o">.</span><span class="n">todense</span><span class="p">()</span>
+<span class="go">matrix([[ 1, -1,  0,  0],</span>
+<span class="go">        [ 0,  0,  1, -1],</span>
+<span class="go">        [ 1,  0, -1,  0],</span>
+<span class="go">        [ 0,  1,  0, -1]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">fd2d</span><span class="p">((</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span><span class="o">.</span><span class="n">todense</span><span class="p">()</span>
+<span class="go">matrix([[ 1, -1,  0,  0,  0,  0],</span>
+<span class="go">        [ 0,  1, -1,  0,  0,  0],</span>
+<span class="go">        [ 0,  0,  0,  1, -1,  0],</span>
+<span class="go">        [ 0,  0,  0,  0,  1, -1],</span>
+<span class="go">        [ 1,  0,  0, -1,  0,  0],</span>
+<span class="go">        [ 0,  1,  0,  0, -1,  0],</span>
+<span class="go">        [ 0,  0,  1,  0,  0, -1]])</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</div>
+
+
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../cookbook.html" class="btn btn-neutral float-right" title="Cookbook"/>Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="inversion.solvers.html" class="btn btn-neutral" title="Optimization routines (fatiando.inversion.solvers)"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2012-2014, Leonardo Uieda.
+      Last updated on Mar 05, 2015.
+    </p>
+  </div>
+
+  <a href="https://github.com/snide/sphinx_rtd_theme">Sphinx theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'0.3',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+      <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

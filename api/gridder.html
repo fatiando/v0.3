@@ -1,0 +1,735 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Gridding (fatiando.gridder) &mdash; Fatiando a Terra v0.3</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+  
+
+  
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="top" title="Fatiando a Terra v0.3" href="../index.html"/>
+        <link rel="up" title="API Reference: The fatiando package" href="fatiando.html"/>
+        <link rel="next" title="Visualization (fatiando.vis)" href="vis.html"/>
+        <link rel="prev" title="Meshing (fatiando.mesher)" href="mesher.html"/> 
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-nav-search">
+        <a href="../index.html" class="fa fa-home"> Fatiando a Terra</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+        
+        
+            <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../contributors.html">Contributors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../license.html">License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../changelog.html">Changelog</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../changelog.html#version-0-3">Version 0.3</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../changelog.html#version-0-2">Version 0.2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../changelog.html#version-0-1">Version 0.1</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../install.html">Installing Fatiando</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../install.html#which-python">Which Python?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../install.html#installing-the-dependencies">Installing the dependencies</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../install.html#id1">Installing Fatiando</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../install.html#installing-the-latest-development-version">Installing the latest development version</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../install.html#testing-the-install">Testing the install</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="reference internal" href="fatiando.html">API Reference: The <tt class="docutils literal"><span class="pre">fatiando</span></tt> package</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="gravmag.html">Gravity and magnetics (<tt class="docutils literal"><span class="pre">fatiando.gravmag</span></tt>)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="seismic.html">Seismics and seismology (<tt class="docutils literal"><span class="pre">fatiando.seismic</span></tt>)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="geothermal.html">Geothermal heat (<tt class="docutils literal"><span class="pre">fatiando.geothermal</span></tt>)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mesher.html">Meshing (<tt class="docutils literal"><span class="pre">fatiando.mesher</span></tt>)</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="">Gridding (<tt class="docutils literal"><span class="pre">fatiando.gridder</span></tt>)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vis.html">Visualization (<tt class="docutils literal"><span class="pre">fatiando.vis</span></tt>)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="datasets.html">Fetch data from the internet (<tt class="docutils literal"><span class="pre">fatiando.datasets</span></tt>)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="gui.html">Graphical user interfaces (<tt class="docutils literal"><span class="pre">fatiando.gui</span></tt>)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="utils.html">Miscellaneous Utilities (<tt class="docutils literal"><span class="pre">fatiando.utils</span></tt>)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="constants.html">Physical constants and unit conversions (<tt class="docutils literal"><span class="pre">fatiando.constants</span></tt>)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="inversion.html">Inverse problems framework (<tt class="docutils literal"><span class="pre">fatiando.inversion</span></tt>)</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../cookbook.html">Cookbook</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/datasets_crust2.0_tesseroid.html">Datasets: Fetch the CRUST2.0 model, convert it to tesseroids and calculate its gravity signal in parallel</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/geothermal_climsig_abrupt.html">Geothermal: Forward and inverse modeling of an abrupt change in temperature measured in a well</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/geothermal_climsig_linear.html">Geothermal: Forward and inverse modeling of a linear change in temperature measured in a well</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/geothermal_climsig_wrong.html">Geothermal: Climate signal: What happens when assuming a climate change is linear, when in fact it was abrupt?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/gravmag_2d_polygon_interactive.html">GravMag: Interactive 2D forward modeling with polygons</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/gravmag_2d_polygon_picker.html">GravMag: 2D forward modeling with polygons</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/gravmag_basin2d_trapezoidal.html">GravMag: Simple gravity inversion for the relief of a 2D trapezoidal basin</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/gravmag_basin2d_trapezoidal_forward.html">GravMag: Interactive 2D forward gravity modeling of a trapezoidal basin</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/gravmag_basin2d_triangular.html">GravMag: Simple gravity inversion for the relief of a 2D triangular basin</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/gravmag_basin2d_triangular_forward.html">GravMag: Interactive 2D forward gravity modeling of a triangular basin</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/gravmag_eqlayer_joint.html">GravMag: Fit an equivalent layer to gravity and gravity gradient data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/gravmag_eqlayer_pel_polereduc.html">GravMag: Use the Polynomial Equivalent Layer to reduce a magnetic total field anomaly to the pole</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/gravmag_eqlayer_pel_upcontinue.html">GravMag: Use the polynomial equivalent layer to upward continue gravity data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/gravmag_eqlayer_polereduc.html">GravMag: Use an equivalent layer to reduce a magnetic total field anomaly to the pole</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/gravmag_eqlayer_upcontinue.html">GravMag: Use an equivalent layer to upward continue gravity data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/gravmag_euler_classic.html">GravMag: Classic 3D Euler deconvolution of magnetic data (single window)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/gravmag_euler_classic_expanding_window.html">GravMag: Classic 3D Euler deconvolution of magnetic data using an expanding window</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/gravmag_euler_classic_moving_window.html">GravMag: Classic 3D Euler deconvolution of magnetic data using a moving window</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/gravmag_fourier_ansig.html">GravMag: Calculate the analytic signal of a total field anomaly using FFT</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/gravmag_fourier_deriv.html">GravMag: Calculating the derivatives of the gravity anomaly using FFT</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/gravmag_grav_polyprism.html">GravMag: Forward gravity modeling using a stack of 3D polygonal model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/gravmag_grav_prism.html">GravMag: Forward modeling of the gravitational potential and its derivatives using 3D model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/gravmag_grav_sphere.html">GravMag: Forward modeling of the gravity anomaly and gravity gradient tensor using model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/gravmag_grav_tesseroid.html">GravMag: Forward modeling of the gravitational potential and its derivatives using tesseroids</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/gravmag_harvester_grav.html">GravMag: 3D gravity inversion by planting anomalous densities using <tt class="docutils literal"><span class="pre">harvester</span></tt> (more complex interactive example)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/gravmag_harvester_tensor.html">GravMag: 3D gravity gradient inversion by planting anomalous densities using <tt class="docutils literal"><span class="pre">harvester</span></tt> (with non-targeted sources)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/gravmag_harvester_weights.html">GravMag: Using data weights in 3D inversion using <tt class="docutils literal"><span class="pre">harvester</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/gravmag_imaging_geninv.html">GravMag: 3D imaging using the Generalized Inverse method on synthetic gravity data (more complex model + noisy data)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/gravmag_imaging_migration.html">GravMag: 3D imaging using the migration method on synthetic gravity data (more complex model + noisy data)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/gravmag_imaging_sandwich.html">GravMag: 3D imaging using the sandwich model method on synthetic gravity data (simple example)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/gravmag_mag_polyprism.html">GravMag: 3D forward modeling of total-field magnetic anomaly using polygonal prisms</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/gravmag_mag_prism.html">GravMag: 3D forward modeling of total-field magnetic anomaly using rectangular prisms (model with induced and remanent magnetization)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/gravmag_mag_sphere.html">GravMag: 3D forward modeling of total-field magnetic anomaly using spheres</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/gravmag_magdir_dipolemagdir.html">GravMag: Use the DipoleMagDir class to estimate the magnetization direction of dipoles with known centers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/gravmag_normal_gravity.html">GravMag: Calculate the gravity disturbance and Bouguer anomaly for Hawaii</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/gravmag_tensor_centerofmass.html">GravMag: Center of mass estimation using the first eigenvector of the gravity gradient tensor (simple model)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/gravmag_tensor_centerofmass_expanding_window.html">GravMag: Center of mass estimation using the first eigenvector of the gravity gradient tensor (2 sources with expanding windows)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/gravmag_tensor_invariants.html">GravMag: Calculate the gravity gradient tensor invariants</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/gravmag_tensor_polyprism.html">GravMag: Generate synthetic gradient tensor data from polygonal prisms</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/gravmag_tensor_prism_noisy.html">GravMag: Generate noise-corrupted gravity gradient tensor data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/gravmag_upcontinue.html">GravMag: Upward continuation of noisy gz data using the analytical formula</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/grid_cut.html">Gridding: Cut a section from a grid</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/grid_interpolate.html">Gridding: Grid irregularly sampled data.</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/grid_profile.html">Gridding: Extract a profile from map data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/grid_scatter.html">Gridding: Generate and plot irregular grids (scatter)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/grid_surfer.html">Gridding: Load a Surfer ASCII grid file</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/mesher_pointgrid.html">Meshing: Making a grid of 3D point sources</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/mesher_prismmesh.html">Meshing: Make and plot a 3D prism mesh</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/mesher_prismmesh_filter.html">Meshing: Filter prisms from a 3D prism mesh based on their physical properties</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/mesher_prismmesh_topo.html">Meshing: Make and plot a 3D prism mesh with topography</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/mesher_prismmesh_vardens.html">Meshing: Make a 3D prism mesh with depth-varying density</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/mesher_prismrelief_topo.html">Meshing: Generate a 3D prism model of the topography</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/mesher_squaremesh_from_image.html">Meshing: Generate a SquareMesh and get the physical properties from an image</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/mesher_tesseroid.html">Meshing: Make and plot a tesseroid with the Earth</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/mesher_tesseroidmesh.html">Meshing: Make and plot a tesseroid mesh</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/mesher_tesseroidmesh_topo.html">Meshing: Make and plot a tesseroid mesh with topography</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/seismic_epic2d.html">Seismic: 2D epicenter estimation assuming a homogeneous and flat Earth</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/seismic_epic2d_iterate.html">Seismic: Show steps taken by different algorithms for 2D epicenter estimation on a flat Earth</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/seismic_profile_vertical.html">Seismic: Invert vertical seismic profile (VSP) traveltimes for the velocity of a layered model.</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/seismic_profile_vertical_interactive.html">Seismic: Interactive forward modeling of 1D vertical seismic profile (VSP) data in layered media</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/seismic_profile_vertical_smooth.html">Seismic: Invert vertical seismic profile (VSP) traveltimes using smoothness regularization and unknown layer thicknesses</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/seismic_srtomo_damped.html">Seismic: 2D straight-ray tomography using damping regularization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/seismic_srtomo_sharp.html">Seismic: 2D straight-ray tomography using sharpness (total variation) regularization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/seismic_srtomo_smooth.html">Seismic: 2D straight-ray tomography using smoothness regularization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/seismic_wavefd_elastic_psv.html">Seismic: 2D finite difference simulation of elastic P and SV wave propagation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/seismic_wavefd_elastic_sh.html">Seismic: 2D finite difference simulation of elastic SH wave propagation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/seismic_wavefd_love_wave.html">Seismic: 2D finite difference simulation of elastic SH wave propagation in a medium with a discontinuity (i.e., Moho), generating Love waves.</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/seismic_wavefd_rayleigh_wave.html">Seismic: 2D finite difference simulation of elastic P and SV wave propagation in a medium with a discontinuity (i.e., Moho), generating Rayleigh waves</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/seismic_wavefd_scalar.html">Seismic: 2D finite difference simulation of scalar wave propagation.</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/vis_mpl_basemap.html">Vis: Plot a map using the Orthographic map projection and filled contours</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/vis_mpl_basemap2.html">Vis: Plot a map using the Mercator map projection and pseudo-color</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/vis_mpl_basemap3.html">Vis: Plot a map using the Robinson map projection and contours</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/vis_mpl_contour.html">Vis: Plot contour lines and filled contours</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/vis_mpl_irregular_data.html">Vis: Plotting irregularly sampled map data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/vis_myv_color.html">Vis: Set the colors in figures, prisms, polygonal prisms and tesseroids.</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/vis_myv_earth.html">Vis: Plot the Earth, continents, inner and outer core in 3D with Mayavi2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/vis_myv_exaggerate.html">Vis: Exaggerate the vertical dimension of 3D plots</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../develop.html">Developer guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../develop.html#making-a-release">Making a release</a></li>
+</ul>
+</li>
+</ul>
+
+        
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../index.html">Fatiando a Terra</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../index.html">Docs</a> &raquo;</li>
+      
+          <li><a href="fatiando.html">API Reference: The <tt class="docutils literal"><span class="pre">fatiando</span></tt> package</a> &raquo;</li>
+      
+    <li>Gridding (<tt class="docutils literal"><span class="pre">fatiando.gridder</span></tt>)</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          <a href="../_sources/api/gridder.txt" rel="nofollow"> View page source</a>
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            
+  <div class="section" id="module-fatiando.gridder">
+<span id="gridding-fatiando-gridder"></span><span id="fatiando-gridder"></span><h1>Gridding (<tt class="docutils literal"><span class="pre">fatiando.gridder</span></tt>)<a class="headerlink" href="#module-fatiando.gridder" title="Permalink to this headline">¶</a></h1>
+<p>Create and operate on grids and profiles.</p>
+<p><strong>Grid generation</strong></p>
+<ul class="simple">
+<li><a class="reference internal" href="#fatiando.gridder.regular" title="fatiando.gridder.regular"><tt class="xref py py-func docutils literal"><span class="pre">regular</span></tt></a></li>
+<li><a class="reference internal" href="#fatiando.gridder.scatter" title="fatiando.gridder.scatter"><tt class="xref py py-func docutils literal"><span class="pre">scatter</span></tt></a></li>
+</ul>
+<p><strong>Grid operations</strong></p>
+<ul class="simple">
+<li><a class="reference internal" href="#fatiando.gridder.cut" title="fatiando.gridder.cut"><tt class="xref py py-func docutils literal"><span class="pre">cut</span></tt></a></li>
+<li><a class="reference internal" href="#fatiando.gridder.profile" title="fatiando.gridder.profile"><tt class="xref py py-func docutils literal"><span class="pre">profile</span></tt></a></li>
+</ul>
+<p><strong>Interpolation</strong></p>
+<ul class="simple">
+<li><a class="reference internal" href="#fatiando.gridder.interp" title="fatiando.gridder.interp"><tt class="xref py py-func docutils literal"><span class="pre">interp</span></tt></a></li>
+<li><a class="reference internal" href="#fatiando.gridder.interp_at" title="fatiando.gridder.interp_at"><tt class="xref py py-func docutils literal"><span class="pre">interp_at</span></tt></a></li>
+<li><a class="reference internal" href="#fatiando.gridder.extrapolate_nans" title="fatiando.gridder.extrapolate_nans"><tt class="xref py py-func docutils literal"><span class="pre">extrapolate_nans</span></tt></a></li>
+</ul>
+<p><strong>Input/Output</strong></p>
+<ul class="simple">
+<li><a class="reference internal" href="#fatiando.gridder.load_surfer" title="fatiando.gridder.load_surfer"><tt class="xref py py-func docutils literal"><span class="pre">load_surfer</span></tt></a>: Read a Surfer grid file and return
+three 1d numpy arrays and the grid shape</li>
+</ul>
+<p><strong>Misc</strong></p>
+<ul class="simple">
+<li><a class="reference internal" href="#fatiando.gridder.spacing" title="fatiando.gridder.spacing"><tt class="xref py py-func docutils literal"><span class="pre">spacing</span></tt></a></li>
+</ul>
+<hr class="docutils" />
+<dl class="function">
+<dt id="fatiando.gridder.cut">
+<tt class="descclassname">fatiando.gridder.</tt><tt class="descname">cut</tt><big>(</big><em>x</em>, <em>y</em>, <em>scalars</em>, <em>area</em><big>)</big><a class="reference internal" href="../_modules/fatiando/gridder.html#cut"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fatiando.gridder.cut" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a subsection of a grid.</p>
+<p>The returned subsection is not a copy! In technical terms, returns a slice
+of the numpy arrays. So changes made to the subsection reflect on the
+original grid. Use numpy.copy to make copies of the subsections and avoid
+this.</p>
+<p>Parameters:</p>
+<ul>
+<li><dl class="first docutils">
+<dt>x, y</dt>
+<dd><p class="first last">Arrays with the x and y coordinates of the data points.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>scalars</dt>
+<dd><p class="first last">List of arrays with the scalar values assigned to the grid points.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>area</dt>
+<dd><p class="first last"><tt class="docutils literal"><span class="pre">(x1,</span> <span class="pre">x2,</span> <span class="pre">y1,</span> <span class="pre">y2)</span></tt>: Borders of the subsection</p>
+</dd>
+</dl>
+</li>
+</ul>
+<p>Returns:</p>
+<ul>
+<li><dl class="first docutils">
+<dt><tt class="docutils literal"><span class="pre">[subx,</span> <span class="pre">suby,</span> <span class="pre">subscalars]</span></tt></dt>
+<dd><p class="first last">Arrays with x and y coordinates and scalar values of the subsection.</p>
+</dd>
+</dl>
+</li>
+</ul>
+</dd></dl>
+
+<dl class="function">
+<dt id="fatiando.gridder.extrapolate_nans">
+<tt class="descclassname">fatiando.gridder.</tt><tt class="descname">extrapolate_nans</tt><big>(</big><em>x</em>, <em>y</em>, <em>v</em><big>)</big><a class="reference internal" href="../_modules/fatiando/gridder.html#extrapolate_nans"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fatiando.gridder.extrapolate_nans" title="Permalink to this definition">¶</a></dt>
+<dd><p>&#8221;
+Extrapolate the NaNs or masked values in a grid INPLACE using nearest
+value.</p>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">Replaces the NaN or masked values of the original array!</p>
+</div>
+<p>Parameters:</p>
+<ul>
+<li><dl class="first docutils">
+<dt>x, y <span class="classifier-delimiter">:</span> <span class="classifier">1D arrays</span></dt>
+<dd><p class="first last">Arrays with the x and y coordinates of the data points.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>v <span class="classifier-delimiter">:</span> <span class="classifier">1D array</span></dt>
+<dd><p class="first last">Array with the scalar value assigned to the data points.</p>
+</dd>
+</dl>
+</li>
+</ul>
+<p>Returns:</p>
+<ul>
+<li><dl class="first docutils">
+<dt>v <span class="classifier-delimiter">:</span> <span class="classifier">1D array</span></dt>
+<dd><p class="first last">The array with NaNs or masked values extrapolated.</p>
+</dd>
+</dl>
+</li>
+</ul>
+</dd></dl>
+
+<dl class="function">
+<dt id="fatiando.gridder.interp">
+<tt class="descclassname">fatiando.gridder.</tt><tt class="descname">interp</tt><big>(</big><em>x</em>, <em>y</em>, <em>v</em>, <em>shape</em>, <em>area=None</em>, <em>algorithm='cubic'</em>, <em>extrapolate=False</em><big>)</big><a class="reference internal" href="../_modules/fatiando/gridder.html#interp"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fatiando.gridder.interp" title="Permalink to this definition">¶</a></dt>
+<dd><p>Interpolate data onto a regular grid.</p>
+<p>Parameters:</p>
+<ul>
+<li><dl class="first docutils">
+<dt>x, y <span class="classifier-delimiter">:</span> <span class="classifier">1D arrays</span></dt>
+<dd><p class="first last">Arrays with the x and y coordinates of the data points.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>v <span class="classifier-delimiter">:</span> <span class="classifier">1D array</span></dt>
+<dd><p class="first last">Array with the scalar value assigned to the data points.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>shape <span class="classifier-delimiter">:</span> <span class="classifier">tuple = (ny, nx)</span></dt>
+<dd><p class="first last">Shape of the interpolated regular grid, ie (ny, nx).</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>area <span class="classifier-delimiter">:</span> <span class="classifier">tuple = (x1, x2, y1, y2)</span></dt>
+<dd><p class="first last">The are where the data will be interpolated. If None, then will get the
+area from <em>x</em> and <em>y</em>.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>algorithm <span class="classifier-delimiter">:</span> <span class="classifier">string</span></dt>
+<dd><p class="first last">Interpolation algorithm. Either <tt class="docutils literal"><span class="pre">'cubic'</span></tt>, <tt class="docutils literal"><span class="pre">'nearest'</span></tt>,
+<tt class="docutils literal"><span class="pre">'linear'</span></tt> (see scipy.interpolate.griddata), or <tt class="docutils literal"><span class="pre">'nn'</span></tt> for nearest
+neighbors (using matplotlib.mlab.griddata)</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>extrapolate <span class="classifier-delimiter">:</span> <span class="classifier">True or False</span></dt>
+<dd><p class="first last">If True, will extrapolate values outside of the convex hull of the data
+points.</p>
+</dd>
+</dl>
+</li>
+</ul>
+<p>Returns:</p>
+<ul>
+<li><dl class="first docutils">
+<dt><tt class="docutils literal"><span class="pre">[x,</span> <span class="pre">y,</span> <span class="pre">v]</span></tt></dt>
+<dd><p class="first last">Three 1D arrays with the interpolated x, y, and v</p>
+</dd>
+</dl>
+</li>
+</ul>
+</dd></dl>
+
+<dl class="function">
+<dt id="fatiando.gridder.interp_at">
+<tt class="descclassname">fatiando.gridder.</tt><tt class="descname">interp_at</tt><big>(</big><em>x</em>, <em>y</em>, <em>v</em>, <em>xp</em>, <em>yp</em>, <em>algorithm='cubic'</em>, <em>extrapolate=False</em><big>)</big><a class="reference internal" href="../_modules/fatiando/gridder.html#interp_at"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fatiando.gridder.interp_at" title="Permalink to this definition">¶</a></dt>
+<dd><p>Interpolate data onto the specified points.</p>
+<p>Parameters:</p>
+<ul>
+<li><dl class="first docutils">
+<dt>x, y <span class="classifier-delimiter">:</span> <span class="classifier">1D arrays</span></dt>
+<dd><p class="first last">Arrays with the x and y coordinates of the data points.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>v <span class="classifier-delimiter">:</span> <span class="classifier">1D array</span></dt>
+<dd><p class="first last">Array with the scalar value assigned to the data points.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>xp, yp <span class="classifier-delimiter">:</span> <span class="classifier">1D arrays</span></dt>
+<dd><p class="first last">Points where the data values will be interpolated</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>algorithm <span class="classifier-delimiter">:</span> <span class="classifier">string</span></dt>
+<dd><p class="first last">Interpolation algorithm. Either <tt class="docutils literal"><span class="pre">'cubic'</span></tt>, <tt class="docutils literal"><span class="pre">'nearest'</span></tt>,
+<tt class="docutils literal"><span class="pre">'linear'</span></tt> (see scipy.interpolate.griddata)</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>extrapolate <span class="classifier-delimiter">:</span> <span class="classifier">True or False</span></dt>
+<dd><p class="first last">If True, will extrapolate values outside of the convex hull of the data
+points.</p>
+</dd>
+</dl>
+</li>
+</ul>
+<p>Returns:</p>
+<ul>
+<li><dl class="first docutils">
+<dt>v <span class="classifier-delimiter">:</span> <span class="classifier">1D array</span></dt>
+<dd><p class="first last">1D array with the interpolated v values.</p>
+</dd>
+</dl>
+</li>
+</ul>
+</dd></dl>
+
+<dl class="function">
+<dt id="fatiando.gridder.load_surfer">
+<tt class="descclassname">fatiando.gridder.</tt><tt class="descname">load_surfer</tt><big>(</big><em>fname</em>, <em>fmt='ascii'</em><big>)</big><a class="reference internal" href="../_modules/fatiando/gridder.html#load_surfer"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fatiando.gridder.load_surfer" title="Permalink to this definition">¶</a></dt>
+<dd><p>Read a Surfer grid file and return three 1d numpy arrays and the grid shape</p>
+<p>Surfer is a contouring, gridding and surface mapping software
+from GoldenSoftware. The names and logos for Surfer and Golden
+Software are registered trademarks of Golden Software, Inc.</p>
+<p><a class="reference external" href="http://www.goldensoftware.com/products/surfer">http://www.goldensoftware.com/products/surfer</a></p>
+<p>According to Surfer structure, x and y are horizontal and vertical
+screen-based coordinates respectively. If the grid is in geographic
+coordinates, x will be longitude and y latitude. If the coordinates
+are cartesian, x will be the easting and y the norting coordinates.</p>
+<p>WARNING: This is opposite to the convention used for Fatiando.
+See io_surfer.py in cookbook.</p>
+<p>Parameters:</p>
+<ul>
+<li><dl class="first docutils">
+<dt>fname <span class="classifier-delimiter">:</span> <span class="classifier">str</span></dt>
+<dd><p class="first last">Name of the Surfer grid file</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>fmt <span class="classifier-delimiter">:</span> <span class="classifier">str</span></dt>
+<dd><p class="first last">File type, can be &#8216;ascii&#8217; or &#8216;binary&#8217;</p>
+</dd>
+</dl>
+</li>
+</ul>
+<p>Returns:</p>
+<ul>
+<li><dl class="first docutils">
+<dt>x <span class="classifier-delimiter">:</span> <span class="classifier">1d-array</span></dt>
+<dd><p class="first last">Value of the horizontal coordinate of each grid point.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>y <span class="classifier-delimiter">:</span> <span class="classifier">1d-array</span></dt>
+<dd><p class="first last">Value of the vertical coordinate of each grid point.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>grd <span class="classifier-delimiter">:</span> <span class="classifier">1d-array</span></dt>
+<dd><p class="first last">Values of the field in each grid point. Field can be for example
+topography, gravity anomaly etc</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>shape <span class="classifier-delimiter">:</span> <span class="classifier">tuple = (ny, nx)</span></dt>
+<dd><p class="first last">The number of points in the vertical and horizontal grid dimensions,
+respectively</p>
+</dd>
+</dl>
+</li>
+</ul>
+</dd></dl>
+
+<dl class="function">
+<dt id="fatiando.gridder.profile">
+<tt class="descclassname">fatiando.gridder.</tt><tt class="descname">profile</tt><big>(</big><em>x</em>, <em>y</em>, <em>v</em>, <em>point1</em>, <em>point2</em>, <em>size</em>, <em>extrapolate=False</em><big>)</big><a class="reference internal" href="../_modules/fatiando/gridder.html#profile"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fatiando.gridder.profile" title="Permalink to this definition">¶</a></dt>
+<dd><p>Extract a data profile between 2 points.</p>
+<p>Uses interpolation to calculate the data values at the profile points.</p>
+<p>Parameters:</p>
+<ul>
+<li><dl class="first docutils">
+<dt>x, y <span class="classifier-delimiter">:</span> <span class="classifier">1D arrays</span></dt>
+<dd><p class="first last">Arrays with the x and y coordinates of the data points.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>v <span class="classifier-delimiter">:</span> <span class="classifier">1D array</span></dt>
+<dd><p class="first last">Array with the scalar value assigned to the data points.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>point1, point2 <span class="classifier-delimiter">:</span> <span class="classifier">lists = [x, y]</span></dt>
+<dd><p class="first last">Lists the x, y coordinates of the 2 points between which the profile
+will be extracted.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>size <span class="classifier-delimiter">:</span> <span class="classifier">int</span></dt>
+<dd><p class="first last">Number of points along the profile.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>extrapolate <span class="classifier-delimiter">:</span> <span class="classifier">True or False</span></dt>
+<dd><p class="first last">If True, will extrapolate values outside of the convex hull of the data
+points.</p>
+</dd>
+</dl>
+</li>
+</ul>
+<p>Returns:</p>
+<ul>
+<li><dl class="first docutils">
+<dt>[xp, yp, distances, vp] <span class="classifier-delimiter">:</span> <span class="classifier">1d arrays</span></dt>
+<dd><p class="first last"><tt class="docutils literal"><span class="pre">xp</span></tt> and <tt class="docutils literal"><span class="pre">yp</span></tt> are the x, y coordinates of the points along the
+profile.
+<tt class="docutils literal"><span class="pre">distances</span></tt> are the distances of the profile points to <tt class="docutils literal"><span class="pre">point1</span></tt>
+<tt class="docutils literal"><span class="pre">vp</span></tt> are the data points along the profile.</p>
+</dd>
+</dl>
+</li>
+</ul>
+</dd></dl>
+
+<dl class="function">
+<dt id="fatiando.gridder.regular">
+<tt class="descclassname">fatiando.gridder.</tt><tt class="descname">regular</tt><big>(</big><em>area</em>, <em>shape</em>, <em>z=None</em><big>)</big><a class="reference internal" href="../_modules/fatiando/gridder.html#regular"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fatiando.gridder.regular" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a regular grid. Order of the output grid is x varies first, then y.</p>
+<p>Parameters:</p>
+<ul>
+<li><dl class="first docutils">
+<dt>area</dt>
+<dd><p class="first last"><tt class="docutils literal"><span class="pre">(x1,</span> <span class="pre">x2,</span> <span class="pre">y1,</span> <span class="pre">y2)</span></tt>: Borders of the grid</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>shape</dt>
+<dd><p class="first last">Shape of the regular grid, ie <tt class="docutils literal"><span class="pre">(ny,</span> <span class="pre">nx)</span></tt>.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>z</dt>
+<dd><p class="first last">Optional. z coordinate of the grid points. If given, will return an
+array with the value <em>z</em>.</p>
+</dd>
+</dl>
+</li>
+</ul>
+<p>Returns:</p>
+<ul>
+<li><dl class="first docutils">
+<dt><tt class="docutils literal"><span class="pre">[xcoords,</span> <span class="pre">ycoords]</span></tt></dt>
+<dd><p class="first last">Numpy arrays with the x and y coordinates of the grid points</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt><tt class="docutils literal"><span class="pre">[xcoords,</span> <span class="pre">ycoords,</span> <span class="pre">zcoords]</span></tt></dt>
+<dd><p class="first last">If <em>z</em> given. Numpy arrays with the x, y, and z coordinates of the grid
+points</p>
+</dd>
+</dl>
+</li>
+</ul>
+</dd></dl>
+
+<dl class="function">
+<dt id="fatiando.gridder.scatter">
+<tt class="descclassname">fatiando.gridder.</tt><tt class="descname">scatter</tt><big>(</big><em>area</em>, <em>n</em>, <em>z=None</em>, <em>seed=None</em><big>)</big><a class="reference internal" href="../_modules/fatiando/gridder.html#scatter"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fatiando.gridder.scatter" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create an irregular grid with a random scattering of points.</p>
+<p>Parameters:</p>
+<ul>
+<li><dl class="first docutils">
+<dt>area</dt>
+<dd><p class="first last"><tt class="docutils literal"><span class="pre">(x1,</span> <span class="pre">x2,</span> <span class="pre">y1,</span> <span class="pre">y2)</span></tt>: Borders of the grid</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>n</dt>
+<dd><p class="first last">Number of points</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>z</dt>
+<dd><p class="first last">Optional. z coordinate of the points. If given, will return an
+array with the value <em>z</em>.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>seed <span class="classifier-delimiter">:</span> <span class="classifier">None or int</span></dt>
+<dd><p class="first last">Seed used to generate the pseudo-random numbers. If <cite>None</cite>, will use a
+different seed every time. Use the same seed to generate the same
+random points.</p>
+</dd>
+</dl>
+</li>
+</ul>
+<p>Returns:</p>
+<ul>
+<li><dl class="first docutils">
+<dt><tt class="docutils literal"><span class="pre">[xcoords,</span> <span class="pre">ycoords]</span></tt></dt>
+<dd><p class="first last">Numpy arrays with the x and y coordinates of the points</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt><tt class="docutils literal"><span class="pre">[xcoords,</span> <span class="pre">ycoords,</span> <span class="pre">zcoords]</span></tt></dt>
+<dd><p class="first last">If <em>z</em> given. Arrays with the x, y, and z coordinates of the points</p>
+</dd>
+</dl>
+</li>
+</ul>
+</dd></dl>
+
+<dl class="function">
+<dt id="fatiando.gridder.spacing">
+<tt class="descclassname">fatiando.gridder.</tt><tt class="descname">spacing</tt><big>(</big><em>area</em>, <em>shape</em><big>)</big><a class="reference internal" href="../_modules/fatiando/gridder.html#spacing"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fatiando.gridder.spacing" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the spacing between grid nodes</p>
+<p>Parameters:</p>
+<ul>
+<li><dl class="first docutils">
+<dt>area</dt>
+<dd><p class="first last"><tt class="docutils literal"><span class="pre">(x1,</span> <span class="pre">x2,</span> <span class="pre">y1,</span> <span class="pre">y2)</span></tt>: Borders of the grid</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>shape</dt>
+<dd><p class="first last">Shape of the regular grid, ie <tt class="docutils literal"><span class="pre">(ny,</span> <span class="pre">nx)</span></tt>.</p>
+</dd>
+</dl>
+</li>
+</ul>
+<p>Returns:</p>
+<ul>
+<li><dl class="first docutils">
+<dt><tt class="docutils literal"><span class="pre">[dy,</span> <span class="pre">dx]</span></tt></dt>
+<dd><p class="first last">Spacing the y and x directions</p>
+</dd>
+</dl>
+</li>
+</ul>
+</dd></dl>
+
+</div>
+
+
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="vis.html" class="btn btn-neutral float-right" title="Visualization (fatiando.vis)"/>Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="mesher.html" class="btn btn-neutral" title="Meshing (fatiando.mesher)"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2012-2014, Leonardo Uieda.
+      Last updated on Mar 05, 2015.
+    </p>
+  </div>
+
+  <a href="https://github.com/snide/sphinx_rtd_theme">Sphinx theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'0.3',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+      <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

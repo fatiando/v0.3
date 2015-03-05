@@ -1,0 +1,12 @@
+.. _cookbook_gravmag_eqlayer_joint:
+
+GravMag: Fit an equivalent layer to gravity and gravity gradient data
+======================================================================
+
+.. raw:: html
+
+    [<a href="../_static/cookbook/gravmag_eqlayer_joint.py">source code</a>]
+
+.. literalinclude:: ../../cookbook/gravmag_eqlayer_joint.py
+    :language: python
+    :linenos:

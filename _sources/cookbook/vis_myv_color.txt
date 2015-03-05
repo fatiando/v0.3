@@ -1,0 +1,12 @@
+.. _cookbook_vis_myv_color:
+
+Vis: Set the colors in figures, prisms, polygonal prisms and tesseroids.
+=========================================================================
+
+.. raw:: html
+
+    [<a href="../_static/cookbook/vis_myv_color.py">source code</a>]
+
+.. literalinclude:: ../../cookbook/vis_myv_color.py
+    :language: python
+    :linenos:

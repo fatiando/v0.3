@@ -1,0 +1,12 @@
+.. _cookbook_grid_surfer:
+
+Gridding: Load a Surfer ASCII grid file
+========================================
+
+.. raw:: html
+
+    [<a href="../_static/cookbook/grid_surfer.py">source code</a>]
+
+.. literalinclude:: ../../cookbook/grid_surfer.py
+    :language: python
+    :linenos:

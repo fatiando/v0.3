@@ -1,0 +1,1323 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Miscellaneous Utilities (fatiando.utils) &mdash; Fatiando a Terra v0.3</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+  
+
+  
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="top" title="Fatiando a Terra v0.3" href="../index.html"/>
+        <link rel="up" title="API Reference: The fatiando package" href="fatiando.html"/>
+        <link rel="next" title="Physical constants and unit conversions (fatiando.constants)" href="constants.html"/>
+        <link rel="prev" title="Simple GUIs using matplotlib (fatiando.gui.simple)" href="gui.simple.html"/> 
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-nav-search">
+        <a href="../index.html" class="fa fa-home"> Fatiando a Terra</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+        
+        
+            <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../contributors.html">Contributors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../license.html">License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../changelog.html">Changelog</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../changelog.html#version-0-3">Version 0.3</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../changelog.html#version-0-2">Version 0.2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../changelog.html#version-0-1">Version 0.1</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../install.html">Installing Fatiando</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../install.html#which-python">Which Python?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../install.html#installing-the-dependencies">Installing the dependencies</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../install.html#id1">Installing Fatiando</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../install.html#installing-the-latest-development-version">Installing the latest development version</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../install.html#testing-the-install">Testing the install</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="reference internal" href="fatiando.html">API Reference: The <tt class="docutils literal"><span class="pre">fatiando</span></tt> package</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="gravmag.html">Gravity and magnetics (<tt class="docutils literal"><span class="pre">fatiando.gravmag</span></tt>)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="seismic.html">Seismics and seismology (<tt class="docutils literal"><span class="pre">fatiando.seismic</span></tt>)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="geothermal.html">Geothermal heat (<tt class="docutils literal"><span class="pre">fatiando.geothermal</span></tt>)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mesher.html">Meshing (<tt class="docutils literal"><span class="pre">fatiando.mesher</span></tt>)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="gridder.html">Gridding (<tt class="docutils literal"><span class="pre">fatiando.gridder</span></tt>)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vis.html">Visualization (<tt class="docutils literal"><span class="pre">fatiando.vis</span></tt>)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="datasets.html">Fetch data from the internet (<tt class="docutils literal"><span class="pre">fatiando.datasets</span></tt>)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="gui.html">Graphical user interfaces (<tt class="docutils literal"><span class="pre">fatiando.gui</span></tt>)</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="">Miscellaneous Utilities (<tt class="docutils literal"><span class="pre">fatiando.utils</span></tt>)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="constants.html">Physical constants and unit conversions (<tt class="docutils literal"><span class="pre">fatiando.constants</span></tt>)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="inversion.html">Inverse problems framework (<tt class="docutils literal"><span class="pre">fatiando.inversion</span></tt>)</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../cookbook.html">Cookbook</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/datasets_crust2.0_tesseroid.html">Datasets: Fetch the CRUST2.0 model, convert it to tesseroids and calculate its gravity signal in parallel</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/geothermal_climsig_abrupt.html">Geothermal: Forward and inverse modeling of an abrupt change in temperature measured in a well</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/geothermal_climsig_linear.html">Geothermal: Forward and inverse modeling of a linear change in temperature measured in a well</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/geothermal_climsig_wrong.html">Geothermal: Climate signal: What happens when assuming a climate change is linear, when in fact it was abrupt?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/gravmag_2d_polygon_interactive.html">GravMag: Interactive 2D forward modeling with polygons</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/gravmag_2d_polygon_picker.html">GravMag: 2D forward modeling with polygons</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/gravmag_basin2d_trapezoidal.html">GravMag: Simple gravity inversion for the relief of a 2D trapezoidal basin</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/gravmag_basin2d_trapezoidal_forward.html">GravMag: Interactive 2D forward gravity modeling of a trapezoidal basin</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/gravmag_basin2d_triangular.html">GravMag: Simple gravity inversion for the relief of a 2D triangular basin</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/gravmag_basin2d_triangular_forward.html">GravMag: Interactive 2D forward gravity modeling of a triangular basin</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/gravmag_eqlayer_joint.html">GravMag: Fit an equivalent layer to gravity and gravity gradient data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/gravmag_eqlayer_pel_polereduc.html">GravMag: Use the Polynomial Equivalent Layer to reduce a magnetic total field anomaly to the pole</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/gravmag_eqlayer_pel_upcontinue.html">GravMag: Use the polynomial equivalent layer to upward continue gravity data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/gravmag_eqlayer_polereduc.html">GravMag: Use an equivalent layer to reduce a magnetic total field anomaly to the pole</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/gravmag_eqlayer_upcontinue.html">GravMag: Use an equivalent layer to upward continue gravity data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/gravmag_euler_classic.html">GravMag: Classic 3D Euler deconvolution of magnetic data (single window)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/gravmag_euler_classic_expanding_window.html">GravMag: Classic 3D Euler deconvolution of magnetic data using an expanding window</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/gravmag_euler_classic_moving_window.html">GravMag: Classic 3D Euler deconvolution of magnetic data using a moving window</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/gravmag_fourier_ansig.html">GravMag: Calculate the analytic signal of a total field anomaly using FFT</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/gravmag_fourier_deriv.html">GravMag: Calculating the derivatives of the gravity anomaly using FFT</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/gravmag_grav_polyprism.html">GravMag: Forward gravity modeling using a stack of 3D polygonal model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/gravmag_grav_prism.html">GravMag: Forward modeling of the gravitational potential and its derivatives using 3D model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/gravmag_grav_sphere.html">GravMag: Forward modeling of the gravity anomaly and gravity gradient tensor using model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/gravmag_grav_tesseroid.html">GravMag: Forward modeling of the gravitational potential and its derivatives using tesseroids</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/gravmag_harvester_grav.html">GravMag: 3D gravity inversion by planting anomalous densities using <tt class="docutils literal"><span class="pre">harvester</span></tt> (more complex interactive example)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/gravmag_harvester_tensor.html">GravMag: 3D gravity gradient inversion by planting anomalous densities using <tt class="docutils literal"><span class="pre">harvester</span></tt> (with non-targeted sources)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/gravmag_harvester_weights.html">GravMag: Using data weights in 3D inversion using <tt class="docutils literal"><span class="pre">harvester</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/gravmag_imaging_geninv.html">GravMag: 3D imaging using the Generalized Inverse method on synthetic gravity data (more complex model + noisy data)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/gravmag_imaging_migration.html">GravMag: 3D imaging using the migration method on synthetic gravity data (more complex model + noisy data)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/gravmag_imaging_sandwich.html">GravMag: 3D imaging using the sandwich model method on synthetic gravity data (simple example)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/gravmag_mag_polyprism.html">GravMag: 3D forward modeling of total-field magnetic anomaly using polygonal prisms</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/gravmag_mag_prism.html">GravMag: 3D forward modeling of total-field magnetic anomaly using rectangular prisms (model with induced and remanent magnetization)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/gravmag_mag_sphere.html">GravMag: 3D forward modeling of total-field magnetic anomaly using spheres</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/gravmag_magdir_dipolemagdir.html">GravMag: Use the DipoleMagDir class to estimate the magnetization direction of dipoles with known centers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/gravmag_normal_gravity.html">GravMag: Calculate the gravity disturbance and Bouguer anomaly for Hawaii</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/gravmag_tensor_centerofmass.html">GravMag: Center of mass estimation using the first eigenvector of the gravity gradient tensor (simple model)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/gravmag_tensor_centerofmass_expanding_window.html">GravMag: Center of mass estimation using the first eigenvector of the gravity gradient tensor (2 sources with expanding windows)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/gravmag_tensor_invariants.html">GravMag: Calculate the gravity gradient tensor invariants</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/gravmag_tensor_polyprism.html">GravMag: Generate synthetic gradient tensor data from polygonal prisms</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/gravmag_tensor_prism_noisy.html">GravMag: Generate noise-corrupted gravity gradient tensor data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/gravmag_upcontinue.html">GravMag: Upward continuation of noisy gz data using the analytical formula</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/grid_cut.html">Gridding: Cut a section from a grid</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/grid_interpolate.html">Gridding: Grid irregularly sampled data.</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/grid_profile.html">Gridding: Extract a profile from map data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/grid_scatter.html">Gridding: Generate and plot irregular grids (scatter)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/grid_surfer.html">Gridding: Load a Surfer ASCII grid file</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/mesher_pointgrid.html">Meshing: Making a grid of 3D point sources</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/mesher_prismmesh.html">Meshing: Make and plot a 3D prism mesh</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/mesher_prismmesh_filter.html">Meshing: Filter prisms from a 3D prism mesh based on their physical properties</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/mesher_prismmesh_topo.html">Meshing: Make and plot a 3D prism mesh with topography</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/mesher_prismmesh_vardens.html">Meshing: Make a 3D prism mesh with depth-varying density</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/mesher_prismrelief_topo.html">Meshing: Generate a 3D prism model of the topography</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/mesher_squaremesh_from_image.html">Meshing: Generate a SquareMesh and get the physical properties from an image</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/mesher_tesseroid.html">Meshing: Make and plot a tesseroid with the Earth</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/mesher_tesseroidmesh.html">Meshing: Make and plot a tesseroid mesh</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/mesher_tesseroidmesh_topo.html">Meshing: Make and plot a tesseroid mesh with topography</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/seismic_epic2d.html">Seismic: 2D epicenter estimation assuming a homogeneous and flat Earth</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/seismic_epic2d_iterate.html">Seismic: Show steps taken by different algorithms for 2D epicenter estimation on a flat Earth</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/seismic_profile_vertical.html">Seismic: Invert vertical seismic profile (VSP) traveltimes for the velocity of a layered model.</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/seismic_profile_vertical_interactive.html">Seismic: Interactive forward modeling of 1D vertical seismic profile (VSP) data in layered media</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/seismic_profile_vertical_smooth.html">Seismic: Invert vertical seismic profile (VSP) traveltimes using smoothness regularization and unknown layer thicknesses</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/seismic_srtomo_damped.html">Seismic: 2D straight-ray tomography using damping regularization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/seismic_srtomo_sharp.html">Seismic: 2D straight-ray tomography using sharpness (total variation) regularization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/seismic_srtomo_smooth.html">Seismic: 2D straight-ray tomography using smoothness regularization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/seismic_wavefd_elastic_psv.html">Seismic: 2D finite difference simulation of elastic P and SV wave propagation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/seismic_wavefd_elastic_sh.html">Seismic: 2D finite difference simulation of elastic SH wave propagation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/seismic_wavefd_love_wave.html">Seismic: 2D finite difference simulation of elastic SH wave propagation in a medium with a discontinuity (i.e., Moho), generating Love waves.</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/seismic_wavefd_rayleigh_wave.html">Seismic: 2D finite difference simulation of elastic P and SV wave propagation in a medium with a discontinuity (i.e., Moho), generating Rayleigh waves</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/seismic_wavefd_scalar.html">Seismic: 2D finite difference simulation of scalar wave propagation.</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/vis_mpl_basemap.html">Vis: Plot a map using the Orthographic map projection and filled contours</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/vis_mpl_basemap2.html">Vis: Plot a map using the Mercator map projection and pseudo-color</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/vis_mpl_basemap3.html">Vis: Plot a map using the Robinson map projection and contours</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/vis_mpl_contour.html">Vis: Plot contour lines and filled contours</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/vis_mpl_irregular_data.html">Vis: Plotting irregularly sampled map data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/vis_myv_color.html">Vis: Set the colors in figures, prisms, polygonal prisms and tesseroids.</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/vis_myv_earth.html">Vis: Plot the Earth, continents, inner and outer core in 3D with Mayavi2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/vis_myv_exaggerate.html">Vis: Exaggerate the vertical dimension of 3D plots</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../develop.html">Developer guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../develop.html#making-a-release">Making a release</a></li>
+</ul>
+</li>
+</ul>
+
+        
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../index.html">Fatiando a Terra</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../index.html">Docs</a> &raquo;</li>
+      
+          <li><a href="fatiando.html">API Reference: The <tt class="docutils literal"><span class="pre">fatiando</span></tt> package</a> &raquo;</li>
+      
+    <li>Miscellaneous Utilities (<tt class="docutils literal"><span class="pre">fatiando.utils</span></tt>)</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          <a href="../_sources/api/utils.txt" rel="nofollow"> View page source</a>
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            
+  <div class="section" id="module-fatiando.utils">
+<span id="miscellaneous-utilities-fatiando-utils"></span><span id="fatiando-utils"></span><h1>Miscellaneous Utilities (<tt class="docutils literal"><span class="pre">fatiando.utils</span></tt>)<a class="headerlink" href="#module-fatiando.utils" title="Permalink to this headline">¶</a></h1>
+<p>Miscellaneous utility functions and classes.</p>
+<p><strong>Mathematical functions</strong></p>
+<ul class="simple">
+<li><a class="reference internal" href="#fatiando.utils.normal" title="fatiando.utils.normal"><tt class="xref py py-func docutils literal"><span class="pre">normal</span></tt></a></li>
+<li><a class="reference internal" href="#fatiando.utils.gaussian" title="fatiando.utils.gaussian"><tt class="xref py py-func docutils literal"><span class="pre">gaussian</span></tt></a></li>
+<li><a class="reference internal" href="#fatiando.utils.gaussian2d" title="fatiando.utils.gaussian2d"><tt class="xref py py-func docutils literal"><span class="pre">gaussian2d</span></tt></a></li>
+<li><a class="reference internal" href="#fatiando.utils.safe_solve" title="fatiando.utils.safe_solve"><tt class="xref py py-func docutils literal"><span class="pre">safe_solve</span></tt></a></li>
+<li><a class="reference internal" href="#fatiando.utils.safe_dot" title="fatiando.utils.safe_dot"><tt class="xref py py-func docutils literal"><span class="pre">safe_dot</span></tt></a></li>
+<li><a class="reference internal" href="#fatiando.utils.safe_diagonal" title="fatiando.utils.safe_diagonal"><tt class="xref py py-func docutils literal"><span class="pre">safe_diagonal</span></tt></a></li>
+<li><a class="reference internal" href="#fatiando.utils.safe_inverse" title="fatiando.utils.safe_inverse"><tt class="xref py py-func docutils literal"><span class="pre">safe_inverse</span></tt></a></li>
+</ul>
+<p><strong>Point scatter generation</strong></p>
+<ul class="simple">
+<li><a class="reference internal" href="#fatiando.utils.random_points" title="fatiando.utils.random_points"><tt class="xref py py-func docutils literal"><span class="pre">random_points</span></tt></a></li>
+<li><a class="reference internal" href="#fatiando.utils.circular_points" title="fatiando.utils.circular_points"><tt class="xref py py-func docutils literal"><span class="pre">circular_points</span></tt></a></li>
+<li><a class="reference internal" href="#fatiando.utils.connect_points" title="fatiando.utils.connect_points"><tt class="xref py py-func docutils literal"><span class="pre">connect_points</span></tt></a></li>
+</ul>
+<p><strong>Unit conversion</strong></p>
+<ul class="simple">
+<li><a class="reference internal" href="#fatiando.utils.si2mgal" title="fatiando.utils.si2mgal"><tt class="xref py py-func docutils literal"><span class="pre">si2mgal</span></tt></a></li>
+<li><a class="reference internal" href="#fatiando.utils.mgal2si" title="fatiando.utils.mgal2si"><tt class="xref py py-func docutils literal"><span class="pre">mgal2si</span></tt></a></li>
+<li><a class="reference internal" href="#fatiando.utils.si2eotvos" title="fatiando.utils.si2eotvos"><tt class="xref py py-func docutils literal"><span class="pre">si2eotvos</span></tt></a></li>
+<li><a class="reference internal" href="#fatiando.utils.eotvos2si" title="fatiando.utils.eotvos2si"><tt class="xref py py-func docutils literal"><span class="pre">eotvos2si</span></tt></a></li>
+<li><a class="reference internal" href="#fatiando.utils.si2nt" title="fatiando.utils.si2nt"><tt class="xref py py-func docutils literal"><span class="pre">si2nt</span></tt></a></li>
+<li><a class="reference internal" href="#fatiando.utils.nt2si" title="fatiando.utils.nt2si"><tt class="xref py py-func docutils literal"><span class="pre">nt2si</span></tt></a></li>
+</ul>
+<p><strong>Coordinate system conversions</strong></p>
+<ul class="simple">
+<li><a class="reference internal" href="#fatiando.utils.sph2cart" title="fatiando.utils.sph2cart"><tt class="xref py py-func docutils literal"><span class="pre">sph2cart</span></tt></a></li>
+</ul>
+<p><strong>Others</strong></p>
+<ul class="simple">
+<li><a class="reference internal" href="#fatiando.utils.fromimage" title="fatiando.utils.fromimage"><tt class="xref py py-func docutils literal"><span class="pre">fromimage</span></tt></a>: Load a matrix from an image file</li>
+<li><a class="reference internal" href="#fatiando.utils.contaminate" title="fatiando.utils.contaminate"><tt class="xref py py-func docutils literal"><span class="pre">contaminate</span></tt></a>: Contaminate a vector with pseudo-random
+Gaussian noise</li>
+<li><a class="reference internal" href="#fatiando.utils.dircos" title="fatiando.utils.dircos"><tt class="xref py py-func docutils literal"><span class="pre">dircos</span></tt></a>: Get the 3 coordinates of a unit vector</li>
+<li><a class="reference internal" href="#fatiando.utils.ang2vec" title="fatiando.utils.ang2vec"><tt class="xref py py-func docutils literal"><span class="pre">ang2vec</span></tt></a>: Convert intensity, inclination and
+declination to a 3-component vector</li>
+<li><a class="reference internal" href="#fatiando.utils.vecnorm" title="fatiando.utils.vecnorm"><tt class="xref py py-func docutils literal"><span class="pre">vecnorm</span></tt></a>: Get the norm of a vector or list of vectors</li>
+<li><a class="reference internal" href="#fatiando.utils.vecmean" title="fatiando.utils.vecmean"><tt class="xref py py-func docutils literal"><span class="pre">vecmean</span></tt></a>: Take the mean array out of a list of arrays</li>
+<li><a class="reference internal" href="#fatiando.utils.vecstd" title="fatiando.utils.vecstd"><tt class="xref py py-func docutils literal"><span class="pre">vecstd</span></tt></a>: Take the standard deviation array out of a
+list of arrays</li>
+<li><a class="reference internal" href="#fatiando.utils.SparseList" title="fatiando.utils.SparseList"><tt class="xref py py-class docutils literal"><span class="pre">SparseList</span></tt></a>: Store only non-zero elements on an
+immutable list</li>
+<li><a class="reference internal" href="#fatiando.utils.sec2hms" title="fatiando.utils.sec2hms"><tt class="xref py py-func docutils literal"><span class="pre">sec2hms</span></tt></a>: Convert seconds to hours, minutes, and
+seconds</li>
+<li><a class="reference internal" href="#fatiando.utils.sec2year" title="fatiando.utils.sec2year"><tt class="xref py py-func docutils literal"><span class="pre">sec2year</span></tt></a>: Convert seconds to Julian years</li>
+<li><a class="reference internal" href="#fatiando.utils.year2sec" title="fatiando.utils.year2sec"><tt class="xref py py-func docutils literal"><span class="pre">year2sec</span></tt></a>: Convert Julian years to seconds</li>
+</ul>
+<hr class="docutils" />
+<dl class="class">
+<dt id="fatiando.utils.SparseList">
+<em class="property">class </em><tt class="descclassname">fatiando.utils.</tt><tt class="descname">SparseList</tt><big>(</big><em>size</em>, <em>elements=None</em><big>)</big><a class="reference internal" href="../_modules/fatiando/utils.html#SparseList"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fatiando.utils.SparseList" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">object</span></tt></p>
+<p>Store only non-zero elements on an immutable list.</p>
+<p>Can iterate over and access elements just like if it were a list.</p>
+<p>Parameters:</p>
+<ul>
+<li><dl class="first docutils">
+<dt>size <span class="classifier-delimiter">:</span> <span class="classifier">int</span></dt>
+<dd><p class="first last">Size of the list.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>elements <span class="classifier-delimiter">:</span> <span class="classifier">dict</span></dt>
+<dd><p class="first last">Dictionary used to initialize the list. Keys are the index of the
+elements and values are their respective values.</p>
+</dd>
+</dl>
+</li>
+</ul>
+<p>Example:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">l</span> <span class="o">=</span> <span class="n">SparseList</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">l</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">=</span> <span class="mf">42.0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span> <span class="nb">len</span><span class="p">(</span><span class="n">l</span><span class="p">)</span>
+<span class="go">5</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span> <span class="n">l</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">l</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span>
+<span class="go">0.0 42.0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">l</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">+=</span> <span class="mf">3.0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">l</span><span class="p">:</span>
+<span class="gp">... </span>    <span class="k">print</span> <span class="n">i</span><span class="p">,</span>
+<span class="go">0.0 3.0 0.0 42.0 0.0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">l2</span> <span class="o">=</span> <span class="n">SparseList</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="n">elements</span><span class="o">=</span><span class="p">{</span><span class="mi">1</span><span class="p">:</span><span class="mf">3.2</span><span class="p">,</span> <span class="mi">3</span><span class="p">:</span><span class="mf">2.8</span><span class="p">})</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">l2</span><span class="p">:</span>
+<span class="gp">... </span>    <span class="k">print</span> <span class="n">i</span><span class="p">,</span>
+<span class="go">0.0 3.2 0.0 2.8</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="fatiando.utils.ang2vec">
+<tt class="descclassname">fatiando.utils.</tt><tt class="descname">ang2vec</tt><big>(</big><em>intensity</em>, <em>inc</em>, <em>dec</em><big>)</big><a class="reference internal" href="../_modules/fatiando/utils.html#ang2vec"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fatiando.utils.ang2vec" title="Permalink to this definition">¶</a></dt>
+<dd><p>Convert intensity, inclination and  declination to a 3-component vector</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Coordinate system is assumed to be x-&gt;North, y-&gt;East, z-&gt;Down.
+Inclination is positive down and declination is measured with respect
+to x (North).</p>
+</div>
+<p>Parameter:</p>
+<ul>
+<li><dl class="first docutils">
+<dt>intensity <span class="classifier-delimiter">:</span> <span class="classifier">float or array</span></dt>
+<dd><p class="first last">The intensity (norm) of the vector</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>inc <span class="classifier-delimiter">:</span> <span class="classifier">float</span></dt>
+<dd><p class="first last">The inclination of the vector (in degrees)</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>dec <span class="classifier-delimiter">:</span> <span class="classifier">float</span></dt>
+<dd><p class="first last">The declination of the vector (in degrees)</p>
+</dd>
+</dl>
+</li>
+</ul>
+<p>Returns:</p>
+<ul>
+<li><dl class="first docutils">
+<dt>vec <span class="classifier-delimiter">:</span> <span class="classifier">array = [x, y, z]</span></dt>
+<dd><p class="first last">The vector</p>
+</dd>
+</dl>
+</li>
+</ul>
+<p>Examples:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span> <span class="n">ang2vec</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">45</span><span class="p">,</span> <span class="mi">45</span><span class="p">)</span>
+<span class="go">[ 1.5         1.5         2.12132034]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span> <span class="n">ang2vec</span><span class="p">(</span><span class="n">numpy</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">4</span><span class="p">),</span> <span class="mi">45</span><span class="p">,</span> <span class="mi">45</span><span class="p">)</span>
+<span class="go">[[ 0.          0.          0.        ]</span>
+<span class="go"> [ 0.5         0.5         0.70710678]</span>
+<span class="go"> [ 1.          1.          1.41421356]</span>
+<span class="go"> [ 1.5         1.5         2.12132034]]</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="fatiando.utils.circular_points">
+<tt class="descclassname">fatiando.utils.</tt><tt class="descname">circular_points</tt><big>(</big><em>area</em>, <em>n</em>, <em>random=False</em>, <em>seed=None</em><big>)</big><a class="reference internal" href="../_modules/fatiando/utils.html#circular_points"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fatiando.utils.circular_points" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generate a set of n points positioned in a circular array.</p>
+<p>The diameter of the circle is equal to the smallest dimension of the area</p>
+<p>Parameters:</p>
+<ul>
+<li><dl class="first docutils">
+<dt>area <span class="classifier-delimiter">:</span> <span class="classifier">list = [x1, x2, y1, y2]</span></dt>
+<dd><p class="first last">Area inside of which the points are contained</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>n <span class="classifier-delimiter">:</span> <span class="classifier">int</span></dt>
+<dd><p class="first last">Number of points</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>random <span class="classifier-delimiter">:</span> <span class="classifier">True or False</span></dt>
+<dd><p class="first last">If True, positions of the points on the circle will be chosen at random</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>seed <span class="classifier-delimiter">:</span> <span class="classifier">None or int</span></dt>
+<dd><p class="first last">Seed used to generate the pseudo-random numbers if <cite>random==True</cite>.
+If <cite>None</cite>, will use a different seed every time.
+Use the same seed to generate the same random sequence.</p>
+</dd>
+</dl>
+</li>
+</ul>
+<p>Result:</p>
+<ul>
+<li><dl class="first docutils">
+<dt>points <span class="classifier-delimiter">:</span> <span class="classifier">list</span></dt>
+<dd><p class="first last">List of (x, y) coordinates of the points</p>
+</dd>
+</dl>
+</li>
+</ul>
+</dd></dl>
+
+<dl class="function">
+<dt id="fatiando.utils.connect_points">
+<tt class="descclassname">fatiando.utils.</tt><tt class="descname">connect_points</tt><big>(</big><em>pts1</em>, <em>pts2</em><big>)</big><a class="reference internal" href="../_modules/fatiando/utils.html#connect_points"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fatiando.utils.connect_points" title="Permalink to this definition">¶</a></dt>
+<dd><p>Connects each point in the first list with all points in the second.
+If the first list has N points and the second has M, the result are 2 lists
+with N*M points each, representing the connections.</p>
+<p>Parameters:</p>
+<ul>
+<li><dl class="first docutils">
+<dt>pts1 <span class="classifier-delimiter">:</span> <span class="classifier">list</span></dt>
+<dd><p class="first last">List of (x, y) coordinates of the points.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>pts2 <span class="classifier-delimiter">:</span> <span class="classifier">list</span></dt>
+<dd><p class="first last">List of (x, y) coordinates of the points.</p>
+</dd>
+</dl>
+</li>
+</ul>
+<p>Returns:</p>
+<ul>
+<li><dl class="first docutils">
+<dt>results <span class="classifier-delimiter">:</span> <span class="classifier">lists of lists = [connect1, connect2]</span></dt>
+<dd><p class="first last">2 lists with the connected points</p>
+</dd>
+</dl>
+</li>
+</ul>
+</dd></dl>
+
+<dl class="function">
+<dt id="fatiando.utils.contaminate">
+<tt class="descclassname">fatiando.utils.</tt><tt class="descname">contaminate</tt><big>(</big><em>data</em>, <em>stddev</em>, <em>percent=False</em>, <em>return_stddev=False</em>, <em>seed=None</em><big>)</big><a class="reference internal" href="../_modules/fatiando/utils.html#contaminate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fatiando.utils.contaminate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add pseudorandom gaussian noise to an array.</p>
+<p>Noise added is normally distributed with zero mean.</p>
+<p>Parameters:</p>
+<ul>
+<li><dl class="first docutils">
+<dt>data <span class="classifier-delimiter">:</span> <span class="classifier">array or list of arrays</span></dt>
+<dd><p class="first last">Data to contaminate</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>stddev <span class="classifier-delimiter">:</span> <span class="classifier">float or list of floats</span></dt>
+<dd><p class="first last">Standard deviation of the Gaussian noise that will be added to <em>data</em></p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>percent <span class="classifier-delimiter">:</span> <span class="classifier">True or False</span></dt>
+<dd><p class="first last">If <tt class="docutils literal"><span class="pre">True</span></tt>, will consider <em>stddev</em> as a decimal percentage and the
+standard deviation of the Gaussian noise will be this percentage of
+the maximum absolute value of <em>data</em></p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>return_stddev <span class="classifier-delimiter">:</span> <span class="classifier">True or False</span></dt>
+<dd><p class="first last">If <tt class="docutils literal"><span class="pre">True</span></tt>, will return also the standard deviation used to
+contaminate <em>data</em></p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>seed <span class="classifier-delimiter">:</span> <span class="classifier">None or int</span></dt>
+<dd><p class="first last">Seed used to generate the pseudo-random numbers. If <cite>None</cite>, will use a
+different seed every time. Use the same seed to generate the same
+random sequence to contaminate the data.</p>
+</dd>
+</dl>
+</li>
+</ul>
+<p>Returns:</p>
+<p>if <em>return_stddev</em> is <tt class="docutils literal"><span class="pre">False</span></tt>:</p>
+<ul>
+<li><dl class="first docutils">
+<dt>contam <span class="classifier-delimiter">:</span> <span class="classifier">array or list of arrays</span></dt>
+<dd><p class="first last">The contaminated data array</p>
+</dd>
+</dl>
+</li>
+</ul>
+<p>else:</p>
+<ul>
+<li><dl class="first docutils">
+<dt>results <span class="classifier-delimiter">:</span> <span class="classifier">list = [contam, stddev]</span></dt>
+<dd><p class="first last">The contaminated data array and the standard deviation used to
+contaminate it.</p>
+</dd>
+</dl>
+</li>
+</ul>
+<p>Examples:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">noisy</span> <span class="o">=</span> <span class="n">contaminate</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span> <span class="n">noisy</span>
+<span class="go">[ 1.03137726  0.89498775  0.95284582  1.07906135  1.04172782]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">noisy</span><span class="p">,</span> <span class="n">std</span> <span class="o">=</span> <span class="n">contaminate</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="mf">0.05</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">percent</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
+<span class="gp">... </span>                         <span class="n">return_stddev</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span> <span class="n">std</span>
+<span class="go">0.05</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span> <span class="n">noisy</span>
+<span class="go">[ 1.01568863  0.94749387  0.97642291  1.03953067  1.02086391]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">data</span> <span class="o">=</span> <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="mi">5</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="mi">3</span><span class="p">)]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">noisy</span> <span class="o">=</span> <span class="n">contaminate</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="p">[</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">],</span> <span class="n">seed</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span> <span class="n">noisy</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="go">[ 0.03137726 -0.10501225 -0.04715418  0.07906135  0.04172782]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span> <span class="n">noisy</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+<span class="go">[ 0.81644754  1.20192079  0.98163167]</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="fatiando.utils.dircos">
+<tt class="descclassname">fatiando.utils.</tt><tt class="descname">dircos</tt><big>(</big><em>inc</em>, <em>dec</em><big>)</big><a class="reference internal" href="../_modules/fatiando/utils.html#dircos"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fatiando.utils.dircos" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the 3 coordinates of a unit vector given its inclination and
+declination.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Coordinate system is assumed to be x-&gt;North, y-&gt;East, z-&gt;Down.
+Inclination is positive down and declination is measured with respect
+to x (North).</p>
+</div>
+<p>Parameter:</p>
+<ul>
+<li><dl class="first docutils">
+<dt>inc <span class="classifier-delimiter">:</span> <span class="classifier">float</span></dt>
+<dd><p class="first last">The inclination of the vector (in degrees)</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>dec <span class="classifier-delimiter">:</span> <span class="classifier">float</span></dt>
+<dd><p class="first last">The declination of the vector (in degrees)</p>
+</dd>
+</dl>
+</li>
+</ul>
+<p>Returns:</p>
+<ul>
+<li><dl class="first docutils">
+<dt>vect <span class="classifier-delimiter">:</span> <span class="classifier">list = [x, y, z]</span></dt>
+<dd><p class="first last">The unit vector</p>
+</dd>
+</dl>
+</li>
+</ul>
+</dd></dl>
+
+<dl class="function">
+<dt id="fatiando.utils.eotvos2si">
+<tt class="descclassname">fatiando.utils.</tt><tt class="descname">eotvos2si</tt><big>(</big><em>value</em><big>)</big><a class="reference internal" href="../_modules/fatiando/utils.html#eotvos2si"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fatiando.utils.eotvos2si" title="Permalink to this definition">¶</a></dt>
+<dd><p>Convert a value from Eotvos to SI units.</p>
+<p>Parameters:</p>
+<ul>
+<li><dl class="first docutils">
+<dt>value <span class="classifier-delimiter">:</span> <span class="classifier">number or array</span></dt>
+<dd><p class="first last">The value in Eotvos</p>
+</dd>
+</dl>
+</li>
+</ul>
+<p>Returns:</p>
+<ul>
+<li><dl class="first docutils">
+<dt>value <span class="classifier-delimiter">:</span> <span class="classifier">number or array</span></dt>
+<dd><p class="first last">The value in SI</p>
+</dd>
+</dl>
+</li>
+</ul>
+</dd></dl>
+
+<dl class="function">
+<dt id="fatiando.utils.fromimage">
+<tt class="descclassname">fatiando.utils.</tt><tt class="descname">fromimage</tt><big>(</big><em>fname</em>, <em>ranges=None</em>, <em>shape=None</em><big>)</big><a class="reference internal" href="../_modules/fatiando/utils.html#fromimage"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fatiando.utils.fromimage" title="Permalink to this definition">¶</a></dt>
+<dd><p>Load an array of normalized gray-scale values from an image file.</p>
+<p>The values will be in the range [0, 1]. The shape of the array is the shape
+of the image (ny, nx), i.e., number of pixels in vertical (height) and
+horizontal (width) dimensions.</p>
+<p>Parameters:</p>
+<ul>
+<li><dl class="first docutils">
+<dt>fname <span class="classifier-delimiter">:</span> <span class="classifier">str</span></dt>
+<dd><p class="first last">Name of the image file</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>ranges <span class="classifier-delimiter">:</span> <span class="classifier">[vmax, vmin] = floats</span></dt>
+<dd><p class="first last">If not <tt class="docutils literal"><span class="pre">None</span></tt>, will set the gray-scale values to this range.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>shape <span class="classifier-delimiter">:</span> <span class="classifier">(ny, nx)</span></dt>
+<dd><p class="first last">If not <tt class="docutils literal"><span class="pre">None</span></tt>, will interpolate the array to match this new shape</p>
+</dd>
+</dl>
+</li>
+</ul>
+<p>Returns:</p>
+<ul>
+<li><dl class="first docutils">
+<dt>values <span class="classifier-delimiter">:</span> <span class="classifier">2d-array</span></dt>
+<dd><p class="first last">The array of gray-scale values</p>
+</dd>
+</dl>
+</li>
+</ul>
+</dd></dl>
+
+<dl class="function">
+<dt id="fatiando.utils.gaussian">
+<tt class="descclassname">fatiando.utils.</tt><tt class="descname">gaussian</tt><big>(</big><em>x</em>, <em>mean</em>, <em>std</em><big>)</big><a class="reference internal" href="../_modules/fatiando/utils.html#gaussian"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fatiando.utils.gaussian" title="Permalink to this definition">¶</a></dt>
+<dd><p>Non-normalized Gaussian function</p>
+<div class="math">
+\[G(x,\bar{x},\sigma) = \exp\left(-\frac{(x-\bar{x})^2}{\sigma^2}
+\right)\]</div>
+<p>Parameters:</p>
+<ul>
+<li><dl class="first docutils">
+<dt>x <span class="classifier-delimiter">:</span> <span class="classifier">float or array</span></dt>
+<dd><p class="first last">Values at which to calculate the Gaussian function</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>mean <span class="classifier-delimiter">:</span> <span class="classifier">float</span></dt>
+<dd><p class="first last">The mean of the distribution <span class="math">\(\bar{x}\)</span></p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>std <span class="classifier-delimiter">:</span> <span class="classifier">float</span></dt>
+<dd><p class="first last">The standard deviation of the distribution <span class="math">\(\sigma\)</span></p>
+</dd>
+</dl>
+</li>
+</ul>
+<p>Returns:</p>
+<ul>
+<li><dl class="first docutils">
+<dt>gauss <span class="classifier-delimiter">:</span> <span class="classifier">array</span></dt>
+<dd><p class="first last">Gaussian function evaluated at <em>x</em></p>
+</dd>
+</dl>
+</li>
+</ul>
+</dd></dl>
+
+<dl class="function">
+<dt id="fatiando.utils.gaussian2d">
+<tt class="descclassname">fatiando.utils.</tt><tt class="descname">gaussian2d</tt><big>(</big><em>x</em>, <em>y</em>, <em>sigma_x</em>, <em>sigma_y</em>, <em>x0=0</em>, <em>y0=0</em>, <em>angle=0.0</em><big>)</big><a class="reference internal" href="../_modules/fatiando/utils.html#gaussian2d"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fatiando.utils.gaussian2d" title="Permalink to this definition">¶</a></dt>
+<dd><p>Non-normalized 2D Gaussian function</p>
+<p>Parameters:</p>
+<ul>
+<li><dl class="first docutils">
+<dt>x, y <span class="classifier-delimiter">:</span> <span class="classifier">float or arrays</span></dt>
+<dd><p class="first last">Coordinates at which to calculate the Gaussian function</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>sigma_x, sigma_y <span class="classifier-delimiter">:</span> <span class="classifier">float</span></dt>
+<dd><p class="first last">Standard deviation in the x and y directions</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>x0, y0 <span class="classifier-delimiter">:</span> <span class="classifier">float</span></dt>
+<dd><p class="first last">Coordinates of the center of the distribution</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>angle <span class="classifier-delimiter">:</span> <span class="classifier">float</span></dt>
+<dd><p class="first last">Rotation angle of the gaussian measure from the x axis (north) growing
+positive to the east (positive y axis)</p>
+</dd>
+</dl>
+</li>
+</ul>
+<p>Returns:</p>
+<ul>
+<li><dl class="first docutils">
+<dt>gauss <span class="classifier-delimiter">:</span> <span class="classifier">array</span></dt>
+<dd><p class="first last">Gaussian function evaluated at <em>x</em>, <em>y</em></p>
+</dd>
+</dl>
+</li>
+</ul>
+</dd></dl>
+
+<dl class="function">
+<dt id="fatiando.utils.mgal2si">
+<tt class="descclassname">fatiando.utils.</tt><tt class="descname">mgal2si</tt><big>(</big><em>value</em><big>)</big><a class="reference internal" href="../_modules/fatiando/utils.html#mgal2si"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fatiando.utils.mgal2si" title="Permalink to this definition">¶</a></dt>
+<dd><p>Convert a value from mGal to SI units.</p>
+<p>Parameters:</p>
+<ul>
+<li><dl class="first docutils">
+<dt>value <span class="classifier-delimiter">:</span> <span class="classifier">number or array</span></dt>
+<dd><p class="first last">The value in mGal</p>
+</dd>
+</dl>
+</li>
+</ul>
+<p>Returns:</p>
+<ul>
+<li><dl class="first docutils">
+<dt>value <span class="classifier-delimiter">:</span> <span class="classifier">number or array</span></dt>
+<dd><p class="first last">The value in SI</p>
+</dd>
+</dl>
+</li>
+</ul>
+</dd></dl>
+
+<dl class="function">
+<dt id="fatiando.utils.normal">
+<tt class="descclassname">fatiando.utils.</tt><tt class="descname">normal</tt><big>(</big><em>x</em>, <em>mean</em>, <em>std</em><big>)</big><a class="reference internal" href="../_modules/fatiando/utils.html#normal"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fatiando.utils.normal" title="Permalink to this definition">¶</a></dt>
+<dd><p>Normal distribution.</p>
+<div class="math">
+\[N(x,\bar{x},\sigma) = \frac{1}{\sigma\sqrt{2 \pi}}
+\exp\left(-\frac{(x-\bar{x})^2}{\sigma^2}\right)\]</div>
+<p>Parameters:</p>
+<ul>
+<li><dl class="first docutils">
+<dt>x <span class="classifier-delimiter">:</span> <span class="classifier">float or array</span></dt>
+<dd><p class="first last">Value at which to calculate the normal distribution</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>mean <span class="classifier-delimiter">:</span> <span class="classifier">float</span></dt>
+<dd><p class="first last">The mean of the distribution <span class="math">\(\bar{x}\)</span></p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>std <span class="classifier-delimiter">:</span> <span class="classifier">float</span></dt>
+<dd><p class="first last">The standard deviation of the distribution <span class="math">\(\sigma\)</span></p>
+</dd>
+</dl>
+</li>
+</ul>
+<p>Returns:</p>
+<ul>
+<li><dl class="first docutils">
+<dt>normal <span class="classifier-delimiter">:</span> <span class="classifier">array</span></dt>
+<dd><p class="first last">Normal distribution evaluated at <em>x</em></p>
+</dd>
+</dl>
+</li>
+</ul>
+</dd></dl>
+
+<dl class="function">
+<dt id="fatiando.utils.nt2si">
+<tt class="descclassname">fatiando.utils.</tt><tt class="descname">nt2si</tt><big>(</big><em>value</em><big>)</big><a class="reference internal" href="../_modules/fatiando/utils.html#nt2si"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fatiando.utils.nt2si" title="Permalink to this definition">¶</a></dt>
+<dd><p>Convert a value from nanoTesla to SI units.</p>
+<p>Parameters:</p>
+<ul>
+<li><dl class="first docutils">
+<dt>value <span class="classifier-delimiter">:</span> <span class="classifier">number or array</span></dt>
+<dd><p class="first last">The value in nanoTesla</p>
+</dd>
+</dl>
+</li>
+</ul>
+<p>Returns:</p>
+<ul>
+<li><dl class="first docutils">
+<dt>value <span class="classifier-delimiter">:</span> <span class="classifier">number or array</span></dt>
+<dd><p class="first last">The value in SI</p>
+</dd>
+</dl>
+</li>
+</ul>
+</dd></dl>
+
+<dl class="function">
+<dt id="fatiando.utils.random_points">
+<tt class="descclassname">fatiando.utils.</tt><tt class="descname">random_points</tt><big>(</big><em>area</em>, <em>n</em>, <em>seed=None</em><big>)</big><a class="reference internal" href="../_modules/fatiando/utils.html#random_points"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fatiando.utils.random_points" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generate a set of n random points.</p>
+<p>Parameters:</p>
+<ul>
+<li><dl class="first docutils">
+<dt>area <span class="classifier-delimiter">:</span> <span class="classifier">list = [x1, x2, y1, y2]</span></dt>
+<dd><p class="first last">Area inside of which the points are contained</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>n <span class="classifier-delimiter">:</span> <span class="classifier">int</span></dt>
+<dd><p class="first last">Number of points</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>seed <span class="classifier-delimiter">:</span> <span class="classifier">None or int</span></dt>
+<dd><p class="first last">Seed used to generate the pseudo-random numbers. If <cite>None</cite>, will use a
+different seed every time. Use the same seed to generate the same
+random sequence.</p>
+</dd>
+</dl>
+</li>
+</ul>
+<p>Result:</p>
+<ul>
+<li><dl class="first docutils">
+<dt>points <span class="classifier-delimiter">:</span> <span class="classifier">list</span></dt>
+<dd><p class="first last">List of (x, y) coordinates of the points</p>
+</dd>
+</dl>
+</li>
+</ul>
+</dd></dl>
+
+<dl class="function">
+<dt id="fatiando.utils.safe_diagonal">
+<tt class="descclassname">fatiando.utils.</tt><tt class="descname">safe_diagonal</tt><big>(</big><em>matrix</em><big>)</big><a class="reference internal" href="../_modules/fatiando/utils.html#safe_diagonal"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fatiando.utils.safe_diagonal" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the diagonal of a matrix using the appropriate method.</p>
+<p>Parameters:</p>
+<ul>
+<li><dl class="first docutils">
+<dt>matrix <span class="classifier-delimiter">:</span> <span class="classifier">2d-array, matrix, sparse matrix</span></dt>
+<dd><p class="first last">The matrix...</p>
+</dd>
+</dl>
+</li>
+</ul>
+<p>Returns:</p>
+<ul>
+<li><dl class="first docutils">
+<dt>diag <span class="classifier-delimiter">:</span> <span class="classifier">1d-array</span></dt>
+<dd><p class="first last">A numpy array with the diagonal of the matrix</p>
+</dd>
+</dl>
+</li>
+</ul>
+</dd></dl>
+
+<dl class="function">
+<dt id="fatiando.utils.safe_dot">
+<tt class="descclassname">fatiando.utils.</tt><tt class="descname">safe_dot</tt><big>(</big><em>a</em>, <em>b</em><big>)</big><a class="reference internal" href="../_modules/fatiando/utils.html#safe_dot"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fatiando.utils.safe_dot" title="Permalink to this definition">¶</a></dt>
+<dd><p>Make the dot product using the appropriate method.</p>
+<p>If <em>a</em> and <em>b</em> are dense, will use <tt class="xref py py-func docutils literal"><span class="pre">numpy.dot</span></tt>. If either is sparse
+(from <tt class="xref py py-mod docutils literal"><span class="pre">scipy.sparse</span></tt>) will use the multiplication operator (i.e., *).</p>
+<p>Parameters:</p>
+<ul>
+<li><dl class="first docutils">
+<dt>a, b <span class="classifier-delimiter">:</span> <span class="classifier">array or matrix</span></dt>
+<dd><p class="first last">The vectors/matrices to take the dot product of.</p>
+</dd>
+</dl>
+</li>
+</ul>
+<p>Returns:</p>
+<ul>
+<li><dl class="first docutils">
+<dt>prod <span class="classifier-delimiter">:</span> <span class="classifier">array or matrix</span></dt>
+<dd><p class="first last">The dot product of <em>a</em> and <em>b</em></p>
+</dd>
+</dl>
+</li>
+</ul>
+</dd></dl>
+
+<dl class="function">
+<dt id="fatiando.utils.safe_inverse">
+<tt class="descclassname">fatiando.utils.</tt><tt class="descname">safe_inverse</tt><big>(</big><em>matrix</em><big>)</big><a class="reference internal" href="../_modules/fatiando/utils.html#safe_inverse"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fatiando.utils.safe_inverse" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculate the inverse of a matrix using an apropriate algorithm.</p>
+<p>Uses the standard <tt class="xref py py-func docutils literal"><span class="pre">numpy.linalg.inv</span></tt> if <em>matrix</em> is dense.
+If it is sparse (from <tt class="xref py py-mod docutils literal"><span class="pre">scipy.sparse</span></tt>) then will use
+<tt class="xref py py-func docutils literal"><span class="pre">scipy.sparse.linalg.inv</span></tt>.</p>
+<p>Parameters:</p>
+<ul>
+<li><dl class="first docutils">
+<dt>matrix <span class="classifier-delimiter">:</span> <span class="classifier">2d-array</span></dt>
+<dd><p class="first last">The matrix</p>
+</dd>
+</dl>
+</li>
+</ul>
+<p>Returns:</p>
+<ul>
+<li><dl class="first docutils">
+<dt>inverse <span class="classifier-delimiter">:</span> <span class="classifier">2d-array</span></dt>
+<dd><p class="first last">The inverse of <em>matrix</em></p>
+</dd>
+</dl>
+</li>
+</ul>
+</dd></dl>
+
+<dl class="function">
+<dt id="fatiando.utils.safe_solve">
+<tt class="descclassname">fatiando.utils.</tt><tt class="descname">safe_solve</tt><big>(</big><em>matrix</em>, <em>vector</em><big>)</big><a class="reference internal" href="../_modules/fatiando/utils.html#safe_solve"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fatiando.utils.safe_solve" title="Permalink to this definition">¶</a></dt>
+<dd><p>Solve a linear system using an apropriate algorithm.</p>
+<p>Uses the standard <tt class="xref py py-func docutils literal"><span class="pre">numpy.linalg.solve</span></tt> if both <em>matrix</em> and <em>vector</em>
+are dense.</p>
+<p>If any of the two is sparse (from <tt class="xref py py-mod docutils literal"><span class="pre">scipy.sparse</span></tt>) then will use the
+Conjugate Gradient Method (<tt class="xref py py-func docutils literal"><span class="pre">scipy.sparse.cgs</span></tt>).</p>
+<p>Parameters:</p>
+<ul>
+<li><dl class="first docutils">
+<dt>matrix <span class="classifier-delimiter">:</span> <span class="classifier">2d-array</span></dt>
+<dd><p class="first last">The matrix defining the linear system</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>vector <span class="classifier-delimiter">:</span> <span class="classifier">1d or 2d-array</span></dt>
+<dd><p class="first last">The right-side vector of the system</p>
+</dd>
+</dl>
+</li>
+</ul>
+<p>Returns:</p>
+<ul>
+<li><dl class="first docutils">
+<dt>solution <span class="classifier-delimiter">:</span> <span class="classifier">1d or 2d-array</span></dt>
+<dd><p class="first last">The solution of the linear system</p>
+</dd>
+</dl>
+</li>
+</ul>
+</dd></dl>
+
+<dl class="function">
+<dt id="fatiando.utils.sec2hms">
+<tt class="descclassname">fatiando.utils.</tt><tt class="descname">sec2hms</tt><big>(</big><em>seconds</em><big>)</big><a class="reference internal" href="../_modules/fatiando/utils.html#sec2hms"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fatiando.utils.sec2hms" title="Permalink to this definition">¶</a></dt>
+<dd><p>Convert seconds into a string with hours, minutes and seconds.</p>
+<p>Parameters:</p>
+<ul>
+<li><dl class="first docutils">
+<dt>seconds <span class="classifier-delimiter">:</span> <span class="classifier">float</span></dt>
+<dd><p class="first last">Time in seconds</p>
+</dd>
+</dl>
+</li>
+</ul>
+<p>Returns:</p>
+<ul>
+<li><dl class="first docutils">
+<dt>time <span class="classifier-delimiter">:</span> <span class="classifier">str</span></dt>
+<dd><p class="first last">String in the format <tt class="docutils literal"><span class="pre">'%dh</span> <span class="pre">%dm</span> <span class="pre">%2.5fs'</span></tt></p>
+</dd>
+</dl>
+</li>
+</ul>
+<p>Example:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="k">print</span> <span class="n">sec2hms</span><span class="p">(</span><span class="mf">62.2</span><span class="p">)</span>
+<span class="go">0h 1m 2.20000s</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span> <span class="n">sec2hms</span><span class="p">(</span><span class="mf">3862.12345678</span><span class="p">)</span>
+<span class="go">1h 4m 22.12346s</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="fatiando.utils.sec2year">
+<tt class="descclassname">fatiando.utils.</tt><tt class="descname">sec2year</tt><big>(</big><em>seconds</em><big>)</big><a class="reference internal" href="../_modules/fatiando/utils.html#sec2year"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fatiando.utils.sec2year" title="Permalink to this definition">¶</a></dt>
+<dd><p>Convert seconds into decimal Julian years.</p>
+<p>Julian years have 365.25 days.</p>
+<p>Parameters:</p>
+<ul>
+<li><dl class="first docutils">
+<dt>seconds <span class="classifier-delimiter">:</span> <span class="classifier">float</span></dt>
+<dd><p class="first last">Time in seconds</p>
+</dd>
+</dl>
+</li>
+</ul>
+<p>Returns:</p>
+<ul>
+<li><dl class="first docutils">
+<dt>years <span class="classifier-delimiter">:</span> <span class="classifier">float</span></dt>
+<dd><p class="first last">Time in years</p>
+</dd>
+</dl>
+</li>
+</ul>
+<p>Example:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="k">print</span> <span class="n">sec2year</span><span class="p">(</span><span class="mi">31557600</span><span class="p">)</span>
+<span class="go">1.0</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="fatiando.utils.si2eotvos">
+<tt class="descclassname">fatiando.utils.</tt><tt class="descname">si2eotvos</tt><big>(</big><em>value</em><big>)</big><a class="reference internal" href="../_modules/fatiando/utils.html#si2eotvos"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fatiando.utils.si2eotvos" title="Permalink to this definition">¶</a></dt>
+<dd><p>Convert a value from SI units to Eotvos.</p>
+<p>Parameters:</p>
+<ul>
+<li><dl class="first docutils">
+<dt>value <span class="classifier-delimiter">:</span> <span class="classifier">number or array</span></dt>
+<dd><p class="first last">The value in SI</p>
+</dd>
+</dl>
+</li>
+</ul>
+<p>Returns:</p>
+<ul>
+<li><dl class="first docutils">
+<dt>value <span class="classifier-delimiter">:</span> <span class="classifier">number or array</span></dt>
+<dd><p class="first last">The value in Eotvos</p>
+</dd>
+</dl>
+</li>
+</ul>
+</dd></dl>
+
+<dl class="function">
+<dt id="fatiando.utils.si2mgal">
+<tt class="descclassname">fatiando.utils.</tt><tt class="descname">si2mgal</tt><big>(</big><em>value</em><big>)</big><a class="reference internal" href="../_modules/fatiando/utils.html#si2mgal"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fatiando.utils.si2mgal" title="Permalink to this definition">¶</a></dt>
+<dd><p>Convert a value from SI units to mGal.</p>
+<p>Parameters:</p>
+<ul>
+<li><dl class="first docutils">
+<dt>value <span class="classifier-delimiter">:</span> <span class="classifier">number or array</span></dt>
+<dd><p class="first last">The value in SI</p>
+</dd>
+</dl>
+</li>
+</ul>
+<p>Returns:</p>
+<ul>
+<li><dl class="first docutils">
+<dt>value <span class="classifier-delimiter">:</span> <span class="classifier">number or array</span></dt>
+<dd><p class="first last">The value in mGal</p>
+</dd>
+</dl>
+</li>
+</ul>
+</dd></dl>
+
+<dl class="function">
+<dt id="fatiando.utils.si2nt">
+<tt class="descclassname">fatiando.utils.</tt><tt class="descname">si2nt</tt><big>(</big><em>value</em><big>)</big><a class="reference internal" href="../_modules/fatiando/utils.html#si2nt"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fatiando.utils.si2nt" title="Permalink to this definition">¶</a></dt>
+<dd><p>Convert a value from SI units to nanoTesla.</p>
+<p>Parameters:</p>
+<ul>
+<li><dl class="first docutils">
+<dt>value <span class="classifier-delimiter">:</span> <span class="classifier">number or array</span></dt>
+<dd><p class="first last">The value in SI</p>
+</dd>
+</dl>
+</li>
+</ul>
+<p>Returns:</p>
+<ul>
+<li><dl class="first docutils">
+<dt>value <span class="classifier-delimiter">:</span> <span class="classifier">number or array</span></dt>
+<dd><p class="first last">The value in nanoTesla</p>
+</dd>
+</dl>
+</li>
+</ul>
+</dd></dl>
+
+<dl class="function">
+<dt id="fatiando.utils.sph2cart">
+<tt class="descclassname">fatiando.utils.</tt><tt class="descname">sph2cart</tt><big>(</big><em>lon</em>, <em>lat</em>, <em>height</em><big>)</big><a class="reference internal" href="../_modules/fatiando/utils.html#sph2cart"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fatiando.utils.sph2cart" title="Permalink to this definition">¶</a></dt>
+<dd><p>Convert spherical coordinates to Cartesian geocentric coordinates.</p>
+<p>Parameters:</p>
+<ul>
+<li><dl class="first docutils">
+<dt>lon, lat, height <span class="classifier-delimiter">:</span> <span class="classifier">floats</span></dt>
+<dd><p class="first last">Spherical coordinates. lon and lat in degrees, height in meters. height
+is the height above mean Earth radius.</p>
+</dd>
+</dl>
+</li>
+</ul>
+<p>Returns:</p>
+<ul>
+<li><dl class="first docutils">
+<dt>x, y, z <span class="classifier-delimiter">:</span> <span class="classifier">floats</span></dt>
+<dd><p class="first last">Converted Cartesian coordinates</p>
+</dd>
+</dl>
+</li>
+</ul>
+</dd></dl>
+
+<dl class="function">
+<dt id="fatiando.utils.vec2ang">
+<tt class="descclassname">fatiando.utils.</tt><tt class="descname">vec2ang</tt><big>(</big><em>vector</em><big>)</big><a class="reference internal" href="../_modules/fatiando/utils.html#vec2ang"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fatiando.utils.vec2ang" title="Permalink to this definition">¶</a></dt>
+<dd><p>Convert a 3-component vector to intensity, inclination and declination.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Coordinate system is assumed to be x-&gt;North, y-&gt;East, z-&gt;Down.
+Inclination is positive down and declination is measured with respect
+to x (North).</p>
+</div>
+<p>Parameter:</p>
+<ul>
+<li><dl class="first docutils">
+<dt>vector <span class="classifier-delimiter">:</span> <span class="classifier">array = [x, y, z]</span></dt>
+<dd><p class="first last">The vector</p>
+</dd>
+</dl>
+</li>
+</ul>
+<p>Returns:</p>
+<ul>
+<li><dl class="first docutils">
+<dt>[intensity, inclination, declination] <span class="classifier-delimiter">:</span> <span class="classifier">floats</span></dt>
+<dd><p class="first last">The intensity, inclination and declination (in degrees)</p>
+</dd>
+</dl>
+</li>
+</ul>
+<p>Examples:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">s</span> <span class="o">=</span> <span class="n">vec2ang</span><span class="p">([</span><span class="mf">1.5</span><span class="p">,</span> <span class="mf">1.5</span><span class="p">,</span> <span class="mf">2.121320343559643</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span> <span class="s">&quot;</span><span class="si">%.3f</span><span class="s"> </span><span class="si">%.3f</span><span class="s"> </span><span class="si">%.3f</span><span class="s">&quot;</span> <span class="o">%</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+<span class="go">3.000 45.000 45.000</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="fatiando.utils.vecmean">
+<tt class="descclassname">fatiando.utils.</tt><tt class="descname">vecmean</tt><big>(</big><em>arrays</em><big>)</big><a class="reference internal" href="../_modules/fatiando/utils.html#vecmean"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fatiando.utils.vecmean" title="Permalink to this definition">¶</a></dt>
+<dd><p>Take the mean array out of a list of arrays.</p>
+<p>Parameter:</p>
+<ul>
+<li><dl class="first docutils">
+<dt>arrays <span class="classifier-delimiter">:</span> <span class="classifier">list</span></dt>
+<dd><p class="first last">List of arrays</p>
+</dd>
+</dl>
+</li>
+</ul>
+<p>Returns:</p>
+<ul>
+<li><dl class="first docutils">
+<dt>mean <span class="classifier-delimiter">:</span> <span class="classifier">array</span></dt>
+<dd><p class="first last">The mean of each element in the arrays</p>
+</dd>
+</dl>
+</li>
+</ul>
+<p>Example:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="k">print</span> <span class="n">vecmean</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">]])</span>
+<span class="go">[ 1.5  2.   3.5]</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="fatiando.utils.vecnorm">
+<tt class="descclassname">fatiando.utils.</tt><tt class="descname">vecnorm</tt><big>(</big><em>vectors</em><big>)</big><a class="reference internal" href="../_modules/fatiando/utils.html#vecnorm"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fatiando.utils.vecnorm" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the l2 norm of each vector in a list.</p>
+<p>Use this to get, for example, the magnetization intensity from a list of
+magnetization vectors.</p>
+<p>Parameters:</p>
+<ul>
+<li><dl class="first docutils">
+<dt>vectors <span class="classifier-delimiter">:</span> <span class="classifier">list of arrays</span></dt>
+<dd><p class="first last">The vector</p>
+</dd>
+</dl>
+</li>
+</ul>
+<p>Returns:</p>
+<ul>
+<li><dl class="first docutils">
+<dt>norms <span class="classifier-delimiter">:</span> <span class="classifier">list</span></dt>
+<dd><p class="first last">The norms of the vectors</p>
+</dd>
+</dl>
+</li>
+</ul>
+<p>Examples:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">v</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">]]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span> <span class="n">vecnorm</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
+<span class="go">[ 1.73205081  3.46410162  5.19615242]</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="fatiando.utils.vecstd">
+<tt class="descclassname">fatiando.utils.</tt><tt class="descname">vecstd</tt><big>(</big><em>arrays</em><big>)</big><a class="reference internal" href="../_modules/fatiando/utils.html#vecstd"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fatiando.utils.vecstd" title="Permalink to this definition">¶</a></dt>
+<dd><p>Take the standard deviation array out of a list of arrays.</p>
+<p>Parameter:</p>
+<ul>
+<li><dl class="first docutils">
+<dt>arrays <span class="classifier-delimiter">:</span> <span class="classifier">list</span></dt>
+<dd><p class="first last">List of arrays</p>
+</dd>
+</dl>
+</li>
+</ul>
+<p>Returns:</p>
+<ul>
+<li><dl class="first docutils">
+<dt>std <span class="classifier-delimiter">:</span> <span class="classifier">array</span></dt>
+<dd><p class="first last">Standard deviation of each element in the arrays</p>
+</dd>
+</dl>
+</li>
+</ul>
+<p>Example:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="k">print</span> <span class="n">vecstd</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">]])</span>
+<span class="go">[ 0.5  1.   1.5]</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="fatiando.utils.year2sec">
+<tt class="descclassname">fatiando.utils.</tt><tt class="descname">year2sec</tt><big>(</big><em>years</em><big>)</big><a class="reference internal" href="../_modules/fatiando/utils.html#year2sec"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fatiando.utils.year2sec" title="Permalink to this definition">¶</a></dt>
+<dd><p>Convert decimal Julian years into seconds.</p>
+<p>Julian years have 365.25 days.</p>
+<p>Parameters:</p>
+<ul>
+<li><dl class="first docutils">
+<dt>years <span class="classifier-delimiter">:</span> <span class="classifier">float</span></dt>
+<dd><p class="first last">Time in years</p>
+</dd>
+</dl>
+</li>
+</ul>
+<p>Returns:</p>
+<ul>
+<li><dl class="first docutils">
+<dt>seconds <span class="classifier-delimiter">:</span> <span class="classifier">float</span></dt>
+<dd><p class="first last">Time in seconds</p>
+</dd>
+</dl>
+</li>
+</ul>
+<p>Example:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="k">print</span> <span class="n">year2sec</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="go">31557600.0</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</div>
+
+
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="constants.html" class="btn btn-neutral float-right" title="Physical constants and unit conversions (fatiando.constants)"/>Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="gui.simple.html" class="btn btn-neutral" title="Simple GUIs using matplotlib (fatiando.gui.simple)"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2012-2014, Leonardo Uieda.
+      Last updated on Mar 05, 2015.
+    </p>
+  </div>
+
+  <a href="https://github.com/snide/sphinx_rtd_theme">Sphinx theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'0.3',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+      <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

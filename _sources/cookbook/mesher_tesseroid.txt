@@ -1,0 +1,12 @@
+.. _cookbook_mesher_tesseroid:
+
+Meshing: Make and plot a tesseroid with the Earth
+==================================================
+
+.. raw:: html
+
+    [<a href="../_static/cookbook/mesher_tesseroid.py">source code</a>]
+
+.. literalinclude:: ../../cookbook/mesher_tesseroid.py
+    :language: python
+    :linenos:

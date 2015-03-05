@@ -1,0 +1,591 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>fatiando.gravmag.normal_gravity &mdash; Fatiando a Terra v0.3</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../../../_static/favicon.ico"/>
+  
+
+  
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="top" title="Fatiando a Terra v0.3" href="../../../index.html"/>
+        <link rel="up" title="Module code" href="../../index.html"/> 
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-nav-search">
+        <a href="../../../index.html" class="fa fa-home"> Fatiando a Terra</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+        
+        
+            <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../contributors.html">Contributors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../license.html">License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../changelog.html">Changelog</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../changelog.html#version-0-3">Version 0.3</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../changelog.html#version-0-2">Version 0.2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../changelog.html#version-0-1">Version 0.1</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../install.html">Installing Fatiando</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../install.html#which-python">Which Python?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../install.html#installing-the-dependencies">Installing the dependencies</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../install.html#id1">Installing Fatiando</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../install.html#installing-the-latest-development-version">Installing the latest development version</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../install.html#testing-the-install">Testing the install</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../api/fatiando.html">API Reference: The <tt class="docutils literal"><span class="pre">fatiando</span></tt> package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../api/gravmag.html">Gravity and magnetics (<tt class="docutils literal"><span class="pre">fatiando.gravmag</span></tt>)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../api/seismic.html">Seismics and seismology (<tt class="docutils literal"><span class="pre">fatiando.seismic</span></tt>)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../api/geothermal.html">Geothermal heat (<tt class="docutils literal"><span class="pre">fatiando.geothermal</span></tt>)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../api/mesher.html">Meshing (<tt class="docutils literal"><span class="pre">fatiando.mesher</span></tt>)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../api/gridder.html">Gridding (<tt class="docutils literal"><span class="pre">fatiando.gridder</span></tt>)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../api/vis.html">Visualization (<tt class="docutils literal"><span class="pre">fatiando.vis</span></tt>)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../api/datasets.html">Fetch data from the internet (<tt class="docutils literal"><span class="pre">fatiando.datasets</span></tt>)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../api/gui.html">Graphical user interfaces (<tt class="docutils literal"><span class="pre">fatiando.gui</span></tt>)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../api/utils.html">Miscellaneous Utilities (<tt class="docutils literal"><span class="pre">fatiando.utils</span></tt>)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../api/constants.html">Physical constants and unit conversions (<tt class="docutils literal"><span class="pre">fatiando.constants</span></tt>)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../api/inversion.html">Inverse problems framework (<tt class="docutils literal"><span class="pre">fatiando.inversion</span></tt>)</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../cookbook.html">Cookbook</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../cookbook/datasets_crust2.0_tesseroid.html">Datasets: Fetch the CRUST2.0 model, convert it to tesseroids and calculate its gravity signal in parallel</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../cookbook/geothermal_climsig_abrupt.html">Geothermal: Forward and inverse modeling of an abrupt change in temperature measured in a well</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../cookbook/geothermal_climsig_linear.html">Geothermal: Forward and inverse modeling of a linear change in temperature measured in a well</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../cookbook/geothermal_climsig_wrong.html">Geothermal: Climate signal: What happens when assuming a climate change is linear, when in fact it was abrupt?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../cookbook/gravmag_2d_polygon_interactive.html">GravMag: Interactive 2D forward modeling with polygons</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../cookbook/gravmag_2d_polygon_picker.html">GravMag: 2D forward modeling with polygons</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../cookbook/gravmag_basin2d_trapezoidal.html">GravMag: Simple gravity inversion for the relief of a 2D trapezoidal basin</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../cookbook/gravmag_basin2d_trapezoidal_forward.html">GravMag: Interactive 2D forward gravity modeling of a trapezoidal basin</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../cookbook/gravmag_basin2d_triangular.html">GravMag: Simple gravity inversion for the relief of a 2D triangular basin</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../cookbook/gravmag_basin2d_triangular_forward.html">GravMag: Interactive 2D forward gravity modeling of a triangular basin</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../cookbook/gravmag_eqlayer_joint.html">GravMag: Fit an equivalent layer to gravity and gravity gradient data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../cookbook/gravmag_eqlayer_pel_polereduc.html">GravMag: Use the Polynomial Equivalent Layer to reduce a magnetic total field anomaly to the pole</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../cookbook/gravmag_eqlayer_pel_upcontinue.html">GravMag: Use the polynomial equivalent layer to upward continue gravity data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../cookbook/gravmag_eqlayer_polereduc.html">GravMag: Use an equivalent layer to reduce a magnetic total field anomaly to the pole</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../cookbook/gravmag_eqlayer_upcontinue.html">GravMag: Use an equivalent layer to upward continue gravity data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../cookbook/gravmag_euler_classic.html">GravMag: Classic 3D Euler deconvolution of magnetic data (single window)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../cookbook/gravmag_euler_classic_expanding_window.html">GravMag: Classic 3D Euler deconvolution of magnetic data using an expanding window</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../cookbook/gravmag_euler_classic_moving_window.html">GravMag: Classic 3D Euler deconvolution of magnetic data using a moving window</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../cookbook/gravmag_fourier_ansig.html">GravMag: Calculate the analytic signal of a total field anomaly using FFT</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../cookbook/gravmag_fourier_deriv.html">GravMag: Calculating the derivatives of the gravity anomaly using FFT</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../cookbook/gravmag_grav_polyprism.html">GravMag: Forward gravity modeling using a stack of 3D polygonal model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../cookbook/gravmag_grav_prism.html">GravMag: Forward modeling of the gravitational potential and its derivatives using 3D model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../cookbook/gravmag_grav_sphere.html">GravMag: Forward modeling of the gravity anomaly and gravity gradient tensor using model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../cookbook/gravmag_grav_tesseroid.html">GravMag: Forward modeling of the gravitational potential and its derivatives using tesseroids</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../cookbook/gravmag_harvester_grav.html">GravMag: 3D gravity inversion by planting anomalous densities using <tt class="docutils literal"><span class="pre">harvester</span></tt> (more complex interactive example)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../cookbook/gravmag_harvester_tensor.html">GravMag: 3D gravity gradient inversion by planting anomalous densities using <tt class="docutils literal"><span class="pre">harvester</span></tt> (with non-targeted sources)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../cookbook/gravmag_harvester_weights.html">GravMag: Using data weights in 3D inversion using <tt class="docutils literal"><span class="pre">harvester</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../cookbook/gravmag_imaging_geninv.html">GravMag: 3D imaging using the Generalized Inverse method on synthetic gravity data (more complex model + noisy data)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../cookbook/gravmag_imaging_migration.html">GravMag: 3D imaging using the migration method on synthetic gravity data (more complex model + noisy data)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../cookbook/gravmag_imaging_sandwich.html">GravMag: 3D imaging using the sandwich model method on synthetic gravity data (simple example)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../cookbook/gravmag_mag_polyprism.html">GravMag: 3D forward modeling of total-field magnetic anomaly using polygonal prisms</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../cookbook/gravmag_mag_prism.html">GravMag: 3D forward modeling of total-field magnetic anomaly using rectangular prisms (model with induced and remanent magnetization)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../cookbook/gravmag_mag_sphere.html">GravMag: 3D forward modeling of total-field magnetic anomaly using spheres</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../cookbook/gravmag_magdir_dipolemagdir.html">GravMag: Use the DipoleMagDir class to estimate the magnetization direction of dipoles with known centers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../cookbook/gravmag_normal_gravity.html">GravMag: Calculate the gravity disturbance and Bouguer anomaly for Hawaii</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../cookbook/gravmag_tensor_centerofmass.html">GravMag: Center of mass estimation using the first eigenvector of the gravity gradient tensor (simple model)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../cookbook/gravmag_tensor_centerofmass_expanding_window.html">GravMag: Center of mass estimation using the first eigenvector of the gravity gradient tensor (2 sources with expanding windows)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../cookbook/gravmag_tensor_invariants.html">GravMag: Calculate the gravity gradient tensor invariants</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../cookbook/gravmag_tensor_polyprism.html">GravMag: Generate synthetic gradient tensor data from polygonal prisms</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../cookbook/gravmag_tensor_prism_noisy.html">GravMag: Generate noise-corrupted gravity gradient tensor data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../cookbook/gravmag_upcontinue.html">GravMag: Upward continuation of noisy gz data using the analytical formula</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../cookbook/grid_cut.html">Gridding: Cut a section from a grid</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../cookbook/grid_interpolate.html">Gridding: Grid irregularly sampled data.</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../cookbook/grid_profile.html">Gridding: Extract a profile from map data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../cookbook/grid_scatter.html">Gridding: Generate and plot irregular grids (scatter)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../cookbook/grid_surfer.html">Gridding: Load a Surfer ASCII grid file</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../cookbook/mesher_pointgrid.html">Meshing: Making a grid of 3D point sources</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../cookbook/mesher_prismmesh.html">Meshing: Make and plot a 3D prism mesh</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../cookbook/mesher_prismmesh_filter.html">Meshing: Filter prisms from a 3D prism mesh based on their physical properties</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../cookbook/mesher_prismmesh_topo.html">Meshing: Make and plot a 3D prism mesh with topography</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../cookbook/mesher_prismmesh_vardens.html">Meshing: Make a 3D prism mesh with depth-varying density</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../cookbook/mesher_prismrelief_topo.html">Meshing: Generate a 3D prism model of the topography</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../cookbook/mesher_squaremesh_from_image.html">Meshing: Generate a SquareMesh and get the physical properties from an image</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../cookbook/mesher_tesseroid.html">Meshing: Make and plot a tesseroid with the Earth</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../cookbook/mesher_tesseroidmesh.html">Meshing: Make and plot a tesseroid mesh</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../cookbook/mesher_tesseroidmesh_topo.html">Meshing: Make and plot a tesseroid mesh with topography</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../cookbook/seismic_epic2d.html">Seismic: 2D epicenter estimation assuming a homogeneous and flat Earth</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../cookbook/seismic_epic2d_iterate.html">Seismic: Show steps taken by different algorithms for 2D epicenter estimation on a flat Earth</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../cookbook/seismic_profile_vertical.html">Seismic: Invert vertical seismic profile (VSP) traveltimes for the velocity of a layered model.</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../cookbook/seismic_profile_vertical_interactive.html">Seismic: Interactive forward modeling of 1D vertical seismic profile (VSP) data in layered media</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../cookbook/seismic_profile_vertical_smooth.html">Seismic: Invert vertical seismic profile (VSP) traveltimes using smoothness regularization and unknown layer thicknesses</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../cookbook/seismic_srtomo_damped.html">Seismic: 2D straight-ray tomography using damping regularization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../cookbook/seismic_srtomo_sharp.html">Seismic: 2D straight-ray tomography using sharpness (total variation) regularization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../cookbook/seismic_srtomo_smooth.html">Seismic: 2D straight-ray tomography using smoothness regularization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../cookbook/seismic_wavefd_elastic_psv.html">Seismic: 2D finite difference simulation of elastic P and SV wave propagation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../cookbook/seismic_wavefd_elastic_sh.html">Seismic: 2D finite difference simulation of elastic SH wave propagation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../cookbook/seismic_wavefd_love_wave.html">Seismic: 2D finite difference simulation of elastic SH wave propagation in a medium with a discontinuity (i.e., Moho), generating Love waves.</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../cookbook/seismic_wavefd_rayleigh_wave.html">Seismic: 2D finite difference simulation of elastic P and SV wave propagation in a medium with a discontinuity (i.e., Moho), generating Rayleigh waves</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../cookbook/seismic_wavefd_scalar.html">Seismic: 2D finite difference simulation of scalar wave propagation.</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../cookbook/vis_mpl_basemap.html">Vis: Plot a map using the Orthographic map projection and filled contours</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../cookbook/vis_mpl_basemap2.html">Vis: Plot a map using the Mercator map projection and pseudo-color</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../cookbook/vis_mpl_basemap3.html">Vis: Plot a map using the Robinson map projection and contours</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../cookbook/vis_mpl_contour.html">Vis: Plot contour lines and filled contours</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../cookbook/vis_mpl_irregular_data.html">Vis: Plotting irregularly sampled map data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../cookbook/vis_myv_color.html">Vis: Set the colors in figures, prisms, polygonal prisms and tesseroids.</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../cookbook/vis_myv_earth.html">Vis: Plot the Earth, continents, inner and outer core in 3D with Mayavi2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../cookbook/vis_myv_exaggerate.html">Vis: Exaggerate the vertical dimension of 3D plots</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../develop.html">Developer guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../develop.html#making-a-release">Making a release</a></li>
+</ul>
+</li>
+</ul>
+
+        
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../../../index.html">Fatiando a Terra</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../../../index.html">Docs</a> &raquo;</li>
+      
+          <li><a href="../../index.html">Module code</a> &raquo;</li>
+      
+    <li>fatiando.gravmag.normal_gravity</li>
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            
+  <h1>Source code for fatiando.gravmag.normal_gravity</h1><div class="highlight"><pre>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Gravity of ellipsoid models and common reductions (Bouguer, free-air)</span>
+
+<span class="sd">**Reference ellipsoids**</span>
+
+<span class="sd">This module uses instances of</span>
+<span class="sd">:class:`~fatiando.gravmag.normal_gravity.ReferenceEllipsoid` to store the</span>
+<span class="sd">physical constants of ellipsoids.</span>
+<span class="sd">To create a new ellipsoid, just instantiate ``ReferenceEllipsoid`` and give it</span>
+<span class="sd">the semimajor axis ``a``, the flattening ``f``, the geocentric gravitational</span>
+<span class="sd">constant ``GM``, and the angular velocity ``omega``.</span>
+<span class="sd">All  other quantities, like the gravity at the poles and equator,</span>
+<span class="sd">eccentricities, etc, are computed by the class from these 4 parameters.</span>
+
+<span class="sd">Available ellipsoids:</span>
+
+<span class="sd">* ``WGS84`` (values taken from Hofmann-Wellenhof and Moritz, 2005)::</span>
+
+<span class="sd">    &gt;&gt;&gt; from fatiando.gravmag.normal_gravity import WGS84</span>
+<span class="sd">    &gt;&gt;&gt; print(WGS84.name)</span>
+<span class="sd">    World Geodetic System 1984</span>
+<span class="sd">    &gt;&gt;&gt; print(&#39;{:.0f}&#39;.format(WGS84.a))</span>
+<span class="sd">    6378137</span>
+<span class="sd">    &gt;&gt;&gt; print(&#39;{:.17f}&#39;.format(WGS84.f))</span>
+<span class="sd">    0.00335281066474748</span>
+<span class="sd">    &gt;&gt;&gt; print(&#39;{:.10g}&#39;.format(WGS84.GM))</span>
+<span class="sd">    3.986004418e+14</span>
+<span class="sd">    &gt;&gt;&gt; print(&#39;{:.7g}&#39;.format(WGS84.omega))</span>
+<span class="sd">    7.292115e-05</span>
+<span class="sd">    &gt;&gt;&gt; print(&#39;{:.4f}&#39;.format(WGS84.b))</span>
+<span class="sd">    6356752.3142</span>
+<span class="sd">    &gt;&gt;&gt; print(&#39;{:.8f}&#39;.format(WGS84.E)) # Linear eccentricity</span>
+<span class="sd">    521854.00842339</span>
+<span class="sd">    &gt;&gt;&gt; print(&#39;{:.15f}&#39;.format(WGS84.e_prime)) # second eccentricity</span>
+<span class="sd">    0.082094437949696</span>
+<span class="sd">    &gt;&gt;&gt; print(&#39;{:.10f}&#39;.format(WGS84.gamma_a)) # gravity at the equator</span>
+<span class="sd">    9.7803253359</span>
+<span class="sd">    &gt;&gt;&gt; print(&#39;{:.11f}&#39;.format(WGS84.gamma_b)) # gravity at the pole</span>
+<span class="sd">    9.83218493786</span>
+<span class="sd">    &gt;&gt;&gt; print(&#39;{:.14f}&#39;.format(WGS84.m))</span>
+<span class="sd">    0.00344978650684</span>
+
+
+<span class="sd">**Normal gravity**</span>
+
+<span class="sd">* :func:`~fatiando.gravmag.normal_gravity.gamma_somigliana`: compute the normal</span>
+<span class="sd">  gravity using the Somigliana formula (Hofmann-Wellenhof and Moritz, 2005).</span>
+<span class="sd">  Calculated **on** the ellipsoid.</span>
+<span class="sd">* :func:`~fatiando.gravmag.normal_gravity.gamma_somigliana_free_air`: compute</span>
+<span class="sd">  normal gravity at a height using the Somigliana formula plus the free-air</span>
+<span class="sd">  correction :math:`-0.3086H\ mGal/m`.</span>
+<span class="sd">* :func:`~fatiando.gravmag.normal_gravity.gamma_closed_form`: compute normal</span>
+<span class="sd">  gravity using the closed form expression from Li and Gotze (2001). Can</span>
+<span class="sd">  compute anywhere (on, above, under the ellipsoid).</span>
+
+<span class="sd">**Bouguer**</span>
+
+<span class="sd">* :func:`~fatiando.gravmag.normal_gravity.bouguer_plate`: compute the</span>
+<span class="sd">  gravitational attraction of an infinite plate (Bouguer plate). Calculated</span>
+<span class="sd">  **on top** of the plate.</span>
+
+<span class="sd">You can use :mod:`fatiando.gravmag.prism` and :mod:`fatiando.gravmag.tesseroid`</span>
+<span class="sd">to calculate the terrain effect for a better correction.</span>
+
+<span class="sd">**References**</span>
+
+<span class="sd">Hofmann-Wellenhof, B. and H. Moritz, 2005, Physical Geodesy,</span>
+<span class="sd">Springer-Verlag Wien, ISBN-13: 978-3-211-23584-3</span>
+
+<span class="sd">Li, X. and H. J. Gotze, 2001, Tutorial: Ellipsoid, geoid, gravity, geodesy,</span>
+<span class="sd">and geophysics, Geophysics, 66(6), p. 1660-1668, doi: 10.1190/1.1487109</span>
+
+<span class="sd">----</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">division</span>
+<span class="kn">import</span> <span class="nn">math</span>
+<span class="kn">import</span> <span class="nn">numpy</span>
+
+<span class="kn">from</span> <span class="nn">..</span> <span class="kn">import</span> <span class="n">utils</span>
+<span class="kn">from</span> <span class="nn">..constants</span> <span class="kn">import</span> <span class="n">G</span>
+
+
+<div class="viewcode-block" id="ReferenceEllipsoid"><a class="viewcode-back" href="../../../api/gravmag.normal_gravity.html#fatiando.gravmag.normal_gravity.ReferenceEllipsoid">[docs]</a><span class="k">class</span> <span class="nc">ReferenceEllipsoid</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    A generic reference ellipsoid.</span>
+
+<span class="sd">    It stores the physical constants defining the ellipsoid and has properties</span>
+<span class="sd">    for computing other (derived) quantities.</span>
+
+<span class="sd">    All quantities are expected and returned in SI units.</span>
+
+<span class="sd">    Parameters:</span>
+
+<span class="sd">    * a : float</span>
+<span class="sd">        The semimajor axis (the largest one, at the equator). In meters.</span>
+<span class="sd">    * f : float</span>
+<span class="sd">        The flattening. Adimensional.</span>
+<span class="sd">    * GM : float</span>
+<span class="sd">        The geocentric gravitational constant of the earth, including the</span>
+<span class="sd">        atmosphere. In :math:`m^3 s^{-2}`.</span>
+<span class="sd">    * omega : float</span>
+<span class="sd">        The angular velocity of the earth. In :math:`rad s^{-1}`.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">f</span><span class="p">,</span> <span class="n">GM</span><span class="p">,</span> <span class="n">omega</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_a</span> <span class="o">=</span> <span class="n">a</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_f</span> <span class="o">=</span> <span class="n">f</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_GM</span> <span class="o">=</span> <span class="n">GM</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_omega</span> <span class="o">=</span> <span class="n">omega</span>
+
+    <span class="nd">@property</span>
+<div class="viewcode-block" id="ReferenceEllipsoid.a"><a class="viewcode-back" href="../../../api/gravmag.normal_gravity.html#fatiando.gravmag.normal_gravity.ReferenceEllipsoid.a">[docs]</a>    <span class="k">def</span> <span class="nf">a</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="s">&quot;Semimajor axis&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_a</span>
+</div>
+    <span class="nd">@property</span>
+<div class="viewcode-block" id="ReferenceEllipsoid.f"><a class="viewcode-back" href="../../../api/gravmag.normal_gravity.html#fatiando.gravmag.normal_gravity.ReferenceEllipsoid.f">[docs]</a>    <span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="s">&quot;Flattening&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_f</span>
+</div>
+    <span class="nd">@property</span>
+<div class="viewcode-block" id="ReferenceEllipsoid.GM"><a class="viewcode-back" href="../../../api/gravmag.normal_gravity.html#fatiando.gravmag.normal_gravity.ReferenceEllipsoid.GM">[docs]</a>    <span class="k">def</span> <span class="nf">GM</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="s">&quot;Geocentric gravitational constant (including the atmosphere)&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_GM</span>
+</div>
+    <span class="nd">@property</span>
+<div class="viewcode-block" id="ReferenceEllipsoid.omega"><a class="viewcode-back" href="../../../api/gravmag.normal_gravity.html#fatiando.gravmag.normal_gravity.ReferenceEllipsoid.omega">[docs]</a>    <span class="k">def</span> <span class="nf">omega</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="s">&quot;Angular velocity&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_omega</span>
+</div>
+    <span class="nd">@property</span>
+<div class="viewcode-block" id="ReferenceEllipsoid.b"><a class="viewcode-back" href="../../../api/gravmag.normal_gravity.html#fatiando.gravmag.normal_gravity.ReferenceEllipsoid.b">[docs]</a>    <span class="k">def</span> <span class="nf">b</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="s">&quot;Semiminor axis&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">a</span><span class="o">*</span><span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">f</span><span class="p">)</span>
+</div>
+    <span class="nd">@property</span>
+<div class="viewcode-block" id="ReferenceEllipsoid.E"><a class="viewcode-back" href="../../../api/gravmag.normal_gravity.html#fatiando.gravmag.normal_gravity.ReferenceEllipsoid.E">[docs]</a>    <span class="k">def</span> <span class="nf">E</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="s">&quot;Linear eccentricity&quot;</span>
+        <span class="k">return</span> <span class="n">math</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">a</span><span class="o">**</span><span class="mi">2</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">b</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+</div>
+    <span class="nd">@property</span>
+<div class="viewcode-block" id="ReferenceEllipsoid.e_prime"><a class="viewcode-back" href="../../../api/gravmag.normal_gravity.html#fatiando.gravmag.normal_gravity.ReferenceEllipsoid.e_prime">[docs]</a>    <span class="k">def</span> <span class="nf">e_prime</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="s">&quot;Second eccentricity&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">E</span><span class="o">/</span><span class="bp">self</span><span class="o">.</span><span class="n">b</span>
+</div>
+    <span class="nd">@property</span>
+<div class="viewcode-block" id="ReferenceEllipsoid.m"><a class="viewcode-back" href="../../../api/gravmag.normal_gravity.html#fatiando.gravmag.normal_gravity.ReferenceEllipsoid.m">[docs]</a>    <span class="k">def</span> <span class="nf">m</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="s">r&quot;:math:`\omega^2 a^2 b / (GM)`&quot;</span>
+        <span class="k">return</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">omega</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">a</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">b</span><span class="o">/</span><span class="bp">self</span><span class="o">.</span><span class="n">GM</span>
+</div>
+    <span class="nd">@property</span>
+<div class="viewcode-block" id="ReferenceEllipsoid.gamma_a"><a class="viewcode-back" href="../../../api/gravmag.normal_gravity.html#fatiando.gravmag.normal_gravity.ReferenceEllipsoid.gamma_a">[docs]</a>    <span class="k">def</span> <span class="nf">gamma_a</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="s">&quot;Normal gravity at the equator&quot;</span>
+        <span class="n">bE</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">b</span><span class="o">/</span><span class="bp">self</span><span class="o">.</span><span class="n">E</span>
+        <span class="n">atanEb</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">atan2</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">E</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">b</span><span class="p">)</span>
+        <span class="n">q0</span> <span class="o">=</span> <span class="mf">0.5</span><span class="o">*</span><span class="p">((</span><span class="mi">1</span> <span class="o">+</span> <span class="mi">3</span><span class="o">*</span><span class="n">bE</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="o">*</span><span class="n">atanEb</span> <span class="o">-</span> <span class="mi">3</span><span class="o">*</span><span class="n">bE</span><span class="p">)</span>
+        <span class="n">q0prime</span> <span class="o">=</span> <span class="mi">3</span><span class="o">*</span><span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">bE</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">bE</span><span class="o">*</span><span class="n">atanEb</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span>
+        <span class="n">m</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">m</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">GM</span><span class="o">*</span><span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">m</span> <span class="o">-</span> <span class="n">m</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">e_prime</span><span class="o">*</span><span class="n">q0prime</span><span class="o">/</span><span class="p">(</span><span class="mi">6</span><span class="o">*</span><span class="n">q0</span><span class="p">))</span><span class="o">/</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">a</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">b</span><span class="p">)</span>
+</div>
+    <span class="nd">@property</span>
+<div class="viewcode-block" id="ReferenceEllipsoid.gamma_b"><a class="viewcode-back" href="../../../api/gravmag.normal_gravity.html#fatiando.gravmag.normal_gravity.ReferenceEllipsoid.gamma_b">[docs]</a>    <span class="k">def</span> <span class="nf">gamma_b</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="s">&quot;Normal gravity at the poles&quot;</span>
+        <span class="n">bE</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">b</span><span class="o">/</span><span class="bp">self</span><span class="o">.</span><span class="n">E</span>
+        <span class="n">atanEb</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">atan2</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">E</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">b</span><span class="p">)</span>
+        <span class="n">q0</span> <span class="o">=</span> <span class="mf">0.5</span><span class="o">*</span><span class="p">((</span><span class="mi">1</span> <span class="o">+</span> <span class="mi">3</span><span class="o">*</span><span class="n">bE</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="o">*</span><span class="n">atanEb</span> <span class="o">-</span> <span class="mi">3</span><span class="o">*</span><span class="n">bE</span><span class="p">)</span>
+        <span class="n">q0prime</span> <span class="o">=</span> <span class="mi">3</span><span class="o">*</span><span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">bE</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">bE</span><span class="o">*</span><span class="n">atanEb</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">GM</span><span class="o">*</span><span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">m</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">e_prime</span><span class="o">*</span><span class="n">q0prime</span><span class="o">/</span><span class="p">(</span><span class="mi">3</span><span class="o">*</span><span class="n">q0</span><span class="p">))</span><span class="o">/</span><span class="bp">self</span><span class="o">.</span><span class="n">a</span><span class="o">**</span><span class="mi">2</span>
+
+</div></div>
+<span class="n">WGS84</span> <span class="o">=</span> <span class="n">ReferenceEllipsoid</span><span class="p">(</span><span class="n">a</span><span class="o">=</span><span class="mi">6378137</span><span class="p">,</span> <span class="n">f</span><span class="o">=</span><span class="mi">1</span><span class="o">/</span><span class="mf">298.257223563</span><span class="p">,</span> <span class="n">GM</span><span class="o">=</span><span class="mf">3986004.418e8</span><span class="p">,</span>
+                           <span class="n">omega</span><span class="o">=</span><span class="mf">7292115e-11</span><span class="p">,</span>
+                           <span class="n">name</span><span class="o">=</span><span class="s">&quot;World Geodetic System 1984&quot;</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="gamma_somigliana"><a class="viewcode-back" href="../../../api/gravmag.normal_gravity.html#fatiando.gravmag.normal_gravity.gamma_somigliana">[docs]</a><span class="k">def</span> <span class="nf">gamma_somigliana</span><span class="p">(</span><span class="n">latitude</span><span class="p">,</span> <span class="n">ellipsoid</span><span class="o">=</span><span class="n">WGS84</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    Calculate the normal gravity by using Somigliana&#39;s formula.</span>
+
+<span class="sd">    This formula computes normal gravity **on** the ellipsoid (height = 0).</span>
+
+<span class="sd">    Parameters:</span>
+
+<span class="sd">    * latitude : float or numpy array</span>
+<span class="sd">        The latitude where the normal gravity will be computed (in degrees)</span>
+<span class="sd">    * ellipsoid : :class:`~fatiando.gravmag.normal_gravity.ReferenceEllipsoid`</span>
+<span class="sd">        The reference ellipsoid used.</span>
+
+<span class="sd">    Returns:</span>
+
+<span class="sd">    * gamma : float or numpy array</span>
+<span class="sd">        The computed normal gravity (in mGal).</span>
+
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="n">lat</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">deg2rad</span><span class="p">(</span><span class="n">latitude</span><span class="p">)</span>
+    <span class="n">sin2</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">lat</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span>
+    <span class="n">cos2</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">lat</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span>
+    <span class="n">top</span> <span class="o">=</span> <span class="p">((</span><span class="n">ellipsoid</span><span class="o">.</span><span class="n">a</span><span class="o">*</span><span class="n">ellipsoid</span><span class="o">.</span><span class="n">gamma_a</span><span class="p">)</span><span class="o">*</span><span class="n">cos2</span>
+           <span class="o">+</span> <span class="p">(</span><span class="n">ellipsoid</span><span class="o">.</span><span class="n">b</span><span class="o">*</span><span class="n">ellipsoid</span><span class="o">.</span><span class="n">gamma_b</span><span class="p">)</span><span class="o">*</span><span class="n">sin2</span><span class="p">)</span>
+    <span class="n">bottom</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">ellipsoid</span><span class="o">.</span><span class="n">a</span><span class="o">**</span><span class="mi">2</span><span class="o">*</span><span class="n">cos2</span> <span class="o">+</span> <span class="n">ellipsoid</span><span class="o">.</span><span class="n">b</span><span class="o">**</span><span class="mi">2</span><span class="o">*</span><span class="n">sin2</span><span class="p">)</span>
+    <span class="n">gamma</span> <span class="o">=</span> <span class="n">top</span><span class="o">/</span><span class="n">bottom</span>
+    <span class="k">return</span> <span class="n">utils</span><span class="o">.</span><span class="n">si2mgal</span><span class="p">(</span><span class="n">gamma</span><span class="p">)</span>
+
+</div>
+<div class="viewcode-block" id="gamma_somigliana_free_air"><a class="viewcode-back" href="../../../api/gravmag.normal_gravity.html#fatiando.gravmag.normal_gravity.gamma_somigliana_free_air">[docs]</a><span class="k">def</span> <span class="nf">gamma_somigliana_free_air</span><span class="p">(</span><span class="n">latitude</span><span class="p">,</span> <span class="n">height</span><span class="p">,</span> <span class="n">ellipsoid</span><span class="o">=</span><span class="n">WGS84</span><span class="p">):</span>
+    <span class="sd">r&#39;&#39;&#39;</span>
+<span class="sd">    Calculate the normal gravity at a height using Somigliana&#39;s formula and the</span>
+<span class="sd">    free-air correction.</span>
+
+<span class="sd">    Parameters:</span>
+
+<span class="sd">    * latitude : float or numpy array</span>
+<span class="sd">        The latitude where the normal gravity will be computed (in degrees)</span>
+<span class="sd">    * height : float or numpy array</span>
+<span class="sd">        The height of computation (in meters). Should be ellipsoidal</span>
+<span class="sd">        (geometric) heights for geophysical purposes.</span>
+<span class="sd">    * ellipsoid : :class:`~fatiando.gravmag.normal_gravity.ReferenceEllipsoid`</span>
+<span class="sd">        The reference ellipsoid used.</span>
+
+<span class="sd">    Returns:</span>
+
+<span class="sd">    * gamma : float or numpy array</span>
+<span class="sd">        The computed normal gravity (in mGal).</span>
+
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="n">fa</span> <span class="o">=</span> <span class="o">-</span><span class="mf">0.3086</span><span class="o">*</span><span class="n">height</span>
+    <span class="n">gamma</span> <span class="o">=</span> <span class="n">gamma_somigliana</span><span class="p">(</span><span class="n">latitude</span><span class="p">,</span> <span class="n">ellipsoid</span><span class="o">=</span><span class="n">ellipsoid</span><span class="p">)</span> <span class="o">+</span> <span class="n">fa</span>
+    <span class="k">return</span> <span class="n">gamma</span>
+
+</div>
+<div class="viewcode-block" id="gamma_closed_form"><a class="viewcode-back" href="../../../api/gravmag.normal_gravity.html#fatiando.gravmag.normal_gravity.gamma_closed_form">[docs]</a><span class="k">def</span> <span class="nf">gamma_closed_form</span><span class="p">(</span><span class="n">latitude</span><span class="p">,</span> <span class="n">height</span><span class="p">,</span> <span class="n">ellipsoid</span><span class="o">=</span><span class="n">WGS84</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Calculate normal gravity at a height using the closed form expression of</span>
+<span class="sd">    Li and Gotze (2001).</span>
+
+<span class="sd">    Parameters:</span>
+
+<span class="sd">    * latitude : float or numpy array</span>
+<span class="sd">        The latitude where the normal gravity will be computed (in degrees)</span>
+<span class="sd">    * height : float or numpy array</span>
+<span class="sd">        The height of computation (in meters). Should be ellipsoidal</span>
+<span class="sd">        (geometric) heights for geophysical purposes.</span>
+<span class="sd">    * ellipsoid : :class:`~fatiando.gravmag.normal_gravity.ReferenceEllipsoid`</span>
+<span class="sd">        The reference ellipsoid used.</span>
+
+<span class="sd">    Returns:</span>
+
+<span class="sd">    * gamma : float or numpy array</span>
+<span class="sd">        The computed normal gravity (in mGal).</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">E2</span> <span class="o">=</span> <span class="n">ellipsoid</span><span class="o">.</span><span class="n">E</span><span class="o">**</span><span class="mi">2</span>
+    <span class="n">bE</span> <span class="o">=</span> <span class="n">ellipsoid</span><span class="o">.</span><span class="n">b</span><span class="o">/</span><span class="n">ellipsoid</span><span class="o">.</span><span class="n">E</span>
+    <span class="n">atanEb</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">atan2</span><span class="p">(</span><span class="n">ellipsoid</span><span class="o">.</span><span class="n">E</span><span class="p">,</span> <span class="n">ellipsoid</span><span class="o">.</span><span class="n">b</span><span class="p">)</span>
+    <span class="n">lat</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">deg2rad</span><span class="p">(</span><span class="n">latitude</span><span class="p">)</span>
+    <span class="n">coslat</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">lat</span><span class="p">)</span>
+    <span class="n">sinlat</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">lat</span><span class="p">)</span>
+    <span class="n">tanlat</span> <span class="o">=</span> <span class="n">sinlat</span><span class="o">/</span><span class="n">coslat</span>
+    <span class="n">beta</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">arctan2</span><span class="p">(</span><span class="n">ellipsoid</span><span class="o">.</span><span class="n">b</span><span class="o">*</span><span class="n">tanlat</span><span class="p">,</span> <span class="n">ellipsoid</span><span class="o">.</span><span class="n">a</span><span class="p">)</span>
+    <span class="n">sinbeta</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">beta</span><span class="p">)</span>
+    <span class="n">cosbeta</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">beta</span><span class="p">)</span>
+    <span class="n">zl2</span> <span class="o">=</span> <span class="p">(</span><span class="n">ellipsoid</span><span class="o">.</span><span class="n">b</span><span class="o">*</span><span class="n">sinbeta</span> <span class="o">+</span> <span class="n">height</span><span class="o">*</span><span class="n">sinlat</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span>
+    <span class="n">rl2</span> <span class="o">=</span> <span class="p">(</span><span class="n">ellipsoid</span><span class="o">.</span><span class="n">a</span><span class="o">*</span><span class="n">cosbeta</span> <span class="o">+</span> <span class="n">height</span><span class="o">*</span><span class="n">coslat</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span>
+    <span class="n">D</span> <span class="o">=</span> <span class="p">(</span><span class="n">rl2</span> <span class="o">-</span> <span class="n">zl2</span><span class="p">)</span><span class="o">/</span><span class="n">E2</span>
+    <span class="n">R</span> <span class="o">=</span> <span class="p">(</span><span class="n">rl2</span> <span class="o">+</span> <span class="n">zl2</span><span class="p">)</span><span class="o">/</span><span class="n">E2</span>
+    <span class="n">cosbetal</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mf">0.5</span><span class="o">*</span><span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">R</span><span class="p">)</span> <span class="o">-</span> <span class="n">numpy</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mf">0.25</span><span class="o">*</span><span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">R</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span> <span class="o">-</span> <span class="mf">0.5</span><span class="o">*</span><span class="n">D</span><span class="p">))</span>
+    <span class="n">cosbetal2</span> <span class="o">=</span> <span class="n">cosbetal</span><span class="o">**</span><span class="mi">2</span>
+    <span class="n">sinbetal2</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">cosbetal2</span>
+    <span class="n">bl</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">rl2</span> <span class="o">+</span> <span class="n">zl2</span> <span class="o">-</span> <span class="n">E2</span><span class="o">*</span><span class="n">cosbetal2</span><span class="p">)</span>
+    <span class="n">bl2</span> <span class="o">=</span> <span class="n">bl</span><span class="o">**</span><span class="mi">2</span>
+    <span class="n">blE</span> <span class="o">=</span> <span class="n">bl</span><span class="o">/</span><span class="n">ellipsoid</span><span class="o">.</span><span class="n">E</span>
+    <span class="n">atanEbl</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">arctan2</span><span class="p">(</span><span class="n">ellipsoid</span><span class="o">.</span><span class="n">E</span><span class="p">,</span> <span class="n">bl</span><span class="p">)</span>
+    <span class="n">q0</span> <span class="o">=</span> <span class="mf">0.5</span><span class="o">*</span><span class="p">((</span><span class="mi">1</span> <span class="o">+</span> <span class="mi">3</span><span class="o">*</span><span class="n">bE</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="o">*</span><span class="n">atanEb</span> <span class="o">-</span> <span class="mi">3</span><span class="o">*</span><span class="n">bE</span><span class="p">)</span>
+    <span class="n">q0l</span> <span class="o">=</span> <span class="mi">3</span><span class="o">*</span><span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">blE</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">blE</span><span class="o">*</span><span class="n">atanEbl</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span>
+    <span class="n">W</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">sqrt</span><span class="p">((</span><span class="n">bl2</span> <span class="o">+</span> <span class="n">E2</span><span class="o">*</span><span class="n">sinbetal2</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="n">bl2</span> <span class="o">+</span> <span class="n">E2</span><span class="p">))</span>
+    <span class="n">omega2</span> <span class="o">=</span> <span class="n">ellipsoid</span><span class="o">.</span><span class="n">omega</span><span class="o">**</span><span class="mi">2</span>
+    <span class="n">a2</span> <span class="o">=</span> <span class="n">ellipsoid</span><span class="o">.</span><span class="n">a</span><span class="o">**</span><span class="mi">2</span>
+    <span class="n">part1</span> <span class="o">=</span> <span class="n">ellipsoid</span><span class="o">.</span><span class="n">GM</span><span class="o">/</span><span class="p">(</span><span class="n">bl2</span> <span class="o">+</span> <span class="n">E2</span><span class="p">)</span>
+    <span class="n">part2</span> <span class="o">=</span> <span class="o">-</span><span class="n">cosbetal2</span><span class="o">*</span><span class="n">bl</span><span class="o">*</span><span class="n">ellipsoid</span><span class="o">.</span><span class="n">omega</span><span class="o">**</span><span class="mi">2</span>
+    <span class="n">part3</span> <span class="o">=</span> <span class="mf">0.5</span><span class="o">*</span><span class="n">sinbetal2</span> <span class="o">-</span> <span class="mi">1</span><span class="o">/</span><span class="mi">6</span>
+    <span class="n">part4</span> <span class="o">=</span> <span class="n">a2</span><span class="o">*</span><span class="n">ellipsoid</span><span class="o">.</span><span class="n">E</span><span class="o">*</span><span class="n">q0l</span><span class="o">*</span><span class="n">omega2</span><span class="o">/</span><span class="p">((</span><span class="n">bl2</span> <span class="o">+</span> <span class="n">E2</span><span class="p">)</span><span class="o">*</span><span class="n">q0</span><span class="p">)</span>
+    <span class="n">gamma</span> <span class="o">=</span> <span class="n">utils</span><span class="o">.</span><span class="n">si2mgal</span><span class="p">((</span><span class="n">part1</span> <span class="o">+</span> <span class="n">part2</span> <span class="o">+</span> <span class="n">part3</span><span class="o">*</span><span class="n">part4</span><span class="p">)</span><span class="o">/</span><span class="n">W</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">gamma</span>
+
+</div>
+<div class="viewcode-block" id="bouguer_plate"><a class="viewcode-back" href="../../../api/gravmag.normal_gravity.html#fatiando.gravmag.normal_gravity.bouguer_plate">[docs]</a><span class="k">def</span> <span class="nf">bouguer_plate</span><span class="p">(</span><span class="n">topography</span><span class="p">,</span> <span class="n">density_rock</span><span class="o">=</span><span class="mi">2670</span><span class="p">,</span> <span class="n">density_water</span><span class="o">=</span><span class="mi">1040</span><span class="p">):</span>
+    <span class="sd">r&quot;&quot;&quot;</span>
+<span class="sd">    Calculate the gravitational effect of an infinite Bouguer plate.</span>
+
+<span class="sd">    .. note:: The effect is calculated **on top** of the plate.</span>
+
+<span class="sd">    Uses the famous :math:`g_{BG} = 2 \pi G \rho t` formula, where t is the</span>
+<span class="sd">    height of the topography. On water (i.e., t &lt; 0), uses</span>
+<span class="sd">    :math:`g_{BG} = 2 \pi G (\rho_{water} - \rho_{rock})\times (-t)`.</span>
+
+<span class="sd">    Parameters:</span>
+
+<span class="sd">    * topography : float or numpy array</span>
+<span class="sd">        The height of topography (in meters).</span>
+<span class="sd">    * density_rock : float</span>
+<span class="sd">        The density of crustal rocks</span>
+<span class="sd">    * density_water : float</span>
+<span class="sd">        The density of ocean water</span>
+
+<span class="sd">    Returns:</span>
+
+<span class="sd">    * g_bouguer : float or array</span>
+<span class="sd">        The computed gravitational effect of the Bouguer plate</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">t</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">atleast_1d</span><span class="p">(</span><span class="n">topography</span><span class="p">)</span>
+    <span class="n">g_bg</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">empty_like</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+    <span class="n">g_bg</span><span class="p">[</span><span class="n">t</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">2</span><span class="o">*</span><span class="n">numpy</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="n">G</span><span class="o">*</span><span class="n">density_rock</span><span class="o">*</span><span class="n">t</span><span class="p">[</span><span class="n">t</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">]</span>
+    <span class="n">g_bg</span><span class="p">[</span><span class="n">t</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">2</span><span class="o">*</span><span class="n">numpy</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="n">G</span><span class="o">*</span><span class="p">(</span><span class="n">density_water</span> <span class="o">-</span> <span class="n">density_rock</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="o">-</span><span class="n">t</span><span class="p">[</span><span class="n">t</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">])</span>
+    <span class="n">g_bg</span> <span class="o">=</span> <span class="n">utils</span><span class="o">.</span><span class="n">si2mgal</span><span class="p">(</span><span class="n">g_bg</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">g_bg</span><span class="o">.</span><span class="n">size</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">g_bg</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">g_bg</span></div>
+</pre></div>
+
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2012-2014, Leonardo Uieda.
+      Last updated on Mar 05, 2015.
+    </p>
+  </div>
+
+  <a href="https://github.com/snide/sphinx_rtd_theme">Sphinx theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../../',
+            VERSION:'0.3',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="../../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../../_static/doctools.js"></script>
+      <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

@@ -1,0 +1,601 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Compute normal gravity and reductions (fatiando.gravmag.normal_gravity) &mdash; Fatiando a Terra v0.3</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+  
+
+  
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="top" title="Fatiando a Terra v0.3" href="../index.html"/>
+        <link rel="up" title="Gravity and magnetics (fatiando.gravmag)" href="gravmag.html"/>
+        <link rel="next" title="Seismics and seismology (fatiando.seismic)" href="seismic.html"/>
+        <link rel="prev" title="Total magnetization estimation methods (fatiando.gravmag.magdir)" href="gravmag.magdir.html"/> 
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-nav-search">
+        <a href="../index.html" class="fa fa-home"> Fatiando a Terra</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+        
+        
+            <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../contributors.html">Contributors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../license.html">License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../changelog.html">Changelog</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../changelog.html#version-0-3">Version 0.3</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../changelog.html#version-0-2">Version 0.2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../changelog.html#version-0-1">Version 0.1</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../install.html">Installing Fatiando</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../install.html#which-python">Which Python?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../install.html#installing-the-dependencies">Installing the dependencies</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../install.html#id1">Installing Fatiando</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../install.html#installing-the-latest-development-version">Installing the latest development version</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../install.html#testing-the-install">Testing the install</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="reference internal" href="fatiando.html">API Reference: The <tt class="docutils literal"><span class="pre">fatiando</span></tt> package</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="gravmag.html">Gravity and magnetics (<tt class="docutils literal"><span class="pre">fatiando.gravmag</span></tt>)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="seismic.html">Seismics and seismology (<tt class="docutils literal"><span class="pre">fatiando.seismic</span></tt>)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="geothermal.html">Geothermal heat (<tt class="docutils literal"><span class="pre">fatiando.geothermal</span></tt>)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mesher.html">Meshing (<tt class="docutils literal"><span class="pre">fatiando.mesher</span></tt>)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="gridder.html">Gridding (<tt class="docutils literal"><span class="pre">fatiando.gridder</span></tt>)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vis.html">Visualization (<tt class="docutils literal"><span class="pre">fatiando.vis</span></tt>)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="datasets.html">Fetch data from the internet (<tt class="docutils literal"><span class="pre">fatiando.datasets</span></tt>)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="gui.html">Graphical user interfaces (<tt class="docutils literal"><span class="pre">fatiando.gui</span></tt>)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="utils.html">Miscellaneous Utilities (<tt class="docutils literal"><span class="pre">fatiando.utils</span></tt>)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="constants.html">Physical constants and unit conversions (<tt class="docutils literal"><span class="pre">fatiando.constants</span></tt>)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="inversion.html">Inverse problems framework (<tt class="docutils literal"><span class="pre">fatiando.inversion</span></tt>)</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../cookbook.html">Cookbook</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/datasets_crust2.0_tesseroid.html">Datasets: Fetch the CRUST2.0 model, convert it to tesseroids and calculate its gravity signal in parallel</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/geothermal_climsig_abrupt.html">Geothermal: Forward and inverse modeling of an abrupt change in temperature measured in a well</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/geothermal_climsig_linear.html">Geothermal: Forward and inverse modeling of a linear change in temperature measured in a well</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/geothermal_climsig_wrong.html">Geothermal: Climate signal: What happens when assuming a climate change is linear, when in fact it was abrupt?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/gravmag_2d_polygon_interactive.html">GravMag: Interactive 2D forward modeling with polygons</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/gravmag_2d_polygon_picker.html">GravMag: 2D forward modeling with polygons</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/gravmag_basin2d_trapezoidal.html">GravMag: Simple gravity inversion for the relief of a 2D trapezoidal basin</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/gravmag_basin2d_trapezoidal_forward.html">GravMag: Interactive 2D forward gravity modeling of a trapezoidal basin</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/gravmag_basin2d_triangular.html">GravMag: Simple gravity inversion for the relief of a 2D triangular basin</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/gravmag_basin2d_triangular_forward.html">GravMag: Interactive 2D forward gravity modeling of a triangular basin</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/gravmag_eqlayer_joint.html">GravMag: Fit an equivalent layer to gravity and gravity gradient data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/gravmag_eqlayer_pel_polereduc.html">GravMag: Use the Polynomial Equivalent Layer to reduce a magnetic total field anomaly to the pole</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/gravmag_eqlayer_pel_upcontinue.html">GravMag: Use the polynomial equivalent layer to upward continue gravity data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/gravmag_eqlayer_polereduc.html">GravMag: Use an equivalent layer to reduce a magnetic total field anomaly to the pole</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/gravmag_eqlayer_upcontinue.html">GravMag: Use an equivalent layer to upward continue gravity data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/gravmag_euler_classic.html">GravMag: Classic 3D Euler deconvolution of magnetic data (single window)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/gravmag_euler_classic_expanding_window.html">GravMag: Classic 3D Euler deconvolution of magnetic data using an expanding window</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/gravmag_euler_classic_moving_window.html">GravMag: Classic 3D Euler deconvolution of magnetic data using a moving window</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/gravmag_fourier_ansig.html">GravMag: Calculate the analytic signal of a total field anomaly using FFT</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/gravmag_fourier_deriv.html">GravMag: Calculating the derivatives of the gravity anomaly using FFT</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/gravmag_grav_polyprism.html">GravMag: Forward gravity modeling using a stack of 3D polygonal model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/gravmag_grav_prism.html">GravMag: Forward modeling of the gravitational potential and its derivatives using 3D model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/gravmag_grav_sphere.html">GravMag: Forward modeling of the gravity anomaly and gravity gradient tensor using model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/gravmag_grav_tesseroid.html">GravMag: Forward modeling of the gravitational potential and its derivatives using tesseroids</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/gravmag_harvester_grav.html">GravMag: 3D gravity inversion by planting anomalous densities using <tt class="docutils literal"><span class="pre">harvester</span></tt> (more complex interactive example)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/gravmag_harvester_tensor.html">GravMag: 3D gravity gradient inversion by planting anomalous densities using <tt class="docutils literal"><span class="pre">harvester</span></tt> (with non-targeted sources)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/gravmag_harvester_weights.html">GravMag: Using data weights in 3D inversion using <tt class="docutils literal"><span class="pre">harvester</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/gravmag_imaging_geninv.html">GravMag: 3D imaging using the Generalized Inverse method on synthetic gravity data (more complex model + noisy data)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/gravmag_imaging_migration.html">GravMag: 3D imaging using the migration method on synthetic gravity data (more complex model + noisy data)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/gravmag_imaging_sandwich.html">GravMag: 3D imaging using the sandwich model method on synthetic gravity data (simple example)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/gravmag_mag_polyprism.html">GravMag: 3D forward modeling of total-field magnetic anomaly using polygonal prisms</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/gravmag_mag_prism.html">GravMag: 3D forward modeling of total-field magnetic anomaly using rectangular prisms (model with induced and remanent magnetization)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/gravmag_mag_sphere.html">GravMag: 3D forward modeling of total-field magnetic anomaly using spheres</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/gravmag_magdir_dipolemagdir.html">GravMag: Use the DipoleMagDir class to estimate the magnetization direction of dipoles with known centers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/gravmag_normal_gravity.html">GravMag: Calculate the gravity disturbance and Bouguer anomaly for Hawaii</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/gravmag_tensor_centerofmass.html">GravMag: Center of mass estimation using the first eigenvector of the gravity gradient tensor (simple model)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/gravmag_tensor_centerofmass_expanding_window.html">GravMag: Center of mass estimation using the first eigenvector of the gravity gradient tensor (2 sources with expanding windows)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/gravmag_tensor_invariants.html">GravMag: Calculate the gravity gradient tensor invariants</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/gravmag_tensor_polyprism.html">GravMag: Generate synthetic gradient tensor data from polygonal prisms</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/gravmag_tensor_prism_noisy.html">GravMag: Generate noise-corrupted gravity gradient tensor data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/gravmag_upcontinue.html">GravMag: Upward continuation of noisy gz data using the analytical formula</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/grid_cut.html">Gridding: Cut a section from a grid</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/grid_interpolate.html">Gridding: Grid irregularly sampled data.</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/grid_profile.html">Gridding: Extract a profile from map data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/grid_scatter.html">Gridding: Generate and plot irregular grids (scatter)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/grid_surfer.html">Gridding: Load a Surfer ASCII grid file</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/mesher_pointgrid.html">Meshing: Making a grid of 3D point sources</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/mesher_prismmesh.html">Meshing: Make and plot a 3D prism mesh</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/mesher_prismmesh_filter.html">Meshing: Filter prisms from a 3D prism mesh based on their physical properties</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/mesher_prismmesh_topo.html">Meshing: Make and plot a 3D prism mesh with topography</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/mesher_prismmesh_vardens.html">Meshing: Make a 3D prism mesh with depth-varying density</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/mesher_prismrelief_topo.html">Meshing: Generate a 3D prism model of the topography</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/mesher_squaremesh_from_image.html">Meshing: Generate a SquareMesh and get the physical properties from an image</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/mesher_tesseroid.html">Meshing: Make and plot a tesseroid with the Earth</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/mesher_tesseroidmesh.html">Meshing: Make and plot a tesseroid mesh</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/mesher_tesseroidmesh_topo.html">Meshing: Make and plot a tesseroid mesh with topography</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/seismic_epic2d.html">Seismic: 2D epicenter estimation assuming a homogeneous and flat Earth</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/seismic_epic2d_iterate.html">Seismic: Show steps taken by different algorithms for 2D epicenter estimation on a flat Earth</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/seismic_profile_vertical.html">Seismic: Invert vertical seismic profile (VSP) traveltimes for the velocity of a layered model.</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/seismic_profile_vertical_interactive.html">Seismic: Interactive forward modeling of 1D vertical seismic profile (VSP) data in layered media</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/seismic_profile_vertical_smooth.html">Seismic: Invert vertical seismic profile (VSP) traveltimes using smoothness regularization and unknown layer thicknesses</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/seismic_srtomo_damped.html">Seismic: 2D straight-ray tomography using damping regularization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/seismic_srtomo_sharp.html">Seismic: 2D straight-ray tomography using sharpness (total variation) regularization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/seismic_srtomo_smooth.html">Seismic: 2D straight-ray tomography using smoothness regularization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/seismic_wavefd_elastic_psv.html">Seismic: 2D finite difference simulation of elastic P and SV wave propagation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/seismic_wavefd_elastic_sh.html">Seismic: 2D finite difference simulation of elastic SH wave propagation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/seismic_wavefd_love_wave.html">Seismic: 2D finite difference simulation of elastic SH wave propagation in a medium with a discontinuity (i.e., Moho), generating Love waves.</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/seismic_wavefd_rayleigh_wave.html">Seismic: 2D finite difference simulation of elastic P and SV wave propagation in a medium with a discontinuity (i.e., Moho), generating Rayleigh waves</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/seismic_wavefd_scalar.html">Seismic: 2D finite difference simulation of scalar wave propagation.</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/vis_mpl_basemap.html">Vis: Plot a map using the Orthographic map projection and filled contours</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/vis_mpl_basemap2.html">Vis: Plot a map using the Mercator map projection and pseudo-color</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/vis_mpl_basemap3.html">Vis: Plot a map using the Robinson map projection and contours</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/vis_mpl_contour.html">Vis: Plot contour lines and filled contours</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/vis_mpl_irregular_data.html">Vis: Plotting irregularly sampled map data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/vis_myv_color.html">Vis: Set the colors in figures, prisms, polygonal prisms and tesseroids.</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/vis_myv_earth.html">Vis: Plot the Earth, continents, inner and outer core in 3D with Mayavi2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/vis_myv_exaggerate.html">Vis: Exaggerate the vertical dimension of 3D plots</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../develop.html">Developer guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../develop.html#making-a-release">Making a release</a></li>
+</ul>
+</li>
+</ul>
+
+        
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../index.html">Fatiando a Terra</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../index.html">Docs</a> &raquo;</li>
+      
+          <li><a href="fatiando.html">API Reference: The <tt class="docutils literal"><span class="pre">fatiando</span></tt> package</a> &raquo;</li>
+      
+          <li><a href="gravmag.html">Gravity and magnetics (<tt class="docutils literal"><span class="pre">fatiando.gravmag</span></tt>)</a> &raquo;</li>
+      
+    <li>Compute normal gravity and reductions (<tt class="docutils literal"><span class="pre">fatiando.gravmag.normal_gravity</span></tt>)</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          <a href="../_sources/api/gravmag.normal_gravity.txt" rel="nofollow"> View page source</a>
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            
+  <div class="section" id="module-fatiando.gravmag.normal_gravity">
+<span id="compute-normal-gravity-and-reductions-fatiando-gravmag-normal-gravity"></span><span id="fatiando-gravmag-normal-gravity"></span><h1>Compute normal gravity and reductions (<tt class="docutils literal"><span class="pre">fatiando.gravmag.normal_gravity</span></tt>)<a class="headerlink" href="#module-fatiando.gravmag.normal_gravity" title="Permalink to this headline">¶</a></h1>
+<p>Gravity of ellipsoid models and common reductions (Bouguer, free-air)</p>
+<p><strong>Reference ellipsoids</strong></p>
+<p>This module uses instances of
+<a class="reference internal" href="#fatiando.gravmag.normal_gravity.ReferenceEllipsoid" title="fatiando.gravmag.normal_gravity.ReferenceEllipsoid"><tt class="xref py py-class docutils literal"><span class="pre">ReferenceEllipsoid</span></tt></a> to store the
+physical constants of ellipsoids.
+To create a new ellipsoid, just instantiate <tt class="docutils literal"><span class="pre">ReferenceEllipsoid</span></tt> and give it
+the semimajor axis <tt class="docutils literal"><span class="pre">a</span></tt>, the flattening <tt class="docutils literal"><span class="pre">f</span></tt>, the geocentric gravitational
+constant <tt class="docutils literal"><span class="pre">GM</span></tt>, and the angular velocity <tt class="docutils literal"><span class="pre">omega</span></tt>.
+All  other quantities, like the gravity at the poles and equator,
+eccentricities, etc, are computed by the class from these 4 parameters.</p>
+<p>Available ellipsoids:</p>
+<ul>
+<li><p class="first"><tt class="docutils literal"><span class="pre">WGS84</span></tt> (values taken from Hofmann-Wellenhof and Moritz, 2005):</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">fatiando.gravmag.normal_gravity</span> <span class="kn">import</span> <span class="n">WGS84</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">WGS84</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+<span class="go">World Geodetic System 1984</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="s">&#39;{:.0f}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">WGS84</span><span class="o">.</span><span class="n">a</span><span class="p">))</span>
+<span class="go">6378137</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="s">&#39;{:.17f}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">WGS84</span><span class="o">.</span><span class="n">f</span><span class="p">))</span>
+<span class="go">0.00335281066474748</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="s">&#39;{:.10g}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">WGS84</span><span class="o">.</span><span class="n">GM</span><span class="p">))</span>
+<span class="go">3.986004418e+14</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="s">&#39;{:.7g}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">WGS84</span><span class="o">.</span><span class="n">omega</span><span class="p">))</span>
+<span class="go">7.292115e-05</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="s">&#39;{:.4f}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">WGS84</span><span class="o">.</span><span class="n">b</span><span class="p">))</span>
+<span class="go">6356752.3142</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="s">&#39;{:.8f}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">WGS84</span><span class="o">.</span><span class="n">E</span><span class="p">))</span> <span class="c"># Linear eccentricity</span>
+<span class="go">521854.00842339</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="s">&#39;{:.15f}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">WGS84</span><span class="o">.</span><span class="n">e_prime</span><span class="p">))</span> <span class="c"># second eccentricity</span>
+<span class="go">0.082094437949696</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="s">&#39;{:.10f}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">WGS84</span><span class="o">.</span><span class="n">gamma_a</span><span class="p">))</span> <span class="c"># gravity at the equator</span>
+<span class="go">9.7803253359</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="s">&#39;{:.11f}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">WGS84</span><span class="o">.</span><span class="n">gamma_b</span><span class="p">))</span> <span class="c"># gravity at the pole</span>
+<span class="go">9.83218493786</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="s">&#39;{:.14f}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">WGS84</span><span class="o">.</span><span class="n">m</span><span class="p">))</span>
+<span class="go">0.00344978650684</span>
+</pre></div>
+</div>
+</li>
+</ul>
+<p><strong>Normal gravity</strong></p>
+<ul class="simple">
+<li><a class="reference internal" href="#fatiando.gravmag.normal_gravity.gamma_somigliana" title="fatiando.gravmag.normal_gravity.gamma_somigliana"><tt class="xref py py-func docutils literal"><span class="pre">gamma_somigliana</span></tt></a>: compute the normal
+gravity using the Somigliana formula (Hofmann-Wellenhof and Moritz, 2005).
+Calculated <strong>on</strong> the ellipsoid.</li>
+<li><a class="reference internal" href="#fatiando.gravmag.normal_gravity.gamma_somigliana_free_air" title="fatiando.gravmag.normal_gravity.gamma_somigliana_free_air"><tt class="xref py py-func docutils literal"><span class="pre">gamma_somigliana_free_air</span></tt></a>: compute
+normal gravity at a height using the Somigliana formula plus the free-air
+correction <span class="math">\(-0.3086H\ mGal/m\)</span>.</li>
+<li><a class="reference internal" href="#fatiando.gravmag.normal_gravity.gamma_closed_form" title="fatiando.gravmag.normal_gravity.gamma_closed_form"><tt class="xref py py-func docutils literal"><span class="pre">gamma_closed_form</span></tt></a>: compute normal
+gravity using the closed form expression from Li and Gotze (2001). Can
+compute anywhere (on, above, under the ellipsoid).</li>
+</ul>
+<p><strong>Bouguer</strong></p>
+<ul class="simple">
+<li><a class="reference internal" href="#fatiando.gravmag.normal_gravity.bouguer_plate" title="fatiando.gravmag.normal_gravity.bouguer_plate"><tt class="xref py py-func docutils literal"><span class="pre">bouguer_plate</span></tt></a>: compute the
+gravitational attraction of an infinite plate (Bouguer plate). Calculated
+<strong>on top</strong> of the plate.</li>
+</ul>
+<p>You can use <a class="reference internal" href="gravmag.prism.html#module-fatiando.gravmag.prism" title="fatiando.gravmag.prism"><tt class="xref py py-mod docutils literal"><span class="pre">fatiando.gravmag.prism</span></tt></a> and <a class="reference internal" href="gravmag.tesseroid.html#module-fatiando.gravmag.tesseroid" title="fatiando.gravmag.tesseroid"><tt class="xref py py-mod docutils literal"><span class="pre">fatiando.gravmag.tesseroid</span></tt></a>
+to calculate the terrain effect for a better correction.</p>
+<p><strong>References</strong></p>
+<p>Hofmann-Wellenhof, B. and H. Moritz, 2005, Physical Geodesy,
+Springer-Verlag Wien, ISBN-13: 978-3-211-23584-3</p>
+<p>Li, X. and H. J. Gotze, 2001, Tutorial: Ellipsoid, geoid, gravity, geodesy,
+and geophysics, Geophysics, 66(6), p. 1660-1668, doi: 10.1190/1.1487109</p>
+<hr class="docutils" />
+<dl class="class">
+<dt id="fatiando.gravmag.normal_gravity.ReferenceEllipsoid">
+<em class="property">class </em><tt class="descclassname">fatiando.gravmag.normal_gravity.</tt><tt class="descname">ReferenceEllipsoid</tt><big>(</big><em>name</em>, <em>a</em>, <em>f</em>, <em>GM</em>, <em>omega</em><big>)</big><a class="reference internal" href="../_modules/fatiando/gravmag/normal_gravity.html#ReferenceEllipsoid"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fatiando.gravmag.normal_gravity.ReferenceEllipsoid" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">object</span></tt></p>
+<p>A generic reference ellipsoid.</p>
+<p>It stores the physical constants defining the ellipsoid and has properties
+for computing other (derived) quantities.</p>
+<p>All quantities are expected and returned in SI units.</p>
+<p>Parameters:</p>
+<ul>
+<li><dl class="first docutils">
+<dt>a <span class="classifier-delimiter">:</span> <span class="classifier">float</span></dt>
+<dd><p class="first last">The semimajor axis (the largest one, at the equator). In meters.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>f <span class="classifier-delimiter">:</span> <span class="classifier">float</span></dt>
+<dd><p class="first last">The flattening. Adimensional.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>GM <span class="classifier-delimiter">:</span> <span class="classifier">float</span></dt>
+<dd><p class="first last">The geocentric gravitational constant of the earth, including the
+atmosphere. In <span class="math">\(m^3 s^{-2}\)</span>.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>omega <span class="classifier-delimiter">:</span> <span class="classifier">float</span></dt>
+<dd><p class="first last">The angular velocity of the earth. In <span class="math">\(rad s^{-1}\)</span>.</p>
+</dd>
+</dl>
+</li>
+</ul>
+<dl class="attribute">
+<dt id="fatiando.gravmag.normal_gravity.ReferenceEllipsoid.E">
+<tt class="descname">E</tt><a class="reference internal" href="../_modules/fatiando/gravmag/normal_gravity.html#ReferenceEllipsoid.E"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fatiando.gravmag.normal_gravity.ReferenceEllipsoid.E" title="Permalink to this definition">¶</a></dt>
+<dd><p>Linear eccentricity</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="fatiando.gravmag.normal_gravity.ReferenceEllipsoid.GM">
+<tt class="descname">GM</tt><a class="reference internal" href="../_modules/fatiando/gravmag/normal_gravity.html#ReferenceEllipsoid.GM"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fatiando.gravmag.normal_gravity.ReferenceEllipsoid.GM" title="Permalink to this definition">¶</a></dt>
+<dd><p>Geocentric gravitational constant (including the atmosphere)</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="fatiando.gravmag.normal_gravity.ReferenceEllipsoid.a">
+<tt class="descname">a</tt><a class="reference internal" href="../_modules/fatiando/gravmag/normal_gravity.html#ReferenceEllipsoid.a"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fatiando.gravmag.normal_gravity.ReferenceEllipsoid.a" title="Permalink to this definition">¶</a></dt>
+<dd><p>Semimajor axis</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="fatiando.gravmag.normal_gravity.ReferenceEllipsoid.b">
+<tt class="descname">b</tt><a class="reference internal" href="../_modules/fatiando/gravmag/normal_gravity.html#ReferenceEllipsoid.b"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fatiando.gravmag.normal_gravity.ReferenceEllipsoid.b" title="Permalink to this definition">¶</a></dt>
+<dd><p>Semiminor axis</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="fatiando.gravmag.normal_gravity.ReferenceEllipsoid.e_prime">
+<tt class="descname">e_prime</tt><a class="reference internal" href="../_modules/fatiando/gravmag/normal_gravity.html#ReferenceEllipsoid.e_prime"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fatiando.gravmag.normal_gravity.ReferenceEllipsoid.e_prime" title="Permalink to this definition">¶</a></dt>
+<dd><p>Second eccentricity</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="fatiando.gravmag.normal_gravity.ReferenceEllipsoid.f">
+<tt class="descname">f</tt><a class="reference internal" href="../_modules/fatiando/gravmag/normal_gravity.html#ReferenceEllipsoid.f"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fatiando.gravmag.normal_gravity.ReferenceEllipsoid.f" title="Permalink to this definition">¶</a></dt>
+<dd><p>Flattening</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="fatiando.gravmag.normal_gravity.ReferenceEllipsoid.gamma_a">
+<tt class="descname">gamma_a</tt><a class="reference internal" href="../_modules/fatiando/gravmag/normal_gravity.html#ReferenceEllipsoid.gamma_a"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fatiando.gravmag.normal_gravity.ReferenceEllipsoid.gamma_a" title="Permalink to this definition">¶</a></dt>
+<dd><p>Normal gravity at the equator</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="fatiando.gravmag.normal_gravity.ReferenceEllipsoid.gamma_b">
+<tt class="descname">gamma_b</tt><a class="reference internal" href="../_modules/fatiando/gravmag/normal_gravity.html#ReferenceEllipsoid.gamma_b"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fatiando.gravmag.normal_gravity.ReferenceEllipsoid.gamma_b" title="Permalink to this definition">¶</a></dt>
+<dd><p>Normal gravity at the poles</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="fatiando.gravmag.normal_gravity.ReferenceEllipsoid.m">
+<tt class="descname">m</tt><a class="reference internal" href="../_modules/fatiando/gravmag/normal_gravity.html#ReferenceEllipsoid.m"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fatiando.gravmag.normal_gravity.ReferenceEllipsoid.m" title="Permalink to this definition">¶</a></dt>
+<dd><p><span class="math">\(\omega^2 a^2 b / (GM)\)</span></p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="fatiando.gravmag.normal_gravity.ReferenceEllipsoid.omega">
+<tt class="descname">omega</tt><a class="reference internal" href="../_modules/fatiando/gravmag/normal_gravity.html#ReferenceEllipsoid.omega"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fatiando.gravmag.normal_gravity.ReferenceEllipsoid.omega" title="Permalink to this definition">¶</a></dt>
+<dd><p>Angular velocity</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="fatiando.gravmag.normal_gravity.bouguer_plate">
+<tt class="descclassname">fatiando.gravmag.normal_gravity.</tt><tt class="descname">bouguer_plate</tt><big>(</big><em>topography</em>, <em>density_rock=2670</em>, <em>density_water=1040</em><big>)</big><a class="reference internal" href="../_modules/fatiando/gravmag/normal_gravity.html#bouguer_plate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fatiando.gravmag.normal_gravity.bouguer_plate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculate the gravitational effect of an infinite Bouguer plate.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The effect is calculated <strong>on top</strong> of the plate.</p>
+</div>
+<p>Uses the famous <span class="math">\(g_{BG} = 2 \pi G \rho t\)</span> formula, where t is the
+height of the topography. On water (i.e., t &lt; 0), uses
+<span class="math">\(g_{BG} = 2 \pi G (\rho_{water} - \rho_{rock})\times (-t)\)</span>.</p>
+<p>Parameters:</p>
+<ul>
+<li><dl class="first docutils">
+<dt>topography <span class="classifier-delimiter">:</span> <span class="classifier">float or numpy array</span></dt>
+<dd><p class="first last">The height of topography (in meters).</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>density_rock <span class="classifier-delimiter">:</span> <span class="classifier">float</span></dt>
+<dd><p class="first last">The density of crustal rocks</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>density_water <span class="classifier-delimiter">:</span> <span class="classifier">float</span></dt>
+<dd><p class="first last">The density of ocean water</p>
+</dd>
+</dl>
+</li>
+</ul>
+<p>Returns:</p>
+<ul>
+<li><dl class="first docutils">
+<dt>g_bouguer <span class="classifier-delimiter">:</span> <span class="classifier">float or array</span></dt>
+<dd><p class="first last">The computed gravitational effect of the Bouguer plate</p>
+</dd>
+</dl>
+</li>
+</ul>
+</dd></dl>
+
+<dl class="function">
+<dt id="fatiando.gravmag.normal_gravity.gamma_closed_form">
+<tt class="descclassname">fatiando.gravmag.normal_gravity.</tt><tt class="descname">gamma_closed_form</tt><big>(</big><em>latitude</em>, <em>height</em>, <em>ellipsoid=&lt;fatiando.gravmag.normal_gravity.ReferenceEllipsoid object at 0x2ad0f3a86d50&gt;</em><big>)</big><a class="reference internal" href="../_modules/fatiando/gravmag/normal_gravity.html#gamma_closed_form"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fatiando.gravmag.normal_gravity.gamma_closed_form" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculate normal gravity at a height using the closed form expression of
+Li and Gotze (2001).</p>
+<p>Parameters:</p>
+<ul>
+<li><dl class="first docutils">
+<dt>latitude <span class="classifier-delimiter">:</span> <span class="classifier">float or numpy array</span></dt>
+<dd><p class="first last">The latitude where the normal gravity will be computed (in degrees)</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>height <span class="classifier-delimiter">:</span> <span class="classifier">float or numpy array</span></dt>
+<dd><p class="first last">The height of computation (in meters). Should be ellipsoidal
+(geometric) heights for geophysical purposes.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>ellipsoid <span class="classifier-delimiter">:</span> <span class="classifier"><a class="reference internal" href="#fatiando.gravmag.normal_gravity.ReferenceEllipsoid" title="fatiando.gravmag.normal_gravity.ReferenceEllipsoid"><tt class="xref py py-class docutils literal"><span class="pre">ReferenceEllipsoid</span></tt></a></span></dt>
+<dd><p class="first last">The reference ellipsoid used.</p>
+</dd>
+</dl>
+</li>
+</ul>
+<p>Returns:</p>
+<ul>
+<li><dl class="first docutils">
+<dt>gamma <span class="classifier-delimiter">:</span> <span class="classifier">float or numpy array</span></dt>
+<dd><p class="first last">The computed normal gravity (in mGal).</p>
+</dd>
+</dl>
+</li>
+</ul>
+</dd></dl>
+
+<dl class="function">
+<dt id="fatiando.gravmag.normal_gravity.gamma_somigliana">
+<tt class="descclassname">fatiando.gravmag.normal_gravity.</tt><tt class="descname">gamma_somigliana</tt><big>(</big><em>latitude</em>, <em>ellipsoid=&lt;fatiando.gravmag.normal_gravity.ReferenceEllipsoid object at 0x2ad0f3a86d50&gt;</em><big>)</big><a class="reference internal" href="../_modules/fatiando/gravmag/normal_gravity.html#gamma_somigliana"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fatiando.gravmag.normal_gravity.gamma_somigliana" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculate the normal gravity by using Somigliana&#8217;s formula.</p>
+<p>This formula computes normal gravity <strong>on</strong> the ellipsoid (height = 0).</p>
+<p>Parameters:</p>
+<ul>
+<li><dl class="first docutils">
+<dt>latitude <span class="classifier-delimiter">:</span> <span class="classifier">float or numpy array</span></dt>
+<dd><p class="first last">The latitude where the normal gravity will be computed (in degrees)</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>ellipsoid <span class="classifier-delimiter">:</span> <span class="classifier"><a class="reference internal" href="#fatiando.gravmag.normal_gravity.ReferenceEllipsoid" title="fatiando.gravmag.normal_gravity.ReferenceEllipsoid"><tt class="xref py py-class docutils literal"><span class="pre">ReferenceEllipsoid</span></tt></a></span></dt>
+<dd><p class="first last">The reference ellipsoid used.</p>
+</dd>
+</dl>
+</li>
+</ul>
+<p>Returns:</p>
+<ul>
+<li><dl class="first docutils">
+<dt>gamma <span class="classifier-delimiter">:</span> <span class="classifier">float or numpy array</span></dt>
+<dd><p class="first last">The computed normal gravity (in mGal).</p>
+</dd>
+</dl>
+</li>
+</ul>
+</dd></dl>
+
+<dl class="function">
+<dt id="fatiando.gravmag.normal_gravity.gamma_somigliana_free_air">
+<tt class="descclassname">fatiando.gravmag.normal_gravity.</tt><tt class="descname">gamma_somigliana_free_air</tt><big>(</big><em>latitude</em>, <em>height</em>, <em>ellipsoid=&lt;fatiando.gravmag.normal_gravity.ReferenceEllipsoid object at 0x2ad0f3a86d50&gt;</em><big>)</big><a class="reference internal" href="../_modules/fatiando/gravmag/normal_gravity.html#gamma_somigliana_free_air"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fatiando.gravmag.normal_gravity.gamma_somigliana_free_air" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculate the normal gravity at a height using Somigliana&#8217;s formula and the
+free-air correction.</p>
+<p>Parameters:</p>
+<ul>
+<li><dl class="first docutils">
+<dt>latitude <span class="classifier-delimiter">:</span> <span class="classifier">float or numpy array</span></dt>
+<dd><p class="first last">The latitude where the normal gravity will be computed (in degrees)</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>height <span class="classifier-delimiter">:</span> <span class="classifier">float or numpy array</span></dt>
+<dd><p class="first last">The height of computation (in meters). Should be ellipsoidal
+(geometric) heights for geophysical purposes.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>ellipsoid <span class="classifier-delimiter">:</span> <span class="classifier"><a class="reference internal" href="#fatiando.gravmag.normal_gravity.ReferenceEllipsoid" title="fatiando.gravmag.normal_gravity.ReferenceEllipsoid"><tt class="xref py py-class docutils literal"><span class="pre">ReferenceEllipsoid</span></tt></a></span></dt>
+<dd><p class="first last">The reference ellipsoid used.</p>
+</dd>
+</dl>
+</li>
+</ul>
+<p>Returns:</p>
+<ul>
+<li><dl class="first docutils">
+<dt>gamma <span class="classifier-delimiter">:</span> <span class="classifier">float or numpy array</span></dt>
+<dd><p class="first last">The computed normal gravity (in mGal).</p>
+</dd>
+</dl>
+</li>
+</ul>
+</dd></dl>
+
+</div>
+
+
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="seismic.html" class="btn btn-neutral float-right" title="Seismics and seismology (fatiando.seismic)"/>Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="gravmag.magdir.html" class="btn btn-neutral" title="Total magnetization estimation methods (fatiando.gravmag.magdir)"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2012-2014, Leonardo Uieda.
+      Last updated on Mar 05, 2015.
+    </p>
+  </div>
+
+  <a href="https://github.com/snide/sphinx_rtd_theme">Sphinx theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'0.3',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+      <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

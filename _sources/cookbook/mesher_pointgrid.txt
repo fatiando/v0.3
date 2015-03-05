@@ -1,0 +1,12 @@
+.. _cookbook_mesher_pointgrid:
+
+Meshing: Making a grid of 3D point sources
+===========================================
+
+.. raw:: html
+
+    [<a href="../_static/cookbook/mesher_pointgrid.py">source code</a>]
+
+.. literalinclude:: ../../cookbook/mesher_pointgrid.py
+    :language: python
+    :linenos:
